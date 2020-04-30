@@ -34,6 +34,18 @@ public class MainActivity extends AppCompatActivity {
                 goToPaginaPrincipal();
             }
         });
+
+        textSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToRegistro();
+            }
+        });
+    }
+
+    private void goToRegistro() {
+        Intent intent = new Intent(this, Registro1Activity.class);
+        startActivity(intent);
     }
 
     private void goToPaginaPrincipal() {
