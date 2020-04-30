@@ -1,4 +1,4 @@
-package com.example.kututistesis;
+package com.example.kututistesis.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,27 +7,29 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Registro2Activity extends AppCompatActivity {
+import com.example.kututistesis.R;
+
+public class Registro1Activity extends AppCompatActivity {
 
     private Button buttonNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.paciente_registrar_2);
+        setContentView(R.layout.paciente_registrar);
 
         buttonNext = (Button) findViewById(R.id.button_next);
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToRegistro3();
+                goToRegistro2();
             }
         });
     }
 
-    private void goToRegistro3() {
-        Intent intent = new Intent(this, Registro3Activity.class);
+    private void goToRegistro2() {
+        Intent intent = new Intent(this, Registro2Activity.class);
         startActivity(intent);
     }
 }

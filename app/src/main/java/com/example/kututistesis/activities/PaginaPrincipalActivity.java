@@ -1,8 +1,10 @@
-package com.example.kututistesis;
+package com.example.kututistesis.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.kututistesis.R;
 
 public class PaginaPrincipalActivity extends AppCompatActivity {
 

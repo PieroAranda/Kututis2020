@@ -1,4 +1,4 @@
-package com.example.kututistesis;
+package com.example.kututistesis.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.kututistesis.R;
 
 public class MainActivity extends AppCompatActivity {
 
