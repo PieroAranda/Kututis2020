@@ -5,10 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.kututistesis.R;
 import com.example.kututistesis.dialog.BirthDatePickerFragment;
@@ -46,6 +50,34 @@ public class Registro1Activity extends AppCompatActivity {
                 openDialogDatePicker();
             }
         });
+
+        // Abre el dialogo para escoger la fecha nacimiento si se hace tap al botón next del teclado
+        editTextLastname.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    openDialogDatePicker();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        editTextMobileNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    goToRegistro2();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        // Muestra el teclado para ingresar los nombres
+        if(editTextNames.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 
     private void openDialogDatePicker() {
@@ -55,6 +87,10 @@ public class Registro1Activity extends AppCompatActivity {
                 // +1 because January is zero
                 final String selectedDate = day + " / " + (month+1) + " / " + year;
                 editTextBirthDate.setText(selectedDate);
+
+                if(editTextMobileNumber.requestFocus()) {
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                }
             }
         });
 

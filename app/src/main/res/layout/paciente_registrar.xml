@@ -106,7 +106,8 @@
         android:text=""
         android:digits="0123456789"
         android:inputType="phone"
-        android:maxLength="9"/>
+        android:maxLength="9"
+        android:imeOptions="actionNext"/>
 
     <Button
         android:id="@+id/button_next"
