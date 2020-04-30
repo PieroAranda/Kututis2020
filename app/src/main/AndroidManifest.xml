@@ -9,12 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.FonemasConsonanticosActivity"></activity>
-        <activity android:name=".activities.FonemasVocalicosActivity" />
-        <activity android:name=".activities.PraxiasActivity" />
-        <activity android:name=".activities.Registro3Activity" />
-        <activity android:name=".activities.Registro2Activity" />
-        <activity android:name=".activities.Registro1Activity" />
+        <activity android:name=".activities.FonemasConsonanticosActivity"
+            android:label="Fonemas Consonánticos    "></activity>
+        <activity android:name=".activities.FonemasVocalicosActivity"
+            android:label="Fonemas Vocálicos"/>
+        <activity android:name=".activities.PraxiasActivity"
+            android:label="Praxias"/>
+        <activity android:name=".activities.Registro3Activity"
+            android:label="Registro"/>
+        <activity android:name=".activities.Registro2Activity"
+            android:label="Registro"/>
+        <activity android:name=".activities.Registro1Activity"
+            android:label="Registro"/>
         <activity android:name=".activities.PaginaPrincipalActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
