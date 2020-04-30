@@ -11,7 +11,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.example.kututistesis.R;
-import com.example.kututistesis.dialog.DatePickerFragment;
+import com.example.kututistesis.dialog.BirthDatePickerFragment;
 
 public class Registro1Activity extends AppCompatActivity {
 
@@ -49,7 +49,7 @@ public class Registro1Activity extends AppCompatActivity {
     }
 
     private void openDialogDatePicker() {
-        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+        BirthDatePickerFragment newFragment = BirthDatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 // +1 because January is zero

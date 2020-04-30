@@ -8,13 +8,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
+import java.util.Date;
 
-public class DatePickerFragment extends DialogFragment {
+public class BirthDatePickerFragment extends DialogFragment {
 
     private DatePickerDialog.OnDateSetListener listener;
 
-    public static DatePickerFragment newInstance(DatePickerDialog.OnDateSetListener listener) {
-        DatePickerFragment fragment = new DatePickerFragment();
+    public static BirthDatePickerFragment newInstance(DatePickerDialog.OnDateSetListener listener) {
+        BirthDatePickerFragment fragment = new BirthDatePickerFragment();
         fragment.setListener(listener);
         return fragment;
     }
@@ -26,12 +27,15 @@ public class DatePickerFragment extends DialogFragment {
     @Override
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final Calendar c = Calendar.getInstance();
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.YEAR, -2);
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        return new DatePickerDialog(getActivity(), listener, year, month, day);
+        DatePickerDialog dialog = new DatePickerDialog(getActivity(), listener, year, month, day);
+        dialog.getDatePicker().setMaxDate(c.getTimeInMillis());
+        return dialog;
     }
 
 }
