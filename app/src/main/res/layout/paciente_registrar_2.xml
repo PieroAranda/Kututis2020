@@ -25,7 +25,8 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginTop="8dp"
-        android:text="" />
+        android:text=""
+        android:singleLine="true"/>
 
     <TextView
         android:id="@+id/text_password_1"
@@ -75,7 +76,8 @@
         android:layout_marginTop="8dp"
         android:text=""
         android:inputType="textPassword"
-        android:maxLength="16"/>
+        android:maxLength="16"
+        android:imeOptions="actionNext"/>
 
     <Button
         android:id="@+id/button_next"
