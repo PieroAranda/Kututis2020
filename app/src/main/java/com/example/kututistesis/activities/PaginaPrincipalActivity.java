@@ -51,6 +51,8 @@ public class PaginaPrincipalActivity extends AppCompatActivity {
     }
 
     private void goToConsonatesVocalicos() {
+        Intent intent = new Intent(this, FonemasVocalicosActivity.class);
+        startActivity(intent);
     }
 
     private void goToPraxias() {
