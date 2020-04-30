@@ -24,7 +24,8 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginTop="8dp"
-        android:text="" />
+        android:text=""
+        android:maxLength="25"/>
 
     <TextView
         android:id="@+id/text_lastname"
@@ -38,7 +39,7 @@
         />
 
     <EditText
-        android:id="@+id/edit_text_password"
+        android:id="@+id/edit_text_lastname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/text_lastname"
@@ -47,13 +48,14 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginTop="8dp"
-        android:text=""/>
+        android:text=""
+        android:maxLength="25"/>
 
     <TextView
         android:id="@+id/text_birthdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_password"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_lastname"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
@@ -97,7 +99,10 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginTop="8dp"
-        android:text=""/>
+        android:text=""
+        android:digits="0123456789"
+        android:inputType="phone"
+        android:maxLength="9"/>
 
     <Button
         android:id="@+id/button_next"
