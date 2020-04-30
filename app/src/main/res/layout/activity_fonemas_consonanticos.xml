@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.FonemasVocalicosActivity">
+    tools:context=".activities.FonemasConsonanticosActivity">
 
     <GridView
-        android:id="@+id/grid_view_fonemas_vocalicos"
+        android:id="@+id/grid_view_fonemas_consonanticos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"

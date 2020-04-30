@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.FonemasVocalicosActivity"></activity>
+        <activity android:name=".activities.FonemasConsonanticosActivity"></activity>
+        <activity android:name=".activities.FonemasVocalicosActivity" />
         <activity android:name=".activities.PraxiasActivity" />
         <activity android:name=".activities.Registro3Activity" />
         <activity android:name=".activities.Registro2Activity" />

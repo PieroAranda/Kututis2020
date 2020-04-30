@@ -21,10 +21,12 @@ public class PaginaPrincipalActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.paciente_pantalla_principal);
 
+        // Inicializa los elementos de la vista
         buttonPraxias = (Button) findViewById(R.id.button_praxias);
         buttonConsonatesVocalicos = (Button) findViewById(R.id.button_fonemas_vocalicos);
         buttonConsonatesConsonanticos = (Button) findViewById(R.id.button_fonemas_consonanticos);
 
+        // Eventos de la vista
         buttonPraxias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +50,8 @@ public class PaginaPrincipalActivity extends AppCompatActivity {
     }
 
     private void goToConsonatesConsonanticos() {
+        Intent intent = new Intent(this, FonemasConsonanticosActivity.class);
+        startActivity(intent);
     }
 
     private void goToConsonatesVocalicos() {
