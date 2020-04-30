@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.util.Util;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,10 +68,7 @@ public class MainActivity extends AppCompatActivity {
         return (email.length() > 0) &&
                 (editTextPassword.getText().toString().trim().length() >= 8) &&
                 (editTextPassword.getText().toString().trim().length() <= 16) &&
-                isEmailValid(email);
+                Util.isEmailValid(email);
     }
 
-    boolean isEmailValid(CharSequence email) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
 }
