@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.kututistesis.R;
@@ -15,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView textSignUp;
     private Button buttonSignIn;
+    private EditText editTextEmail;
+    private EditText editTextPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         // Inicializa los elementos de la vista
         textSignUp = (TextView) findViewById(R.id.text_sign_up);
         buttonSignIn = (Button) findViewById(R.id.button_sign_in);
+        editTextEmail = (EditText) findViewById(R.id.edit_text_email);
+        editTextPassword = (EditText) findViewById(R.id.edit_text_password);
 
         // Subraya el texto para ir a la vista de registro
         textSignUp.setPaintFlags(textSignUp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -51,7 +56,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToPaginaPrincipal() {
-        Intent intent = new Intent(this, PaginaPrincipalActivity.class);
-        startActivity(intent);
+        if(isValid()) {
+            Intent intent = new Intent(this, PaginaPrincipalActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private boolean isValid() {
+        String email = editTextEmail.getText().toString().trim();
+        return (email.length() > 0) &&
+                (editTextPassword.getText().toString().trim().length() >= 8) &&
+                (editTextPassword.getText().toString().trim().length() <= 16) &&
+                isEmailValid(email);
+    }
+
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }

@@ -61,8 +61,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
-        android:text="Contraseña"
-        />
+        android:text="Contraseña"/>
 
     <EditText
         android:id="@+id/edit_text_password"
@@ -75,7 +74,8 @@
         android:layout_marginRight="32dp"
         android:layout_marginTop="8dp"
         android:text=""
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:maxLength="16"/>
 
     <Button
         android:id="@+id/button_sign_in"
