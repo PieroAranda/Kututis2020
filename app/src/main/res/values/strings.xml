@@ -2,4 +2,8 @@
     <string name="app_name">KututisTesis</string>
     <string name="err_email">Ingrese un correo válido</string>
     <string name="err_password">Ingrese una constraseña válida</string>
+    <string name="err_names_blank">Ingrese sus nombres</string>
+    <string name="err_lastname_blank">Ingrese sus apellidos</string>
+    <string name="err_birth_blank">Ingrese su fecha de nacimiento</string>
+    <string name="err_mobile_phone_length">El número de celular debe tener 9 dígitos</string>
 </resources>

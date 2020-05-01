@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         awesomeValidation.addValidation(this, R.id.edit_text_password, new SimpleCustomValidation() {
             @Override
             public boolean compare(String s) {
+                s = s.trim();
                 return s.length() >= 8  && s.length() <= 16;
             }
         }, R.string.err_password);

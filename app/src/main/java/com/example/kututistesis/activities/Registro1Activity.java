@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -14,6 +16,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
 import com.example.kututistesis.R;
 import com.example.kututistesis.dialog.BirthDatePickerFragment;
 import com.example.kututistesis.model.SignUpForm;
@@ -29,6 +34,7 @@ public class Registro1Activity extends AppCompatActivity {
     private EditText editTextNames;
     private EditText editTextLastname;
     private EditText editTextMobileNumber;
+    private AwesomeValidation awesomeValidation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +86,28 @@ public class Registro1Activity extends AppCompatActivity {
         });
 
         // Muestra el teclado para ingresar los nombres
-        if(editTextNames.requestFocus()) {
+        if (editTextNames.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
+
+        // Validaciones
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+        SimpleCustomValidation notBlankValidation = new SimpleCustomValidation() {
+            @Override
+            public boolean compare(String s) {
+                Log.i("SIGNUP", s + " " + s.trim().length());
+                return s.trim().length() > 0;
+            }
+        };
+        awesomeValidation.addValidation(this, R.id.edit_text_names, notBlankValidation, R.string.err_names_blank);
+        awesomeValidation.addValidation(this, R.id.edit_text_lastname, notBlankValidation, R.string.err_lastname_blank);
+        awesomeValidation.addValidation(this, R.id.edit_text_birthdate, notBlankValidation, R.string.err_birth_blank);
+        awesomeValidation.addValidation(this, R.id.edit_text_mobile_number, new SimpleCustomValidation() {
+            @Override
+            public boolean compare(String s) {
+                return s.trim().length() == 9;
+            }
+        }, R.string.err_mobile_phone_length);
     }
 
     private void openDialogDatePicker() {
@@ -103,7 +128,7 @@ public class Registro1Activity extends AppCompatActivity {
     }
 
     private void goToRegistro2() {
-        if (isValid()) {
+        if (awesomeValidation.validate()) {
             SignUpForm signUpData = new SignUpForm();
             signUpData.setNombre(editTextNames.getText().toString().trim());
             signUpData.setApellido(editTextLastname.getText().toString().trim());
@@ -115,12 +140,5 @@ public class Registro1Activity extends AppCompatActivity {
             intent.putExtra(INTENT_EXTRA_SIGN_UP_DATA, (Serializable) signUpData);
             startActivity(intent);
         }
-    }
-
-    private boolean isValid() {
-        return (editTextNames.getText().toString().trim().length() > 0) &&
-                (editTextLastname.getText().toString().trim().length() > 0) &&
-                (editTextBirthDate.getText().toString().trim().length() > 0) &&
-                (editTextMobileNumber.getText().toString().trim().length() == 9);
     }
 }
