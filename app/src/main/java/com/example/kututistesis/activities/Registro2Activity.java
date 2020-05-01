@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,21 +14,28 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.model.SignUpForm;
 import com.example.kututistesis.util.Util;
 
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
 public class Registro2Activity extends AppCompatActivity {
+
+    private static final String INTENT_EXTRA_SIGN_UP_DATA = "SIGN_UP_DATA";
 
     private Button buttonNext;
     private EditText editTextEmail;
     private EditText editTextPassword1;
     private EditText editTextPassword2;
+    private SignUpForm signUpForm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.paciente_registrar_2);
+
+        getIntentData();
 
         editTextEmail = (EditText) findViewById(R.id.edit_text_email);
         editTextPassword1 = (EditText) findViewById(R.id.edit_text_password_1);
@@ -57,9 +65,22 @@ public class Registro2Activity extends AppCompatActivity {
         }
     }
 
+    // Obtiene datos de la vista Registro 1
+    private void getIntentData() {
+        if(getIntent() != null) {
+            signUpForm = (SignUpForm) getIntent().getSerializableExtra(INTENT_EXTRA_SIGN_UP_DATA);
+            //Log.i("SIGNUP", signUpForm.getNombre() + " " + signUpForm.getApellido() + " " + signUpForm.getCelular());
+        }
+    }
+
     private void goToRegistro3() {
         if(isValid()) {
             Intent intent = new Intent(this, Registro3Activity.class);
+
+            signUpForm.setCorreo(editTextEmail.getText().toString().trim());
+            signUpForm.setContrasenia(editTextPassword1.getText().toString().trim());
+            intent.putExtra(INTENT_EXTRA_SIGN_UP_DATA, (Serializable) signUpForm);
+
             startActivity(intent);
         }
     }

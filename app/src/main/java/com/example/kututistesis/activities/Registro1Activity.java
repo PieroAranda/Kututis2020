@@ -16,8 +16,13 @@ import android.widget.TextView;
 
 import com.example.kututistesis.R;
 import com.example.kututistesis.dialog.BirthDatePickerFragment;
+import com.example.kututistesis.model.SignUpForm;
+
+import java.io.Serializable;
 
 public class Registro1Activity extends AppCompatActivity {
+
+    private static final String INTENT_EXTRA_SIGN_UP_DATA = "SIGN_UP_DATA";
 
     private Button buttonNext;
     private EditText editTextBirthDate;
@@ -99,7 +104,15 @@ public class Registro1Activity extends AppCompatActivity {
 
     private void goToRegistro2() {
         if (isValid()) {
+            SignUpForm signUpData = new SignUpForm();
+            signUpData.setNombre(editTextNames.getText().toString().trim());
+            signUpData.setApellido(editTextLastname.getText().toString().trim());
+            signUpData.setCelular(editTextMobileNumber.getText().toString().trim());
+
             Intent intent = new Intent(this, Registro2Activity.class);
+            // Revisar si hacer un cast de Serializable es eficiente o mejor usar la
+            // interface Parcelable
+            intent.putExtra(INTENT_EXTRA_SIGN_UP_DATA, (Serializable) signUpData);
             startActivity(intent);
         }
     }
