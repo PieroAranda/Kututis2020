@@ -10,11 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.example.kututistesis.R;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.api.ApiService;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SignUpForm;
+import com.example.kututistesis.util.Validations;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -33,6 +36,7 @@ public class Registro3Activity extends AppCompatActivity {
     private Button buttonRegister;
     private SignUpForm signUpForm;
     private ApiClient apiClient;
+    private AwesomeValidation awesomeValidation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,10 @@ public class Registro3Activity extends AppCompatActivity {
         });
 
         apiClient = ApiClient.getInstance();
+
+        // Validaciones
+        awesomeValidation =  new AwesomeValidation(ValidationStyle.BASIC);
+        awesomeValidation.addValidation(this, R.id.edit_text_pet_name, Validations.notBlank, R.string.err_pet_name_blank);
     }
 
     private void getIntentData() {
@@ -61,7 +69,7 @@ public class Registro3Activity extends AppCompatActivity {
     }
 
     private void registerUser() {
-        if(isValid()) {
+        if(awesomeValidation.validate()) {
             // Se valida y se registra al usuario
             Log.i("SIGNUP", signUpForm.toString());
             apiClient.registrarPaciente(signUpForm).enqueue(new Callback<ResponseStatus>() {
@@ -103,9 +111,5 @@ public class Registro3Activity extends AppCompatActivity {
         // actividad de la pantalla principal
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-    }
-
-    private boolean isValid() {
-        return editTextPetName.getText().toString().trim().length() > 0;
     }
 }

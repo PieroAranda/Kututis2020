@@ -26,7 +26,9 @@
         android:layout_marginTop="8dp"
         android:text=""
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        android:imeOptions="actionDone"/>
+        android:inputType="text"
+        android:singleLine="true"
+        android:imeOptions="actionDone" />
 
     <ImageView
         android:id="@+id/image_pet"

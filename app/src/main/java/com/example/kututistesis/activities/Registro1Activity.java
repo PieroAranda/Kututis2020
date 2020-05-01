@@ -22,6 +22,7 @@ import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
 import com.example.kututistesis.R;
 import com.example.kututistesis.dialog.BirthDatePickerFragment;
 import com.example.kututistesis.model.SignUpForm;
+import com.example.kututistesis.util.Validations;
 
 import java.io.Serializable;
 
@@ -92,16 +93,9 @@ public class Registro1Activity extends AppCompatActivity {
 
         // Validaciones
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
-        SimpleCustomValidation notBlankValidation = new SimpleCustomValidation() {
-            @Override
-            public boolean compare(String s) {
-                Log.i("SIGNUP", s + " " + s.trim().length());
-                return s.trim().length() > 0;
-            }
-        };
-        awesomeValidation.addValidation(this, R.id.edit_text_names, notBlankValidation, R.string.err_names_blank);
-        awesomeValidation.addValidation(this, R.id.edit_text_lastname, notBlankValidation, R.string.err_lastname_blank);
-        awesomeValidation.addValidation(this, R.id.edit_text_birthdate, notBlankValidation, R.string.err_birth_blank);
+        awesomeValidation.addValidation(this, R.id.edit_text_names, Validations.notBlank, R.string.err_names_blank);
+        awesomeValidation.addValidation(this, R.id.edit_text_lastname, Validations.notBlank, R.string.err_lastname_blank);
+        awesomeValidation.addValidation(this, R.id.edit_text_birthdate, Validations.notBlank, R.string.err_birth_blank);
         awesomeValidation.addValidation(this, R.id.edit_text_mobile_number, new SimpleCustomValidation() {
             @Override
             public boolean compare(String s) {
