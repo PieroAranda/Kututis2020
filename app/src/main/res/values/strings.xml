@@ -6,4 +6,7 @@
     <string name="err_lastname_blank">Ingrese sus apellidos</string>
     <string name="err_birth_blank">Ingrese su fecha de nacimiento</string>
     <string name="err_mobile_phone_length">El número de celular debe tener 9 dígitos</string>
+    <string name="err_password_length">La contraseña debe tener al menos 8 caracteres</string>
+    <string name="err_password_confirmation">Las contraseñas no coinciden</string>
+    <string name="err_password_special_char">La contraseña debe incluir un caracter especial</string>
 </resources>

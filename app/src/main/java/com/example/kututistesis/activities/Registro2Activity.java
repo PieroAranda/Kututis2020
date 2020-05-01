@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,6 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
 import com.example.kututistesis.R;
 import com.example.kututistesis.model.SignUpForm;
 import com.example.kututistesis.util.Util;
@@ -29,6 +33,7 @@ public class Registro2Activity extends AppCompatActivity {
     private EditText editTextPassword1;
     private EditText editTextPassword2;
     private SignUpForm signUpForm;
+    private AwesomeValidation awesomeValidation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,29 @@ public class Registro2Activity extends AppCompatActivity {
         if(editTextEmail.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
+
+        // Validaciones
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+        awesomeValidation.addValidation(this, R.id.edit_text_email, Patterns.EMAIL_ADDRESS, R.string.err_email);
+        awesomeValidation.addValidation(this, R.id.edit_text_password_1, new SimpleCustomValidation() {
+            @Override
+            public boolean compare(String s) {
+                // En caso se agrege la restricción de que la contraseña contenga una letra en mayúscula
+                //Pattern UpperCasePatten = Pattern.compile("[A-Z ]");
+                // Otras restricciones disponibles
+                //Pattern lowerCasePatten = Pattern.compile("[a-z ]");
+                //Pattern digitCasePatten = Pattern.compile("[0-9 ]");
+                Pattern specialCharPatten = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+                return specialCharPatten.matcher(s.trim()).find();
+            }
+        }, R.string.err_password_special_char);
+        awesomeValidation.addValidation(this, R.id.edit_text_password_1, new SimpleCustomValidation() {
+            @Override
+            public boolean compare(String s) {
+                return s.trim().length() >= 8;
+            }
+        }, R.string.err_password_length);
+        awesomeValidation.addValidation(this, R.id.edit_text_password_2, R.id.edit_text_password_1, R.string.err_password_confirmation);
     }
 
     // Obtiene datos de la vista Registro 1
@@ -74,7 +102,7 @@ public class Registro2Activity extends AppCompatActivity {
     }
 
     private void goToRegistro3() {
-        if(isValid()) {
+        if(awesomeValidation.validate()) {
             Intent intent = new Intent(this, Registro3Activity.class);
 
             signUpForm.setCorreo(editTextEmail.getText().toString().trim());
@@ -83,27 +111,5 @@ public class Registro2Activity extends AppCompatActivity {
 
             startActivity(intent);
         }
-    }
-
-    private boolean isValid() {
-        String email = editTextEmail.getText().toString().trim();
-        String password1 = editTextPassword1.getText().toString().trim();
-        String password2 = editTextPassword2.getText().toString().trim();
-
-        Pattern specialCharPatten = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-        // En caso se agrege la restricción de que la contraseña contenga una letra en mayúscula
-        //Pattern UpperCasePatten = Pattern.compile("[A-Z ]");
-        Pattern lowerCasePatten = Pattern.compile("[a-z ]");
-        Pattern digitCasePatten = Pattern.compile("[0-9 ]");
-
-
-        return (email.length() > 0) &&
-                (password1.length() >= 8) &&
-                (password1.length() <= 16) &&
-                (password1.matches(password2)) &&
-                (specialCharPatten.matcher(password1).find()) &&
-                (lowerCasePatten.matcher(password1).find()) &&
-                (digitCasePatten.matcher(password1).find()) &&
-                Util.isEmailValid(email);
     }
 }
