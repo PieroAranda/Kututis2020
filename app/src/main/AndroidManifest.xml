@@ -18,9 +18,11 @@
         <activity android:name=".activities.PraxiasActivity"
             android:label="Praxias"/>
         <activity android:name=".activities.Registro3Activity"
-            android:label="Registro"/>
+            android:label="Registro"
+            android:parentActivityName=".activities.Registro2Activity"/>
         <activity android:name=".activities.Registro2Activity"
-            android:label="Registro"/>
+            android:label="Registro"
+            android:parentActivityName=".activities.Registro1Activity"/>
         <activity android:name=".activities.Registro1Activity"
             android:label="Registro"/>
         <activity android:name=".activities.PaginaPrincipalActivity" />

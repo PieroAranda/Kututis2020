@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -41,6 +42,7 @@ public class Registro2Activity extends AppCompatActivity {
         setContentView(R.layout.paciente_registrar_2);
 
         getIntentData();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         editTextEmail = (EditText) findViewById(R.id.edit_text_email);
         editTextPassword1 = (EditText) findViewById(R.id.edit_text_password_1);
@@ -110,6 +112,17 @@ public class Registro2Activity extends AppCompatActivity {
             intent.putExtra(INTENT_EXTRA_SIGN_UP_DATA, (Serializable) signUpForm);
 
             startActivity(intent);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

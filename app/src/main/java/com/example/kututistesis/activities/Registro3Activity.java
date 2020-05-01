@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,7 @@ public class Registro3Activity extends AppCompatActivity {
         setContentView(R.layout.paciente_registrar_3);
 
         getIntentData();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         editTextPetName = (EditText) findViewById(R.id.edit_text_pet_name);
         buttonRegister = (Button) findViewById(R.id.button_register);
@@ -111,5 +113,16 @@ public class Registro3Activity extends AppCompatActivity {
         // actividad de la pantalla principal
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
