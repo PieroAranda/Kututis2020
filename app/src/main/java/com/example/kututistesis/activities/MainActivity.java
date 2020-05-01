@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -14,6 +15,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.basgeekball.awesomevalidation.utility.RegexTemplate;
+import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
 import com.example.kututistesis.R;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.ResponseStatus;
@@ -30,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private ApiClient apiClient;
+    private AwesomeValidation awesomeValidation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToPaginaPrincipal();
+                login();
             }
         });
 
@@ -73,6 +79,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         apiClient = ApiClient.getInstance();
+
+        // Validaciones
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+        awesomeValidation.addValidation(this, R.id.edit_text_email, Patterns.EMAIL_ADDRESS, R.string.err_email);
+        awesomeValidation.addValidation(this, R.id.edit_text_password, new SimpleCustomValidation() {
+            @Override
+            public boolean compare(String s) {
+                return s.length() >= 8  && s.length() <= 16;
+            }
+        }, R.string.err_password);
     }
 
     private void goToRegistro() {
@@ -81,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void login() {
-        if(isValid()) {
+        if(awesomeValidation.validate()) {
             String email = editTextEmail.getText().toString().trim();
             String contrasenia = editTextPassword.getText().toString().trim();
 
@@ -122,13 +138,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PaginaPrincipalActivity.class);
         startActivity(intent);
     }
-
-    private boolean isValid() {
-        String email = editTextEmail.getText().toString().trim();
-        return (email.length() > 0) &&
-                (editTextPassword.getText().toString().trim().length() >= 8) &&
-                (editTextPassword.getText().toString().trim().length() <= 16) &&
-                Util.isEmailValid(email);
-    }
-
 }
