@@ -3,6 +3,7 @@ package com.example.kututistesis.api;
 import android.content.Context;
 
 import com.example.kututistesis.model.ResponseStatus;
+import com.example.kututistesis.model.SignInForm;
 import com.example.kututistesis.model.SignUpForm;
 import com.google.gson.Gson;
 
@@ -36,5 +37,11 @@ public class ApiClient {
     public Call<ResponseStatus> registrarPaciente(SignUpForm signUpForm) {
         Gson gson =  new Gson();
         return apiService.registarPaciente(gson.toJson(signUpForm));
+    }
+
+    public Call<ResponseStatus> loginPaciente(String correo, String contrasenia) {
+        SignInForm signInForm = new SignInForm(correo, contrasenia);
+        Gson gson =  new Gson();
+        return apiService.loginPaciente(gson.toJson(signInForm));
     }
 }

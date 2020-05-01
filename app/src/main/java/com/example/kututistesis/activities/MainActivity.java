@@ -5,15 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.api.ApiClient;
+import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.util.Util;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private ApiClient apiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +65,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    goToPaginaPrincipal();
+                    login();
                     return true;
                 }
                 return false;
             }
         });
+
+        apiClient = ApiClient.getInstance();
     }
 
     private void goToRegistro() {
@@ -69,11 +80,47 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void goToPaginaPrincipal() {
+    private void login() {
         if(isValid()) {
-            Intent intent = new Intent(this, PaginaPrincipalActivity.class);
-            startActivity(intent);
+            String email = editTextEmail.getText().toString().trim();
+            String contrasenia = editTextPassword.getText().toString().trim();
+
+            apiClient.loginPaciente(email, contrasenia).enqueue(new Callback<ResponseStatus>() {
+                @Override
+                public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
+                    Log.i("SIGNIN", response.body().getStatus() + " " + response.body().getCode());
+                    String responseCode = response.body().getCode();
+
+                    switch (responseCode) {
+                        case "200":
+                            goToPaginaPrincipal();
+                            break;
+                        case "400":
+                            Toast.makeText(getApplicationContext(),
+                                    "Ocurrío un problema, no se pudo autenticar",
+                                    Toast.LENGTH_SHORT)
+                                    .show();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseStatus> call, Throwable t) {
+                    Log.e("SIGNIN", t.getMessage());
+                    Toast.makeText(getApplicationContext(),
+                            "Ocurrío un problema, no se puede conectar al servicio",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
+            });
         }
+    }
+
+    private void goToPaginaPrincipal() {
+        Intent intent = new Intent(this, PaginaPrincipalActivity.class);
+        startActivity(intent);
     }
 
     private boolean isValid() {

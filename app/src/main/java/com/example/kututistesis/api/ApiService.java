@@ -15,4 +15,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("registropaciente")
     Call<ResponseStatus> registarPaciente(@Field("json") String json);
+
+    @FormUrlEncoded
+    @POST("loginpaciente")
+    Call<ResponseStatus> loginPaciente(@Field("json") String json);
 }
