@@ -26,7 +26,8 @@
         android:layout_marginRight="32dp"
         android:layout_marginTop="8dp"
         android:text=""
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:inputType="textEmailAddress"/>
 
     <TextView
         android:id="@+id/text_password_1"
