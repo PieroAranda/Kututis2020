@@ -10,7 +10,7 @@ import com.example.kututistesis.R;
 
 public class BienvenidaActivity extends AppCompatActivity {
 
-    private static int TIME_DELAY_MILLISECONDS = 3000;
+    private static int TIME_DELAY_MILLISECONDS = 2500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

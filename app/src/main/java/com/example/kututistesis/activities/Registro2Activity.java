@@ -14,16 +14,22 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
 import com.example.kututistesis.R;
+import com.example.kututistesis.api.ApiClient;
+import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SignUpForm;
-import com.example.kututistesis.util.Util;
 
 import java.io.Serializable;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Registro2Activity extends AppCompatActivity {
 
@@ -35,6 +41,7 @@ public class Registro2Activity extends AppCompatActivity {
     private EditText editTextPassword2;
     private SignUpForm signUpForm;
     private AwesomeValidation awesomeValidation;
+    private ApiClient apiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +59,7 @@ public class Registro2Activity extends AppCompatActivity {
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToRegistro3();
+                validate();
             }
         });
 
@@ -60,7 +67,7 @@ public class Registro2Activity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                    goToRegistro3();
+                    validate();
                     return true;
                 }
                 return false;
@@ -93,6 +100,8 @@ public class Registro2Activity extends AppCompatActivity {
             }
         }, R.string.err_password_length);
         awesomeValidation.addValidation(this, R.id.edit_text_password_2, R.id.edit_text_password_1, R.string.err_password_confirmation);
+
+        apiClient = ApiClient.getInstance();
     }
 
     // Obtiene datos de la vista Registro 1
@@ -103,16 +112,47 @@ public class Registro2Activity extends AppCompatActivity {
         }
     }
 
-    private void goToRegistro3() {
+    private void validate() {
         if(awesomeValidation.validate()) {
-            Intent intent = new Intent(this, Registro3Activity.class);
+            String correo = editTextEmail.getText().toString().trim();
+            String contrasenia = editTextPassword1.getText().toString().trim();
 
-            signUpForm.setCorreo(editTextEmail.getText().toString().trim());
-            signUpForm.setContrasenia(editTextPassword1.getText().toString().trim());
-            intent.putExtra(INTENT_EXTRA_SIGN_UP_DATA, (Serializable) signUpForm);
+            apiClient.loginPaciente(correo, "WRONG_PASSWORD").enqueue(new Callback<ResponseStatus>() {
+                @Override
+                public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
+                    Log.i("SIGNUP", response.body().getStatus() + " " + response.body().getCode());
+                    String responseStatus = response.body().getStatus();
+                    // Verifica que el API responda que el correo no está registrado
+                    if (responseStatus.matches("error_correo")) {
+                        goToRegistro3();
+                    } else {
+                        // Muestra el mensaje de error cuando el correo sí está registrado
+                        editTextEmail.setError(getString(R.string.err_email_used));
+                        editTextEmail.requestFocus();
+                    }
 
-            startActivity(intent);
+                }
+
+                @Override
+                public void onFailure(Call<ResponseStatus> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(),
+                            "Ocurrío un problema, no se puede conectar al servicio",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
+            });
+
         }
+    }
+
+    private void goToRegistro3() {
+        Intent intent = new Intent(this, Registro3Activity.class);
+
+        signUpForm.setCorreo(editTextEmail.getText().toString().trim());
+        signUpForm.setContrasenia(editTextPassword1.getText().toString().trim());
+        intent.putExtra(INTENT_EXTRA_SIGN_UP_DATA, (Serializable) signUpForm);
+
+        startActivity(intent);
     }
 
     @Override

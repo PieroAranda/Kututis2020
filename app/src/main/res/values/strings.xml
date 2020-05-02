@@ -13,4 +13,5 @@
     <string name="err_email_not_registered">El correo no está registrado</string>
     <string name="err_password_incorrect">Contraseña incorrecta</string>
     <string name="welcome_message">Bienvenido, su usuario se registró existosamente</string>
+    <string name="err_email_used">El correo ya está registrado</string>
 </resources>
