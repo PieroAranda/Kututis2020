@@ -7,12 +7,27 @@
     tools:context=".activities.BienvenidaActivity">
 
     <TextView
+        android:id="@+id/text_welcome_message_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_message_title"
+        android:textSize="30sp"
+        android:letterSpacing="0.1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:text="@string/welcome_message"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="18dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginRight="64dp"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/text_welcome_message_title"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:letterSpacing="0.1"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
