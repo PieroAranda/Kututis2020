@@ -25,7 +25,6 @@
         app:layout_constraintTop_toBottomOf="@+id/text_welcome_message_title"
         android:textAlignment="center"
         android:textSize="24sp"
-        android:letterSpacing="0.1"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"/>
