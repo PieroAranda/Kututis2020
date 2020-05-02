@@ -39,4 +39,7 @@ dependencies {
 
     // Validaciones
     implementation 'com.basgeekball:awesome-validation:4.2'
+
+    // Flexbox Layout
+    implementation 'com.google.android:flexbox:2.0.1'
 }
