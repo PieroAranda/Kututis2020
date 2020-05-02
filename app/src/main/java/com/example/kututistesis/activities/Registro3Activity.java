@@ -15,19 +15,13 @@ import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.example.kututistesis.R;
 import com.example.kututistesis.api.ApiClient;
-import com.example.kututistesis.api.ApiService;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SignUpForm;
 import com.example.kututistesis.util.Validations;
-import com.google.gson.Gson;
 
-import java.io.IOException;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class Registro3Activity extends AppCompatActivity {
 
@@ -82,7 +76,7 @@ public class Registro3Activity extends AppCompatActivity {
 
                     switch (responseCode) {
                         case "200":
-                            goToPaginaPrincipal();
+                            goToBienvenida();
                             break;
                         case "300":
                             Toast.makeText(getApplicationContext(),
@@ -107,12 +101,13 @@ public class Registro3Activity extends AppCompatActivity {
         }
     }
 
-    private void goToPaginaPrincipal() {
-        Intent intent = new Intent(this, PaginaPrincipalActivity.class);
+    private void goToBienvenida() {
+        Intent intent = new Intent(this, BienvenidaActivity.class);
         // Flags para que al registrarse descarte actividades del registro y se quede solo con la
-        // actividad de la pantalla principal
+        // actividad del mensaje de bienvenida
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @Override
