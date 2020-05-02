@@ -7,6 +7,8 @@ import com.example.kututistesis.model.SignInForm;
 import com.example.kututistesis.model.SignUpForm;
 import com.google.gson.Gson;
 
+import java.util.Map;
+
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -43,5 +45,10 @@ public class ApiClient {
         SignInForm signInForm = new SignInForm(correo, contrasenia);
         Gson gson =  new Gson();
         return apiService.loginPaciente(gson.toJson(signInForm));
+    }
+
+    public  Call<ResponseStatus> registroSesionPraxias(Map<String,String> request){
+        Gson gson = new Gson();
+        return apiService.registroSesionPraxias(gson.toJson(request));
     }
 }

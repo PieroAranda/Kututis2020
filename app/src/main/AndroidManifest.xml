@@ -3,6 +3,8 @@
     package="com.example.kututistesis">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.camera2" android:required="true"/>
 
     <application
         android:allowBackup="true"
@@ -34,6 +36,8 @@
             android:name=".activities.Registro1Activity"
             android:label="Registro" />
         <activity android:name=".activities.PaginaPrincipalActivity" />
+        <activity android:name=".activities.SesionPraxiaGrabarActivity"
+            android:label="Grabar Praxia"/>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
