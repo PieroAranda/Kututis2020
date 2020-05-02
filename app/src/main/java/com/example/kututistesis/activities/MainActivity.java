@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
@@ -78,6 +80,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        editTextEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                editTextPassword.setError(null);
+            }
+        });
+
         apiClient = ApiClient.getInstance();
 
         // Validaciones
@@ -115,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case "400":
                             if (responseStatus.matches("error_correo")) {
+                                awesomeValidation.clear();
                                 editTextEmail.setError(getString(R.string.err_email_not_registered));
                                 editTextEmail.requestFocus();
                             } else if(responseStatus.matches("error_contra")){
