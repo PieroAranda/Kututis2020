@@ -7,6 +7,9 @@ import com.example.kututistesis.model.SignInForm;
 import com.example.kututistesis.model.SignUpForm;
 import com.google.gson.Gson;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -15,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static ApiClient instance = null;
-    public static final String BASE_URL = "http://192.168.0.7/curso-laravel/kututis/public/api/";
+    public static final String BASE_URL = "http://192.168.1.11:82/curso-laravel/kututis/public/api/";
 
     private ApiService apiService = null;
 
@@ -43,5 +46,10 @@ public class ApiClient {
         SignInForm signInForm = new SignInForm(correo, contrasenia);
         Gson gson =  new Gson();
         return apiService.loginPaciente(gson.toJson(signInForm));
+    }
+
+    public  Call<ResponseStatus> registroSesionPraxias(Map<String,String> request){
+        Gson gson = new Gson();
+        return apiService.registroSesionPraxias(gson.toJson(request));
     }
 }
