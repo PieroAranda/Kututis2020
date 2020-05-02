@@ -107,16 +107,25 @@ public class MainActivity extends AppCompatActivity {
                 public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
                     Log.i("SIGNIN", response.body().getStatus() + " " + response.body().getCode());
                     String responseCode = response.body().getCode();
+                    String responseStatus = response.body().getStatus();
 
                     switch (responseCode) {
                         case "200":
                             goToPaginaPrincipal();
                             break;
                         case "400":
-                            Toast.makeText(getApplicationContext(),
-                                    "Ocurrío un problema, no se pudo autenticar",
-                                    Toast.LENGTH_SHORT)
-                                    .show();
+                            if (responseStatus.matches("error_correo")) {
+                                editTextEmail.setError(getString(R.string.err_email_not_registered));
+                                editTextEmail.requestFocus();
+                            } else if(responseStatus.matches("error_contra")){
+                                editTextPassword.setError(getString(R.string.err_password_incorrect));
+                                editTextPassword.requestFocus();
+                            }else {
+                                Toast.makeText(getApplicationContext(),
+                                        "Ocurrío un problema, no se pudo autenticar",
+                                        Toast.LENGTH_SHORT)
+                                        .show();
+                            }
                             break;
                         default:
                             break;

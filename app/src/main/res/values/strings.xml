@@ -10,4 +10,6 @@
     <string name="err_password_confirmation">Las contraseñas no coinciden</string>
     <string name="err_password_special_char">La contraseña debe incluir un caracter especial</string>
     <string name="err_pet_name_blank">Ingrese un nombre a su mascota</string>
+    <string name="err_email_not_registered">El correo no está registrado</string>
+    <string name="err_password_incorrect">Contraseña incorrecta</string>
 </resources>
