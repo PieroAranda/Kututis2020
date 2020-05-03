@@ -1,12 +1,17 @@
 package com.example.kututistesis.api;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.kututistesis.model.ResponseStatus;
+import com.example.kututistesis.model.SesionPraxia;
 import com.example.kututistesis.model.SignInForm;
 import com.example.kututistesis.model.SignUpForm;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static ApiClient instance = null;
-    public static final String BASE_URL = "http://192.168.1.11:82/curso-laravel/kututis/public/api/";
+    public static final String BASE_URL = "http://10.0.2.2:82/curso-laravel/kututis/public/api/";
 
     private ApiService apiService = null;
 
@@ -48,8 +53,9 @@ public class ApiClient {
         return apiService.loginPaciente(gson.toJson(signInForm));
     }
 
-    public  Call<ResponseStatus> registroSesionPraxias(Map<String,String> request){
+    public Call<ResponseStatus> registroSesionPraxias(SesionPraxia request){
         Gson gson = new Gson();
-        return apiService.registroSesionPraxias(gson.toJson(request));
+        String json = gson.toJson(request);
+        return apiService.registroSesionPraxias(json);
     }
 }

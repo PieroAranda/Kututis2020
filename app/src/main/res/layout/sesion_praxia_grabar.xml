@@ -18,4 +18,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/presence_video_online" />
 
+    <Button
+        android:id="@+id/buttonEnvio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="EnviarVideo"
+        android:text="Enviar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.325" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
