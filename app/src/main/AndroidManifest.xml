@@ -20,6 +20,8 @@
         <activity android:name=".activities.FonemasVocalicosActivity"
             android:label="Fonemas Vocálicos"
             android:parentActivityName=".activities.PaginaPrincipalActivity"/>
+        <activity android:name=".activities.BienvenidaActivity"
+            android:label="Bienvenida" />
         <activity android:name=".activities.PraxiasActivity"
             android:label="Praxias"
             android:parentActivityName=".activities.PaginaPrincipalActivity"/>

@@ -191,7 +191,6 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
     public void goToHistorialVideos(View view) {
         Intent intent = new Intent(this, HistorialVideos.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 
     }
