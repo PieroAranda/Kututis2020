@@ -91,6 +91,9 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EnviarVideo();
+                // Deshabilita el botón de enviar mientras el servicio no responda, esto debería ser
+                // temporal hasta que se converse cómo debería ser la interacción
+                v.setEnabled(false);
             }
         });
     }
@@ -151,7 +154,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.i("VIDEO", response.toString());
-
+                onBackPressed();
                 //Log.i("Enviando video", response.body().getStatus() + " " + response.body().getCode());
                 //String responseCode = response.body().getCode();
 
