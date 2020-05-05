@@ -59,7 +59,7 @@ public class ApiClient {
         return apiService.loginPaciente(gson.toJson(signInForm));
     }
 
-    public Call<ResponseStatus> registroSesionPraxias(SesionPraxia request){
+    public Call<ResponseBody> registroSesionPraxias(SesionPraxia request){
         Gson gson = new Gson();
         String json = gson.toJson(request);
         return apiService.registroSesionPraxias(json);

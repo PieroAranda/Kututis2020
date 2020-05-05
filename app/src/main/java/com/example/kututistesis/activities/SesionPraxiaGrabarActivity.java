@@ -44,6 +44,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -146,15 +147,15 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
         SesionPraxia sesionPraxia = new SesionPraxia(paciente_id, praxias_id, Aprobado, Fecha, ruta);
 
-        apiClient.registroSesionPraxias(sesionPraxia).enqueue(new Callback<ResponseStatus>() {
+        apiClient.registroSesionPraxias(sesionPraxia).enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.i("VIDEO", response.toString());
 
-                Log.i("Enviando video", response.body().getStatus() + " " + response.body().getCode());
-                String responseCode = response.body().getCode();
+                //Log.i("Enviando video", response.body().getStatus() + " " + response.body().getCode());
+                //String responseCode = response.body().getCode();
 
-                switch (responseCode) {
+                /*switch (responseCode) {
                     case "200":
                         goToPaginaPrincipal();
                         break;
@@ -166,11 +167,11 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
                         break;
                     default:
                         break;
-                }
+                }*/
             }
 
             @Override
-            public void onFailure(Call<ResponseStatus> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("Enviando video", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrío un problema, no se puede conectar al servicio",

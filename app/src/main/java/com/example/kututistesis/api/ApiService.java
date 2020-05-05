@@ -29,7 +29,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("registrosesion_praxias")
-    Call<ResponseStatus> registroSesionPraxias(@Field("json") String json);
+    Call<ResponseBody> registroSesionPraxias(@Field("json") String json);
 
     @GET("listar_sesionpraxias")
     Call<List<SesionPraxia>> listar_sesionpraxias();
