@@ -141,7 +141,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
                         break;
                     case "400":
                         Toast.makeText(getApplicationContext(),
-                                "Ocurrío un problema, no se pudo enviar el video",
+                                "Ocurrió un problema, no se pudo enviar el video",
                                 Toast.LENGTH_SHORT)
                                 .show();
                         break;
@@ -152,7 +152,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseStatus> call, Throwable t) {
-                Log.e("SIGNIN", t.getMessage());
+                Log.e("Enviando video", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrío un problema, no se puede conectar al servicio",
                         Toast.LENGTH_SHORT)
@@ -164,6 +164,12 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
     private void goToPaginaPrincipal() {
         Intent intent = new Intent(this, PaginaPrincipalActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    public void goToHistorialVideos(View view) {
+        Intent intent = new Intent(this, HistorialVideos.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

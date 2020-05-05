@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kututistesis">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-feature android:name="android.hardware.camera2" android:required="true"/>
+
 
 
     <application
@@ -15,11 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.FonemasConsonanticosActivity"
-            android:label="Fonemas Consonánticos"></activity>
+            android:label="Fonemas Consonánticos"
+            android:parentActivityName=".activities.PaginaPrincipalActivity"></activity>
         <activity android:name=".activities.FonemasVocalicosActivity"
-            android:label="Fonemas Vocálicos"/>
+            android:label="Fonemas Vocálicos"
+            android:parentActivityName=".activities.PaginaPrincipalActivity"/>
         <activity android:name=".activities.PraxiasActivity"
-            android:label="Praxias"/>
+            android:label="Praxias"
+            android:parentActivityName=".activities.PaginaPrincipalActivity"/>
         <activity android:name=".activities.Registro3Activity"
             android:label="Registro"
             android:parentActivityName=".activities.Registro2Activity"/>
@@ -27,10 +32,22 @@
             android:label="Registro"
             android:parentActivityName=".activities.Registro1Activity"/>
         <activity android:name=".activities.Registro1Activity"
-            android:label="Registro"/>
-        <activity android:name=".activities.PaginaPrincipalActivity" />
+            android:label="Registro"
+            android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.PaginaPrincipalActivity"
+            android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.SesionPraxiaGrabarActivity"
-            android:label="Grabar Praxia"/>
+            android:label="Grabar Praxia"
+            android:parentActivityName=".activities.PraxiasActivity"/>
+        <activity android:name=".activities.HistorialVideos"
+            android:label="Historial Videos"
+            android:parentActivityName=".activities.SesionPraxiaGrabarActivity"/>
+        <activity android:name=".activities.SesionVocalGrabarActivity"
+            android:label="Grabar Audios"
+            android:parentActivityName=".activities.FonemasVocalicosActivity"/>
+        <activity android:name=".activities.HistorialAudios"
+            android:label="Grabar Audios"
+            android:parentActivityName=".activities.FonemasVocalicosActivity"/>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

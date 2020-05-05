@@ -60,7 +60,7 @@ public class PaginaPrincipalActivity extends AppCompatActivity {
     }
 
     private void goToPraxias() {
-        Intent intent = new Intent(this, SesionPraxiaGrabarActivity.class);
+        Intent intent = new Intent(this, PraxiasActivity.class);
         startActivity(intent);
     }
 }
