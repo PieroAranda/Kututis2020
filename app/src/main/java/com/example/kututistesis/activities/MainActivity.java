@@ -1,8 +1,12 @@
 package com.example.kututistesis.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
@@ -109,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
                 return s.length() >= 8  && s.length() <= 16;
             }
         }, R.string.err_password);
+
+
+
     }
 
     private void goToRegistro() {
