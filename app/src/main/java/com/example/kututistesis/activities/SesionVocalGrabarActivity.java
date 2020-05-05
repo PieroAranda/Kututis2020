@@ -62,6 +62,8 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
 
     private static final int COD_VIDEO = 20;
     private Button buttonEnviar;
+    private Button buttonReproducir;
+    private Boolean grabado = false;
 
 
     @Override
@@ -87,12 +89,22 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
 
         btn_recorder = (Button) findViewById(R.id.btn_rec);
         buttonEnviar = (Button) findViewById(R.id.buttonEnvio2);
+        buttonReproducir = (Button) findViewById(R.id.btn_play);
         reproducir = findViewById(R.id.btn_play);
 
         buttonEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EnviarAudio();
+            }
+        });
+
+        buttonReproducir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(grabado) {
+                    reproducir();
+                }
             }
         });
     }
@@ -123,11 +135,12 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
             grabacion = null;
             btn_recorder.setBackgroundResource(R.drawable.stop_rec);
             buttonEnviar.setEnabled(true);
+            grabado = true;
             Toast.makeText(getApplicationContext(), "Grabación finalizada", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void reproducir(View view){
+    public void reproducir(){
         MediaPlayer mediaPlayer = new MediaPlayer();
         try {
             mediaPlayer.setDataSource(path);
