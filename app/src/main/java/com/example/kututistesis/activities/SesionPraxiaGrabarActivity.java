@@ -15,10 +15,12 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -63,6 +65,8 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
     private static final int COD_VIDEO = 20;
 
+    private Button buttonEnviar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -80,11 +84,22 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
         Aprobado = 0;
         Fecha = "";
         ruta = "";
+
+        buttonEnviar = (Button) findViewById(R.id.buttonEnvio);
+        buttonEnviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EnviarVideo();
+            }
+        });
     }
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
 
     public void TomarVideo(View view) {
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
         File miFile = new File(Environment.getExternalStorageDirectory(),DIRECTORIO_IMAGEN);
         boolean isCreada = miFile.exists();
 
@@ -111,7 +126,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
     }
 
-    public void EnviarVideo(View view){
+    public void EnviarVideo(){
 
         try {
             byte[] arreglo_binarios = FileUtils.readFileToByteArray(fileVideo);//Convert any file, image or video into byte array
@@ -132,6 +147,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
         apiClient.registroSesionPraxias(sesionPraxia).enqueue(new Callback<ResponseStatus>() {
             @Override
             public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
+                Log.i("VIDEO", response.toString());
                 Log.i("Enviando video", response.body().getStatus() + " " + response.body().getCode());
                 String responseCode = response.body().getCode();
 
@@ -163,9 +179,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
     }
 
     private void goToPaginaPrincipal() {
-        Intent intent = new Intent(this, PaginaPrincipalActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        onBackPressed();
     }
 
     @Override
@@ -187,6 +201,9 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+
+                // Habilita el botón de enviar
+                buttonEnviar.setEnabled(true);
 
                 break;
         }
