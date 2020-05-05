@@ -196,14 +196,11 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
 
 
     private void goToPaginaPrincipal() {
-        Intent intent = new Intent(this, PaginaPrincipalActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        onBackPressed();
     }
 
     public void goToHistorialAudios(View view) {
         Intent intent = new Intent(this, HistorialAudios.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
