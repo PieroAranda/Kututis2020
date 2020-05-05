@@ -45,7 +45,7 @@ public class HistorialVideos extends AppCompatActivity implements View.OnClickLi
         video = findViewById(R.id.videoViewCargar);
         play = findViewById(R.id.btnPlay);
         play.setOnClickListener(this);
-        url = "http://10.0.2.2:82/curso-laravel/kututis/";
+        url = "http://10.0.2.2/curso-laravel/kututis/";
         obtenerVideos();
     }
 
