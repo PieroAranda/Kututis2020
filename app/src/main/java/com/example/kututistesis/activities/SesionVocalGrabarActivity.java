@@ -61,6 +61,7 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
     private String ruta;
 
     private static final int COD_VIDEO = 20;
+    private Button buttonEnviar;
 
 
     @Override
@@ -85,8 +86,15 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
         }
 
         btn_recorder = (Button) findViewById(R.id.btn_rec);
-
+        buttonEnviar = (Button) findViewById(R.id.buttonEnvio2);
         reproducir = findViewById(R.id.btn_play);
+
+        buttonEnviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EnviarAudio();
+            }
+        });
     }
     public void Recorder(View view){
         if(grabacion == null){
@@ -114,8 +122,8 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
             fileVideo = new File(path);
             grabacion = null;
             btn_recorder.setBackgroundResource(R.drawable.stop_rec);
+            buttonEnviar.setEnabled(true);
             Toast.makeText(getApplicationContext(), "Grabación finalizada", Toast.LENGTH_SHORT).show();
-
         }
     }
 
@@ -133,7 +141,7 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
     }
 
 
-    public void EnviarAudio(View view){
+    public void EnviarAudio(){
 
         try {
             byte[] arreglo_binarios = FileUtils.readFileToByteArray(fileVideo);//Convert any file, image or video into byte array
