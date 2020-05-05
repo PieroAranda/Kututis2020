@@ -2,14 +2,12 @@ package com.example.kututistesis.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.sql.Blob;
-
-public class SesionPraxia {
+public class SesionVocal {
     @SerializedName("paciente_id")
     private Integer paciente_id;
 
-    @SerializedName("praxias_id")
-    private Integer praxias_id;
+    @SerializedName("vocales_id")
+    private Integer vocales_id;
 
     @SerializedName("Aprobado")
     private Integer Aprobado;
@@ -23,9 +21,9 @@ public class SesionPraxia {
     @SerializedName("ruta_servidor")
     private String ruta_servidor;
 
-    public SesionPraxia(Integer paciente_id, Integer praxias_id, Integer Aprobado, String Fecha, String ruta) {
+    public SesionVocal(Integer paciente_id, Integer vocales_id, Integer Aprobado, String Fecha, String ruta) {
         this.paciente_id = paciente_id;
-        this.praxias_id = praxias_id;
+        this.vocales_id = vocales_id;
         this.Aprobado = Aprobado;
         this.Fecha = Fecha;
         this.ruta = ruta;
@@ -41,11 +39,11 @@ public class SesionPraxia {
     }
 
     public Integer getPraxia_id() {
-        return praxias_id;
+        return vocales_id;
     }
 
-    public void setPraxia_id(Integer praxia_id) {
-        this.praxias_id = praxia_id;
+    public void setPraxia_id(Integer vocales_id) {
+        this.vocales_id = vocales_id;
     }
 
     public Integer getAprobado() {

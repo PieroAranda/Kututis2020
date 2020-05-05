@@ -20,6 +20,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -64,7 +65,6 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
     private String ruta;
 
     private static final int COD_VIDEO = 20;
-
     private Button buttonEnviar;
 
     @Override
@@ -97,6 +97,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
     static final int REQUEST_VIDEO_CAPTURE = 1;
 
     public void TomarVideo(View view) {
+
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
@@ -128,6 +129,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
     public void EnviarVideo(){
 
+
         try {
             byte[] arreglo_binarios = FileUtils.readFileToByteArray(fileVideo);//Convert any file, image or video into byte array
             ruta = Base64.encodeToString(arreglo_binarios, Base64.NO_WRAP);//Convert byte array into string
@@ -148,6 +150,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
                 Log.i("VIDEO", response.toString());
+
                 Log.i("Enviando video", response.body().getStatus() + " " + response.body().getCode());
                 String responseCode = response.body().getCode();
 
@@ -168,7 +171,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseStatus> call, Throwable t) {
-                Log.e("SIGNIN", t.getMessage());
+                Log.e("Enviando video", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrío un problema, no se puede conectar al servicio",
                         Toast.LENGTH_SHORT)
@@ -180,6 +183,13 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
     private void goToPaginaPrincipal() {
         onBackPressed();
+    }
+
+    public void goToHistorialVideos(View view) {
+        Intent intent = new Intent(this, HistorialVideos.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+
     }
 
     @Override

@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.paciente_inicio_sesion);
+        apiClient = ApiClient.getInstance();
 
         // Inicializa los elementos de la vista
         textSignUp = (TextView) findViewById(R.id.text_sign_up);
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        apiClient = ApiClient.getInstance();
+
 
         // Validaciones
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
