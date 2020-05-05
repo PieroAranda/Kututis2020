@@ -1,10 +1,12 @@
 package com.example.kututistesis.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,10 +54,19 @@ public class VocalAdapter extends RecyclerView.Adapter<VocalAdapter.MyViewHolder
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView NombreVocal;
         ImageView nextVocal;
+        LinearLayout item;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             NombreVocal = itemView.findViewById(R.id.nombreVocal);
+            item = itemView.findViewById(R.id.item_fonema_vocalico);
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, SesionVocalGrabarActivity.class);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

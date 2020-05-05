@@ -79,9 +79,4 @@ public class FonemasVocalicosActivity extends AppCompatActivity {
         });
     }
 
-    public void goToSesionVocalGrabar(View view) {
-        Intent intent = new Intent(this, SesionVocalGrabarActivity.class);
-        startActivity(intent);
-    }
-
 }
