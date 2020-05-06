@@ -7,7 +7,7 @@
     android:background="@drawable/background">
 
     <Button
-        android:id="@+id/buttonHistorial"
+        android:id="@+id/buttonHistorialAudios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="goToHistorialAudios"
@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.788"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:enabled="false"/>
 
     <Button
         android:id="@+id/buttonEnvio2"

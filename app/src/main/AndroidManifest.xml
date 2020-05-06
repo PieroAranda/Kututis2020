@@ -41,13 +41,13 @@
             android:parentActivityName=".activities.PraxiasActivity"/>
         <activity android:name=".activities.HistorialVideos"
             android:label="Historial Videos"
-            android:parentActivityName=".activities.SesionPraxiaGrabarActivity"/>
+            android:parentActivityName=".activities.PaginaPrincipalActivity"/>
         <activity android:name=".activities.SesionVocalGrabarActivity"
             android:label="Grabar Audios"
             android:parentActivityName=".activities.FonemasVocalicosActivity"/>
         <activity android:name=".activities.HistorialAudios"
             android:label="Grabar Audios"
-            android:parentActivityName=".activities.FonemasVocalicosActivity"/>
+            android:parentActivityName=".activities.PaginaPrincipalActivity"/>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

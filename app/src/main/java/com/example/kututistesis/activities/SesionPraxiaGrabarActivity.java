@@ -66,7 +66,8 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
     private String ruta;
 
     private static final int COD_VIDEO = 20;
-    private Button buttonEnviar;
+    //private Button buttonEnviar;
+    private Button buttonhitorialVideos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,24 +87,26 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
         Fecha = "";
         ruta = "";
 
-        buttonEnviar = (Button) findViewById(R.id.buttonEnvio);
-        buttonEnviar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EnviarVideo();
-                // Deshabilita el botón de enviar mientras el servicio no responda, esto debería ser
-                // temporal hasta que se converse cómo debería ser la interacción
-                v.setEnabled(false);
-            }
-        });
+        buttonhitorialVideos = findViewById(R.id.buttonHistorailVideos);
+
+        //buttonEnviar = (Button) findViewById(R.id.buttonEnvio);
+        //buttonEnviar.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        //        EnviarVideo();
+        //        // Deshabilita el botón de enviar mientras el servicio no responda, esto debería ser
+        //        // temporal hasta que se converse cómo debería ser la interacción
+        //        v.setEnabled(false);
+        //    }
+        //});
     }
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
 
     public void TomarVideo(View view) {
-
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());
+        //Para celular fisico
+        //StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        //StrictMode.setVmPolicy(builder.build());
 
         File miFile = new File(Environment.getExternalStorageDirectory(),DIRECTORIO_IMAGEN);
         boolean isCreada = miFile.exists();
@@ -154,7 +157,14 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.i("VIDEO", response.toString());
-                onBackPressed();
+                Context context = getApplicationContext();
+                CharSequence text = "Video Enviado";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                buttonhitorialVideos.setEnabled(true);
+                //goToPaginaPrincipal();
                 //Log.i("Enviando video", response.body().getStatus() + " " + response.body().getCode());
                 //String responseCode = response.body().getCode();
 
@@ -186,7 +196,9 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
     }
 
     private void goToPaginaPrincipal() {
-        onBackPressed();
+        Intent intent = new Intent(this, PaginaPrincipalActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     public void goToHistorialVideos(View view) {
@@ -209,14 +221,17 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
                         });
 
                 Context context = getApplicationContext();
-                CharSequence text = "Termine de grabar";
+                CharSequence text = "Enviando el video";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
 
                 // Habilita el botón de enviar
-                buttonEnviar.setEnabled(true);
+                //buttonEnviar.setEnabled(true);
+
+                EnviarVideo();
+
 
                 break;
         }

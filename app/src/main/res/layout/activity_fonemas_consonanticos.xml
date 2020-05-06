@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.FonemasConsonanticosActivity">
 
-    <Button
+    <!--<Button
         android:id="@+id/buttonMicrofono"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -30,7 +30,7 @@
         app:layout_constraintHorizontal_bias="0.553"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonMicrofono"
-        app:layout_constraintVertical_bias="0.039" />
+        app:layout_constraintVertical_bias="0.039" />-->
 
     <TextView
         android:id="@+id/textPalabra"
@@ -39,12 +39,12 @@
         android:text="León"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonMicrofono"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintHorizontal_bias="0.355"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.222" />
+        app:layout_constraintVertical_bias="0.143" />
 
     <ImageButton
         android:id="@+id/imageAltavoz"

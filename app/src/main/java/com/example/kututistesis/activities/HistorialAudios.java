@@ -42,7 +42,7 @@ public class HistorialAudios extends AppCompatActivity implements View.OnClickLi
 
         play = findViewById(R.id.btn_play2);
         play.setOnClickListener(this);
-        url = "http://10.0.2.2/curso-laravel/kututis/";
+        url = "http://10.0.2.2:82/curso-laravel/kututis/";
         obtenerAudios();
     }
 

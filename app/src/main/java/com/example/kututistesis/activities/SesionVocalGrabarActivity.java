@@ -64,6 +64,7 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
     private Button buttonEnviar;
     private Button buttonReproducir;
     private Boolean grabado = false;
+    private Button buttonHistorialAudios;
 
 
     @Override
@@ -92,6 +93,8 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
         buttonReproducir = (Button) findViewById(R.id.btn_play);
         reproducir = findViewById(R.id.btn_play);
 
+        buttonHistorialAudios = findViewById(R.id.buttonHistorialAudios);
+
         buttonEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +112,7 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
         });
     }
     public void Recorder(View view){
+        buttonHistorialAudios.setEnabled(false);
         if(grabacion == null){
                 Long consecutivo = System.currentTimeMillis()/1000;
                 String nombre = consecutivo.toString()+".mp3";
@@ -156,6 +160,13 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
 
     public void EnviarAudio(){
 
+        Context context = getApplicationContext();
+        CharSequence text = "Enviando Audio";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
         try {
             byte[] arreglo_binarios = FileUtils.readFileToByteArray(fileVideo);//Convert any file, image or video into byte array
             ruta = Base64.encodeToString(arreglo_binarios, Base64.NO_WRAP);//Convert byte array into string
@@ -180,7 +191,15 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
 
                 switch (responseCode) {
                     case "200":
-                        goToPaginaPrincipal();
+                        //goToPaginaPrincipal();
+                        Context context = getApplicationContext();
+                        CharSequence text = "Audio Enviado";
+                        int duration = Toast.LENGTH_SHORT;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        buttonHistorialAudios.setEnabled(true);
+                        buttonEnviar.setEnabled(false);
                         break;
                     case "400":
                         Toast.makeText(getApplicationContext(),

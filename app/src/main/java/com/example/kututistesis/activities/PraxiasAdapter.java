@@ -1,6 +1,7 @@
 package com.example.kututistesis.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -82,13 +84,20 @@ public class PraxiasAdapter extends RecyclerView.Adapter<PraxiasAdapter.MyViewHo
         ImageView imagen;
         TextView NombrePraxia;
         ImageView next;
-
+        LinearLayout item;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imagen = itemView.findViewById(R.id.ImagenPraxia);
             NombrePraxia = itemView.findViewById(R.id.nombrePraxia);
-            next = itemView.findViewById(R.id.GrabarPraxia);
+            item = itemView.findViewById(R.id.item_praxia);
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, SesionPraxiaGrabarActivity.class);
+                    context.startActivity(intent);
+                }
+            });
 
         }
     }
