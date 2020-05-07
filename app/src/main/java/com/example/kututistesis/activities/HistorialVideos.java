@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.MediaController;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -27,13 +28,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HistorialVideos extends AppCompatActivity implements View.OnClickListener {
+public class HistorialVideos extends AppCompatActivity {
 
     private ApiClient apiClient;
     private String url;
     private File fileVideo;
     private VideoView video;
     private ImageButton play;
+    private ProgressBar progressBarVideos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -42,9 +45,16 @@ public class HistorialVideos extends AppCompatActivity implements View.OnClickLi
 
         apiClient = ApiClient.getInstance();
 
-        video = findViewById(R.id.videoViewCargar);
-        play = findViewById(R.id.btnPlay);
-        play.setOnClickListener(this);
+        video = (VideoView) findViewById(R.id.videoViewCargar);
+        play = (ImageButton) findViewById(R.id.btnPlay);
+        progressBarVideos = (ProgressBar) findViewById(R.id.progress_videos);
+
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playVideo();
+            }
+        });
         url = "http://10.0.2.2:82/curso-laravel/kututis/";
         obtenerVideos();
     }
@@ -58,6 +68,8 @@ public class HistorialVideos extends AppCompatActivity implements View.OnClickLi
                 if(response.isSuccessful()){
                     List<SesionPraxia> sesionPraxiaList = response.body();
                     url = url + sesionPraxiaList.get(sesionPraxiaList.size()-1).getRuta_servidor();
+                    play.setVisibility(View.VISIBLE);
+                    progressBarVideos.setVisibility(View.GONE);
                 }
                 else{
                     Toast.makeText(getApplicationContext(),
@@ -79,8 +91,7 @@ public class HistorialVideos extends AppCompatActivity implements View.OnClickLi
         });
     }
 
-    @Override
-    public void onClick(View v) {
+    public void playVideo() {
         try {
             if (!video.isPlaying()){
                 Uri uri = Uri.parse(url);
