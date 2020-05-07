@@ -65,6 +65,8 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
     private String Fecha;
     private String ruta;
 
+    private boolean enviando = false;
+
     private static final int COD_VIDEO = 20;
     //private Button buttonEnviar;
     private Button buttonhitorialVideos;
@@ -104,6 +106,11 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
     static final int REQUEST_VIDEO_CAPTURE = 1;
 
     public void TomarVideo(View view) {
+
+        // Mientras está un video no abre la cámara
+        if(enviando) {
+            return;
+        }
         //Para celular fisico
         //StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         //StrictMode.setVmPolicy(builder.build());
@@ -136,6 +143,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
     public void EnviarVideo(){
 
+        enviando = true;
 
         try {
             byte[] arreglo_binarios = FileUtils.readFileToByteArray(fileVideo);//Convert any file, image or video into byte array
@@ -156,6 +164,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
         apiClient.registroSesionPraxias(sesionPraxia).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                enviando = false;
                 Log.i("VIDEO", response.toString());
                 Context context = getApplicationContext();
                 CharSequence text = "Video Enviado";
@@ -185,6 +194,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                enviando = false;
                 Log.e("Enviando video", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrío un problema, no se puede conectar al servicio",
