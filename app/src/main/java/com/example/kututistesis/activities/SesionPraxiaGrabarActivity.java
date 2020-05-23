@@ -77,6 +77,9 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sesion_praxia_grabar);
 
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
         if (ContextCompat.checkSelfPermission(SesionPraxiaGrabarActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(SesionPraxiaGrabarActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(SesionPraxiaGrabarActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1000);
         }

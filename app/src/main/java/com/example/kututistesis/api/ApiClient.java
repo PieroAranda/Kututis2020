@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static ApiClient instance = null;
-    public static final String BASE_URL = "http://10.0.2.2:82/curso-laravel/kututis/public/api/";
+    public static final String BASE_URL = "http://192.168.0.7:82/curso-laravel/kututis/public/api/";
 
     private ApiService apiService = null;
 
