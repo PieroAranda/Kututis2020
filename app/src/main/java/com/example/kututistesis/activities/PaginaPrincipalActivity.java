@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,9 +14,9 @@ import com.example.kututistesis.R;
 
 public class PaginaPrincipalActivity extends AppCompatActivity {
 
-    private Button buttonPraxias;
-    private Button buttonConsonatesVocalicos;
-    private Button buttonConsonatesConsonanticos;
+    private ImageView buttonPraxias;
+    private ImageView buttonConsonatesVocalicos;
+    private ImageView buttonConsonatesConsonanticos;
     private ImageView imageViewLogout;
 
     @Override
@@ -24,10 +25,17 @@ public class PaginaPrincipalActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.paciente_pantalla_principal);
 
+        // Cambia el color de la barra de notificaciones
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent, this.getTheme()));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorAccent));
+        }
+
         // Inicializa los elementos de la vista
-        buttonPraxias = (Button) findViewById(R.id.button_praxias);
-        buttonConsonatesVocalicos = (Button) findViewById(R.id.button_fonemas_vocalicos);
-        buttonConsonatesConsonanticos = (Button) findViewById(R.id.button_fonemas_consonanticos);
+        buttonPraxias = (ImageView) findViewById(R.id.button_praxias);
+        buttonConsonatesVocalicos = (ImageView) findViewById(R.id.button_fonemas_vocalicos);
+        buttonConsonatesConsonanticos = (ImageView) findViewById(R.id.button_fonemas_consonanticos);
         imageViewLogout = (ImageView) findViewById(R.id.image_logout);
 
         // Eventos de la vista
