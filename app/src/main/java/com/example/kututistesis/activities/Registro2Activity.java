@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,10 +36,12 @@ public class Registro2Activity extends AppCompatActivity {
 
     private static final String INTENT_EXTRA_SIGN_UP_DATA = "SIGN_UP_DATA";
 
-    private Button buttonNext;
+    private ImageView buttonNext;
     private EditText editTextEmail;
     private EditText editTextPassword1;
     private EditText editTextPassword2;
+    private ImageView imageViewAtras;
+
     private SignUpForm signUpForm;
     private AwesomeValidation awesomeValidation;
     private ApiClient apiClient;
@@ -55,7 +58,8 @@ public class Registro2Activity extends AppCompatActivity {
         editTextEmail = (EditText) findViewById(R.id.edit_text_email);
         editTextPassword1 = (EditText) findViewById(R.id.edit_text_password_1);
         editTextPassword2 = (EditText) findViewById(R.id.edit_text_password_2);
-        buttonNext = (Button) findViewById(R.id.button_next);
+        buttonNext = (ImageView) findViewById(R.id.button_next);
+        imageViewAtras = (ImageView) findViewById(R.id.imageViewRegistro2Atras);
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +76,13 @@ public class Registro2Activity extends AppCompatActivity {
                     return true;
                 }
                 return false;
+            }
+        });
+
+        imageViewAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Registro2Activity.super.onBackPressed();
             }
         });
 

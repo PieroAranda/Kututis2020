@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
@@ -28,7 +29,8 @@ public class Registro3Activity extends AppCompatActivity {
     private static final String INTENT_EXTRA_SIGN_UP_DATA = "SIGN_UP_DATA";
 
     private EditText editTextPetName;
-    private Button buttonRegister;
+    private ImageView buttonRegister;
+    private ImageView imageViewAtras;
     private SignUpForm signUpForm;
     private ApiClient apiClient;
     private AwesomeValidation awesomeValidation;
@@ -43,12 +45,20 @@ public class Registro3Activity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         editTextPetName = (EditText) findViewById(R.id.edit_text_pet_name);
-        buttonRegister = (Button) findViewById(R.id.button_register);
+        buttonRegister = (ImageView) findViewById(R.id.button_register);
+        imageViewAtras = (ImageView) findViewById(R.id.imageViewRegistro3Atras);
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 registerUser();
+            }
+        });
+
+        imageViewAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Registro3Activity.super.onBackPressed();
             }
         });
 

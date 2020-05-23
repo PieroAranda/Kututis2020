@@ -14,6 +14,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
@@ -30,12 +31,13 @@ public class Registro1Activity extends AppCompatActivity {
 
     private static final String INTENT_EXTRA_SIGN_UP_DATA = "SIGN_UP_DATA";
 
-    private Button buttonNext;
+    private ImageView buttonNext;
     private EditText editTextBirthDate;
     private EditText editTextNames;
     private EditText editTextLastname;
     private EditText editTextMobileNumber;
     private AwesomeValidation awesomeValidation;
+    private ImageView imageViewAtras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,8 @@ public class Registro1Activity extends AppCompatActivity {
         editTextLastname = (EditText) findViewById(R.id.edit_text_lastname);
         editTextBirthDate = (EditText) findViewById(R.id.edit_text_birthdate);
         editTextMobileNumber = (EditText) findViewById(R.id.edit_text_mobile_number);
-        buttonNext = (Button) findViewById(R.id.button_next);
+        buttonNext = (ImageView) findViewById(R.id.button_next);
+        imageViewAtras = (ImageView) findViewById(R.id.imageViewRegistro1Atras);
 
         // Eventos de la vista
         buttonNext.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +64,12 @@ public class Registro1Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openDialogDatePicker();
+            }
+        });
+        imageViewAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Registro1Activity.super.onBackPressed();
             }
         });
 
