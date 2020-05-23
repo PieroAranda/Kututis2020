@@ -47,20 +47,6 @@ public class PraxiasAdapter extends RecyclerView.Adapter<PraxiasAdapter.MyViewHo
         return new PraxiasAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.row_praxias,parent,false));
     }
 
-    public static Bitmap getBitmapFromURL(String src) {
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            // Log exception
-            return null;
-        }
-    }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
@@ -69,9 +55,7 @@ public class PraxiasAdapter extends RecyclerView.Adapter<PraxiasAdapter.MyViewHo
         String url = praxias.getVideo();
 
         holder.NombrePraxia.setText(nombrePraxia);
-        //Bitmap bitmap = getBitmapFromURL(url);
-        //holder.imagen.setImageBitmap(bitmap);
-        //Picasso.with(context).load(url).fit().centerInside().into(holder.imagen);
+        Picasso.get().load(url).into(holder.imagen);
     }
 
 

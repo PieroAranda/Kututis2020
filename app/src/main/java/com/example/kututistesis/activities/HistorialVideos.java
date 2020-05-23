@@ -55,7 +55,7 @@ public class HistorialVideos extends AppCompatActivity {
                 playVideo();
             }
         });
-        url = "http://10.0.0.2:82/curso-laravel/kututis/";
+        url = "http://10.0.2.2:82/curso-laravel/kututis/";
         obtenerVideos();
     }
 
