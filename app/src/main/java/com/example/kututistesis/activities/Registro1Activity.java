@@ -40,6 +40,7 @@ public class Registro1Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.paciente_registrar);
 
         // Inicializa los elementos de la vista

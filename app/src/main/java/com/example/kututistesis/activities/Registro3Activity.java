@@ -36,6 +36,7 @@ public class Registro3Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.paciente_registrar_3);
 
         getIntentData();

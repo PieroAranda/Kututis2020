@@ -2,83 +2,92 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/inicio_sesion_fondo">
 
-    <TextView
-        android:id="@+id/text_email"
+    <ImageView
+        android:id="@+id/imageViewRegistro2Atras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
-        android:text="Correo"
+        android:layout_marginLeft="32dp"
+        android:src="@drawable/salir"
         />
 
     <EditText
         android:id="@+id/edit_text_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/text_email"
+        app:layout_constraintTop_toBottomOf="@id/imageViewRegistro2Atras"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="48dp"
         android:text=""
         android:singleLine="true"
-        android:inputType="textEmailAddress"/>
-
-    <TextView
-        android:id="@+id/text_password_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_email"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
-        android:text="Contraseña"
-        />
+        android:inputType="textEmailAddress"
+        android:background="@drawable/edittext_round"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:fontFamily="@font/dimbo_regular"
+        android:textSize="24dp"
+        android:hint="correo"
+        android:textColorHint="#fbcfa5"
+        android:letterSpacing="0.05"/>
 
     <EditText
         android:id="@+id/edit_text_password_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/text_password_1"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_email"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:text=""
         android:inputType="textPassword"
-        android:maxLength="16"/>
-
-    <TextView
-        android:id="@+id/text_password_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_password_1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
-        android:text="Repetir contraseña"
-        />
+        android:maxLength="16"
+        android:background="@drawable/edittext_round"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:fontFamily="@font/dimbo_regular"
+        android:textSize="24dp"
+        android:hint="contraseña"
+        android:textColorHint="#fbcfa5"
+        android:letterSpacing="0.05"/>
 
     <EditText
         android:id="@+id/edit_text_password_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/text_password_2"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_password_1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:text=""
         android:inputType="textPassword"
         android:maxLength="16"
-        android:imeOptions="actionNext"/>
+        android:imeOptions="actionNext"
+        android:background="@drawable/edittext_round"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:fontFamily="@font/dimbo_regular"
+        android:textSize="24dp"
+        android:hint="repita contraseña"
+        android:textColorHint="#fbcfa5"
+        android:letterSpacing="0.05"/>
 
     <Button
         android:id="@+id/button_next"
