@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private TextView textSignUp;
-    private Button buttonSignIn;
+    private ImageView buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private ApiClient apiClient;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Inicializa los elementos de la vista
         textSignUp = (TextView) findViewById(R.id.text_sign_up);
-        buttonSignIn = (Button) findViewById(R.id.button_sign_in);
+        buttonSignIn = (ImageView) findViewById(R.id.button_sign_in);
         editTextEmail = (EditText) findViewById(R.id.edit_text_email);
         editTextPassword = (EditText) findViewById(R.id.edit_text_password);
 
