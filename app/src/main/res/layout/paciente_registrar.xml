@@ -37,7 +37,7 @@
         android:paddingRight="15dp"
         android:fontFamily="@font/dimbo_regular"
         android:textSize="24dp"
-        android:hint="nombres"
+        android:hint="Nombres"
         android:textColorHint="#fbcfa5"
         android:letterSpacing="0.05"/>
 
@@ -62,7 +62,7 @@
         android:paddingRight="15dp"
         android:fontFamily="@font/dimbo_regular"
         android:textSize="24dp"
-        android:hint="apellidos"
+        android:hint="Apellidos"
         android:textColorHint="#fbcfa5"
         android:letterSpacing="0.05"/>
 
@@ -88,7 +88,7 @@
         android:paddingRight="15dp"
         android:fontFamily="@font/dimbo_regular"
         android:textSize="24dp"
-        android:hint="fecha de nacimiento"
+        android:hint="Fecha de nacimiento"
         android:textColorHint="#fbcfa5"
         android:letterSpacing="0.05"/>
 
@@ -114,7 +114,7 @@
         android:paddingRight="15dp"
         android:fontFamily="@font/dimbo_regular"
         android:textSize="24dp"
-        android:hint="celular"
+        android:hint="Celular"
         android:textColorHint="#fbcfa5"
         android:letterSpacing="0.05"/>
 

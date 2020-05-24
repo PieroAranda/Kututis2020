@@ -36,7 +36,7 @@
         android:paddingRight="15dp"
         android:fontFamily="@font/dimbo_regular"
         android:textSize="24dp"
-        android:hint="correo"
+        android:hint="Correo"
         android:textColorHint="#fbcfa5"
         android:letterSpacing="0.05"/>
 
@@ -60,7 +60,7 @@
         android:paddingRight="15dp"
         android:fontFamily="@font/dimbo_regular"
         android:textSize="24dp"
-        android:hint="contraseña"
+        android:hint="Contraseña"
         android:textColorHint="#fbcfa5"
         android:letterSpacing="0.05"/>
 
@@ -85,7 +85,7 @@
         android:paddingRight="15dp"
         android:fontFamily="@font/dimbo_regular"
         android:textSize="24dp"
-        android:hint="repita contraseña"
+        android:hint="Repita contraseña"
         android:textColorHint="#fbcfa5"
         android:letterSpacing="0.05"/>
 
