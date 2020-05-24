@@ -86,4 +86,8 @@ public class ApiClient {
     public Call<List<Vocales>> listarvocales(){
         return apiService.listarvocales();
     }
+
+    public Call<List<SesionPraxia>> buscarxpraxiaxusuarioxfecha(Integer id_paciente, Integer id_praxia, String fecha){
+        return apiService.buscarxpraxiaxusuarioxfecha(id_paciente,id_praxia,fecha);
+    }
 }

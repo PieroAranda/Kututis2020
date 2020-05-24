@@ -115,7 +115,7 @@ public class Registro1Activity extends AppCompatActivity {
     }
 
     private void openDialogDatePicker() {
-        BirthDatePickerFragment newFragment = BirthDatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+        BirthDatePickerFragment newFragment = BirthDatePickerFragment.newInstance(true,new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 // +1 because January is zero

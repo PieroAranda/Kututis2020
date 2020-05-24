@@ -9,12 +9,11 @@
     <VideoView
         android:id="@+id/videoViewCargar"
         android:layout_width="406dp"
-        android:layout_height="614dp"
+        android:layout_height="727dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.003" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progress_videos"
@@ -29,11 +28,10 @@
         android:id="@+id/btnPlay"
         android:layout_width="101dp"
         android:layout_height="87dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/videoViewCargar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoViewCargar"
-        app:srcCompat="@drawable/play"
-        android:visibility="invisible"/>
+        app:srcCompat="@drawable/play" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

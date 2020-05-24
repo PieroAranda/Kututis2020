@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/inicio_sesion_fondo">
+
+    <EditText
+        android:id="@+id/edit_text_date"
+        android:layout_width="203dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="19dp"
+        android:background="@drawable/edittext_round"
+        android:clickable="true"
+        android:focusable="false"
+        android:fontFamily="@font/dimbo_regular"
+        android:hint="@string/ingrese_fecha"
+        android:inputType="date"
+        android:letterSpacing="0.05"
+        android:maxLines="1"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="15dp"
+        android:text=""
+        android:textColorHint="#fbcfa5"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/Boton_Buscar_Videos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/Boton_Buscar_Videos"
+        android:layout_width="167dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/boton_ingresar"
+        app:layout_constraintBottom_toTopOf="@id/VideoSeleccionado"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerHistorialVideoPorFecha"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/VideoSeleccionado"/>
+
+    <VideoView
+        android:id="@+id/VideoSeleccionado"
+        android:layout_width="match_parent"
+        android:layout_height="214dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/recyclerHistorialVideoPorFecha"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_date" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,6 +42,8 @@
         <activity android:name=".activities.HistorialVideos"
             android:label="Historial Videos"
             android:parentActivityName=".activities.PaginaPrincipalActivity"/>
+        <activity android:name=".activities.HistorialVideosFechas"
+            android:parentActivityName=".activities.PaginaPrincipalActivity"/>
         <activity android:name=".activities.SesionVocalGrabarActivity"
             android:label="Grabar Audios"
             android:parentActivityName=".activities.FonemasVocalicosActivity"/>
