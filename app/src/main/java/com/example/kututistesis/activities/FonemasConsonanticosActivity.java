@@ -20,7 +20,7 @@ import java.util.Locale;
 public class FonemasConsonanticosActivity extends AppCompatActivity {
 
     private static final int REQ_CODE_SPEECH_INPUT=100;
-    //private Button mBotonHablar;
+    private Button mBotonHablar;
     private String lista_palabras;
     private String lista_confianza;
 
@@ -35,7 +35,7 @@ public class FonemasConsonanticosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fonemas_consonanticos);
 
 
-        //mBotonHablar = findViewById(R.id.buttonMicrofono);
+        mBotonHablar = findViewById(R.id.buttonMicrofono);
         lista_palabras = "";
         lista_confianza = "";
 
@@ -51,12 +51,12 @@ public class FonemasConsonanticosActivity extends AppCompatActivity {
                 ttsManager.initQueue(texto);
             }
         });
-        /*mBotonHablar.setOnClickListener(new View.OnClickListener() {
+        mBotonHablar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 iniciarEntradaVoz();
             }
-        });*/
+        });
     }
 
     private void iniciarEntradaVoz() {
