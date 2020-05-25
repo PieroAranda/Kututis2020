@@ -173,7 +173,7 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Date date = new Date();
 
         Fecha = dateFormat.format(date);
@@ -234,7 +234,7 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
     }
 
     public void goToHistorialAudios(View view) {
-        Intent intent = new Intent(this, HistorialAudios.class);
+        Intent intent = new Intent(this, HistorialAudiosFechas.class);
         startActivity(intent);
     }
 

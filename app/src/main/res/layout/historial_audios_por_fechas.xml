@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.HistorialAudiosFechas"
+    android:background="@drawable/inicio_sesion_fondo">
+
+    <EditText
+        android:id="@+id/edit_text_date_audios"
+        android:layout_width="203dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="19dp"
+        android:background="@drawable/edittext_round"
+        android:clickable="true"
+        android:focusable="false"
+        android:fontFamily="@font/dimbo_regular"
+        android:hint="@string/ingrese_fecha"
+        android:inputType="date"
+        android:letterSpacing="0.05"
+        android:maxLines="1"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="15dp"
+        android:text=""
+        android:textColorHint="#fbcfa5"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/Boton_Buscar_Audios"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/Boton_Buscar_Audios"
+        android:layout_width="167dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@id/recyclerHistorialAudioPorFecha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        app:srcCompat="@drawable/boton_ingresar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerHistorialAudioPorFecha"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_date_audios"
+        app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

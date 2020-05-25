@@ -1,0 +1,113 @@
+package com.example.kututistesis.activities;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.app.DatePickerDialog;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.example.kututistesis.R;
+import com.example.kututistesis.api.ApiClient;
+import com.example.kututistesis.dialog.BirthDatePickerFragment;
+import com.example.kututistesis.model.SesionVocal;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class HistorialAudiosFechas extends AppCompatActivity {
+    private ApiClient apiClient;
+    private EditText editText;
+    private RecyclerView recyclerView;
+
+    private HistorialAudiosFechasAdapter audiosFechasAdapter;
+    private ImageView imageView;
+    private String url;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.historial_audios_por_fechas);
+
+        apiClient = ApiClient.getInstance();
+
+        editText = findViewById(R.id.edit_text_date_audios);
+
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialogDatePicker();
+            }
+        });
+
+        recyclerView = findViewById(R.id.recyclerHistorialAudioPorFecha);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        audiosFechasAdapter = new HistorialAudiosFechasAdapter();
+
+        imageView = findViewById(R.id.Boton_Buscar_Audios);
+
+        url = "http://192.168.1.13:82/curso-laravel/kututis/";
+
+        final Integer id_paciente = 1;
+        final Integer id_vocal = 1;
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                obtenerAudiosGrabados(id_vocal, id_paciente, editText.getText().toString());
+            }
+        });
+
+    }
+
+    public void obtenerAudiosGrabados(Integer id_vocal, Integer id_paciente, String fecha) {
+        apiClient.buscarxvocalxusuarioxfecha(id_vocal, id_paciente, fecha).enqueue(new Callback<List<SesionVocal>>() {
+            @Override
+            public void onResponse(Call<List<SesionVocal>> call, Response<List<SesionVocal>> response) {
+                List<SesionVocal> sesionVocalList = response.body();
+                Log.d("Funciono vocales", "tamanio:"+sesionVocalList.size());
+                for (SesionVocal sesionVocal: sesionVocalList){
+                    url = url + sesionVocal.getRuta_servidor();
+                    sesionVocal.setRuta_servidor(url);
+                    url = "http://10.0.2.2:82/curso-laravel/kututis/";
+                }
+
+                audiosFechasAdapter.setData(sesionVocalList);
+                recyclerView.setAdapter(audiosFechasAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<SesionVocal>> call, Throwable t) {
+                Log.d("Fallo praxias", t.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Ocurrió un problema, no se puede conectar al servicio",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+    }
+
+    private void openDialogDatePicker() {
+        BirthDatePickerFragment newFragment = BirthDatePickerFragment.newInstance(false,new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                // +1 because January is zero
+                final String selectedDate = day + "-" +"0"+ (month+1) + "-" + year;
+                editText.setText(selectedDate);
+            }
+        });
+
+        newFragment.show(HistorialAudiosFechas.this.getSupportFragmentManager(), "datePicker");
+    }
+}
