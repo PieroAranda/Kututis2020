@@ -50,8 +50,9 @@ public class HistorialVideosFechasAdapter extends RecyclerView.Adapter<Historial
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
         final SesionPraxia sesionPraxia = sesionPraxiaList.get(position);
-        String intento = "Intento #"+position;
-        holder.intento.setText(intento);
+        Integer intento = position + 1;
+        String numero_intento = "Intento #"+intento;
+        holder.intento.setText(numero_intento);
         String aprobado;
         if(sesionPraxia.getAprobado() == 0)
         {

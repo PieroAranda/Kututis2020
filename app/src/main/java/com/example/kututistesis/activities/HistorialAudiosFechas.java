@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,11 +33,18 @@ public class HistorialAudiosFechas extends AppCompatActivity {
     private HistorialAudiosFechasAdapter audiosFechasAdapter;
     private ImageView imageView;
     private String url;
+    private GlobalClass globalClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.historial_audios_por_fechas);
+
+        globalClass = (GlobalClass) getApplicationContext();
+
+        Intent intent = getIntent();
+
+        Integer intent_vocal_id = intent.getIntExtra("vocal_id",0);
 
         apiClient = ApiClient.getInstance();
 
@@ -59,8 +67,8 @@ public class HistorialAudiosFechas extends AppCompatActivity {
 
         url = "http://192.168.1.13:82/curso-laravel/kututis/";
 
-        final Integer id_paciente = 1;
-        final Integer id_vocal = 1;
+        final Integer id_paciente = globalClass.getId_usuario();
+        final Integer id_vocal = intent_vocal_id;
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

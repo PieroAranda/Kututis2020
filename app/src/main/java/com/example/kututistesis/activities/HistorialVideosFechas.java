@@ -1,6 +1,7 @@
 package com.example.kututistesis.activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -44,11 +45,22 @@ public class HistorialVideosFechas extends AppCompatActivity {
     private HistorialVideosFechasAdapter videosFechasAdapter;
     private MediaController mediaController;
 
+    private Integer id_paciente;
+    private Integer id_praxia;
+
+    private GlobalClass globalClass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.historial_videos_por_fechas);
+
+        globalClass = (GlobalClass) getApplicationContext();
+
+        Intent intent = getIntent();
+
+        Integer intent_praxia_id = intent.getIntExtra("praxia_id",0);
 
         apiClient = ApiClient.getInstance();
 
@@ -75,21 +87,21 @@ public class HistorialVideosFechas extends AppCompatActivity {
 
         url = "http://192.168.1.13:82/curso-laravel/kututis/";
 
-        final Integer id_paciente = 1;
-        final Integer id_praxia = 1;
+        id_paciente = globalClass.getId_usuario();
+        id_praxia = intent_praxia_id;
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                obtenerVideosGrabados(id_paciente, id_praxia, editText.getText().toString());
+                obtenerVideosGrabados(id_praxia, id_paciente,editText.getText().toString());
             }
         });
 
 
     }
 
-    public void obtenerVideosGrabados(Integer id_paciente, Integer id_praxia, String fecha){
-        apiClient.buscarxpraxiaxusuarioxfecha(id_paciente,id_praxia,fecha).enqueue(new Callback<List<SesionPraxia>>() {
+    public void obtenerVideosGrabados(Integer id_praxia, Integer id_paciente,String fecha){
+        apiClient.buscarxpraxiaxusuarioxfecha(id_praxia,id_paciente,fecha).enqueue(new Callback<List<SesionPraxia>>() {
             @Override
             public void onResponse(Call<List<SesionPraxia>> call, Response<List<SesionPraxia>> response) {
                 List<SesionPraxia> sesionPraxiaList = response.body();

@@ -16,4 +16,5 @@
     <string name="err_email_used">El correo ya está registrado</string>
     <string name="welcome_message_title">Bienvenido</string>
     <string name="ingrese_fecha">Ingrese Fecha</string>
+    <string name="historial_videos">Historial Videos</string>
 </resources>

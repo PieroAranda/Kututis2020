@@ -22,14 +22,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FonemasVocalicosActivity extends AppCompatActivity {
+public class FonemasVocalicosActivity extends AppCompatActivity implements VocalAdapter.OnVocalesListener {
     private ApiClient apiClient;
     private String url;
 
     Toolbar toolbar;
     RecyclerView recyclerView;
     VocalAdapter vocalAdapter;
-
+    private List<Vocales> vocalesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +56,8 @@ public class FonemasVocalicosActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Vocales>> call, Response<List<Vocales>> response) {
                 if(response.isSuccessful()){
-                    List<Vocales> vocalesList = response.body();
-                    vocalAdapter.setData(vocalesList);
+                    vocalesList = response.body();
+                    vocalAdapter.setData(vocalesList,FonemasVocalicosActivity.this);
                     recyclerView.setAdapter(vocalAdapter);
                 }
                 else{
@@ -79,4 +79,11 @@ public class FonemasVocalicosActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void OnVocalClick(int position) {
+        Integer vocal_id = vocalesList.get(position).getId();
+        Intent intent = new Intent(this, SesionVocalGrabarActivity.class);
+        intent.putExtra("vocal_id", vocal_id);
+        startActivity(intent);
+    }
 }

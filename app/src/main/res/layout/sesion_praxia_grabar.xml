@@ -4,33 +4,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/inicio_sesion_fondo">
 
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="154dp"
         android:layout_height="142dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="16dp"
         android:onClick="TomarVideo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoEjemploPraxia"
         app:srcCompat="@android:drawable/presence_video_online" />
 
     <Button
         android:id="@+id/buttonHistorailVideos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="28dp"
+        android:enabled="false"
         android:onClick="goToHistorialVideos"
-        android:text="Historial Videos"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        android:text="@string/historial_videos"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.747"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.497"
-        android:enabled="false"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <VideoView
+        android:id="@+id/videoEjemploPraxia"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/playVideoEjemplo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonHistorailVideos" />
+
+    <ImageView
+        android:id="@+id/playVideoEjemplo"
+        android:layout_width="143dp"
+        android:layout_height="138dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_play_arrow_black_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

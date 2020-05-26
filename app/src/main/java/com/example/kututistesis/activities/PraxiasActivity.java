@@ -29,18 +29,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PraxiasActivity extends AppCompatActivity {
+public class PraxiasActivity extends AppCompatActivity implements PraxiasAdapter.OnPraxiaListener {
     private ApiClient apiClient;
     private String url;
 
     Toolbar toolbar;
     RecyclerView recyclerView;
     PraxiasAdapter praxiasAdapter;
+    private GlobalClass globalClass;
+
+    private List<Praxias> praxiasList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_praxias);
+
+        globalClass = (GlobalClass) getApplicationContext();
 
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.recyclerView);
@@ -61,13 +66,13 @@ public class PraxiasActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Praxias>> call, Response<List<Praxias>> response) {
                 if(response.isSuccessful()){
-                    List<Praxias> praxiasList = response.body();
+                    praxiasList = response.body();
                     for(Praxias prax : praxiasList)
                     {
                         String urlImagen = url + prax.getVideo();
                         prax.setVideo(urlImagen);
                     }
-                    praxiasAdapter.setData(praxiasList);
+                    praxiasAdapter.setData(praxiasList, globalClass,PraxiasActivity.this);
                     recyclerView.setAdapter(praxiasAdapter);
                 }
                 else{
@@ -89,11 +94,13 @@ public class PraxiasActivity extends AppCompatActivity {
         });
     }
 
-    public void goToSesionPraxiaGrabar(View view) {
+
+
+    @Override
+    public void onPraxiaClick(int position) {
+        Integer praxia_id = praxiasList.get(position).getId();
         Intent intent = new Intent(this, SesionPraxiaGrabarActivity.class);
+        intent.putExtra("praxia_id", praxia_id);
         startActivity(intent);
     }
-
-
-
 }

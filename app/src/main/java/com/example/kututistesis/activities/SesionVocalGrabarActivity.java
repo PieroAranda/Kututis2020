@@ -65,6 +65,7 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
     private Button buttonReproducir;
     private Boolean grabado = false;
     private Button buttonHistorialAudios;
+    private GlobalClass globalClass;
 
 
     @Override
@@ -72,10 +73,16 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sesion_vocal_grabar);
 
+        globalClass = (GlobalClass) getApplicationContext();
+
+        Intent intent = getIntent();
+
+        Integer intent_vocal_id = intent.getIntExtra("vocal_id",0);
+
         apiClient = ApiClient.getInstance();
 
-        paciente_id = 1;
-        vocales_id = 1;
+        paciente_id = globalClass.getId_usuario();
+        vocales_id = intent_vocal_id;
         Aprobado = 0;
         Fecha = "";
         ruta = "";
@@ -235,6 +242,7 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
 
     public void goToHistorialAudios(View view) {
         Intent intent = new Intent(this, HistorialAudiosFechas.class);
+        intent.putExtra("vocal_id",vocales_id);
         startActivity(intent);
     }
 

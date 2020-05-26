@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import android.view.View;
 
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -65,17 +67,36 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
     private String Fecha;
     private String ruta;
 
+    private VideoView videoEjemplo;
+
     private boolean enviando = false;
 
     private static final int COD_VIDEO = 20;
     //private Button buttonEnviar;
     private Button buttonhitorialVideos;
 
+    private String url;
+
+    private String ruta_video_ejemplo;
+
+    private ImageView play;
+
+    private  GlobalClass globalClass;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.sesion_praxia_grabar);
+
+        globalClass = (GlobalClass) getApplicationContext();
+
+        Intent intent = getIntent();
+
+        Integer intent_praxia_id = intent.getIntExtra("praxia_id",0);
+
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
@@ -86,13 +107,30 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
         apiClient = ApiClient.getInstance();
 
-        paciente_id = 1;
-        praxias_id = 1;
+        paciente_id = globalClass.getId_usuario();
+        praxias_id = intent_praxia_id;
         Aprobado = 0;
         Fecha = "";
         ruta = "";
 
+        ruta_video_ejemplo = "praxia1Ejemplo.mp4";
+
+        url = "http://10.0.2.2:82/curso-laravel/kututis/storage/app/images/"+ruta_video_ejemplo;
+
         buttonhitorialVideos = findViewById(R.id.buttonHistorailVideos);
+
+        videoEjemplo = findViewById(R.id.videoEjemploPraxia);
+
+        play = findViewById(R.id.playVideoEjemplo);
+
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playVideo();
+            }
+        });
+
+
 
         //buttonEnviar = (Button) findViewById(R.id.buttonEnvio);
         //buttonEnviar.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +180,42 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    public void playVideo() {
+        try {
+            if (!videoEjemplo.isPlaying()){
+                Uri uri = Uri.parse(url);
+                videoEjemplo.setVideoURI(uri);
+
+                MediaController mediaController = new MediaController(this);
+                videoEjemplo.setMediaController(mediaController);
+                mediaController.setAnchorView(videoEjemplo);
+
+                videoEjemplo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        play.setImageResource(R.drawable.ic_play_arrow_black_24dp);
+                    }
+                });
+            }else {
+                videoEjemplo.pause();
+                play.setImageResource(R.drawable.ic_play_arrow_black_24dp);
+            }
+
+        }catch (Exception e)
+        {
+
+        }
+        videoEjemplo.requestFocus();
+        videoEjemplo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true);
+                videoEjemplo.start();
+                play.setImageResource(R.drawable.ic_pause_black_24dp);
+            }
+        });
     }
 
     public void EnviarVideo(){
@@ -216,6 +290,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
     public void goToHistorialVideos(View view) {
         Intent intent = new Intent(this, HistorialVideosFechas.class);
+        intent.putExtra("praxia_id", praxias_id);
         startActivity(intent);
 
     }

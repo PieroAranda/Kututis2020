@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextPassword;
     private ApiClient apiClient;
     private AwesomeValidation awesomeValidation;
+    private GlobalClass globalClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.paciente_inicio_sesion);
         apiClient = ApiClient.getInstance();
+        globalClass = (GlobalClass) getApplicationContext();
 
         // Inicializa los elementos de la vista
         textSignUp = (TextView) findViewById(R.id.text_sign_up);
@@ -136,9 +138,11 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("SIGNIN", response.body().getStatus() + " " + response.body().getCode());
                     String responseCode = response.body().getCode();
                     String responseStatus = response.body().getStatus();
+                    Integer responseUser = response.body().getUser();
 
                     switch (responseCode) {
                         case "200":
+                            globalClass.setId_usuario(responseUser);
                             goToPaginaPrincipal();
                             break;
                         case "400":

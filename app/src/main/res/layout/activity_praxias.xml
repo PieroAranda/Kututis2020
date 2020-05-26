@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimary"
-    android:onClick="goToSesionPraxiaGrabar"
     tools:context=".activities.PraxiasActivity">
 
     <androidx.appcompat.widget.Toolbar

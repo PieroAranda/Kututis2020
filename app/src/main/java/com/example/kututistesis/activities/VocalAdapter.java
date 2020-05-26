@@ -21,13 +21,15 @@ import java.util.List;
 public class VocalAdapter extends RecyclerView.Adapter<VocalAdapter.MyViewHolder> {
     private List<Vocales> vocalesList;
     private Context context;
+    private OnVocalesListener mOnVocalesListener;
 
     public VocalAdapter() {
 
     }
 
-    public void setData(List<Vocales> vocalesList) {
+    public void setData(List<Vocales> vocalesList, OnVocalesListener mOnVocalesListener) {
         this.vocalesList = vocalesList;
+        this.mOnVocalesListener = mOnVocalesListener;
         notifyDataSetChanged();
     }
 
@@ -35,7 +37,7 @@ public class VocalAdapter extends RecyclerView.Adapter<VocalAdapter.MyViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context= parent.getContext();
-        return new VocalAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.row_vocales,parent,false));
+        return new VocalAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.row_vocales,parent,false), mOnVocalesListener);
     }
 
     @Override
@@ -51,22 +53,28 @@ public class VocalAdapter extends RecyclerView.Adapter<VocalAdapter.MyViewHolder
         return vocalesList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView NombreVocal;
         ImageView nextVocal;
-        LinearLayout item;
+        OnVocalesListener onVocalesListener;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, OnVocalesListener onVocalesListener) {
             super(itemView);
             NombreVocal = itemView.findViewById(R.id.nombreVocal);
-            item = itemView.findViewById(R.id.item_fonema_vocalico);
-            item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, SesionVocalGrabarActivity.class);
-                    context.startActivity(intent);
-                }
-            });
+
+            this.onVocalesListener = onVocalesListener;
+
+            itemView.setOnClickListener(this);
+
         }
+
+        @Override
+        public void onClick(View v) {
+            onVocalesListener.OnVocalClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnVocalesListener{
+        void OnVocalClick(int position);
     }
 }

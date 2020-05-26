@@ -30,13 +30,17 @@ import java.util.List;
 public class PraxiasAdapter extends RecyclerView.Adapter<PraxiasAdapter.MyViewHolder> {
     private List<Praxias> praxiasList;
     private Context context;
+    private GlobalClass globalClass;
+    private OnPraxiaListener mOnpraxialistener;
 
     public PraxiasAdapter() {
 
     }
 
-    public void setData(List<Praxias> praxiasList) {
+    public void setData(List<Praxias> praxiasList, GlobalClass globalClass, OnPraxiaListener onPraxiaListener) {
         this.praxiasList = praxiasList;
+        this.globalClass = globalClass;
+        this.mOnpraxialistener = onPraxiaListener;
         notifyDataSetChanged();
     }
 
@@ -44,13 +48,13 @@ public class PraxiasAdapter extends RecyclerView.Adapter<PraxiasAdapter.MyViewHo
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context= parent.getContext();
-        return new PraxiasAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.row_praxias,parent,false));
+        return new PraxiasAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.row_praxias,parent,false),mOnpraxialistener);
     }
 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Praxias praxias = praxiasList.get(position);
+        final Praxias praxias = praxiasList.get(position);
         String nombrePraxia = praxias.getNombre();
         String url = praxias.getVideo();
 
@@ -64,25 +68,28 @@ public class PraxiasAdapter extends RecyclerView.Adapter<PraxiasAdapter.MyViewHo
         return praxiasList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imagen;
         TextView NombrePraxia;
         ImageView next;
-        LinearLayout item;
+        OnPraxiaListener onPraxiaListener;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, OnPraxiaListener onPraxiaListener) {
             super(itemView);
             imagen = itemView.findViewById(R.id.ImagenPraxia);
             NombrePraxia = itemView.findViewById(R.id.nombrePraxia);
-            item = itemView.findViewById(R.id.item_praxia);
-            item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, SesionPraxiaGrabarActivity.class);
-                    context.startActivity(intent);
-                }
-            });
+            this.onPraxiaListener = onPraxiaListener;
 
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onPraxiaListener.onPraxiaClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnPraxiaListener{
+        void onPraxiaClick(int position);
     }
 }
