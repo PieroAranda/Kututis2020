@@ -20,10 +20,10 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="230dp"
-        android:layout_marginBottom="150dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="210dp"
+        android:layout_marginBottom="130dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
         app:alignItems="center"
         app:flexDirection="column"
         app:justifyContent="center"
@@ -41,9 +41,6 @@
                 android:id="@+id/button_praxias"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="32dp"
                 android:layout_marginBottom="8dp"
                 android:text="Praxias"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -61,11 +58,8 @@
                 android:id="@+id/button_fonemas_vocalicos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="32dp"
-                android:layout_marginBottom="8dp"
                 android:text="Fonemas Vocálicos"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:src="@drawable/boton_menu_vocales"/>
@@ -80,9 +74,6 @@
                 android:id="@+id/button_fonemas_consonanticos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="32dp"
                 android:layout_marginBottom="8dp"
                 android:text="Fonemas Consonánticos"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -91,13 +82,13 @@
         </LinearLayout>
     </com.google.android.flexbox.FlexboxLayout>
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/imageViewMenuCategoriaAbout"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="32dp"
         android:src="@drawable/boton_about"
-        />
+        />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

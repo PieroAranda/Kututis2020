@@ -85,7 +85,7 @@ public class HistorialVideosFechas extends AppCompatActivity {
 
         mediaController = new MediaController(this);
 
-        url = "http://192.168.1.13:82/curso-laravel/kututis/";
+        url = "http://10.0.2.2:82/curso-laravel/kututis/";
 
         id_paciente = globalClass.getId_usuario();
         id_praxia = intent_praxia_id;

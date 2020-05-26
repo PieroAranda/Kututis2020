@@ -10,6 +10,7 @@ import android.speech.RecognizerIntent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kututistesis.R;
@@ -25,6 +26,7 @@ public class FonemasConsonanticosActivity extends AppCompatActivity {
     private String lista_confianza;
 
     private ImageButton hablarAhoraBoton;
+    private ImageView imageViewConsonanticosAtras;
     private TextView palabra;
     TTSManager ttsManager = null;
 
@@ -43,6 +45,15 @@ public class FonemasConsonanticosActivity extends AppCompatActivity {
         ttsManager.init(this);
         palabra = findViewById(R.id.textPalabra);
         hablarAhoraBoton = findViewById(R.id.imageAltavoz);
+        imageViewConsonanticosAtras = (ImageView) findViewById(R.id.imageViewConsonanticosAtras);
+
+
+        imageViewConsonanticosAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FonemasConsonanticosActivity.super.onBackPressed();
+            }
+        });
 
         hablarAhoraBoton.setOnClickListener(new View.OnClickListener() {
             @Override
