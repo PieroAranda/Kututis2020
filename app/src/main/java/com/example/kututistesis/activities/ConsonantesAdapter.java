@@ -18,13 +18,15 @@ public class ConsonantesAdapter extends RecyclerView.Adapter<ConsonantesAdapter.
 
     private List<Fonema> fonemaList;
     private Context context;
+    private OnConsonantesListener mOnconsonanteslistener;
 
     public ConsonantesAdapter(){
 
     }
 
-    public void setData(List<Fonema> fonemaList){
+    public void setData(List<Fonema> fonemaList, OnConsonantesListener onConsonantesListener){
         this.fonemaList = fonemaList;
+        this.mOnconsonanteslistener = onConsonantesListener;
         notifyDataSetChanged();
     }
 
@@ -32,7 +34,7 @@ public class ConsonantesAdapter extends RecyclerView.Adapter<ConsonantesAdapter.
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        return new ConsonantesAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.column_consonante,parent,false));
+        return new ConsonantesAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.column_consonante,parent,false), mOnconsonanteslistener);
     }
 
     @Override
@@ -47,14 +49,26 @@ public class ConsonantesAdapter extends RecyclerView.Adapter<ConsonantesAdapter.
         return fonemaList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView textConsonante;
+        OnConsonantesListener onConsonantesListener;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, OnConsonantesListener onConsonantesListener) {
             super(itemView);
-
+            this.onConsonantesListener = onConsonantesListener;
             textConsonante = itemView.findViewById(R.id.TextConsonante);
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onConsonantesListener.onConsonanteClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnConsonantesListener{
+        void onConsonanteClick(int position);
     }
 }

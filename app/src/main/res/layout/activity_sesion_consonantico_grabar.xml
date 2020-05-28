@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageViewConsonanticosContador" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewPalabraVocabulario"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginStart="32dp"
@@ -98,6 +98,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewPalabraVocabulario" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

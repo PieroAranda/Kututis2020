@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kututistesis.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -30,11 +31,25 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
     private TextView palabra;
     TTSManager ttsManager = null;
 
+    private ImageView imageViewPalabraVocabulario;
+
+    String url;
+
+    String texto_palabra;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_sesion_consonantico_grabar);
+
+        imageViewPalabraVocabulario = findViewById(R.id.imageViewPalabraVocabulario);
+
+        Intent intent = getIntent();
+
+        url = intent.getStringExtra("imagen_palabra");
+
+        Picasso.get().load(url).into(imageViewPalabraVocabulario);
 
         mBotonHablar = findViewById(R.id.buttonMicrofono);
         lista_palabras = "";
@@ -43,6 +58,11 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
         ttsManager = new TTSManager();
         ttsManager.init(this);
         palabra = findViewById(R.id.textPalabra);
+
+        texto_palabra = intent.getStringExtra("texto_palabra");
+
+        palabra.setText(texto_palabra);
+
         hablarAhoraBoton = findViewById(R.id.imageAltavoz);
         imageViewConsonanticosAtras = (ImageView) findViewById(R.id.imageViewConsonanticosAtras);
 

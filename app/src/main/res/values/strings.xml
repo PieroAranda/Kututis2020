@@ -17,4 +17,5 @@
     <string name="welcome_message_title">Bienvenido</string>
     <string name="ingrese_fecha">Ingrese Fecha</string>
     <string name="historial_videos">Historial Videos</string>
+    <string name="titulo_vocabulario">Palabras que aprenderás</string>
 </resources>

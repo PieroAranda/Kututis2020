@@ -6,6 +6,7 @@ import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionPraxia;
 import com.example.kututistesis.model.SesionVocal;
 import com.example.kututistesis.model.SignUpForm;
+import com.example.kututistesis.model.Vocabulario;
 import com.example.kututistesis.model.Vocales;
 
 import java.util.List;
@@ -57,4 +58,7 @@ public interface ApiService {
 
     @GET("listarfonemas")
     Call<List<Fonema>> listarfonemas();
+
+    @GET("vocabulario/buscarxfonemaid/{fonema_id}")
+    Call<List<Vocabulario>> buscarvocabularioxfonemaid(@Path("fonema_id") Integer fonema_id);
 }

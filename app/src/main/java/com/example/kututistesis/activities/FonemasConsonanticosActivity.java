@@ -28,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FonemasConsonanticosActivity extends AppCompatActivity {
+public class FonemasConsonanticosActivity extends AppCompatActivity implements ConsonantesAdapter.OnConsonantesListener{
 
     private RecyclerView recyclerFonemaConsonantico;
 
@@ -64,7 +64,7 @@ public class FonemasConsonanticosActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Fonema>> call, Response<List<Fonema>> response) {
                 fonemaList = response.body();
-                consonantesAdapter.setData(fonemaList);
+                consonantesAdapter.setData(fonemaList, FonemasConsonanticosActivity.this);
                 recyclerFonemaConsonantico.setAdapter(consonantesAdapter);
             }
 
@@ -73,5 +73,14 @@ public class FonemasConsonanticosActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onConsonanteClick(int position) {
+        Integer consonante_id = fonemaList.get(position).getId();
+        Intent intent = new Intent(this, VocabularioActivity.class);
+        intent.putExtra("consonante_id",consonante_id);
+        startActivity(intent);
+
     }
 }
