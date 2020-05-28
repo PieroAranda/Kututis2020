@@ -2,6 +2,9 @@ package com.example.kututistesis.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -14,21 +17,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.api.ApiClient;
+import com.example.kututistesis.model.Fonema;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FonemasConsonanticosActivity extends AppCompatActivity {
 
-    private static final int REQ_CODE_SPEECH_INPUT=100;
-    private Button mBotonHablar;
-    private String lista_palabras;
-    private String lista_confianza;
+    private RecyclerView recyclerFonemaConsonantico;
 
-    private ImageButton hablarAhoraBoton;
-    private ImageView imageViewConsonanticosAtras;
-    private TextView palabra;
-    TTSManager ttsManager = null;
+    private ApiClient apiClient;
+
+    private List<Fonema> fonemaList;
+
+    private ConsonantesAdapter consonantesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,77 +44,34 @@ public class FonemasConsonanticosActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_fonemas_consonanticos);
 
+        apiClient = ApiClient.getInstance();
 
-        mBotonHablar = findViewById(R.id.buttonMicrofono);
-        lista_palabras = "";
-        lista_confianza = "";
+        consonantesAdapter = new ConsonantesAdapter();
 
-        ttsManager = new TTSManager();
-        ttsManager.init(this);
-        palabra = findViewById(R.id.textPalabra);
-        hablarAhoraBoton = findViewById(R.id.imageAltavoz);
-        imageViewConsonanticosAtras = (ImageView) findViewById(R.id.imageViewConsonanticosAtras);
+        recyclerFonemaConsonantico = findViewById(R.id.recyclerFonemasConsonanticos);
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(
+                FonemasConsonanticosActivity.this, LinearLayoutManager.HORIZONTAL, false
+        );
+        recyclerFonemaConsonantico.setLayoutManager(layoutManager);
+        recyclerFonemaConsonantico.setItemAnimator(new DefaultItemAnimator());
 
-        imageViewConsonanticosAtras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FonemasConsonanticosActivity.super.onBackPressed();
-            }
-        });
-
-        hablarAhoraBoton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String texto = palabra.getText().toString();
-                ttsManager.initQueue(texto);
-            }
-        });
-        mBotonHablar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                iniciarEntradaVoz();
-            }
-        });
+        obtenerFonemas();
     }
 
-    private void iniciarEntradaVoz() {
-
-        Intent intent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Hola dime lo que sea");
-        try {
-            startActivityForResult(intent,REQ_CODE_SPEECH_INPUT);
-        }catch (ActivityNotFoundException e){
-
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode){
-            case REQ_CODE_SPEECH_INPUT:{
-                if (resultCode==RESULT_OK && null!=data){
-                    ArrayList<String> result=data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    float[]confidence = data.getFloatArrayExtra(RecognizerIntent.EXTRA_CONFIDENCE_SCORES);
-
-                    for (int i = 0; i < result.size();i++)
-                    {
-                        lista_palabras = lista_palabras + result.get(i) +"\n";
-                    }
-                    lista_confianza = Float.toString(confidence[0]);
-                }
-                break;
+    public void obtenerFonemas(){
+        apiClient.listarfonemas().enqueue(new Callback<List<Fonema>>() {
+            @Override
+            public void onResponse(Call<List<Fonema>> call, Response<List<Fonema>> response) {
+                fonemaList = response.body();
+                consonantesAdapter.setData(fonemaList);
+                recyclerFonemaConsonantico.setAdapter(consonantesAdapter);
             }
-        }
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ttsManager.shutDown();
+            @Override
+            public void onFailure(Call<List<Fonema>> call, Throwable t) {
+
+            }
+        });
     }
 }

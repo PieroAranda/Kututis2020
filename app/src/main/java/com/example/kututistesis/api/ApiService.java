@@ -1,5 +1,6 @@
 package com.example.kututistesis.api;
 
+import com.example.kututistesis.model.Fonema;
 import com.example.kututistesis.model.Praxias;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionPraxia;
@@ -53,4 +54,7 @@ public interface ApiService {
 
     @GET("buscarxvocalxusuarioxfecha/{id_vocal}/{id_usuario}/{fecha}")
     Call<List<SesionVocal>> buscarxvocalxusuarioxfecha(@Path("id_vocal") Integer id_vocal, @Path("id_usuario") Integer id_usuario, @Path("fecha") String fecha);
+
+    @GET("listarfonemas")
+    Call<List<Fonema>> listarfonemas();
 }

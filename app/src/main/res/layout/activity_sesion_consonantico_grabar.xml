@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SesionConsonanticoGrabarActivity"
+    android:background="@drawable/inicio_sesion_fondo">
+
+    <ImageView
+        android:id="@+id/imageViewConsonanticosAtras"
+        android:layout_width="96dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/boton_atras_naranja_claro"/>
+
+    <ImageView
+        android:id="@+id/imageViewConsonanticosContador"
+        android:layout_width="120dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/fondo_contador"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewConsonanticosCordel"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/cordel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewConsonanticosContador" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewConsonanticosCordel"
+        app:srcCompat="@drawable/leon" />
+
+    <ImageView
+        android:id="@+id/imageViewBanderin"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        app:srcCompat="@drawable/banderin_palabras_vocabulario"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewConsonanticosContador"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/textPalabra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="León"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="36sp"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewConsonanticosContador"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="54dp"
+        android:layout_marginTop="21dp"
+        android:textAllCaps="true"
+        android:fontFamily="@font/dimbo_regular"
+        android:textColor="@color/colorBackground"/>
+
+
+    <ImageButton
+        android:id="@+id/imageAltavoz"
+        android:layout_width="48dp"
+        android:layout_height="49dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintHorizontal_bias="0.777"
+        app:layout_constraintLeft_toRightOf="@+id/textPalabra"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textPalabra"
+        app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />
+
+    <Button
+        android:id="@+id/buttonMicrofono"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="142dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="142dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/boton_grabar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

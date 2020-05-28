@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.kututistesis.model.Fonema;
 import com.example.kututistesis.model.Praxias;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionPraxia;
@@ -93,5 +94,9 @@ public class ApiClient {
 
     public Call<List<SesionVocal>> buscarxvocalxusuarioxfecha(Integer id_vocal, Integer id_paciente, String fecha){
         return apiService.buscarxvocalxusuarioxfecha(id_vocal, id_paciente,fecha);
+    }
+
+    public Call<List<Fonema>> listarfonemas(){
+        return apiService.listarfonemas();
     }
 }
