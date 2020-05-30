@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kututistesis.R;
 import com.squareup.picasso.Picasso;
@@ -33,15 +34,29 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
 
     private ImageView imageViewPalabraVocabulario;
 
+    private TextView texto_contador;
+
     String url;
 
     String texto_palabra;
+
+    Double factor_minimo_confianza;
+
+    Integer contador;
+
+    String texto;
+
+    String [] texto_array;
+
+    String palabra_en_pantalla;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_sesion_consonantico_grabar);
+
+        factor_minimo_confianza = 0.70;
 
         imageViewPalabraVocabulario = findViewById(R.id.imageViewPalabraVocabulario);
 
@@ -63,6 +78,17 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
 
         palabra.setText(texto_palabra);
 
+        palabra_en_pantalla = palabra.getText().toString();
+
+        palabra_en_pantalla = palabra_en_pantalla.toLowerCase();
+
+        texto_contador = findViewById(R.id.textViewContador);
+
+        texto = texto_contador.getText().toString();
+        texto_array = texto.split(" ");
+
+        contador = Integer.parseInt(texto_array[0]);
+
         hablarAhoraBoton = findViewById(R.id.imageAltavoz);
         imageViewConsonanticosAtras = (ImageView) findViewById(R.id.imageViewConsonanticosAtras);
 
@@ -77,8 +103,7 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
         hablarAhoraBoton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String texto = palabra.getText().toString();
-                ttsManager.initQueue(texto);
+                ttsManager.initQueue(palabra_en_pantalla);
             }
         });
         mBotonHablar.setOnClickListener(new View.OnClickListener() {
@@ -114,9 +139,37 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
 
                     for (int i = 0; i < result.size();i++)
                     {
-                        lista_palabras = lista_palabras + result.get(i) +"\n";
+                        lista_palabras = lista_palabras + result.get(i) +"\n"; // se esta mostrando todos los resultados anteriores no es que no funcione la libreria, se debe borrar la data anterior
                     }
                     lista_confianza = Float.toString(confidence[0]);
+
+                    String lista_palabras_uno = result.get(0);
+
+                    //Al parecer el contains no distingue las mayusculas
+                    if (confidence[0]>=factor_minimo_confianza && lista_palabras_uno.equals(palabra_en_pantalla)) //lista_palabras_uno.contains(palabra_en_pantalla)
+                    {
+                        contador++;
+                        texto_array[0] = contador.toString();
+                        //texto = String.valueOf(texto_array);
+                        texto = texto_array[0]+" "+"/"+" "+texto_array[texto_array.length-1];
+
+                        texto_contador.setText(texto);
+
+                        Toast.makeText(getApplicationContext(),lista_palabras,
+                                Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(),
+                                "Intentalo nuevamente...no te rindas",
+                                Toast.LENGTH_SHORT)
+                                .show();
+
+                        Toast.makeText(getApplicationContext(),lista_palabras,
+                                Toast.LENGTH_SHORT)
+                                .show();
+                    }
+
                 }
                 break;
             }

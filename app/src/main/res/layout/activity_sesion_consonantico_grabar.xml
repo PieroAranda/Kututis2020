@@ -100,4 +100,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewPalabraVocabulario" />
 
+    <TextView
+        android:id="@+id/textViewContador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 / 10"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="101dp"
+        android:textAllCaps="true"
+        android:fontFamily="@font/dimbo_regular"
+        android:textColor="@color/colorBackground"
+        android:textSize="36sp"
+        app:layout_constraintTop_toTopOf="@+id/imageViewConsonanticosContador"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewConsonanticosContador"
+        app:layout_constraintLeft_toLeftOf="@+id/imageViewConsonanticosContador"
+        app:layout_constraintRight_toRightOf="@+id/imageViewConsonanticosContador"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
