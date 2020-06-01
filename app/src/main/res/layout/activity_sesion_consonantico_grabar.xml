@@ -67,7 +67,7 @@
         android:textSize="36sp"
         app:layout_constraintTop_toBottomOf="@+id/imageViewConsonanticosContador"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="54dp"
+        android:layout_marginLeft="48dp"
         android:layout_marginTop="21dp"
         android:textAllCaps="true"
         android:fontFamily="@font/dimbo_regular"
@@ -84,6 +84,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textPalabra"
         app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />
+
+    <ImageView
+        android:id="@+id/imageViewConsonanticosBarra"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:src="@drawable/sprite_barra"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonMicrofono"
+        android:layout_marginBottom="20dp"/>
 
     <Button
         android:id="@+id/buttonMicrofono"
