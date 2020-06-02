@@ -168,6 +168,10 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
                         texto_contador.setText(texto);
 
                         updateBarra(contador);
+
+                        if (contador == 10) {
+                            goToResultados();
+                        }
                     }
                     else {
                         Toast vuelveAIntentarloToast = Toast.makeText(getApplicationContext(),
@@ -181,6 +185,11 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    private void goToResultados() {
+        Intent intent = new Intent(this, ResultadosActivity.class);
+        startActivity(intent);
     }
 
     private void updateBarra(Integer contador) {
