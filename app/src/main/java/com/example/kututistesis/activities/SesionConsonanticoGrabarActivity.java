@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -169,10 +170,11 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
                         updateBarra(contador);
                     }
                     else {
-                        Toast.makeText(getApplicationContext(),
+                        Toast vuelveAIntentarloToast = Toast.makeText(getApplicationContext(),
                                 "Intentalo nuevamente...no te rindas",
-                                Toast.LENGTH_SHORT)
-                                .show();
+                                Toast.LENGTH_SHORT);
+                        vuelveAIntentarloToast.setGravity(Gravity.CENTER, 0, 0);
+                        vuelveAIntentarloToast.show();
                     }
 
                 }
