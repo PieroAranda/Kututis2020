@@ -167,18 +167,10 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
                         texto_contador.setText(texto);
 
                         updateBarra(contador);
-
-                        Toast.makeText(getApplicationContext(),lista_palabras,
-                                Toast.LENGTH_SHORT)
-                                .show();
                     }
                     else {
                         Toast.makeText(getApplicationContext(),
                                 "Intentalo nuevamente...no te rindas",
-                                Toast.LENGTH_SHORT)
-                                .show();
-
-                        Toast.makeText(getApplicationContext(),lista_palabras,
                                 Toast.LENGTH_SHORT)
                                 .show();
                     }
