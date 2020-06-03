@@ -12,7 +12,7 @@
         android:layout_width="203dp"
         android:layout_height="51dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="57dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="19dp"
         android:background="@drawable/edittext_round"
         android:clickable="true"
@@ -29,20 +29,17 @@
         android:text=""
         android:textColorHint="#fbcfa5"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/Boton_Buscar_Videos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
     <ImageView
         android:id="@+id/Boton_Buscar_Videos"
-        android:layout_width="167dp"
-        android:layout_height="98dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="25dp"
         app:srcCompat="@drawable/boton_ingresar"
-        app:layout_constraintBottom_toTopOf="@id/VideoSeleccionado"/>
+        app:layout_constraintLeft_toRightOf="@+id/edit_text_date"
+        app:layout_constraintTop_toTopOf="@+id/edit_text_date"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerHistorialVideoPorFecha"

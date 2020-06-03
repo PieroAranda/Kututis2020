@@ -53,7 +53,6 @@ public class HistorialVideosFechas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.historial_videos_por_fechas);
 
         globalClass = (GlobalClass) getApplicationContext();
