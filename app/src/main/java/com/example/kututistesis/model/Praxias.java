@@ -18,12 +18,16 @@ public class Praxias {
     @SerializedName("Video")
     private String Video;
 
-    public Praxias(Integer id, String Nombre, String Tipo, String Descripcion, String Video) {
+    @SerializedName("imagen")
+    private String imagen;
+
+    public Praxias(Integer id, String Nombre, String Tipo, String Descripcion, String Video, String imagen) {
         this.id = id;
         this.Nombre = Nombre;
         this.Tipo = Tipo;
         this.Descripcion = Descripcion;
         this.Video = Video;
+        this.imagen = imagen;
     }
 
     public Integer getId() {
@@ -64,5 +68,13 @@ public class Praxias {
 
     public void setVideo(String video) {
         Video = video;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

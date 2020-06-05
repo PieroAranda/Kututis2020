@@ -56,7 +56,7 @@ public class PraxiasAdapter extends RecyclerView.Adapter<PraxiasAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final Praxias praxias = praxiasList.get(position);
         String nombrePraxia = praxias.getNombre();
-        String url = praxias.getVideo();
+        String url = praxias.getImagen();
 
         holder.NombrePraxia.setText(nombrePraxia);
         Picasso.get().load(url).into(holder.imagen);

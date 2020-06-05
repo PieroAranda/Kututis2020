@@ -97,6 +97,8 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
         Integer intent_praxia_id = intent.getIntExtra("praxia_id",0);
 
+        String intent_video_por_praxia = intent.getStringExtra("video_por_praxia");
+
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
@@ -113,9 +115,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
         Fecha = "";
         ruta = "";
 
-        ruta_video_ejemplo = "praxia1Ejemplo.mp4";
-
-        url = "http://10.0.2.2:82/curso-laravel/kututis/storage/app/images/"+ruta_video_ejemplo;
+        url = intent_video_por_praxia;
 
         buttonhitorialVideos = findViewById(R.id.buttonHistorailVideos);
 
@@ -211,7 +211,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
         videoEjemplo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                mp.setLooping(true);
+                //mp.setLooping(true);
                 videoEjemplo.start();
                 play.setImageResource(R.drawable.ic_pause_black_24dp);
             }

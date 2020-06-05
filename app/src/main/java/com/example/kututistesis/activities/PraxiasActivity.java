@@ -69,8 +69,10 @@ public class PraxiasActivity extends AppCompatActivity implements PraxiasAdapter
                     praxiasList = response.body();
                     for(Praxias prax : praxiasList)
                     {
-                        String urlImagen = url + prax.getVideo();
-                        prax.setVideo(urlImagen);
+                        String urlVideo = url + prax.getVideo();
+                        prax.setVideo(urlVideo);
+                        String urlImagen = url + prax.getImagen();
+                        prax.setImagen(urlImagen);
                     }
                     praxiasAdapter.setData(praxiasList, globalClass,PraxiasActivity.this);
                     recyclerView.setAdapter(praxiasAdapter);
@@ -99,8 +101,10 @@ public class PraxiasActivity extends AppCompatActivity implements PraxiasAdapter
     @Override
     public void onPraxiaClick(int position) {
         Integer praxia_id = praxiasList.get(position).getId();
+        String video_por_praxia = praxiasList.get(position).getVideo();
         Intent intent = new Intent(this, SesionPraxiaGrabarActivity.class);
         intent.putExtra("praxia_id", praxia_id);
+        intent.putExtra("video_por_praxia", video_por_praxia);
         startActivity(intent);
     }
 }

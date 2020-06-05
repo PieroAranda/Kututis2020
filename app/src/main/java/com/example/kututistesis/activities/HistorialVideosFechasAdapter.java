@@ -100,7 +100,7 @@ public class HistorialVideosFechasAdapter extends RecyclerView.Adapter<Historial
         video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                mp.setLooping(true);
+                //mp.setLooping(true);
                 video.start();
                 play.setImageResource(R.drawable.ic_pause_black_24dp);
             }
