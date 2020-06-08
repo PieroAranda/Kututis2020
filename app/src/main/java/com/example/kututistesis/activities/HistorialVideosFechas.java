@@ -53,7 +53,6 @@ public class HistorialVideosFechas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.historial_videos_por_fechas);
 
         globalClass = (GlobalClass) getApplicationContext();
@@ -85,7 +84,7 @@ public class HistorialVideosFechas extends AppCompatActivity {
 
         mediaController = new MediaController(this);
 
-        url = "http://10.0.2.2:82/curso-laravel/kututis/";
+        url = "http://192.168.1.13:82/curso-laravel/kututis/";
 
         id_paciente = globalClass.getId_usuario();
         id_praxia = intent_praxia_id;
@@ -109,7 +108,7 @@ public class HistorialVideosFechas extends AppCompatActivity {
                 for (SesionPraxia sesionPraxia: sesionPraxiaList){
                     url = url + sesionPraxia.getRuta_servidor();
                     sesionPraxia.setRuta_servidor(url);
-                    url = "http://10.0.2.2:82/curso-laravel/kututis/";
+                    url = "http://192.168.1.13:82/curso-laravel/kututis/";
                 }
 
                 videosFechasAdapter.setData(sesionPraxiaList, video, mediaController);

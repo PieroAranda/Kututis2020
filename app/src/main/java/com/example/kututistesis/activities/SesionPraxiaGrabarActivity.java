@@ -83,6 +83,8 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
     private  GlobalClass globalClass;
 
+    private ImageView imageViewAtras;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +144,14 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
         //        v.setEnabled(false);
         //    }
         //});
+
+        imageViewAtras = (ImageView) findViewById(R.id.imageViewPraxiasAtras);
+        imageViewAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     static final int REQUEST_VIDEO_CAPTURE = 1;

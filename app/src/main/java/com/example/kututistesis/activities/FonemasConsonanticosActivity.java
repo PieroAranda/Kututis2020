@@ -38,11 +38,22 @@ public class FonemasConsonanticosActivity extends AppCompatActivity implements C
 
     private ConsonantesAdapter consonantesAdapter;
 
+    private ImageView imageViewAtras;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_fonemas_consonanticos);
+
+        imageViewAtras = (ImageView) findViewById(R.id.imageViewConsonanticosAtras);
+
+        imageViewAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FonemasConsonanticosActivity.super.onBackPressed();
+            }
+        });
 
         apiClient = ApiClient.getInstance();
 
@@ -81,6 +92,5 @@ public class FonemasConsonanticosActivity extends AppCompatActivity implements C
         Intent intent = new Intent(this, VocabularioActivity.class);
         intent.putExtra("consonante_id",consonante_id);
         startActivity(intent);
-
     }
 }

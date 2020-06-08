@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.VocabularioActivity"></activity>
+        <activity android:name=".activities.ResultadosActivity"></activity>
+        <activity android:name=".activities.VocabularioActivity" />
         <activity
             android:name=".activities.SesionConsonanticoGrabarActivity"
             android:parentActivityName=".activities.FonemasConsonanticosActivity" />

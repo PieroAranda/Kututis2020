@@ -57,7 +57,7 @@ public class PraxiasActivity extends AppCompatActivity implements PraxiasAdapter
         praxiasAdapter = new PraxiasAdapter();
 
 
-        url = "http://10.0.2.2:82/curso-laravel/kututis/storage/app/images/";
+        url = "http://192.168.1.13:82/curso-laravel/kututis/storage/app/images/";
         obtenerPraxias();
     }
 

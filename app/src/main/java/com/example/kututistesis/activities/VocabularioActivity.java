@@ -44,7 +44,7 @@ public class VocabularioActivity extends AppCompatActivity implements Vocabulari
         setContentView(R.layout.activity_vocabulario);
 
         apiClient = ApiClient.getInstance();
-        url = "http://10.0.2.2:82/curso-laravel/kututis/storage/app/images/";
+        url = "http://192.168.1.13:82/curso-laravel/kututis/storage/app/images/";
         recyclerView = findViewById(R.id.recyclerVocabulario);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -76,7 +76,7 @@ public class VocabularioActivity extends AppCompatActivity implements Vocabulari
                 {
                     url = url + vocabulario.getImagen();
                     vocabulario.setImagen(url);
-                    url = "http://10.0.2.2:82/curso-laravel/kututis/storage/app/images/";
+                    url = "http://192.168.1.13:82/curso-laravel/kututis/storage/app/images/";
                 }
                 vocabularioAdapter.setData(vocabularioList, VocabularioActivity.this);
                 recyclerView.setAdapter(vocabularioAdapter);

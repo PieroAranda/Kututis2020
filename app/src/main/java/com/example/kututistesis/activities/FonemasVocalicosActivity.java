@@ -46,7 +46,7 @@ public class FonemasVocalicosActivity extends AppCompatActivity implements Vocal
         vocalAdapter = new VocalAdapter();
 
 
-        url = "http://10.0.2.2:82/curso-laravel/kututis/imagenesTerapia/praxias/";
+        url = "http://192.168.1.13:82/curso-laravel/kututis/imagenesTerapia/praxias/";
         obtenerVocales();
 
     }

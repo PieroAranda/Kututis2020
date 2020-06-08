@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -33,6 +37,7 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
     TTSManager ttsManager = null;
 
     private ImageView imageViewPalabraVocabulario;
+    private ImageView imageViewBarra;
 
     private TextView texto_contador;
 
@@ -59,6 +64,11 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
         factor_minimo_confianza = 0.70;
 
         imageViewPalabraVocabulario = findViewById(R.id.imageViewPalabraVocabulario);
+        imageViewBarra = (ImageView) findViewById(R.id.imageViewConsonanticosBarra);
+
+        Bitmap barraSprites = BitmapFactory.decodeResource(getResources(), R.drawable.sprite_barra);
+        Bitmap barra = Bitmap.createBitmap(barraSprites, 0, 0, 1046, barraSprites.getHeight());
+        imageViewBarra.setImageBitmap(getResizedBitmap(barra, 400, 100));
 
         Intent intent = getIntent();
 
@@ -127,6 +137,8 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
         }
     }
 
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -155,19 +167,18 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
 
                         texto_contador.setText(texto);
 
-                        Toast.makeText(getApplicationContext(),lista_palabras,
-                                Toast.LENGTH_SHORT)
-                                .show();
+                        updateBarra(contador);
+
+                        if (contador == 10) {
+                            goToResultados();
+                        }
                     }
                     else {
-                        Toast.makeText(getApplicationContext(),
+                        Toast vuelveAIntentarloToast = Toast.makeText(getApplicationContext(),
                                 "Intentalo nuevamente...no te rindas",
-                                Toast.LENGTH_SHORT)
-                                .show();
-
-                        Toast.makeText(getApplicationContext(),lista_palabras,
-                                Toast.LENGTH_SHORT)
-                                .show();
+                                Toast.LENGTH_SHORT);
+                        vuelveAIntentarloToast.setGravity(Gravity.CENTER, 0, 0);
+                        vuelveAIntentarloToast.show();
                     }
 
                 }
@@ -176,9 +187,37 @@ public class SesionConsonanticoGrabarActivity extends AppCompatActivity {
         }
     }
 
+    private void goToResultados() {
+        Intent intent = new Intent(this, ResultadosActivity.class);
+        startActivity(intent);
+    }
+
+    private void updateBarra(Integer contador) {
+        Bitmap barraSprites = BitmapFactory.decodeResource(getResources(), R.drawable.sprite_barra);
+        Bitmap barra = Bitmap.createBitmap(barraSprites, 1046 * contador, 0, 1046, barraSprites.getHeight());
+        imageViewBarra.setImageBitmap(getResizedBitmap(barra, 400, 100));
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ttsManager.shutDown();
+    }
+
+    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(
+                bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        return resizedBitmap;
     }
 }
