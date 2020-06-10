@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/inicio_sesion_fondo">
+
+    <ImageView
+        android:id="@+id/image_app_logo"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="105dp"
+        android:src="@drawable/logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_text_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/image_app_logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="48dp"
+        android:text=""
+        android:maxLines="1"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/edittext_round"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:fontFamily="@font/dimbo_regular"
+        android:textSize="24dp"
+        android:hint="Correo"
+        android:textColorHint="#fbcfa5"
+        android:letterSpacing="0.05"/>
+
+    <EditText
+        android:id="@+id/edit_text_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_email"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
+        android:text=""
+        android:inputType="textPassword"
+        android:maxLength="16"
+        android:background="@drawable/edittext_round"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:fontFamily="@font/dimbo_regular"
+        android:textSize="24dp"
+        android:hint="Contraseña"
+        android:textColorHint="#fbcfa5"
+        android:letterSpacing="0.05"/>
+
+    <ImageView
+        android:id="@+id/button_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:text="Iniciar Sesión"
+        app:layout_constraintBottom_toTopOf="@+id/text_sign_up"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/boton_ingresar"
+        />
+
+    <TextView
+        android:id="@+id/text_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="32dp"
+        android:text="¿Aún no tienes cuenta?"
+        android:fontFamily="@font/dimbo_regular"
+        android:textSize="28dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
