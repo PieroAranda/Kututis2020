@@ -9,8 +9,8 @@
     <ImageView
         android:id="@+id/image_app_logo"
         android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="105dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="95dp"
         android:src="@drawable/logo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -67,7 +67,7 @@
     <ImageView
         android:id="@+id/button_sign_in"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
+        android:layout_height="50dp"
         android:text="Iniciar Sesión"
         app:layout_constraintBottom_toTopOf="@+id/text_sign_up"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -85,7 +85,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="20dp"
         android:text="¿Aún no tienes cuenta?"
         android:fontFamily="@font/dimbo_regular"
         android:textSize="28dp"/>
