@@ -23,8 +23,7 @@
         <activity android:name=".activities.VocabularioActivity" />
         <activity
             android:name=".activities.SesionConsonanticoGrabarActivity"
-            android:parentActivityName=".activities.FonemasConsonanticosActivity"
-            android:noHistory="true"/>
+            android:parentActivityName=".activities.FonemasConsonanticosActivity" />
         <activity
             android:name=".activities.HistorialAudiosFechas"
             android:parentActivityName=".activities.PaginaPrincipalActivity" />
