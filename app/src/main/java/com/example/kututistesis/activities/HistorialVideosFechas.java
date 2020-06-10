@@ -104,7 +104,7 @@ public class HistorialVideosFechas extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<SesionPraxia>> call, Response<List<SesionPraxia>> response) {
                 List<SesionPraxia> sesionPraxiaList = response.body();
-                Log.d("Funciono praxias", sesionPraxiaList.get(0).getRuta());
+                //Log.d("Funciono praxias", sesionPraxiaList.get(0).getRuta());
                 for (SesionPraxia sesionPraxia: sesionPraxiaList){
                     url = url + sesionPraxia.getRuta_servidor();
                     sesionPraxia.setRuta_servidor(url);
@@ -131,8 +131,13 @@ public class HistorialVideosFechas extends AppCompatActivity {
         BirthDatePickerFragment newFragment = BirthDatePickerFragment.newInstance(false,new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                final String selectedDate;
                 // +1 because January is zero
-                final String selectedDate = day + "-" +"0"+ (month+1) + "-" + year;
+                if (day>=1 && day <=9){
+                    selectedDate = "0"+day + "-" +"0"+ (month+1) + "-" + year;
+                }else {
+                    selectedDate = day + "-" +"0"+ (month+1) + "-" + year;
+                }
                 editText.setText(selectedDate);
             }
         });

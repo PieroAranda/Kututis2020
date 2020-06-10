@@ -85,6 +85,9 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
     private ImageView imageViewAtras;
 
+    private Boolean reproducido = false;
+
+    private Integer position = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +125,21 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
         buttonhitorialVideos = findViewById(R.id.buttonHistorailVideos);
 
         videoEjemplo = findViewById(R.id.videoEjemploPraxia);
+
+        Uri uri = Uri.parse(url);
+        videoEjemplo.setVideoURI(uri);
+
+        MediaController mediaController = new MediaController(this);
+        videoEjemplo.setMediaController(mediaController);
+        mediaController.setAnchorView(videoEjemplo);
+
+        videoEjemplo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                play.setImageResource(R.drawable.ic_play_arrow_black_24dp);
+                position = 0;
+            }
+        });
 
         play = findViewById(R.id.playVideoEjemplo);
 
@@ -195,20 +213,15 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
     public void playVideo() {
         try {
             if (!videoEjemplo.isPlaying()){
-                Uri uri = Uri.parse(url);
-                videoEjemplo.setVideoURI(uri);
-
-                MediaController mediaController = new MediaController(this);
-                videoEjemplo.setMediaController(mediaController);
-                mediaController.setAnchorView(videoEjemplo);
-
-                videoEjemplo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        play.setImageResource(R.drawable.ic_play_arrow_black_24dp);
-                    }
-                });
+                if(!reproducido){
+                    reproducido = true;
+                }else {
+                    videoEjemplo.seekTo(position);
+                }
+                videoEjemplo.start();
+                play.setImageResource(R.drawable.ic_pause_black_24dp);
             }else {
+                position = videoEjemplo.getCurrentPosition();
                 videoEjemplo.pause();
                 play.setImageResource(R.drawable.ic_play_arrow_black_24dp);
             }
@@ -218,14 +231,6 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
         }
         videoEjemplo.requestFocus();
-        videoEjemplo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                //mp.setLooping(true);
-                videoEjemplo.start();
-                play.setImageResource(R.drawable.ic_pause_black_24dp);
-            }
-        });
     }
 
     public void EnviarVideo(){

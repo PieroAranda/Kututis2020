@@ -27,7 +27,7 @@
         android:onClick="TomarVideo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoEjemploPraxia"
+        app:layout_constraintTop_toBottomOf="@+id/FrameVideo"
         app:srcCompat="@android:drawable/presence_video_online" />
 
     <Button
@@ -45,17 +45,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <VideoView
-        android:id="@+id/videoEjemploPraxia"
+    
+    <FrameLayout
+        android:id="@+id/FrameVideo"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/playVideoEjemplo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonHistorailVideos" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonHistorailVideos">
+
+        <VideoView
+            android:id="@+id/videoEjemploPraxia"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginBottom="40dp"
+            />
+
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/playVideoEjemplo"
