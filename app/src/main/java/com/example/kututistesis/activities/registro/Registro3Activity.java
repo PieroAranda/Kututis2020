@@ -1,4 +1,4 @@
-package com.example.kututistesis.activities;
+package com.example.kututistesis.activities.registro;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -15,6 +14,7 @@ import android.widget.Toast;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.example.kututistesis.R;
+import com.example.kututistesis.activities.BienvenidaActivity;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SignUpForm;

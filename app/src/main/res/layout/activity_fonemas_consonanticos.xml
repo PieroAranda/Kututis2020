@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.FonemasConsonanticosActivity"
+    tools:context=".activities.consonanticos.FonemasConsonanticosActivity"
     android:background="@drawable/inicio_sesion_fondo">
 
     <ImageView

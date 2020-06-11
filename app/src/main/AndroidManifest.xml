@@ -19,56 +19,56 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ResultadosActivity"></activity>
-        <activity android:name=".activities.VocabularioActivity" />
+        <activity android:name=".activities.consonanticos.ResultadosActivity"></activity>
+        <activity android:name=".activities.consonanticos.VocabularioActivity" />
         <activity
-            android:name=".activities.SesionConsonanticoGrabarActivity"
-            android:parentActivityName=".activities.FonemasConsonanticosActivity" />
+            android:name=".activities.consonanticos.SesionConsonanticoGrabarActivity"
+            android:parentActivityName=".activities.consonanticos.FonemasConsonanticosActivity" />
         <activity
-            android:name=".activities.HistorialAudiosFechas"
+            android:name=".activities.vocales.HistorialAudiosFechas"
             android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
-            android:name=".activities.FonemasConsonanticosActivity"
+            android:name=".activities.consonanticos.FonemasConsonanticosActivity"
             android:label="Fonemas Consonánticos"
             android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
-            android:name=".activities.FonemasVocalicosActivity"
+            android:name=".activities.vocales.FonemasVocalicosActivity"
             android:label="Fonemas Vocálicos"
             android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
             android:name=".activities.BienvenidaActivity"
             android:label="Bienvenida" />
         <activity
-            android:name=".activities.PraxiasActivity"
+            android:name=".activities.praxias.PraxiasActivity"
             android:label="Praxias"
             android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
-            android:name=".activities.Registro3Activity"
+            android:name=".activities.registro.Registro3Activity"
             android:label="Registro"
-            android:parentActivityName=".activities.Registro2Activity" />
+            android:parentActivityName=".activities.registro.Registro2Activity" />
         <activity
-            android:name=".activities.Registro2Activity"
+            android:name=".activities.registro.Registro2Activity"
             android:label="Registro"
-            android:parentActivityName=".activities.Registro1Activity" />
+            android:parentActivityName=".activities.registro.Registro1Activity" />
         <activity
-            android:name=".activities.Registro1Activity"
+            android:name=".activities.registro.Registro1Activity"
             android:label="Registro"
-            android:parentActivityName=".activities.MainActivity" />
+            android:parentActivityName=".activities.InicioSesionActivity" />
         <activity
             android:name=".activities.MenuPrincipalActivity"
-            android:parentActivityName=".activities.MainActivity" />
+            android:parentActivityName=".activities.InicioSesionActivity" />
         <activity
-            android:name=".activities.SesionPraxiaGrabarActivity"
+            android:name=".activities.praxias.SesionPraxiaGrabarActivity"
             android:label="Grabar Praxia"
-            android:parentActivityName=".activities.PraxiasActivity" />
+            android:parentActivityName=".activities.praxias.PraxiasActivity" />
         <activity
-            android:name=".activities.HistorialVideosFechas"
+            android:name=".activities.praxias.HistorialVideosFechas"
             android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
-            android:name=".activities.SesionVocalGrabarActivity"
+            android:name=".activities.vocales.SesionVocalGrabarActivity"
             android:label="Grabar Audios"
-            android:parentActivityName=".activities.FonemasVocalicosActivity" />
-        <activity android:name=".activities.MainActivity">
+            android:parentActivityName=".activities.vocales.FonemasVocalicosActivity" />
+        <activity android:name=".activities.InicioSesionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

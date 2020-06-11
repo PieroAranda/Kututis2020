@@ -1,4 +1,4 @@
-package com.example.kututistesis.activities;
+package com.example.kututistesis.activities.vocales;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;

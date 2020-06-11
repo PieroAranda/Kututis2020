@@ -1,4 +1,4 @@
-package com.example.kututistesis.activities;
+package com.example.kututistesis.activities.praxias;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -27,6 +27,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.activities.MenuPrincipalActivity;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.SesionPraxia;
 import com.example.kututistesis.util.GlobalClass;

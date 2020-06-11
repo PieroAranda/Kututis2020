@@ -21,6 +21,7 @@ import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
 import com.example.kututistesis.R;
+import com.example.kututistesis.activities.registro.Registro1Activity;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.util.GlobalClass;
@@ -31,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class InicioSesionActivity extends AppCompatActivity {
 
     private TextView textSignUp;
     private ImageView buttonSignIn;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Objects.requireNonNull(getSupportActionBar()).hide();
-        setContentView(R.layout.paciente_inicio_sesion);
+        setContentView(R.layout.inicio_sesion_activity);
         apiClient = ApiClient.getInstance();
         global = (GlobalClass) getApplicationContext();
 

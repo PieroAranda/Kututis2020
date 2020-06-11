@@ -1,4 +1,4 @@
-package com.example.kututistesis.activities;
+package com.example.kututistesis.activities.vocales;
 
 import android.Manifest;
 import android.content.Context;
@@ -22,6 +22,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.activities.MenuPrincipalActivity;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionVocal;

@@ -1,4 +1,4 @@
-package com.example.kututistesis.activities;
+package com.example.kututistesis.activities.praxias;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;

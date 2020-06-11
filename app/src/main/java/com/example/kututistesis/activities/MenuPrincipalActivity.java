@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.activities.consonanticos.FonemasConsonanticosActivity;
+import com.example.kututistesis.activities.praxias.PraxiasActivity;
+import com.example.kututistesis.activities.vocales.FonemasVocalicosActivity;
 
 public class MenuPrincipalActivity extends AppCompatActivity {
 
@@ -67,7 +70,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, InicioSesionActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

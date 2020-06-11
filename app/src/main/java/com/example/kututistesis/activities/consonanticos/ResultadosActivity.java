@@ -1,4 +1,4 @@
-package com.example.kututistesis.activities;
+package com.example.kututistesis.activities.consonanticos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
