@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kututistesis.R;
-import com.example.kututistesis.util.GlobalClass;
+import com.example.kututistesis.util.Global;
 import com.example.kututistesis.model.Praxias;
 import com.squareup.picasso.Picasso;
 
@@ -21,16 +21,16 @@ import java.util.List;
 public class PraxiasAdapter extends RecyclerView.Adapter<PraxiasAdapter.MyViewHolder> {
     private List<Praxias> praxiasList;
     private Context context;
-    private GlobalClass globalClass;
+    private Global global;
     private OnPraxiaListener mOnpraxialistener;
 
     public PraxiasAdapter() {
 
     }
 
-    public void setData(List<Praxias> praxiasList, GlobalClass globalClass, OnPraxiaListener onPraxiaListener) {
+    public void setData(List<Praxias> praxiasList, Global global, OnPraxiaListener onPraxiaListener) {
         this.praxiasList = praxiasList;
-        this.globalClass = globalClass;
+        this.global = global;
         this.mOnpraxialistener = onPraxiaListener;
         notifyDataSetChanged();
     }

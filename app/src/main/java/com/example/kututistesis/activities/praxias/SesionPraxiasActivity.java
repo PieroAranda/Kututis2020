@@ -30,7 +30,7 @@ import com.example.kututistesis.R;
 import com.example.kututistesis.activities.MenuPrincipalActivity;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.SesionPraxia;
-import com.example.kututistesis.util.GlobalClass;
+import com.example.kututistesis.util.Global;
 
 import org.apache.commons.io.FileUtils;
 
@@ -75,7 +75,7 @@ public class SesionPraxiasActivity extends AppCompatActivity {
 
     private ImageView play;
 
-    private GlobalClass globalClass;
+    private Global global;
 
     private ImageView imageViewAtras;
 
@@ -90,7 +90,7 @@ public class SesionPraxiasActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.sesion_praxia_grabar);
 
-        globalClass = (GlobalClass) getApplicationContext();
+        global = (Global) getApplicationContext();
 
         Intent intent = getIntent();
 
@@ -108,7 +108,7 @@ public class SesionPraxiasActivity extends AppCompatActivity {
 
         apiClient = ApiClient.getInstance();
 
-        paciente_id = globalClass.getId_usuario();
+        paciente_id = global.getId_usuario();
         praxias_id = intent_praxia_id;
         Aprobado = 0;
         Fecha = "";

@@ -19,7 +19,7 @@ import com.example.kututistesis.adapters.HistorialAudiosFechasAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.dialog.BirthDatePickerFragment;
 import com.example.kututistesis.model.SesionVocal;
-import com.example.kututistesis.util.GlobalClass;
+import com.example.kututistesis.util.Global;
 
 import java.util.List;
 
@@ -35,14 +35,14 @@ public class HistorialVocalicosActivity extends AppCompatActivity {
     private HistorialAudiosFechasAdapter audiosFechasAdapter;
     private ImageView imageView;
     private String url;
-    private GlobalClass globalClass;
+    private Global global;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.historial_audios_por_fechas);
 
-        globalClass = (GlobalClass) getApplicationContext();
+        global = (Global) getApplicationContext();
 
         Intent intent = getIntent();
 
@@ -69,7 +69,7 @@ public class HistorialVocalicosActivity extends AppCompatActivity {
 
         url = "http://192.168.0.7:82/curso-laravel/kututis/";
 
-        final Integer id_paciente = globalClass.getId_usuario();
+        final Integer id_paciente = global.getId_usuario();
         final Integer id_vocal = intent_vocal_id;
 
         imageView.setOnClickListener(new View.OnClickListener() {

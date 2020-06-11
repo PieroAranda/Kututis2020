@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,9 +25,7 @@ import com.example.kututistesis.R;
 import com.example.kututistesis.activities.registro.Registro1Activity;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.ResponseStatus;
-import com.example.kututistesis.util.GlobalClass;
-
-import java.util.Objects;
+import com.example.kututistesis.util.Global;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,40 +33,42 @@ import retrofit2.Response;
 
 public class InicioSesionActivity extends AppCompatActivity {
 
-    private TextView textSignUp;
-    private ImageView buttonSignIn;
+    private TextView textViewSignUp;
+    private ImageView imageViewSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private ProgressBar progressBarSignIn;
     private ApiClient apiClient;
     private AwesomeValidation awesomeValidation;
-    private GlobalClass global;
+    private Global global;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        getSupportActionBar().hide();
         setContentView(R.layout.inicio_sesion_activity);
         apiClient = ApiClient.getInstance();
-        global = (GlobalClass) getApplicationContext();
+        global = (Global) getApplicationContext();
 
         // Inicializa los elementos de la vista
-        textSignUp = findViewById(R.id.text_sign_up);
-        buttonSignIn = findViewById(R.id.button_sign_in);
+        textViewSignUp = findViewById(R.id.text_sign_up);
+        imageViewSignIn = findViewById(R.id.button_sign_in);
         editTextEmail = findViewById(R.id.edit_text_email);
         editTextPassword = findViewById(R.id.edit_text_password);
+        progressBarSignIn = findViewById(R.id.progressBarSignIn);
 
         // Subraya el texto para ir a la vista de registro
-        textSignUp.setPaintFlags(textSignUp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        textViewSignUp.setPaintFlags(textViewSignUp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         // Eventos de la vista
-        buttonSignIn.setOnClickListener(new View.OnClickListener() {
+        imageViewSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
             }
         });
 
-        textSignUp.setOnClickListener(new View.OnClickListener() {
+        textViewSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToRegistro();
@@ -115,17 +116,13 @@ public class InicioSesionActivity extends AppCompatActivity {
         }, R.string.err_password);
     }
 
-    private void goToRegistro() {
-        Intent intent = new Intent(this, Registro1Activity.class);
-        startActivity(intent);
-    }
-
     private void login() {
         if (!awesomeValidation.validate()) {
             return;
         }
         String email = editTextEmail.getText().toString().trim();
         String contrasenia = editTextPassword.getText().toString().trim();
+        progressBarSignIn.setVisibility(View.VISIBLE);
 
         apiClient.loginPaciente(email, contrasenia).enqueue(new Callback<ResponseStatus>() {
             @Override
@@ -138,7 +135,7 @@ public class InicioSesionActivity extends AppCompatActivity {
                 switch (responseCode) {
                     case "200":
                         global.setId(responseId);
-                        goToPaginaPrincipal();
+                        goToMenuPrincipal();
                         break;
                     case "400":
                         if (responseStatus.matches("error_correo")) {
@@ -149,6 +146,7 @@ public class InicioSesionActivity extends AppCompatActivity {
                             editTextPassword.setError(getString(R.string.err_password_incorrect));
                             editTextPassword.requestFocus();
                         } else {
+                            progressBarSignIn.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(),
                                     "Ocurrío un problema, no se pudo autenticar",
                                     Toast.LENGTH_SHORT)
@@ -162,6 +160,7 @@ public class InicioSesionActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseStatus> call, Throwable t) {
+                progressBarSignIn.setVisibility(View.GONE);
                 Log.e("SIGNIN", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrío un problema, no se puede conectar al servicio",
@@ -171,9 +170,15 @@ public class InicioSesionActivity extends AppCompatActivity {
         });
     }
 
-    private void goToPaginaPrincipal() {
+    private void goToMenuPrincipal() {
         Intent intent = new Intent(this, MenuPrincipalActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private void goToRegistro() {
+        Intent intent = new Intent(this, Registro1Activity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 }

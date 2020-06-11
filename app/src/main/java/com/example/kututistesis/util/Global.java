@@ -2,7 +2,7 @@ package com.example.kututistesis.util;
 
 import android.app.Application;
 
-public class GlobalClass extends Application {
+public class Global extends Application {
     private Integer id_usuario;
     private Integer id_praxia;
 

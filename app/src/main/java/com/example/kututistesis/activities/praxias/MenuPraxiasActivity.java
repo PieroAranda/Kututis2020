@@ -14,7 +14,7 @@ import com.example.kututistesis.R;
 import com.example.kututistesis.adapters.PraxiasAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Praxias;
-import com.example.kututistesis.util.GlobalClass;
+import com.example.kututistesis.util.Global;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class MenuPraxiasActivity extends AppCompatActivity implements PraxiasAda
     Toolbar toolbar;
     RecyclerView recyclerView;
     PraxiasAdapter praxiasAdapter;
-    private GlobalClass globalClass;
+    private Global global;
 
     private List<Praxias> praxiasList;
 
@@ -38,7 +38,7 @@ public class MenuPraxiasActivity extends AppCompatActivity implements PraxiasAda
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_praxias);
 
-        globalClass = (GlobalClass) getApplicationContext();
+        global = (Global) getApplicationContext();
 
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.recyclerView);
@@ -67,7 +67,7 @@ public class MenuPraxiasActivity extends AppCompatActivity implements PraxiasAda
                         String urlImagen = url + prax.getImagen();
                         prax.setImagen(urlImagen);
                     }
-                    praxiasAdapter.setData(praxiasList, globalClass, MenuPraxiasActivity.this);
+                    praxiasAdapter.setData(praxiasList, global, MenuPraxiasActivity.this);
                     recyclerView.setAdapter(praxiasAdapter);
                 }
                 else{

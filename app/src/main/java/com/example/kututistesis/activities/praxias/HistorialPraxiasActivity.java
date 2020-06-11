@@ -22,7 +22,7 @@ import com.example.kututistesis.adapters.HistorialVideosFechasAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.dialog.BirthDatePickerFragment;
 import com.example.kututistesis.model.SesionPraxia;
-import com.example.kututistesis.util.GlobalClass;
+import com.example.kututistesis.util.Global;
 
 import java.io.File;
 import java.util.List;
@@ -48,14 +48,14 @@ public class HistorialPraxiasActivity extends AppCompatActivity {
     private Integer id_paciente;
     private Integer id_praxia;
 
-    private GlobalClass globalClass;
+    private Global global;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.historial_videos_por_fechas);
 
-        globalClass = (GlobalClass) getApplicationContext();
+        global = (Global) getApplicationContext();
 
         Intent intent = getIntent();
 
@@ -86,7 +86,7 @@ public class HistorialPraxiasActivity extends AppCompatActivity {
 
         url = "http://192.168.0.7:82/curso-laravel/kututis/";
 
-        id_paciente = globalClass.getId_usuario();
+        id_paciente = global.getId_usuario();
         id_praxia = intent_praxia_id;
 
         imageView.setOnClickListener(new View.OnClickListener() {

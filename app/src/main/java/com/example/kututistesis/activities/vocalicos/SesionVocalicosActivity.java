@@ -26,7 +26,7 @@ import com.example.kututistesis.activities.MenuPrincipalActivity;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionVocal;
-import com.example.kututistesis.util.GlobalClass;
+import com.example.kututistesis.util.Global;
 
 import org.apache.commons.io.FileUtils;
 
@@ -65,7 +65,7 @@ public class SesionVocalicosActivity extends AppCompatActivity {
     private Button buttonReproducir;
     private Boolean grabado = false;
     private Button buttonHistorialAudios;
-    private GlobalClass globalClass;
+    private Global global;
 
 
     @Override
@@ -73,7 +73,7 @@ public class SesionVocalicosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sesion_vocal_grabar);
 
-        globalClass = (GlobalClass) getApplicationContext();
+        global = (Global) getApplicationContext();
 
         Intent intent = getIntent();
 
@@ -81,7 +81,7 @@ public class SesionVocalicosActivity extends AppCompatActivity {
 
         apiClient = ApiClient.getInstance();
 
-        paciente_id = globalClass.getId_usuario();
+        paciente_id = global.getId_usuario();
         vocales_id = intent_vocal_id;
         Aprobado = 0;
         Fecha = "";
