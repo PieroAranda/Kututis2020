@@ -10,6 +10,7 @@ import com.example.kututistesis.R;
 
 public class BienvenidaActivity extends AppCompatActivity {
 
+    // Tiempo de transición en milisegundos
     private static int TIME_DELAY_MILLISECONDS = 2500;
 
     @Override
@@ -17,16 +18,18 @@ public class BienvenidaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_bienvenida);
+
+        // Retrasa la transición por 2.5 segundos
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                goToPaginaPrincipal();
+                goToMenuPrincipal();
             }
         }, TIME_DELAY_MILLISECONDS);
     }
 
-    private void goToPaginaPrincipal() {
-        Intent intent = new Intent(this, PaginaPrincipalActivity.class);
+    private void goToMenuPrincipal() {
+        Intent intent = new Intent(this, MenuPrincipalActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
