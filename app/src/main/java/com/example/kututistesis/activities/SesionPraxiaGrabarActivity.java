@@ -29,6 +29,7 @@ import android.widget.VideoView;
 import com.example.kututistesis.R;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.SesionPraxia;
+import com.example.kututistesis.util.GlobalClass;
 
 import org.apache.commons.io.FileUtils;
 
@@ -73,7 +74,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
 
     private ImageView play;
 
-    private  GlobalClass globalClass;
+    private GlobalClass globalClass;
 
     private ImageView imageViewAtras;
 

@@ -2,27 +2,20 @@ package com.example.kututistesis.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import android.widget.VideoView;
-
 import com.example.kututistesis.R;
+import com.example.kututistesis.adapters.PraxiasAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Praxias;
-import com.example.kututistesis.model.SesionPraxia;
+import com.example.kututistesis.util.GlobalClass;
 
-import java.io.File;
 import java.util.List;
 
 import retrofit2.Call;

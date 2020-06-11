@@ -1,4 +1,4 @@
-package com.example.kututistesis.activities;
+package com.example.kututistesis.adapters;
 
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -16,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kututistesis.R;
-import com.example.kututistesis.model.Praxias;
 import com.example.kututistesis.model.SesionPraxia;
 
 import java.util.List;

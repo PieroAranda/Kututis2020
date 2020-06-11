@@ -1,4 +1,4 @@
-package com.example.kututistesis.activities;
+package com.example.kututistesis.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

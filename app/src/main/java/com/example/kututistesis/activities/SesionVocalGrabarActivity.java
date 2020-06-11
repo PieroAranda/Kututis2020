@@ -25,6 +25,7 @@ import com.example.kututistesis.R;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionVocal;
+import com.example.kututistesis.util.GlobalClass;
 
 import org.apache.commons.io.FileUtils;
 

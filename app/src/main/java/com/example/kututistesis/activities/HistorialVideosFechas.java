@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
@@ -20,9 +18,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.adapters.HistorialVideosFechasAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.dialog.BirthDatePickerFragment;
 import com.example.kututistesis.model.SesionPraxia;
+import com.example.kututistesis.util.GlobalClass;
 
 import java.io.File;
 import java.util.List;

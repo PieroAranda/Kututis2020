@@ -15,9 +15,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.adapters.HistorialAudiosFechasAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.dialog.BirthDatePickerFragment;
 import com.example.kututistesis.model.SesionVocal;
+import com.example.kututistesis.util.GlobalClass;
 
 import java.util.List;
 

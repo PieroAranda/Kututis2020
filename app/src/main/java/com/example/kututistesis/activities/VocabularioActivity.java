@@ -1,7 +1,6 @@
 package com.example.kututistesis.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.adapters.VocabularioAdapter;
 import com.example.kututistesis.api.ApiClient;
-import com.example.kututistesis.model.Praxias;
 import com.example.kututistesis.model.Vocabulario;
 
 import java.util.List;

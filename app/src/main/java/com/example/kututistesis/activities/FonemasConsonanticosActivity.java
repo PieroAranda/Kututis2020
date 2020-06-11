@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.adapters.ConsonantesAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Fonema;
 
