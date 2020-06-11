@@ -22,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VocabularioActivity extends AppCompatActivity implements VocabularioAdapter.OnVocabularioListener{
+public class Menu2ConsonanticosActivity extends AppCompatActivity implements VocabularioAdapter.OnVocabularioListener{
 
     private ApiClient apiClient;
     private String url;
@@ -53,7 +53,7 @@ public class VocabularioActivity extends AppCompatActivity implements Vocabulari
         imageViewAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VocabularioActivity.super.onBackPressed();
+                Menu2ConsonanticosActivity.super.onBackPressed();
             }
         });
 
@@ -77,7 +77,7 @@ public class VocabularioActivity extends AppCompatActivity implements Vocabulari
                     vocabulario.setImagen(url);
                     url = "http://192.168.0.7:82/curso-laravel/kututis/storage/app/images/";
                 }
-                vocabularioAdapter.setData(vocabularioList, VocabularioActivity.this);
+                vocabularioAdapter.setData(vocabularioList, Menu2ConsonanticosActivity.this);
                 recyclerView.setAdapter(vocabularioAdapter);
             }
 
@@ -96,7 +96,7 @@ public class VocabularioActivity extends AppCompatActivity implements Vocabulari
     public void onVocabularioClick(int position) {
         String imagen = vocabularioList.get(position).getImagen();
         String palabra = vocabularioList.get(position).getPalabra();
-        Intent intent = new Intent(this, SesionConsonanticoGrabarActivity.class);
+        Intent intent = new Intent(this, SesionConsonanticosActivity.class);
         intent.putExtra("imagen_palabra", imagen);
         intent.putExtra("texto_palabra", palabra);
         startActivity(intent);

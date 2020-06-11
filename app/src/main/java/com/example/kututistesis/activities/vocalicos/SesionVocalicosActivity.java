@@ -1,4 +1,4 @@
-package com.example.kututistesis.activities.vocales;
+package com.example.kututistesis.activities.vocalicos;
 
 import android.Manifest;
 import android.content.Context;
@@ -40,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SesionVocalGrabarActivity extends AppCompatActivity {
+public class SesionVocalicosActivity extends AppCompatActivity {
     private MediaRecorder grabacion;
     private Button btn_recorder;
 
@@ -88,11 +88,11 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
         ruta = "";
 
         if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) && (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)) { //estrutura condicional que revisa si se ha puesto los permisos para grabar audio y escribir en el celular los audios, en el archivo manifest
-            ActivityCompat.requestPermissions(SesionVocalGrabarActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000); //escribe en pantalla las ventanas empergentes que piden permisos para acceder al microfno y que se guarden los audios en el celular
+            ActivityCompat.requestPermissions(SesionVocalicosActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000); //escribe en pantalla las ventanas empergentes que piden permisos para acceder al microfno y que se guarden los audios en el celular
         }
 
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) { //estrutura condicional que revisa si se ha puesto los permisos para grabar audio y escribir en el celular los audios, en el archivo manifest
-            ActivityCompat.requestPermissions(SesionVocalGrabarActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 1000); //escribe en pantalla las ventanas empergentes que piden permisos para acceder al microfno y que se guarden los audios en el celular
+            ActivityCompat.requestPermissions(SesionVocalicosActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 1000); //escribe en pantalla las ventanas empergentes que piden permisos para acceder al microfno y que se guarden los audios en el celular
         }
 
         btn_recorder = (Button) findViewById(R.id.btn_rec);
@@ -241,7 +241,7 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
     }
 
     public void goToHistorialAudios(View view) {
-        Intent intent = new Intent(this, HistorialAudiosFechas.class);
+        Intent intent = new Intent(this, HistorialVocalicosActivity.class);
         intent.putExtra("vocal_id",vocales_id);
         startActivity(intent);
     }

@@ -1,4 +1,4 @@
-package com.example.kututistesis.activities.vocales;
+package com.example.kututistesis.activities.vocalicos;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FonemasVocalicosActivity extends AppCompatActivity implements VocalAdapter.OnVocalesListener {
+public class MenuVocalicosActivity extends AppCompatActivity implements VocalAdapter.OnVocalesListener {
     private ApiClient apiClient;
     Toolbar toolbar;
     RecyclerView recyclerView;
@@ -52,7 +52,7 @@ public class FonemasVocalicosActivity extends AppCompatActivity implements Vocal
             public void onResponse(Call<List<Vocales>> call, Response<List<Vocales>> response) {
                 if(response.isSuccessful()){
                     vocalesList = response.body();
-                    vocalAdapter.setData(vocalesList,FonemasVocalicosActivity.this);
+                    vocalAdapter.setData(vocalesList, MenuVocalicosActivity.this);
                     recyclerView.setAdapter(vocalAdapter);
                 }
                 else{
@@ -77,7 +77,7 @@ public class FonemasVocalicosActivity extends AppCompatActivity implements Vocal
     @Override
     public void OnVocalClick(int position) {
         Integer vocal_id = vocalesList.get(position).getId();
-        Intent intent = new Intent(this, SesionVocalGrabarActivity.class);
+        Intent intent = new Intent(this, SesionVocalicosActivity.class);
         intent.putExtra("vocal_id", vocal_id);
         startActivity(intent);
     }

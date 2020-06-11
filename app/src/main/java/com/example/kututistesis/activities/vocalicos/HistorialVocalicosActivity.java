@@ -1,4 +1,4 @@
-package com.example.kututistesis.activities.vocales;
+package com.example.kututistesis.activities.vocalicos;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,7 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HistorialAudiosFechas extends AppCompatActivity {
+public class HistorialVocalicosActivity extends AppCompatActivity {
     private ApiClient apiClient;
     private EditText editText;
     private RecyclerView recyclerView;
@@ -127,6 +127,6 @@ public class HistorialAudiosFechas extends AppCompatActivity {
             }
         });
 
-        newFragment.show(HistorialAudiosFechas.this.getSupportFragmentManager(), "datePicker");
+        newFragment.show(HistorialVocalicosActivity.this.getSupportFragmentManager(), "datePicker");
     }
 }

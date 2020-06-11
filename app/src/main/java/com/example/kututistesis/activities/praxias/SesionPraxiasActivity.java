@@ -45,7 +45,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SesionPraxiaGrabarActivity extends AppCompatActivity {
+public class SesionPraxiasActivity extends AppCompatActivity {
 
     private static final String CARPETA_PRINCIPAL = "misImagenesApp/";
     private static final String CARPETA_IMAGEN = "imagenes";
@@ -102,8 +102,8 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
-        if (ContextCompat.checkSelfPermission(SesionPraxiaGrabarActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(SesionPraxiaGrabarActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(SesionPraxiaGrabarActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1000);
+        if (ContextCompat.checkSelfPermission(SesionPraxiasActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(SesionPraxiasActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(SesionPraxiasActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1000);
         }
 
         apiClient = ApiClient.getInstance();
@@ -298,7 +298,7 @@ public class SesionPraxiaGrabarActivity extends AppCompatActivity {
     }
 
     public void goToHistorialVideos(View view) {
-        Intent intent = new Intent(this, HistorialVideosFechas.class);
+        Intent intent = new Intent(this, HistorialPraxiasActivity.class);
         intent.putExtra("praxia_id", praxias_id);
         startActivity(intent);
 

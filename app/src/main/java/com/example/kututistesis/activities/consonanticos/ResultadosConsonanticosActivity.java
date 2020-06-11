@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.example.kututistesis.R;
 
-public class ResultadosActivity extends AppCompatActivity {
+public class ResultadosConsonanticosActivity extends AppCompatActivity {
 
     private ImageView imageViewAtras;
 

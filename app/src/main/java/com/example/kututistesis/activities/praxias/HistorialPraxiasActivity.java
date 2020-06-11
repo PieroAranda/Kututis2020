@@ -31,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HistorialVideosFechas extends AppCompatActivity {
+public class HistorialPraxiasActivity extends AppCompatActivity {
 
     private ApiClient apiClient;
     private String url;
@@ -145,7 +145,7 @@ public class HistorialVideosFechas extends AppCompatActivity {
             }
         });
 
-        newFragment.show(HistorialVideosFechas.this.getSupportFragmentManager(), "datePicker");
+        newFragment.show(HistorialPraxiasActivity.this.getSupportFragmentManager(), "datePicker");
     }
 
 }

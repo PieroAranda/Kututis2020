@@ -22,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PraxiasActivity extends AppCompatActivity implements PraxiasAdapter.OnPraxiaListener {
+public class MenuPraxiasActivity extends AppCompatActivity implements PraxiasAdapter.OnPraxiaListener {
     private ApiClient apiClient;
     private String url;
 
@@ -67,7 +67,7 @@ public class PraxiasActivity extends AppCompatActivity implements PraxiasAdapter
                         String urlImagen = url + prax.getImagen();
                         prax.setImagen(urlImagen);
                     }
-                    praxiasAdapter.setData(praxiasList, globalClass,PraxiasActivity.this);
+                    praxiasAdapter.setData(praxiasList, globalClass, MenuPraxiasActivity.this);
                     recyclerView.setAdapter(praxiasAdapter);
                 }
                 else{
@@ -95,7 +95,7 @@ public class PraxiasActivity extends AppCompatActivity implements PraxiasAdapter
     public void onPraxiaClick(int position) {
         Integer praxia_id = praxiasList.get(position).getId();
         String video_por_praxia = praxiasList.get(position).getVideo();
-        Intent intent = new Intent(this, SesionPraxiaGrabarActivity.class);
+        Intent intent = new Intent(this, SesionPraxiasActivity.class);
         intent.putExtra("praxia_id", praxia_id);
         intent.putExtra("video_por_praxia", video_por_praxia);
         startActivity(intent);

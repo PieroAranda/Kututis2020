@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.consonanticos.ResultadosActivity"
+    tools:context=".activities.consonanticos.ResultadosConsonanticosActivity"
     android:background="@drawable/kututis_felicitaciones_screen">
 
     <ImageView

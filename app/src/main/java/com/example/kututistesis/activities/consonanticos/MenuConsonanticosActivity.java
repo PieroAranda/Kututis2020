@@ -21,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FonemasConsonanticosActivity extends AppCompatActivity implements ConsonantesAdapter.OnConsonantesListener {
+public class MenuConsonanticosActivity extends AppCompatActivity implements ConsonantesAdapter.OnConsonantesListener {
 
     private RecyclerView recyclerViewFonemaConsonantico;
     private ImageView imageViewAtras;
@@ -44,12 +44,12 @@ public class FonemasConsonanticosActivity extends AppCompatActivity implements C
         imageViewAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FonemasConsonanticosActivity.super.onBackPressed();
+                MenuConsonanticosActivity.super.onBackPressed();
             }
         });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(
-                FonemasConsonanticosActivity.this, LinearLayoutManager.HORIZONTAL, false
+                MenuConsonanticosActivity.this, LinearLayoutManager.HORIZONTAL, false
         );
         recyclerViewFonemaConsonantico.setLayoutManager(layoutManager);
         recyclerViewFonemaConsonantico.setItemAnimator(new DefaultItemAnimator());
@@ -62,7 +62,7 @@ public class FonemasConsonanticosActivity extends AppCompatActivity implements C
             @Override
             public void onResponse(Call<List<Fonema>> call, Response<List<Fonema>> response) {
                 fonemas = response.body();
-                consonantesAdapter.setData(fonemas, FonemasConsonanticosActivity.this);
+                consonantesAdapter.setData(fonemas, MenuConsonanticosActivity.this);
                 recyclerViewFonemaConsonantico.setAdapter(consonantesAdapter);
             }
 
@@ -76,7 +76,7 @@ public class FonemasConsonanticosActivity extends AppCompatActivity implements C
     @Override
     public void onConsonanteClick(int position) {
         Integer consonante_id = fonemas.get(position).getId();
-        Intent intent = new Intent(this, VocabularioActivity.class);
+        Intent intent = new Intent(this, Menu2ConsonanticosActivity.class);
         intent.putExtra("consonante_id", consonante_id);
         startActivity(intent);
     }
