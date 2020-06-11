@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.media.MediaScannerConnection;
@@ -25,7 +24,6 @@ import androidx.core.content.ContextCompat;
 import com.example.kututistesis.R;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.ResponseStatus;
-import com.example.kututistesis.model.SesionPraxia;
 import com.example.kututistesis.model.SesionVocal;
 
 import org.apache.commons.io.FileUtils;
@@ -235,7 +233,7 @@ public class SesionVocalGrabarActivity extends AppCompatActivity {
 
 
     private void goToPaginaPrincipal() {
-        Intent intent = new Intent(this, PaginaPrincipalActivity.class);
+        Intent intent = new Intent(this, MenuPrincipalActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

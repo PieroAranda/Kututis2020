@@ -32,7 +32,8 @@ import retrofit2.http.Path;
 
 public class ApiClient {
     private static ApiClient instance = null;
-    public static final String BASE_URL = "http://192.168.1.13:82/curso-laravel/kututis/public/api/";
+    public static final String BASE_HOST_URL = "http://192.168.0.7:82/curso-laravel/kututis/";
+    public static final String BASE_URL = BASE_HOST_URL + "public/api/";
 
     private ApiService apiService = null;
 
@@ -98,7 +99,7 @@ public class ApiClient {
         return apiService.buscarxvocalxusuarioxfecha(id_vocal, id_paciente,fecha);
     }
 
-    public Call<List<Fonema>> listarfonemas(){
+    public Call<List<Fonema>> getFonemas(){
         return apiService.listarfonemas();
     }
 

@@ -84,7 +84,7 @@ public class HistorialVideosFechas extends AppCompatActivity {
 
         mediaController = new MediaController(this);
 
-        url = "http://192.168.1.13:82/curso-laravel/kututis/";
+        url = "http://192.168.0.7:82/curso-laravel/kututis/";
 
         id_paciente = globalClass.getId_usuario();
         id_praxia = intent_praxia_id;
@@ -92,7 +92,10 @@ public class HistorialVideosFechas extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                obtenerVideosGrabados(id_praxia, id_paciente,editText.getText().toString());
+                String fecha = editText.getText().toString();
+                if (fecha.length() != 0) {
+                    obtenerVideosGrabados(id_praxia, id_paciente, fecha);
+                }
             }
         });
 
@@ -108,7 +111,7 @@ public class HistorialVideosFechas extends AppCompatActivity {
                 for (SesionPraxia sesionPraxia: sesionPraxiaList){
                     url = url + sesionPraxia.getRuta_servidor();
                     sesionPraxia.setRuta_servidor(url);
-                    url = "http://192.168.1.13:82/curso-laravel/kututis/";
+                    url = "http://192.168.0.7:82/curso-laravel/kututis/";
                 }
 
                 videosFechasAdapter.setData(sesionPraxiaList, video, mediaController);

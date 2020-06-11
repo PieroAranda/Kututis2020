@@ -10,7 +10,7 @@ public class GlobalClass extends Application {
         return id_usuario;
     }
 
-    public void setId_usuario(Integer id_usuario) {
+    public void setId(Integer id_usuario) {
         this.id_usuario = id_usuario;
     }
 

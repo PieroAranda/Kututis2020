@@ -3,16 +3,14 @@ package com.example.kututistesis.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.kututistesis.R;
 
-public class PaginaPrincipalActivity extends AppCompatActivity {
+public class MenuPrincipalActivity extends AppCompatActivity {
 
     private ImageView buttonPraxias;
     private ImageView buttonConsonatesVocalicos;
@@ -33,10 +31,10 @@ public class PaginaPrincipalActivity extends AppCompatActivity {
         }
 
         // Inicializa los elementos de la vista
-        buttonPraxias = (ImageView) findViewById(R.id.button_praxias);
-        buttonConsonatesVocalicos = (ImageView) findViewById(R.id.button_fonemas_vocalicos);
-        buttonConsonatesConsonanticos = (ImageView) findViewById(R.id.button_fonemas_consonanticos);
-        imageViewLogout = (ImageView) findViewById(R.id.image_logout);
+        buttonPraxias = findViewById(R.id.button_praxias);
+        buttonConsonatesVocalicos = findViewById(R.id.button_fonemas_vocalicos);
+        buttonConsonatesConsonanticos = findViewById(R.id.button_fonemas_consonanticos);
+        imageViewLogout = findViewById(R.id.image_logout);
 
         // Eventos de la vista
         buttonPraxias.setOnClickListener(new View.OnClickListener() {

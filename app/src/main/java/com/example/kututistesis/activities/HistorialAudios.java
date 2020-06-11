@@ -25,24 +25,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HistorialAudios extends AppCompatActivity implements View.OnClickListener{
-
     private ApiClient apiClient;
-    private String url;
-    private File fileVideo;
     private Button play;
-
+    private List<SesionVocal> sesionVocalesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.historial_audios);
 
         apiClient = ApiClient.getInstance();
-
         play = findViewById(R.id.btn_play2);
         play.setOnClickListener(this);
-        url = "http://192.168.1.13:82/curso-laravel/kututis/";
         obtenerAudios();
     }
 
@@ -50,12 +44,9 @@ public class HistorialAudios extends AppCompatActivity implements View.OnClickLi
         apiClient.listar_sesionvocales().enqueue(new Callback<List<SesionVocal>>() {
             @Override
             public void onResponse(Call<List<SesionVocal>> call, Response<List<SesionVocal>> response) {
-
                 if(response.isSuccessful()){
-                    List<SesionVocal> sesionVocalesList = response.body();
-                    url = url + sesionVocalesList.get(sesionVocalesList.size()-1).getRuta_servidor();
-                }
-                else{
+                    sesionVocalesList = response.body();
+                } else {
                     Toast.makeText(getApplicationContext(),
                             "Ocurrió un problema, no se pudo obtener el video",
                             Toast.LENGTH_SHORT)
@@ -80,13 +71,12 @@ public class HistorialAudios extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         MediaPlayer mediaPlayer = new MediaPlayer();
         try {
+            String url = sesionVocalesList.get(sesionVocalesList.size()-1).getRuta_servidor();
             mediaPlayer.setDataSource(url);
             mediaPlayer.prepare();
+            mediaPlayer.start();
+            Toast.makeText(getApplicationContext(), "Reproducir audio "+url, Toast.LENGTH_SHORT).show();
         }catch (IOException e){
         }
-
-        mediaPlayer.start();
-        Toast.makeText(getApplicationContext(), "Reproducir audio "+url, Toast.LENGTH_SHORT).show();
-
     }
 }

@@ -26,22 +26,22 @@
             android:parentActivityName=".activities.FonemasConsonanticosActivity" />
         <activity
             android:name=".activities.HistorialAudiosFechas"
-            android:parentActivityName=".activities.PaginaPrincipalActivity" />
+            android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
             android:name=".activities.FonemasConsonanticosActivity"
             android:label="Fonemas Consonánticos"
-            android:parentActivityName=".activities.PaginaPrincipalActivity" />
+            android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
             android:name=".activities.FonemasVocalicosActivity"
             android:label="Fonemas Vocálicos"
-            android:parentActivityName=".activities.PaginaPrincipalActivity" />
+            android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
             android:name=".activities.BienvenidaActivity"
             android:label="Bienvenida" />
         <activity
             android:name=".activities.PraxiasActivity"
             android:label="Praxias"
-            android:parentActivityName=".activities.PaginaPrincipalActivity" />
+            android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
             android:name=".activities.Registro3Activity"
             android:label="Registro"
@@ -55,7 +55,7 @@
             android:label="Registro"
             android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".activities.PaginaPrincipalActivity"
+            android:name=".activities.MenuPrincipalActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.SesionPraxiaGrabarActivity"
@@ -64,10 +64,10 @@
         <activity
             android:name=".activities.HistorialVideos"
             android:label="Historial Videos"
-            android:parentActivityName=".activities.PaginaPrincipalActivity" />
+            android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
             android:name=".activities.HistorialVideosFechas"
-            android:parentActivityName=".activities.PaginaPrincipalActivity" />
+            android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
             android:name=".activities.SesionVocalGrabarActivity"
             android:label="Grabar Audios"
@@ -75,7 +75,7 @@
         <activity
             android:name=".activities.HistorialAudios"
             android:label="Grabar Audios"
-            android:parentActivityName=".activities.PaginaPrincipalActivity" />
+            android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -65,7 +65,7 @@ public class HistorialAudiosFechas extends AppCompatActivity {
 
         imageView = findViewById(R.id.Boton_Buscar_Audios);
 
-        url = "http://192.168.1.13:82/curso-laravel/kututis/";
+        url = "http://192.168.0.7:82/curso-laravel/kututis/";
 
         final Integer id_paciente = globalClass.getId_usuario();
         final Integer id_vocal = intent_vocal_id;
@@ -73,7 +73,10 @@ public class HistorialAudiosFechas extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                obtenerAudiosGrabados(id_vocal, id_paciente, editText.getText().toString());
+                String fecha = editText.getText().toString();
+                if (fecha.length() != 0) {
+                    obtenerAudiosGrabados(id_vocal, id_paciente, fecha);
+                }
             }
         });
 
@@ -88,7 +91,7 @@ public class HistorialAudiosFechas extends AppCompatActivity {
                 for (SesionVocal sesionVocal: sesionVocalList){
                     url = url + sesionVocal.getRuta_servidor();
                     sesionVocal.setRuta_servidor(url);
-                    url = "http://192.168.1.13:82/curso-laravel/kututis/";
+                    url = "http://192.168.0.7:82/curso-laravel/kututis/";
                 }
 
                 audiosFechasAdapter.setData(sesionVocalList);
