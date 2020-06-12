@@ -138,6 +138,7 @@ public class InicioSesionActivity extends AppCompatActivity {
                         goToMenuPrincipal();
                         break;
                     case "400":
+                        progressBarSignIn.setVisibility(View.GONE);
                         if (responseStatus.matches("error_correo")) {
                             awesomeValidation.clear();
                             editTextEmail.setError(getString(R.string.err_email_not_registered));
@@ -146,7 +147,6 @@ public class InicioSesionActivity extends AppCompatActivity {
                             editTextPassword.setError(getString(R.string.err_password_incorrect));
                             editTextPassword.requestFocus();
                         } else {
-                            progressBarSignIn.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(),
                                     "Ocurrío un problema, no se pudo autenticar",
                                     Toast.LENGTH_SHORT)
