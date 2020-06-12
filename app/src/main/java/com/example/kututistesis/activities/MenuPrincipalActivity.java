@@ -15,16 +15,16 @@ import com.example.kututistesis.activities.vocalicos.MenuVocalicosActivity;
 
 public class MenuPrincipalActivity extends AppCompatActivity {
 
-    private ImageView buttonPraxias;
-    private ImageView buttonConsonatesVocalicos;
-    private ImageView buttonConsonatesConsonanticos;
+    private ImageView imageViewPraxias;
+    private ImageView imageViewConsonatesVocalicos;
+    private ImageView imageViewConsonatesConsonanticos;
     private ImageView imageViewLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.paciente_pantalla_principal);
+        setContentView(R.layout.menu_principal_activity);
 
         // Cambia el color de la barra de notificaciones
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -34,27 +34,27 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         }
 
         // Inicializa los elementos de la vista
-        buttonPraxias = findViewById(R.id.button_praxias);
-        buttonConsonatesVocalicos = findViewById(R.id.button_fonemas_vocalicos);
-        buttonConsonatesConsonanticos = findViewById(R.id.button_fonemas_consonanticos);
+        imageViewPraxias = findViewById(R.id.button_praxias);
+        imageViewConsonatesVocalicos = findViewById(R.id.button_fonemas_vocalicos);
+        imageViewConsonatesConsonanticos = findViewById(R.id.button_fonemas_consonanticos);
         imageViewLogout = findViewById(R.id.image_logout);
 
         // Eventos de la vista
-        buttonPraxias.setOnClickListener(new View.OnClickListener() {
+        imageViewPraxias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToPraxias();
             }
         });
 
-        buttonConsonatesVocalicos.setOnClickListener(new View.OnClickListener() {
+        imageViewConsonatesVocalicos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToConsonatesVocalicos();
             }
         });
 
-        buttonConsonatesConsonanticos.setOnClickListener(new View.OnClickListener() {
+        imageViewConsonatesConsonanticos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToConsonatesConsonanticos();
