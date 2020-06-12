@@ -49,7 +49,7 @@ public class Registro2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.paciente_registrar_2);
+        setContentView(R.layout.registro2_activity);
 
         getIntentData();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

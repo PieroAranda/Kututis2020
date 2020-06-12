@@ -40,7 +40,7 @@ public class Registro1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.paciente_registrar);
+        setContentView(R.layout.registro1_activity);
 
         // Inicializa los elementos de la vista
         editTextNames = (EditText) findViewById(R.id.edit_text_names);
