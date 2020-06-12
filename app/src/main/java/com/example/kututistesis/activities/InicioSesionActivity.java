@@ -161,7 +161,7 @@ public class InicioSesionActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseStatus> call, Throwable t) {
                 progressBarSignIn.setVisibility(View.GONE);
-                Log.e("SIGNIN", t.getMessage());
+                //Log.e("SIGNIN", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrío un problema, no se puede conectar al servicio",
                         Toast.LENGTH_SHORT)
