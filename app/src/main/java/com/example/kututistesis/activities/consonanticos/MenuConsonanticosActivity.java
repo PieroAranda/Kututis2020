@@ -34,7 +34,7 @@ public class MenuConsonanticosActivity extends AppCompatActivity implements Cons
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.fonemas_consonanticos_activity);
+        setContentView(R.layout.menu_consonanticos_activity);
 
         // Cambia el color de la barra de notificaciones
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
