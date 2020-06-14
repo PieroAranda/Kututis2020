@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.consonanticos.SesionConsonanticosActivity"
-    android:background="@drawable/inicio_sesion_fondo">
+    android:background="@color/colorBackground">
 
     <ImageView
         android:id="@+id/imageViewConsonanticosAtras"
-        android:layout_width="96dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="90dp"
+        android:layout_height="35dp"
         android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/boton_atras_naranja_claro"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/boton_atras_naranja_claro"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/imageViewConsonanticosContador"
