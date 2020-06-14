@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.example.kututistesis.R;
 import com.example.kututistesis.adapters.ConsonantesAdapter;
+import com.example.kututistesis.adapters.MenuBanderaAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Fonema;
 
@@ -28,7 +29,7 @@ public class MenuConsonanticosActivity extends AppCompatActivity implements Cons
     private ImageView imageViewAtras;
     private ApiClient apiClient;
     private List<Fonema> fonemas;
-    private ConsonantesAdapter consonantesAdapter;
+    private MenuBanderaAdapter consonantesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class MenuConsonanticosActivity extends AppCompatActivity implements Cons
         recyclerViewFonemaConsonantico = findViewById(R.id.recyclerFonemasConsonanticos);
 
         apiClient = ApiClient.getInstance();
-        consonantesAdapter = new ConsonantesAdapter();
+        consonantesAdapter = new MenuBanderaAdapter();
 
         imageViewAtras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +58,7 @@ public class MenuConsonanticosActivity extends AppCompatActivity implements Cons
         });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(
-                MenuConsonanticosActivity.this, LinearLayoutManager.HORIZONTAL, false
+                MenuConsonanticosActivity.this, LinearLayoutManager.VERTICAL, false
         );
         recyclerViewFonemaConsonantico.setLayoutManager(layoutManager);
         recyclerViewFonemaConsonantico.setItemAnimator(new DefaultItemAnimator());

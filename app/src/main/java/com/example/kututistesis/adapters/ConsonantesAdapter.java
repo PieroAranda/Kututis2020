@@ -19,10 +19,12 @@ public class ConsonantesAdapter extends RecyclerView.Adapter<ConsonantesAdapter.
     private List<Fonema> fonemaList;
     private Context context;
     private OnConsonantesListener mOnconsonanteslistener;
+    int row;
 
-    public void setData(List<Fonema> fonemaList, OnConsonantesListener onConsonantesListener) {
+    public void setData(List<Fonema> fonemaList, OnConsonantesListener onConsonantesListener, int row) {
         this.fonemaList = fonemaList;
         this.mOnconsonanteslistener = onConsonantesListener;
+        this.row = row;
         notifyDataSetChanged();
     }
 
@@ -38,6 +40,8 @@ public class ConsonantesAdapter extends RecyclerView.Adapter<ConsonantesAdapter.
         Fonema fonema = fonemaList.get(position);
         String nombre_fonema = fonema.getFonema();
         holder.textConsonante.setText(nombre_fonema);
+        holder.position = position;
+        holder.row = row;
     }
 
     @Override
@@ -49,18 +53,19 @@ public class ConsonantesAdapter extends RecyclerView.Adapter<ConsonantesAdapter.
 
         TextView textConsonante;
         OnConsonantesListener onConsonantesListener;
+        int position;
+        int row;
 
         public MyViewHolder(@NonNull View itemView, OnConsonantesListener onConsonantesListener) {
             super(itemView);
             this.onConsonantesListener = onConsonantesListener;
             textConsonante = itemView.findViewById(R.id.TextConsonante);
-
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            onConsonantesListener.onConsonanteClick(getAdapterPosition());
+            onConsonantesListener.onConsonanteClick(5*row + position);
         }
     }
 
