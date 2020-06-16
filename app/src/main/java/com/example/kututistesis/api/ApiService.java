@@ -6,7 +6,7 @@ import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionPraxia;
 import com.example.kututistesis.model.SesionVocal;
 import com.example.kututistesis.model.Vocabulario;
-import com.example.kututistesis.model.Vocales;
+import com.example.kututistesis.model.Vocal;
 
 import java.util.List;
 
@@ -46,7 +46,7 @@ public interface ApiService {
     Call<List<Praxia>> listarpraxias();
 
     @GET("listarvocales")
-    Call<List<Vocales>> listarvocales();
+    Call<List<Vocal>> listarvocales();
 
     @GET("buscarxpraxiaxusuarioxfecha/{id_praxia}/{id_usuario}/{fecha}")
     Call<List<SesionPraxia>> buscarxpraxiaxusuarioxfecha(@Path("id_praxia") Integer id_praxia, @Path("id_usuario") Integer id_usuario, @Path("fecha") String fecha);

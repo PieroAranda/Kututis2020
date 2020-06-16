@@ -8,7 +8,7 @@ import com.example.kututistesis.model.SesionVocal;
 import com.example.kututistesis.model.SignInForm;
 import com.example.kututistesis.model.SignUpForm;
 import com.example.kututistesis.model.Vocabulario;
-import com.example.kututistesis.model.Vocales;
+import com.example.kututistesis.model.Vocal;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -76,7 +76,7 @@ public class ApiClient {
         return apiService.listarpraxias();
     }
 
-    public Call<List<Vocales>> listarvocales(){
+    public Call<List<Vocal>> listarvocales(){
         return apiService.listarvocales();
     }
 

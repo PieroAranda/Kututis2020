@@ -1,20 +1,26 @@
 package com.example.kututistesis.activities.vocalicos;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.adapters.ConsonantesAdapter;
+import com.example.kututistesis.adapters.MenuBanderaAdapter;
 import com.example.kututistesis.adapters.VocalAdapter;
 import com.example.kututistesis.api.ApiClient;
-import com.example.kututistesis.model.Vocales;
+import com.example.kututistesis.model.Banderin;
+import com.example.kututistesis.model.Vocal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,37 +28,60 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MenuVocalicosActivity extends AppCompatActivity implements VocalAdapter.OnVocalesListener {
+
     private ApiClient apiClient;
-    Toolbar toolbar;
-    RecyclerView recyclerView;
-    VocalAdapter vocalAdapter;
-    private List<Vocales> vocalesList;
+    private RecyclerView recyclerView;
+    private MenuBanderaAdapter vocalAdapter;
+    private List<Vocal> vocalesList;
+    private ImageView imageViewAtras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_fonemas_vocalicos);
 
-        toolbar = findViewById(R.id.toolbarVocales);
-        recyclerView = findViewById(R.id.recyclerViewVocales);
+        // Cambia el color de la barra de notificaciones
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground, this.getTheme()));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground));
+        }
 
         apiClient = ApiClient.getInstance();
+        vocalAdapter = new MenuBanderaAdapter();
 
+        recyclerView = findViewById(R.id.recyclerViewVocalicos);
+        imageViewAtras = findViewById(R.id.imageViewVocalicossAtras);
+
+        imageViewAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MenuVocalicosActivity.super.onBackPressed();
+            }
+        });
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        vocalAdapter = new VocalAdapter();
-
-        obtenerVocales();
-
+        loadVocales();
     }
 
-    public void obtenerVocales() {
-        apiClient.listarvocales().enqueue(new Callback<List<Vocales>>() {
+    public void loadVocales() {
+        apiClient.listarvocales().enqueue(new Callback<List<Vocal>>() {
             @Override
-            public void onResponse(Call<List<Vocales>> call, Response<List<Vocales>> response) {
+            public void onResponse(Call<List<Vocal>> call, Response<List<Vocal>> response) {
                 if(response.isSuccessful()){
                     vocalesList = response.body();
-                    vocalAdapter.setData(vocalesList, MenuVocalicosActivity.this);
+                    List<Banderin> banderines = new ArrayList<>();
+
+                    for (Vocal v : vocalesList) {
+                        banderines.add(new Banderin(v.getNombre()));
+                    }
+                    vocalAdapter.setData(banderines, new ConsonantesAdapter.OnConsonantesListener() {
+                        @Override
+                        public void onConsonanteClick(int position) {
+                            OnVocalClick(position);
+                        }
+                    });
                     recyclerView.setAdapter(vocalAdapter);
                 }
                 else{
@@ -64,7 +93,7 @@ public class MenuVocalicosActivity extends AppCompatActivity implements VocalAda
             }
 
             @Override
-            public void onFailure(Call<List<Vocales>> call, Throwable t) {
+            public void onFailure(Call<List<Vocal>> call, Throwable t) {
                 Log.e("Obteniendo praxias", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrió un problema, no se puede conectar al servicio",

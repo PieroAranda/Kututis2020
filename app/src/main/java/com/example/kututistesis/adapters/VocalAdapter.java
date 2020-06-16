@@ -11,12 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kututistesis.R;
-import com.example.kututistesis.model.Vocales;
+import com.example.kututistesis.model.Vocal;
 
 import java.util.List;
 
 public class VocalAdapter extends RecyclerView.Adapter<VocalAdapter.MyViewHolder> {
-    private List<Vocales> vocalesList;
+    private List<Vocal> vocalesList;
     private Context context;
     private OnVocalesListener mOnVocalesListener;
 
@@ -24,7 +24,7 @@ public class VocalAdapter extends RecyclerView.Adapter<VocalAdapter.MyViewHolder
 
     }
 
-    public void setData(List<Vocales> vocalesList, OnVocalesListener mOnVocalesListener) {
+    public void setData(List<Vocal> vocalesList, OnVocalesListener mOnVocalesListener) {
         this.vocalesList = vocalesList;
         this.mOnVocalesListener = mOnVocalesListener;
         notifyDataSetChanged();
@@ -39,7 +39,7 @@ public class VocalAdapter extends RecyclerView.Adapter<VocalAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Vocales vocales = vocalesList.get(position);
+        Vocal vocales = vocalesList.get(position);
         String nombreVocal = vocales.getNombre();
 
         holder.NombreVocal.setText(nombreVocal);
