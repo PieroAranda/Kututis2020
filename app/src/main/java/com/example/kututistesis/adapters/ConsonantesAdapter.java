@@ -10,18 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.model.Banderin;
 import com.example.kututistesis.model.Fonema;
 
 import java.util.List;
 
 public class ConsonantesAdapter extends RecyclerView.Adapter<ConsonantesAdapter.MyViewHolder> {
 
-    private List<Fonema> fonemaList;
+    private List<Banderin> fonemaList;
     private Context context;
     private OnConsonantesListener mOnconsonanteslistener;
     int row;
 
-    public void setData(List<Fonema> fonemaList, OnConsonantesListener onConsonantesListener, int row) {
+    public void setData(List<Banderin> fonemaList, OnConsonantesListener onConsonantesListener, int row) {
         this.fonemaList = fonemaList;
         this.mOnconsonanteslistener = onConsonantesListener;
         this.row = row;
@@ -37,8 +38,8 @@ public class ConsonantesAdapter extends RecyclerView.Adapter<ConsonantesAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Fonema fonema = fonemaList.get(position);
-        String nombre_fonema = fonema.getFonema();
+        Banderin fonema = fonemaList.get(position);
+        String nombre_fonema = fonema.getTexto();
         holder.textConsonante.setText(nombre_fonema);
         holder.position = position;
         holder.row = row;
@@ -65,7 +66,7 @@ public class ConsonantesAdapter extends RecyclerView.Adapter<ConsonantesAdapter.
 
         @Override
         public void onClick(View v) {
-            onConsonantesListener.onConsonanteClick(5*row + position);
+            onConsonantesListener.onConsonanteClick(5 * row + position);
         }
     }
 
