@@ -1,11 +1,10 @@
 package com.example.kututistesis.api;
 
 import com.example.kututistesis.model.Fonema;
-import com.example.kututistesis.model.Praxias;
+import com.example.kututistesis.model.Praxia;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionPraxia;
 import com.example.kututistesis.model.SesionVocal;
-import com.example.kututistesis.model.SignUpForm;
 import com.example.kututistesis.model.Vocabulario;
 import com.example.kututistesis.model.Vocales;
 
@@ -13,7 +12,6 @@ import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -45,7 +43,7 @@ public interface ApiService {
     Call<List<SesionVocal>> listar_sesionvocales();
 
     @GET("listarpraxias")
-    Call<List<Praxias>> listarpraxias();
+    Call<List<Praxia>> listarpraxias();
 
     @GET("listarvocales")
     Call<List<Vocales>> listarvocales();

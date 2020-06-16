@@ -2,7 +2,7 @@ package com.example.kututistesis.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Praxias {
+public class Praxia {
     @SerializedName("id")
     private Integer id;
 
@@ -21,7 +21,7 @@ public class Praxias {
     @SerializedName("imagen")
     private String imagen;
 
-    public Praxias(Integer id, String Nombre, String Tipo, String Descripcion, String Video, String imagen) {
+    public Praxia(Integer id, String Nombre, String Tipo, String Descripcion, String Video, String imagen) {
         this.id = id;
         this.Nombre = Nombre;
         this.Tipo = Tipo;

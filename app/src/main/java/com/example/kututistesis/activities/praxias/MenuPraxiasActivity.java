@@ -13,13 +13,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.kututistesis.R;
-import com.example.kututistesis.activities.consonanticos.MenuConsonanticosActivity;
 import com.example.kututistesis.adapters.ConsonantesAdapter;
 import com.example.kututistesis.adapters.MenuBanderaAdapter;
 import com.example.kututistesis.adapters.PraxiasAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Banderin;
-import com.example.kututistesis.model.Praxias;
+import com.example.kututistesis.model.Praxia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ public class MenuPraxiasActivity extends AppCompatActivity implements PraxiasAda
     private ApiClient apiClient;
     private RecyclerView recyclerView;
     private MenuBanderaAdapter praxiasAdapter;
-    private List<Praxias> praxiasList;
+    private List<Praxia> praxiasList;
     private ImageView imageViewAtras;
 
     @Override
@@ -68,14 +67,14 @@ public class MenuPraxiasActivity extends AppCompatActivity implements PraxiasAda
     }
 
     public void loadPraxias() {
-        apiClient.listarpraxias().enqueue(new Callback<List<Praxias>>() {
+        apiClient.listarpraxias().enqueue(new Callback<List<Praxia>>() {
             @Override
-            public void onResponse(Call<List<Praxias>> call, Response<List<Praxias>> response) {
+            public void onResponse(Call<List<Praxia>> call, Response<List<Praxia>> response) {
                 if (response.isSuccessful()) {
                     praxiasList = response.body();
                     List<Banderin> banderines = new ArrayList<>();
 
-                    for (Praxias prax : praxiasList) {
+                    for (Praxia prax : praxiasList) {
                         String urlVideo = ApiClient.BASE_STORAGE_IMAGE_URL + prax.getVideo();
                         prax.setVideo(urlVideo);
                         String urlImagen = ApiClient.BASE_STORAGE_IMAGE_URL + prax.getImagen();
@@ -99,7 +98,7 @@ public class MenuPraxiasActivity extends AppCompatActivity implements PraxiasAda
             }
 
             @Override
-            public void onFailure(Call<List<Praxias>> call, Throwable t) {
+            public void onFailure(Call<List<Praxia>> call, Throwable t) {
                 Log.e("Obteniendo praxias", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrió un problema, no se puede conectar al servicio",

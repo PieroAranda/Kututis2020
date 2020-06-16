@@ -1,11 +1,7 @@
 package com.example.kututistesis.api;
 
-import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.example.kututistesis.model.Fonema;
-import com.example.kututistesis.model.Praxias;
+import com.example.kututistesis.model.Praxia;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionPraxia;
 import com.example.kututistesis.model.SesionVocal;
@@ -14,21 +10,13 @@ import com.example.kututistesis.model.SignUpForm;
 import com.example.kututistesis.model.Vocabulario;
 import com.example.kututistesis.model.Vocales;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Map;
 
 import java.util.List;
-import java.util.Map;
 
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Path;
 
 public class ApiClient {
     private static ApiClient instance = null;
@@ -84,7 +72,7 @@ public class ApiClient {
         return apiService.listar_sesionvocales();
     }
 
-    public Call<List<Praxias>> listarpraxias(){
+    public Call<List<Praxia>> listarpraxias(){
         return apiService.listarpraxias();
     }
 

@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kututistesis.R;
 import com.example.kututistesis.util.Global;
-import com.example.kututistesis.model.Praxias;
+import com.example.kututistesis.model.Praxia;
 import com.squareup.picasso.Picasso;
 
 
 import java.util.List;
 
 public class PraxiasAdapter extends RecyclerView.Adapter<PraxiasAdapter.MyViewHolder> {
-    private List<Praxias> praxiasList;
+    private List<Praxia> praxiasList;
     private Context context;
     private Global global;
     private OnPraxiaListener mOnpraxialistener;
@@ -28,7 +28,7 @@ public class PraxiasAdapter extends RecyclerView.Adapter<PraxiasAdapter.MyViewHo
 
     }
 
-    public void setData(List<Praxias> praxiasList, Global global, OnPraxiaListener onPraxiaListener) {
+    public void setData(List<Praxia> praxiasList, Global global, OnPraxiaListener onPraxiaListener) {
         this.praxiasList = praxiasList;
         this.global = global;
         this.mOnpraxialistener = onPraxiaListener;
@@ -45,7 +45,7 @@ public class PraxiasAdapter extends RecyclerView.Adapter<PraxiasAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        final Praxias praxias = praxiasList.get(position);
+        final Praxia praxias = praxiasList.get(position);
         String nombrePraxia = praxias.getNombre();
         String url = praxias.getImagen();
 
