@@ -34,6 +34,7 @@ public class ApiClient {
     private static ApiClient instance = null;
     public static final String BASE_HOST_URL = "http://192.168.0.7:82/curso-laravel/kututis/";
     public static final String BASE_URL = BASE_HOST_URL + "public/api/";
+    public static final String BASE_STORAGE_IMAGE_URL = BASE_HOST_URL + "storage/app/images/";
 
     private ApiService apiService = null;
 

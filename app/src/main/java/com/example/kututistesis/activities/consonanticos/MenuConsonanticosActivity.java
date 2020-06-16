@@ -15,8 +15,10 @@ import com.example.kututistesis.R;
 import com.example.kututistesis.adapters.ConsonantesAdapter;
 import com.example.kututistesis.adapters.MenuBanderaAdapter;
 import com.example.kututistesis.api.ApiClient;
+import com.example.kututistesis.model.Banderin;
 import com.example.kututistesis.model.Fonema;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -71,7 +73,11 @@ public class MenuConsonanticosActivity extends AppCompatActivity implements Cons
             @Override
             public void onResponse(Call<List<Fonema>> call, Response<List<Fonema>> response) {
                 fonemas = response.body();
-                consonantesAdapter.setData(fonemas, MenuConsonanticosActivity.this);
+                List<Banderin> banderines = new ArrayList<>();
+                for (Fonema f : fonemas) {
+                    banderines.add(new Banderin(f.getFonema()));
+                }
+                consonantesAdapter.setData(banderines, MenuConsonanticosActivity.this);
                 recyclerViewFonemaConsonantico.setAdapter(consonantesAdapter);
             }
 

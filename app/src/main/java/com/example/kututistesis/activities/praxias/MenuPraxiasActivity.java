@@ -1,21 +1,27 @@
 package com.example.kututistesis.activities.praxias;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.activities.consonanticos.MenuConsonanticosActivity;
+import com.example.kututistesis.adapters.ConsonantesAdapter;
+import com.example.kututistesis.adapters.MenuBanderaAdapter;
 import com.example.kututistesis.adapters.PraxiasAdapter;
 import com.example.kututistesis.api.ApiClient;
+import com.example.kututistesis.model.Banderin;
 import com.example.kututistesis.model.Praxias;
-import com.example.kututistesis.util.Global;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -23,54 +29,68 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MenuPraxiasActivity extends AppCompatActivity implements PraxiasAdapter.OnPraxiaListener {
+
     private ApiClient apiClient;
-    private String url;
-
-    Toolbar toolbar;
-    RecyclerView recyclerView;
-    PraxiasAdapter praxiasAdapter;
-    private Global global;
-
+    private RecyclerView recyclerView;
+    private MenuBanderaAdapter praxiasAdapter;
     private List<Praxias> praxiasList;
+    private ImageView imageViewAtras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_praxias);
 
-        global = (Global) getApplicationContext();
+        // Cambia el color de la barra de notificaciones
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground, this.getTheme()));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground));
+        }
 
-        toolbar = findViewById(R.id.toolbar);
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerViewPraxias);
+        imageViewAtras = findViewById(R.id.imageViewPraxiasAtras);
 
         apiClient = ApiClient.getInstance();
 
+        imageViewAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MenuPraxiasActivity.super.onBackPressed();
+            }
+        });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        praxiasAdapter = new MenuBanderaAdapter();
 
-        praxiasAdapter = new PraxiasAdapter();
-
-
-        url = "http://192.168.0.7:82/curso-laravel/kututis/storage/app/images/";
-        obtenerPraxias();
+        loadPraxias();
     }
 
-    public void obtenerPraxias() {
+    public void loadPraxias() {
         apiClient.listarpraxias().enqueue(new Callback<List<Praxias>>() {
             @Override
             public void onResponse(Call<List<Praxias>> call, Response<List<Praxias>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     praxiasList = response.body();
-                    for(Praxias prax : praxiasList)
-                    {
-                        String urlVideo = url + prax.getVideo();
+                    List<Banderin> banderines = new ArrayList<>();
+
+                    for (Praxias prax : praxiasList) {
+                        String urlVideo = ApiClient.BASE_STORAGE_IMAGE_URL + prax.getVideo();
                         prax.setVideo(urlVideo);
-                        String urlImagen = url + prax.getImagen();
+                        String urlImagen = ApiClient.BASE_STORAGE_IMAGE_URL + prax.getImagen();
                         prax.setImagen(urlImagen);
+                        banderines.add(new Banderin(prax.getNombre()));
                     }
-                    praxiasAdapter.setData(praxiasList, global, MenuPraxiasActivity.this);
+
+                    praxiasAdapter.setData(banderines, new ConsonantesAdapter.OnConsonantesListener() {
+                        @Override
+                        public void onConsonanteClick(int position) {
+                            onPraxiaClick(position);
+                        }
+                    });
                     recyclerView.setAdapter(praxiasAdapter);
-                }
-                else{
+                } else {
                     Toast.makeText(getApplicationContext(),
                             "Ocurrió un problema, no se pudo obtener el video",
                             Toast.LENGTH_SHORT)
@@ -88,8 +108,6 @@ public class MenuPraxiasActivity extends AppCompatActivity implements PraxiasAda
             }
         });
     }
-
-
 
     @Override
     public void onPraxiaClick(int position) {
