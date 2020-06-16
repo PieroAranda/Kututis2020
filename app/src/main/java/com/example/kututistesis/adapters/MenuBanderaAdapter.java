@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kututistesis.R;
 import com.example.kututistesis.activities.consonanticos.MenuConsonanticosActivity;
+import com.example.kututistesis.model.Banderin;
 import com.example.kututistesis.model.Fonema;
 
 import java.util.ArrayList;
@@ -21,11 +22,11 @@ import java.util.List;
 public class MenuBanderaAdapter extends RecyclerView.Adapter<MenuBanderaAdapter.MyViewHolder> {
 
     private List<ConsonantesAdapter> banderasAdapters;
-    private List<Fonema> fonemaList;
+    private List<Banderin> fonemaList;
     private Context context;
     private ConsonantesAdapter.OnConsonantesListener mOnconsonanteslistener;
 
-    public void setData(List<Fonema> fonemaList, ConsonantesAdapter.OnConsonantesListener onConsonantesListener) {
+    public void setData(List<Banderin> fonemaList, ConsonantesAdapter.OnConsonantesListener onConsonantesListener) {
         int rows = (int) Math.ceil(fonemaList.size() / 6.0);
 
         banderasAdapters = new ArrayList<ConsonantesAdapter>();
@@ -54,16 +55,12 @@ public class MenuBanderaAdapter extends RecyclerView.Adapter<MenuBanderaAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MenuBanderaAdapter.MyViewHolder holder, int position) {
-        Fonema fonema = fonemaList.get(position);
-        String nombre_fonema = fonema.getFonema();
         LinearLayoutManager layoutManager = new LinearLayoutManager(
                 context, LinearLayoutManager.HORIZONTAL, false
         );
         holder.row.setLayoutManager(layoutManager);
         holder.row.setItemAnimator(new DefaultItemAnimator());
         holder.row.setAdapter(banderasAdapters.get(position));
-
-        //holder.textConsonante.setText(nombre_fonema);
     }
 
     @Override
