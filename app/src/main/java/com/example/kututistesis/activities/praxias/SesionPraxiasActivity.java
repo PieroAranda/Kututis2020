@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
@@ -83,12 +84,21 @@ public class SesionPraxiasActivity extends AppCompatActivity {
 
     private Integer position = 0;
 
+    private ImageView imageViewRecordVideo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.sesion_praxia_grabar);
+
+        // Cambia el color de la barra de notificaciones
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground, this.getTheme()));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground));
+        }
 
         global = (Global) getApplicationContext();
 
@@ -117,8 +127,8 @@ public class SesionPraxiasActivity extends AppCompatActivity {
         url = intent_video_por_praxia;
 
         buttonhitorialVideos = findViewById(R.id.buttonHistorailVideos);
-
         videoEjemplo = findViewById(R.id.videoEjemploPraxia);
+        imageViewRecordVideo = findViewById(R.id.imageView2);
 
         Uri uri = Uri.parse(url);
         videoEjemplo.setVideoURI(uri);
@@ -144,7 +154,12 @@ public class SesionPraxiasActivity extends AppCompatActivity {
             }
         });
 
-
+        imageViewRecordVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TomarVideo();
+            }
+        });
 
         //buttonEnviar = (Button) findViewById(R.id.buttonEnvio);
         //buttonEnviar.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +183,7 @@ public class SesionPraxiasActivity extends AppCompatActivity {
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
 
-    public void TomarVideo(View view) {
+    public void TomarVideo() {
 
         // Mientras está un video no abre la cámara
         if(enviando) {

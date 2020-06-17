@@ -41,6 +41,7 @@ public class InicioSesionActivity extends AppCompatActivity {
     private ApiClient apiClient;
     private AwesomeValidation awesomeValidation;
     private Global global;
+    private int attemps = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +124,7 @@ public class InicioSesionActivity extends AppCompatActivity {
         String email = editTextEmail.getText().toString().trim();
         String contrasenia = editTextPassword.getText().toString().trim();
         progressBarSignIn.setVisibility(View.VISIBLE);
+        attemps = attemps + 1;
 
         apiClient.loginPaciente(email, contrasenia).enqueue(new Callback<ResponseStatus>() {
             @Override
@@ -160,12 +162,16 @@ public class InicioSesionActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseStatus> call, Throwable t) {
+                if (attemps == 1) {
+                    login();
+                } else {
                 progressBarSignIn.setVisibility(View.GONE);
-                //Log.e("SIGNIN", t.getMessage());
+                attemps = 0;
                 Toast.makeText(getApplicationContext(),
                         "Ocurrío un problema, no se puede conectar al servicio",
                         Toast.LENGTH_SHORT)
                         .show();
+                }
             }
         });
     }
