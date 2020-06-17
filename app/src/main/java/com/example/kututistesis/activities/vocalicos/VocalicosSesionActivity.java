@@ -8,12 +8,14 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +42,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SesionVocalicosActivity extends AppCompatActivity {
+public class VocalicosSesionActivity extends AppCompatActivity {
     private MediaRecorder grabacion;
     private Button btn_recorder;
 
@@ -66,12 +68,21 @@ public class SesionVocalicosActivity extends AppCompatActivity {
     private Boolean grabado = false;
     private Button buttonHistorialAudios;
     private Global global;
+    private ImageView imageViewAtras;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sesion_vocal_grabar);
+        getSupportActionBar().hide();
+        setContentView(R.layout.activity_vocalicos_sesion);
+
+        // Cambia el color de la barra de notificaciones
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground, this.getTheme()));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground));
+        }
 
         global = (Global) getApplicationContext();
 
@@ -88,17 +99,18 @@ public class SesionVocalicosActivity extends AppCompatActivity {
         ruta = "";
 
         if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) && (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)) { //estrutura condicional que revisa si se ha puesto los permisos para grabar audio y escribir en el celular los audios, en el archivo manifest
-            ActivityCompat.requestPermissions(SesionVocalicosActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000); //escribe en pantalla las ventanas empergentes que piden permisos para acceder al microfno y que se guarden los audios en el celular
+            ActivityCompat.requestPermissions(VocalicosSesionActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000); //escribe en pantalla las ventanas empergentes que piden permisos para acceder al microfno y que se guarden los audios en el celular
         }
 
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) { //estrutura condicional que revisa si se ha puesto los permisos para grabar audio y escribir en el celular los audios, en el archivo manifest
-            ActivityCompat.requestPermissions(SesionVocalicosActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 1000); //escribe en pantalla las ventanas empergentes que piden permisos para acceder al microfno y que se guarden los audios en el celular
+            ActivityCompat.requestPermissions(VocalicosSesionActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 1000); //escribe en pantalla las ventanas empergentes que piden permisos para acceder al microfno y que se guarden los audios en el celular
         }
 
         btn_recorder = (Button) findViewById(R.id.btn_rec);
         buttonEnviar = (Button) findViewById(R.id.buttonEnvio2);
         buttonReproducir = (Button) findViewById(R.id.btn_play);
         reproducir = findViewById(R.id.btn_play);
+        imageViewAtras = findViewById(R.id.imageViewVocalicosSesionAtras);
 
         buttonHistorialAudios = findViewById(R.id.buttonHistorialAudios);
 
@@ -115,6 +127,13 @@ public class SesionVocalicosActivity extends AppCompatActivity {
                 if(grabado) {
                     reproducir();
                 }
+            }
+        });
+
+        imageViewAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VocalicosSesionActivity.super.onBackPressed();
             }
         });
     }

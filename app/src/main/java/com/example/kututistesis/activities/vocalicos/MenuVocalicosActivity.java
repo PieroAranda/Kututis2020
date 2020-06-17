@@ -106,7 +106,7 @@ public class MenuVocalicosActivity extends AppCompatActivity implements VocalAda
     @Override
     public void OnVocalClick(int position) {
         Integer vocal_id = vocalesList.get(position).getId();
-        Intent intent = new Intent(this, SesionVocalicosActivity.class);
+        Intent intent = new Intent(this, VocalicosSesionActivity.class);
         intent.putExtra("vocal_id", vocal_id);
         startActivity(intent);
     }

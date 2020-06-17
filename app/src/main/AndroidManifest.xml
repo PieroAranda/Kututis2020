@@ -65,7 +65,7 @@
             android:name=".activities.praxias.PraxiasHistorialActivity"
             android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
-            android:name=".activities.vocalicos.SesionVocalicosActivity"
+            android:name=".activities.vocalicos.VocalicosSesionActivity"
             android:label="Grabar Audios"
             android:parentActivityName=".activities.vocalicos.MenuVocalicosActivity" />
         <activity android:name=".activities.InicioSesionActivity">

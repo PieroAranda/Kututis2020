@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <ImageView
+        android:id="@+id/imageViewVocalicosSesionAtras"
+        android:layout_width="90dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/boton_atras_naranja_claro"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonHistorialAudios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:enabled="false"
+        android:onClick="goToHistorialAudios"
+        android:text="Historial"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonEnvio2"
+        android:layout_width="106dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="16dp"
+        android:enabled="false"
+        android:text="Enviar"
+        app:layout_constraintLeft_toRightOf="@+id/btn_play"
+        app:layout_constraintTop_toTopOf="@+id/btn_play" />
+
+    <Button
+        android:id="@+id/btn_rec"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/stop_rec"
+        android:onClick="Recorder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/btn_play"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/reproducir"
+        app:layout_constraintLeft_toRightOf="@+id/btn_rec"
+        app:layout_constraintTop_toTopOf="@+id/btn_rec" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
