@@ -62,7 +62,7 @@
             android:label="Grabar Praxia"
             android:parentActivityName=".activities.praxias.MenuPraxiasActivity" />
         <activity
-            android:name=".activities.praxias.HistorialPraxiasActivity"
+            android:name=".activities.praxias.PraxiasHistorialActivity"
             android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
             android:name=".activities.vocalicos.SesionVocalicosActivity"

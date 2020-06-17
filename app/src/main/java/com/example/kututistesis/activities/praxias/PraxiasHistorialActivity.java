@@ -2,6 +2,7 @@ package com.example.kututistesis.activities.praxias;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HistorialPraxiasActivity extends AppCompatActivity {
+public class PraxiasHistorialActivity extends AppCompatActivity {
 
     private ApiClient apiClient;
     private String url;
@@ -44,16 +45,24 @@ public class HistorialPraxiasActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private HistorialVideosFechasAdapter videosFechasAdapter;
     private MediaController mediaController;
-
     private Integer id_paciente;
     private Integer id_praxia;
+    private ImageView imageViewAtras;
 
     private Global global;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.historial_videos_por_fechas);
+        getSupportActionBar().hide();
+        setContentView(R.layout.activity_praxias_historial);
+
+        // Cambia el color de la barra de notificaciones
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground, this.getTheme()));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground));
+        }
 
         global = (Global) getApplicationContext();
 
@@ -75,6 +84,7 @@ public class HistorialPraxiasActivity extends AppCompatActivity {
         video = (VideoView) findViewById(R.id.VideoSeleccionado);
 
         recyclerView = findViewById(R.id.recyclerHistorialVideoPorFecha);
+        imageViewAtras = findViewById(R.id.imageViewPraxiasHistorialAtras);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -99,7 +109,12 @@ public class HistorialPraxiasActivity extends AppCompatActivity {
             }
         });
 
-
+        imageViewAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PraxiasHistorialActivity.super.onBackPressed();
+            }
+        });
     }
 
     public void obtenerVideosGrabados(Integer id_praxia, Integer id_paciente,String fecha){
@@ -145,7 +160,7 @@ public class HistorialPraxiasActivity extends AppCompatActivity {
             }
         });
 
-        newFragment.show(HistorialPraxiasActivity.this.getSupportFragmentManager(), "datePicker");
+        newFragment.show(PraxiasHistorialActivity.this.getSupportFragmentManager(), "datePicker");
     }
 
 }

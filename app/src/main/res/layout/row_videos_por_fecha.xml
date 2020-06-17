@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemVideoFecha"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
-    app:cardUseCompatPadding="true"
-    android:id="@+id/itemVideoFecha"
-    >
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,33 +22,30 @@
 
         <TextView
             android:id="@+id/TituloVideo"
-            android:textSize="22sp"
-            tools:text="Intento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/PlayPause"
-            android:layout_toEndOf="@id/PlayPause"
-            android:layout_marginLeft="16dp"
             android:layout_marginStart="10dp"
-            />
+            android:layout_marginLeft="16dp"
+            android:layout_toEndOf="@id/PlayPause"
+            android:layout_toRightOf="@id/PlayPause"
+            android:textSize="22sp"
+            tools:text="Intento" />
 
         <TextView
             android:id="@+id/Aprobado"
-            android:textSize="19sp"
-            tools:text="Aprobado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/PlayPause"
-            android:layout_toEndOf="@id/PlayPause"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
             android:layout_below="@id/TituloVideo"
-            />
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@id/PlayPause"
+            android:layout_toRightOf="@id/PlayPause"
+            android:textSize="19sp"
+            tools:text="Aprobado" />
 
 
     </RelativeLayout>
-
 
 
 </androidx.cardview.widget.CardView>
