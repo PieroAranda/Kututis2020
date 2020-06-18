@@ -112,7 +112,7 @@ public class MenuPraxiasActivity extends AppCompatActivity implements PraxiasAda
     public void onPraxiaClick(int position) {
         Integer praxia_id = praxiasList.get(position).getId();
         String video_por_praxia = praxiasList.get(position).getVideo();
-        Intent intent = new Intent(this, SesionPraxiasActivity.class);
+        Intent intent = new Intent(this, PraxiasSesionActivity.class);
         intent.putExtra("praxia_id", praxia_id);
         intent.putExtra("video_por_praxia", video_por_praxia);
         startActivity(intent);

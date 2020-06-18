@@ -8,8 +8,8 @@
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true"
     android:id="@+id/itemAudioFecha"
-    android:layout_marginLeft="32dp"
-    android:layout_marginRight="32dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
     >
 
     <RelativeLayout

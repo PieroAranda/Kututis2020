@@ -58,7 +58,7 @@
             android:name=".activities.MenuPrincipalActivity"
             android:parentActivityName=".activities.InicioSesionActivity" />
         <activity
-            android:name=".activities.praxias.SesionPraxiasActivity"
+            android:name=".activities.praxias.PraxiasSesionActivity"
             android:label="Grabar Praxia"
             android:parentActivityName=".activities.praxias.MenuPraxiasActivity" />
         <activity

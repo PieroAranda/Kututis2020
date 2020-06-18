@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -22,7 +21,6 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.Toast;
@@ -47,7 +45,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SesionPraxiasActivity extends AppCompatActivity {
+public class PraxiasSesionActivity extends AppCompatActivity {
 
     private static final String CARPETA_PRINCIPAL = "misImagenesApp/";
     private static final String CARPETA_IMAGEN = "imagenes";
@@ -113,8 +111,8 @@ public class SesionPraxiasActivity extends AppCompatActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
-        if (ContextCompat.checkSelfPermission(SesionPraxiasActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(SesionPraxiasActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(SesionPraxiasActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1000);
+        if (ContextCompat.checkSelfPermission(PraxiasSesionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(PraxiasSesionActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(PraxiasSesionActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1000);
         }
 
         apiClient = ApiClient.getInstance();
@@ -229,11 +227,11 @@ public class SesionPraxiasActivity extends AppCompatActivity {
                     videoEjemplo.seekTo(position);
                 }
                 videoEjemplo.start();
-                play.setImageResource(R.drawable.ic_pause_black_24dp);
+                play.setImageResource(R.drawable.boton_parar);
             }else {
                 position = videoEjemplo.getCurrentPosition();
                 videoEjemplo.pause();
-                play.setImageResource(R.drawable.ic_play_arrow_black_24dp);
+                play.setImageResource(R.drawable.boton_reproducir);
             }
 
         }catch (Exception e)
@@ -259,7 +257,6 @@ public class SesionPraxiasActivity extends AppCompatActivity {
         Fecha = dateFormat.format(date);
 
         ruta = "data:image/mp4;base64,"+ruta;
-
 
         SesionPraxia sesionPraxia = new SesionPraxia(paciente_id, praxias_id, Aprobado, Fecha, ruta);
 
