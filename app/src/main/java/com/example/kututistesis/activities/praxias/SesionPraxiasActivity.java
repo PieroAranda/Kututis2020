@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -68,7 +69,7 @@ public class SesionPraxiasActivity extends AppCompatActivity {
 
     private static final int COD_VIDEO = 20;
     //private Button buttonEnviar;
-    private Button buttonhitorialVideos;
+    private ImageView buttonhitorialVideos;
 
     private String url;
 
@@ -91,7 +92,7 @@ public class SesionPraxiasActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.sesion_praxia_grabar);
+        setContentView(R.layout.activity_praxias_sesion);
 
         // Cambia el color de la barra de notificaciones
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

@@ -18,11 +18,12 @@
 
     <EditText
         android:id="@+id/edit_text_date"
-        android:layout_width="140dp"
-        android:layout_height="51dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/edittext_round"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/edittext_round_white"
         android:clickable="true"
         android:focusable="false"
         android:fontFamily="@font/dimbo_regular"
@@ -38,29 +39,43 @@
         android:textColorHint="#fbcfa5"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/Boton_Buscar_Videos"
         app:layout_constraintTop_toBottomOf="@+id/imageViewPraxiasHistorialAtras" />
 
     <ImageView
         android:id="@+id/Boton_Buscar_Videos"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        android:layout_marginLeft="25dp"
-        app:layout_constraintLeft_toRightOf="@+id/edit_text_date"
-        app:layout_constraintTop_toTopOf="@+id/edit_text_date"
-        app:srcCompat="@drawable/boton_ingresar" />
+        android:layout_width="64dp"
+        android:layout_height="62dp"
+        android:layout_marginRight="32dp"
+        android:background="@drawable/search_button_background"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_text_date" />
+
+    <ImageView
+        android:id="@+id/imageViewConsonanticosCordel"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/cordel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_date" />
 
     <VideoView
         android:id="@+id/VideoSeleccionado"
         android:layout_width="match_parent"
         android:layout_height="214dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/Boton_Buscar_Videos"/>
+        android:layout_marginTop="1dp"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewConsonanticosCordel" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="8dp"
         android:id="@+id/recyclerHistorialVideoPorFecha"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/VideoSeleccionado"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/VideoSeleccionado" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

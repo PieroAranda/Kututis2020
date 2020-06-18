@@ -16,17 +16,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageView
         android:id="@+id/buttonHistorialAudios"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="105dp"
+        android:layout_height="35dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="32dp"
-        android:enabled="false"
         android:onClick="goToHistorialAudios"
         android:text="Historial"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/historial_boton"/>
 
     <Button
         android:id="@+id/buttonEnvio2"

@@ -66,7 +66,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
     private Button buttonEnviar;
     private Button buttonReproducir;
     private Boolean grabado = false;
-    private Button buttonHistorialAudios;
+    private ImageView buttonHistorialAudios;
     private Global global;
     private ImageView imageViewAtras;
 
