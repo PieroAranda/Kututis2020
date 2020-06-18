@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -12,9 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kututistesis.R;
-import com.example.kututistesis.activities.consonanticos.MenuConsonanticosActivity;
 import com.example.kututistesis.model.Banderin;
-import com.example.kututistesis.model.Fonema;
 
 import java.util.ArrayList;
 import java.util.List;

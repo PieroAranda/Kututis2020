@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorBackground"
-    tools:context=".activities.praxias.MenuPraxiasActivity">
+    tools:context=".activities.praxias.PraxiasMenuActivity">
 
     <ImageView
         android:id="@+id/imageViewPraxiasAtras"

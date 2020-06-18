@@ -1,4 +1,4 @@
-package com.example.kututistesis.activities.praxias;
+package com.example.kututistesis.activities.vocalicos;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,10 +15,10 @@ import android.widget.Toast;
 import com.example.kututistesis.R;
 import com.example.kututistesis.adapters.ConsonantesAdapter;
 import com.example.kututistesis.adapters.MenuBanderaAdapter;
-import com.example.kututistesis.adapters.PraxiasAdapter;
+import com.example.kututistesis.adapters.VocalAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Banderin;
-import com.example.kututistesis.model.Praxia;
+import com.example.kututistesis.model.Vocal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,19 +27,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MenuPraxiasActivity extends AppCompatActivity implements PraxiasAdapter.OnPraxiaListener {
+public class VocalicosMenuActivity extends AppCompatActivity implements VocalAdapter.OnVocalesListener {
 
     private ApiClient apiClient;
     private RecyclerView recyclerView;
-    private MenuBanderaAdapter praxiasAdapter;
-    private List<Praxia> praxiasList;
+    private MenuBanderaAdapter vocalAdapter;
+    private List<Vocal> vocalesList;
     private ImageView imageViewAtras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_praxias);
+        setContentView(R.layout.activity_fonemas_vocalicos);
 
         // Cambia el color de la barra de notificaciones
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -48,48 +48,43 @@ public class MenuPraxiasActivity extends AppCompatActivity implements PraxiasAda
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground));
         }
 
-        recyclerView = findViewById(R.id.recyclerViewPraxias);
-        imageViewAtras = findViewById(R.id.imageViewPraxiasAtras);
-
         apiClient = ApiClient.getInstance();
+        vocalAdapter = new MenuBanderaAdapter();
+
+        recyclerView = findViewById(R.id.recyclerViewVocalicos);
+        imageViewAtras = findViewById(R.id.imageViewVocalicossAtras);
 
         imageViewAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MenuPraxiasActivity.super.onBackPressed();
+                VocalicosMenuActivity.super.onBackPressed();
             }
         });
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        praxiasAdapter = new MenuBanderaAdapter();
 
-        loadPraxias();
+        loadVocales();
     }
 
-    public void loadPraxias() {
-        apiClient.listarpraxias().enqueue(new Callback<List<Praxia>>() {
+    public void loadVocales() {
+        apiClient.listarvocales().enqueue(new Callback<List<Vocal>>() {
             @Override
-            public void onResponse(Call<List<Praxia>> call, Response<List<Praxia>> response) {
-                if (response.isSuccessful()) {
-                    praxiasList = response.body();
+            public void onResponse(Call<List<Vocal>> call, Response<List<Vocal>> response) {
+                if(response.isSuccessful()){
+                    vocalesList = response.body();
                     List<Banderin> banderines = new ArrayList<>();
 
-                    for (Praxia prax : praxiasList) {
-                        String urlVideo = ApiClient.BASE_STORAGE_IMAGE_URL + prax.getVideo();
-                        prax.setVideo(urlVideo);
-                        String urlImagen = ApiClient.BASE_STORAGE_IMAGE_URL + prax.getImagen();
-                        prax.setImagen(urlImagen);
-                        banderines.add(new Banderin(prax.getNombre()));
+                    for (Vocal v : vocalesList) {
+                        banderines.add(new Banderin(v.getNombre()));
                     }
-
-                    praxiasAdapter.setData(banderines, new ConsonantesAdapter.OnConsonantesListener() {
+                    vocalAdapter.setData(banderines, new ConsonantesAdapter.OnConsonantesListener() {
                         @Override
                         public void onConsonanteClick(int position) {
-                            onPraxiaClick(position);
+                            OnVocalClick(position);
                         }
                     });
-                    recyclerView.setAdapter(praxiasAdapter);
-                } else {
+                    recyclerView.setAdapter(vocalAdapter);
+                }
+                else{
                     Toast.makeText(getApplicationContext(),
                             "Ocurrió un problema, no se pudo obtener el video",
                             Toast.LENGTH_SHORT)
@@ -98,7 +93,7 @@ public class MenuPraxiasActivity extends AppCompatActivity implements PraxiasAda
             }
 
             @Override
-            public void onFailure(Call<List<Praxia>> call, Throwable t) {
+            public void onFailure(Call<List<Vocal>> call, Throwable t) {
                 Log.e("Obteniendo praxias", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrió un problema, no se puede conectar al servicio",
@@ -109,12 +104,10 @@ public class MenuPraxiasActivity extends AppCompatActivity implements PraxiasAda
     }
 
     @Override
-    public void onPraxiaClick(int position) {
-        Integer praxia_id = praxiasList.get(position).getId();
-        String video_por_praxia = praxiasList.get(position).getVideo();
-        Intent intent = new Intent(this, PraxiasSesionActivity.class);
-        intent.putExtra("praxia_id", praxia_id);
-        intent.putExtra("video_por_praxia", video_por_praxia);
+    public void OnVocalClick(int position) {
+        Integer vocal_id = vocalesList.get(position).getId();
+        Intent intent = new Intent(this, VocalicosSesionActivity.class);
+        intent.putExtra("vocal_id", vocal_id);
         startActivity(intent);
     }
 }

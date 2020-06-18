@@ -23,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Menu2ConsonanticosActivity extends AppCompatActivity implements VocabularioAdapter.OnVocabularioListener{
+public class ConsonanticosMenu2Activity extends AppCompatActivity implements VocabularioAdapter.OnVocabularioListener{
 
     private ApiClient apiClient;
     private String url;
@@ -61,7 +61,7 @@ public class Menu2ConsonanticosActivity extends AppCompatActivity implements Voc
         imageViewAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Menu2ConsonanticosActivity.super.onBackPressed();
+                ConsonanticosMenu2Activity.super.onBackPressed();
             }
         });
 
@@ -85,7 +85,7 @@ public class Menu2ConsonanticosActivity extends AppCompatActivity implements Voc
                     vocabulario.setImagen(url);
                     url = "http://192.168.0.7:82/curso-laravel/kututis/storage/app/images/";
                 }
-                vocabularioAdapter.setData(vocabularioList, Menu2ConsonanticosActivity.this);
+                vocabularioAdapter.setData(vocabularioList, ConsonanticosMenu2Activity.this);
                 recyclerView.setAdapter(vocabularioAdapter);
             }
 
@@ -104,7 +104,7 @@ public class Menu2ConsonanticosActivity extends AppCompatActivity implements Voc
     public void onVocabularioClick(int position) {
         String imagen = vocabularioList.get(position).getImagen();
         String palabra = vocabularioList.get(position).getPalabra();
-        Intent intent = new Intent(this, SesionConsonanticosActivity.class);
+        Intent intent = new Intent(this, ConsonanticosSesionActivity.class);
         intent.putExtra("imagen_palabra", imagen);
         intent.putExtra("texto_palabra", palabra);
         startActivity(intent);

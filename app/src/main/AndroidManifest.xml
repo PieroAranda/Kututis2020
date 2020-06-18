@@ -19,27 +19,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.consonanticos.ResultadosConsonanticosActivity"></activity>
-        <activity android:name=".activities.consonanticos.Menu2ConsonanticosActivity" />
+        <activity android:name=".activities.consonanticos.ConsonanticosResultadosActivity"></activity>
+        <activity android:name=".activities.consonanticos.ConsonanticosMenu2Activity" />
         <activity
-            android:name=".activities.consonanticos.SesionConsonanticosActivity"
-            android:parentActivityName=".activities.consonanticos.MenuConsonanticosActivity" />
+            android:name=".activities.consonanticos.ConsonanticosSesionActivity"
+            android:parentActivityName=".activities.consonanticos.ConsonanticosMenuActivity" />
         <activity
             android:name=".activities.vocalicos.VocalicosHistorialActivity"
             android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
-            android:name=".activities.consonanticos.MenuConsonanticosActivity"
+            android:name=".activities.consonanticos.ConsonanticosMenuActivity"
             android:label="Fonemas Consonánticos"
             android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
-            android:name=".activities.vocalicos.MenuVocalicosActivity"
+            android:name=".activities.vocalicos.VocalicosMenuActivity"
             android:label="Fonemas Vocálicos"
             android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
             android:name=".activities.BienvenidaActivity"
             android:label="Bienvenida" />
         <activity
-            android:name=".activities.praxias.MenuPraxiasActivity"
+            android:name=".activities.praxias.PraxiasMenuActivity"
             android:label="Praxias"
             android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
@@ -60,14 +60,14 @@
         <activity
             android:name=".activities.praxias.PraxiasSesionActivity"
             android:label="Grabar Praxia"
-            android:parentActivityName=".activities.praxias.MenuPraxiasActivity" />
+            android:parentActivityName=".activities.praxias.PraxiasMenuActivity" />
         <activity
             android:name=".activities.praxias.PraxiasHistorialActivity"
             android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
             android:name=".activities.vocalicos.VocalicosSesionActivity"
             android:label="Grabar Audios"
-            android:parentActivityName=".activities.vocalicos.MenuVocalicosActivity" />
+            android:parentActivityName=".activities.vocalicos.VocalicosMenuActivity" />
         <activity android:name=".activities.InicioSesionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

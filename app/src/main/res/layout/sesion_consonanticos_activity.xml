@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context=".activities.consonanticos.SesionConsonanticosActivity">
+    tools:context=".activities.consonanticos.ConsonanticosSesionActivity">
 
     <ImageView
         android:id="@+id/imageViewConsonanticosAtras"

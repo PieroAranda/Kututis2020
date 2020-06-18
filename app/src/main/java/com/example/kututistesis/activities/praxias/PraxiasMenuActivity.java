@@ -1,4 +1,4 @@
-package com.example.kututistesis.activities.vocalicos;
+package com.example.kututistesis.activities.praxias;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,10 +15,9 @@ import android.widget.Toast;
 import com.example.kututistesis.R;
 import com.example.kututistesis.adapters.ConsonantesAdapter;
 import com.example.kututistesis.adapters.MenuBanderaAdapter;
-import com.example.kututistesis.adapters.VocalAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Banderin;
-import com.example.kututistesis.model.Vocal;
+import com.example.kututistesis.model.Praxia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,19 +26,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MenuVocalicosActivity extends AppCompatActivity implements VocalAdapter.OnVocalesListener {
+public class PraxiasMenuActivity extends AppCompatActivity {
 
     private ApiClient apiClient;
     private RecyclerView recyclerView;
-    private MenuBanderaAdapter vocalAdapter;
-    private List<Vocal> vocalesList;
+    private MenuBanderaAdapter praxiasAdapter;
+    private List<Praxia> praxiasList;
     private ImageView imageViewAtras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_fonemas_vocalicos);
+        setContentView(R.layout.activity_praxias);
 
         // Cambia el color de la barra de notificaciones
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -48,43 +47,48 @@ public class MenuVocalicosActivity extends AppCompatActivity implements VocalAda
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground));
         }
 
-        apiClient = ApiClient.getInstance();
-        vocalAdapter = new MenuBanderaAdapter();
+        recyclerView = findViewById(R.id.recyclerViewPraxias);
+        imageViewAtras = findViewById(R.id.imageViewPraxiasAtras);
 
-        recyclerView = findViewById(R.id.recyclerViewVocalicos);
-        imageViewAtras = findViewById(R.id.imageViewVocalicossAtras);
+        apiClient = ApiClient.getInstance();
 
         imageViewAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MenuVocalicosActivity.super.onBackPressed();
+                PraxiasMenuActivity.super.onBackPressed();
             }
         });
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        loadVocales();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        praxiasAdapter = new MenuBanderaAdapter();
+
+        loadPraxias();
     }
 
-    public void loadVocales() {
-        apiClient.listarvocales().enqueue(new Callback<List<Vocal>>() {
+    public void loadPraxias() {
+        apiClient.listarpraxias().enqueue(new Callback<List<Praxia>>() {
             @Override
-            public void onResponse(Call<List<Vocal>> call, Response<List<Vocal>> response) {
-                if(response.isSuccessful()){
-                    vocalesList = response.body();
+            public void onResponse(Call<List<Praxia>> call, Response<List<Praxia>> response) {
+                if (response.isSuccessful()) {
+                    praxiasList = response.body();
                     List<Banderin> banderines = new ArrayList<>();
 
-                    for (Vocal v : vocalesList) {
-                        banderines.add(new Banderin(v.getNombre()));
+                    for (Praxia prax : praxiasList) {
+                        String urlVideo = ApiClient.BASE_STORAGE_IMAGE_URL + prax.getVideo();
+                        prax.setVideo(urlVideo);
+                        String urlImagen = ApiClient.BASE_STORAGE_IMAGE_URL + prax.getImagen();
+                        prax.setImagen(urlImagen);
+                        banderines.add(new Banderin(prax.getNombre()));
                     }
-                    vocalAdapter.setData(banderines, new ConsonantesAdapter.OnConsonantesListener() {
+
+                    praxiasAdapter.setData(banderines, new ConsonantesAdapter.OnConsonantesListener() {
                         @Override
                         public void onConsonanteClick(int position) {
-                            OnVocalClick(position);
+                            onPraxiaClick(position);
                         }
                     });
-                    recyclerView.setAdapter(vocalAdapter);
-                }
-                else{
+                    recyclerView.setAdapter(praxiasAdapter);
+                } else {
                     Toast.makeText(getApplicationContext(),
                             "Ocurrió un problema, no se pudo obtener el video",
                             Toast.LENGTH_SHORT)
@@ -93,7 +97,7 @@ public class MenuVocalicosActivity extends AppCompatActivity implements VocalAda
             }
 
             @Override
-            public void onFailure(Call<List<Vocal>> call, Throwable t) {
+            public void onFailure(Call<List<Praxia>> call, Throwable t) {
                 Log.e("Obteniendo praxias", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrió un problema, no se puede conectar al servicio",
@@ -103,11 +107,12 @@ public class MenuVocalicosActivity extends AppCompatActivity implements VocalAda
         });
     }
 
-    @Override
-    public void OnVocalClick(int position) {
-        Integer vocal_id = vocalesList.get(position).getId();
-        Intent intent = new Intent(this, VocalicosSesionActivity.class);
-        intent.putExtra("vocal_id", vocal_id);
+    public void onPraxiaClick(int position) {
+        Integer praxia_id = praxiasList.get(position).getId();
+        String video_por_praxia = praxiasList.get(position).getVideo();
+        Intent intent = new Intent(this, PraxiasSesionActivity.class);
+        intent.putExtra("praxia_id", praxia_id);
+        intent.putExtra("video_por_praxia", video_por_praxia);
         startActivity(intent);
     }
 }

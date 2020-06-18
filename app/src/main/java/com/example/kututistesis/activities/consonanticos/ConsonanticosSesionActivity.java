@@ -26,7 +26,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class SesionConsonanticosActivity extends AppCompatActivity {
+public class ConsonanticosSesionActivity extends AppCompatActivity {
 
     private static final int REQ_CODE_SPEECH_INPUT=100;
     private Button mBotonHablar;
@@ -115,7 +115,7 @@ public class SesionConsonanticosActivity extends AppCompatActivity {
         imageViewConsonanticosAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SesionConsonanticosActivity.super.onBackPressed();
+                ConsonanticosSesionActivity.super.onBackPressed();
             }
         });
 
@@ -197,7 +197,7 @@ public class SesionConsonanticosActivity extends AppCompatActivity {
     }
 
     private void goToResultados() {
-        Intent intent = new Intent(this, ResultadosConsonanticosActivity.class);
+        Intent intent = new Intent(this, ConsonanticosResultadosActivity.class);
         startActivity(intent);
     }
 
