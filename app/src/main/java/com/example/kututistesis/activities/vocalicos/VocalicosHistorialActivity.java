@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HistorialVocalicosActivity extends AppCompatActivity {
+public class VocalicosHistorialActivity extends AppCompatActivity {
     private ApiClient apiClient;
     private EditText editText;
     private RecyclerView recyclerView;
@@ -36,11 +37,20 @@ public class HistorialVocalicosActivity extends AppCompatActivity {
     private ImageView imageView;
     private String url;
     private Global global;
+    private ImageView imageViewAtras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.historial_audios_por_fechas);
+        getSupportActionBar().hide();
+        setContentView(R.layout.activity_vocalicos_historial);
+
+        // Cambia el color de la barra de notificaciones
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground, this.getTheme()));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground));
+        }
 
         global = (Global) getApplicationContext();
 
@@ -60,6 +70,7 @@ public class HistorialVocalicosActivity extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.recyclerHistorialAudioPorFecha);
+        imageViewAtras = findViewById(R.id.imageViewVocalicosHistorialAtras);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -82,6 +93,12 @@ public class HistorialVocalicosActivity extends AppCompatActivity {
             }
         });
 
+        imageViewAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VocalicosHistorialActivity.super.onBackPressed();
+            }
+        });
     }
 
     public void obtenerAudiosGrabados(Integer id_vocal, Integer id_paciente, String fecha) {
@@ -127,6 +144,6 @@ public class HistorialVocalicosActivity extends AppCompatActivity {
             }
         });
 
-        newFragment.show(HistorialVocalicosActivity.this.getSupportFragmentManager(), "datePicker");
+        newFragment.show(VocalicosHistorialActivity.this.getSupportFragmentManager(), "datePicker");
     }
 }

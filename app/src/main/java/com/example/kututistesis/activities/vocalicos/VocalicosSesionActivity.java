@@ -70,7 +70,6 @@ public class VocalicosSesionActivity extends AppCompatActivity {
     private Global global;
     private ImageView imageViewAtras;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -260,7 +259,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
     }
 
     public void goToHistorialAudios(View view) {
-        Intent intent = new Intent(this, HistorialVocalicosActivity.class);
+        Intent intent = new Intent(this, VocalicosHistorialActivity.class);
         intent.putExtra("vocal_id",vocales_id);
         startActivity(intent);
     }

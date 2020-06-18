@@ -25,7 +25,7 @@
             android:name=".activities.consonanticos.SesionConsonanticosActivity"
             android:parentActivityName=".activities.consonanticos.MenuConsonanticosActivity" />
         <activity
-            android:name=".activities.vocalicos.HistorialVocalicosActivity"
+            android:name=".activities.vocalicos.VocalicosHistorialActivity"
             android:parentActivityName=".activities.MenuPrincipalActivity" />
         <activity
             android:name=".activities.consonanticos.MenuConsonanticosActivity"
