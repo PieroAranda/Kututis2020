@@ -30,31 +30,31 @@
 
     <Button
         android:id="@+id/buttonEnvio2"
-        android:layout_width="106dp"
-        android:layout_height="60dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginLeft="16dp"
         android:enabled="false"
-        android:text="Enviar"
+        android:background="@drawable/boton_enviar"
         app:layout_constraintLeft_toRightOf="@+id/btn_play"
         app:layout_constraintTop_toTopOf="@+id/btn_play" />
 
     <Button
         android:id="@+id/btn_rec"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginLeft="32dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/stop_rec"
+        android:background="@drawable/boton_grabar"
         android:onClick="Recorder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
         android:id="@+id/btn_play"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginLeft="16dp"
-        android:background="@drawable/reproducir"
+        android:background="@drawable/boton_reproducir"
         app:layout_constraintLeft_toRightOf="@+id/btn_rec"
         app:layout_constraintTop_toTopOf="@+id/btn_rec" />
 

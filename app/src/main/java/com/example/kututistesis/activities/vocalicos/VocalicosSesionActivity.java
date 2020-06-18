@@ -155,14 +155,14 @@ public class VocalicosSesionActivity extends AppCompatActivity {
                 } catch (IOException e){
                 }
 
-                btn_recorder.setBackgroundResource(R.drawable.rec);
+                btn_recorder.setBackgroundResource(R.drawable.boton_parar_grabacion);
                 Toast.makeText(getApplicationContext(), "Grabando...", Toast.LENGTH_SHORT).show();
             } else if(grabacion!=null){
             grabacion.stop();
             grabacion.release();
             fileVideo = new File(path);
             grabacion = null;
-            btn_recorder.setBackgroundResource(R.drawable.stop_rec);
+            btn_recorder.setBackgroundResource(R.drawable.boton_grabar);
             buttonEnviar.setEnabled(true);
             grabado = true;
             Toast.makeText(getApplicationContext(), "Grabación finalizada", Toast.LENGTH_SHORT).show();
