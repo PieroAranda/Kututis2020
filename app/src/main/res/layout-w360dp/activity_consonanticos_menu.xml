@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".activities.consonanticos.ConsonanticosMenuActivity">
+
+    <ImageView
+        android:id="@+id/imageViewConsonanticosAtras"
+        android:layout_width="96dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/boton_atras_naranja_claro"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewConsonanticosTitulo"
+        android:layout_width="250dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/vocabulario_leccion"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewConsonanticosAtras" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerFonemasConsonanticos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewConsonanticosTitulo"></androidx.recyclerview.widget.RecyclerView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

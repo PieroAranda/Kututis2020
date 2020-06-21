@@ -61,7 +61,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.sesion_consonanticos_activity);
+        setContentView(R.layout.activity_consonanticos_sesion);
 
         // Cambia el color de la barra de notificaciones
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -178,7 +178,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
 
                         updateBarra(contador);
 
-                        if (contador == 10) {
+                        if (contador == 1) {
                             goToResultados();
                         }
                     }

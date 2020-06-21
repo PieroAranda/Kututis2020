@@ -39,7 +39,7 @@ public class Registro3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.registro3_activity);
+        setContentView(R.layout.activity_registro3);
 
         getIntentData();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

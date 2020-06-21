@@ -47,7 +47,7 @@ public class InicioSesionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.inicio_sesion_activity);
+        setContentView(R.layout.activity_inicio_sesion);
         apiClient = ApiClient.getInstance();
         global = (Global) getApplicationContext();
 

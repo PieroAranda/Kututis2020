@@ -24,7 +24,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.menu_principal_activity);
+        setContentView(R.layout.activity_menu_principal);
 
         // Cambia el color de la barra de notificaciones
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

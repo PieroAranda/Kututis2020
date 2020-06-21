@@ -41,7 +41,7 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.menu_2_consonanticos_activity);
+        setContentView(R.layout.activity_consonanticos_menu_2);
 
         // Cambia el color de la barra de notificaciones
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

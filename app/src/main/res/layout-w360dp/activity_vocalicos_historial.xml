@@ -5,16 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.vocalicos.VocalicosHistorialActivity"
-    android:background="@drawable/inicio_sesion_fondo">
+    android:background="@color/colorBackground">
+
+
+    <ImageView
+        android:id="@+id/imageViewVocalicosHistorialAtras"
+        android:layout_width="96dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/boton_atras_naranja_claro"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edit_text_date_audios"
-        android:layout_width="203dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="57dp"
-        android:layout_marginEnd="19dp"
-        android:background="@drawable/edittext_round"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/edittext_round_white"
         android:clickable="true"
         android:focusable="false"
         android:fontFamily="@font/dimbo_regular"
@@ -29,30 +40,37 @@
         android:text=""
         android:textColorHint="#fbcfa5"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/Boton_Buscar_Audios"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/Boton_Buscar_Audios"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewVocalicosHistorialAtras" />
 
     <ImageView
         android:id="@+id/Boton_Buscar_Audios"
-        android:layout_width="167dp"
-        android:layout_height="98dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toTopOf="@id/recyclerHistorialAudioPorFecha"
+        android:layout_width="64dp"
+        android:layout_height="62dp"
+        android:layout_marginRight="32dp"
+        android:background="@drawable/search_button_background"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_text_date_audios" />
+
+    <ImageView
+        android:id="@+id/imageViewVocalicosHistorialCordel"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/cordel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1"
-        app:srcCompat="@drawable/boton_ingresar" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_date_audios" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerHistorialAudioPorFecha"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_date_audios"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewVocalicosHistorialCordel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

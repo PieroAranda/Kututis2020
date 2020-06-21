@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.example.kututistesis.R;
 import com.example.kututistesis.adapters.ConsonantesAdapter;
 import com.example.kututistesis.adapters.MenuBanderaAdapter;
-import com.example.kututistesis.adapters.VocalAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Banderin;
 import com.example.kututistesis.model.Vocal;
@@ -27,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VocalicosMenuActivity extends AppCompatActivity implements VocalAdapter.OnVocalesListener {
+public class VocalicosMenuActivity extends AppCompatActivity {
 
     private ApiClient apiClient;
     private RecyclerView recyclerView;
@@ -39,7 +38,7 @@ public class VocalicosMenuActivity extends AppCompatActivity implements VocalAda
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_fonemas_vocalicos);
+        setContentView(R.layout.activity_vocalicos_menu);
 
         // Cambia el color de la barra de notificaciones
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -103,7 +102,6 @@ public class VocalicosMenuActivity extends AppCompatActivity implements VocalAda
         });
     }
 
-    @Override
     public void OnVocalClick(int position) {
         Integer vocal_id = vocalesList.get(position).getId();
         Intent intent = new Intent(this, VocalicosSesionActivity.class);

@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageViewVocalicosSesionAtras"
-        android:layout_width="90dp"
-        android:layout_height="35dp"
+        android:layout_width="96dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/boton_atras_naranja_claro"
@@ -19,7 +19,7 @@
     <ImageView
         android:id="@+id/buttonHistorialAudios"
         android:layout_width="105dp"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="32dp"
         android:onClick="goToHistorialAudios"
