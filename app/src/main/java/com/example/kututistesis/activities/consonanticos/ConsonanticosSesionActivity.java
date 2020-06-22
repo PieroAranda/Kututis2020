@@ -178,7 +178,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
 
                         updateBarra(contador);
 
-                        if (contador == 1) {
+                        if (contador == 10) {
                             goToResultados();
                         }
                     }
@@ -198,6 +198,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
 
     private void goToResultados() {
         Intent intent = new Intent(this, ConsonanticosResultadosActivity.class);
+        intent.putExtra("puntaje", contador);
         startActivity(intent);
     }
 
