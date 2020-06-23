@@ -50,6 +50,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
     Double factor_minimo_confianza;
 
     Integer contador;
+    Integer contadorBarraProgreso;
 
     String texto;
 
@@ -107,6 +108,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
         texto_array = texto.split(" ");
 
         contador = Integer.parseInt(texto_array[0]);
+        contadorBarraProgreso = 0;
 
         hablarAhoraBoton = findViewById(R.id.imageAltavoz);
         imageViewConsonanticosAtras = (ImageView) findViewById(R.id.imageViewConsonanticosAtras);
@@ -155,6 +157,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
         switch (requestCode){
             case REQ_CODE_SPEECH_INPUT:{
                 if (resultCode==RESULT_OK && null!=data){
+                    contadorBarraProgreso++;
                     ArrayList<String> result=data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     float[]confidence = data.getFloatArrayExtra(RecognizerIntent.EXTRA_CONFIDENCE_SCORES);
 
@@ -175,12 +178,6 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
                         texto = texto_array[0]+" "+"/"+" "+texto_array[texto_array.length-1];
 
                         texto_contador.setText(texto);
-
-                        updateBarra(contador);
-
-                        if (contador == 10) {
-                            goToResultados();
-                        }
                     }
                     else {
                         Toast vuelveAIntentarloToast = Toast.makeText(getApplicationContext(),
@@ -190,6 +187,10 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
                         vuelveAIntentarloToast.show();
                     }
 
+                    updateBarra(contadorBarraProgreso);
+                    if (contadorBarraProgreso == 10) {
+                        goToResultados();
+                    }
                 }
                 break;
             }
