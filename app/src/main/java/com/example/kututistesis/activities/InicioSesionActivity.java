@@ -2,7 +2,9 @@ package com.example.kututistesis.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
@@ -50,6 +52,10 @@ public class InicioSesionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inicio_sesion);
         apiClient = ApiClient.getInstance();
         global = (Global) getApplicationContext();
+        global.sharedPref = getPreferences(Context.MODE_PRIVATE);
+
+        // Verifica si el usuario ya se ha autenticado
+        checkIfSignIn();
 
         // Inicializa los elementos de la vista
         textViewSignUp = findViewById(R.id.text_sign_up);
@@ -117,6 +123,15 @@ public class InicioSesionActivity extends AppCompatActivity {
         }, R.string.err_password);
     }
 
+    private void checkIfSignIn() {
+        int defaultValue = -1;
+        int userId = global.sharedPref.getInt(getString(R.string.saved_user_id), defaultValue);
+        Log.i("USER_ID", "value: " + userId);
+        if (userId != defaultValue) {
+            goToMenuPrincipal();
+        }
+    }
+
     private void login() {
         if (!awesomeValidation.validate()) {
             return;
@@ -136,6 +151,10 @@ public class InicioSesionActivity extends AppCompatActivity {
 
                 switch (responseCode) {
                     case "200":
+                        finish();
+                        SharedPreferences.Editor editor = global.sharedPref.edit();
+                        editor.putInt(getString(R.string.saved_user_id), responseId);
+                        editor.commit();
                         global.setId(responseId);
                         goToMenuPrincipal();
                         break;

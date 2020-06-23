@@ -20,4 +20,5 @@
     <string name="titulo_vocabulario">Palabras que aprenderás</string>
     <string name="string_videos_no_encontrados">No se encontraron videos</string>
     <string name="string_audios_no_encontrados">No se encontraron audios</string>
+    <string name="saved_user_id">user_id</string>
 </resources>

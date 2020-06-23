@@ -1,10 +1,12 @@
 package com.example.kututistesis.util;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 
 public class Global extends Application {
     private Integer id_usuario;
     private Integer id_praxia;
+    public static SharedPreferences sharedPref;
 
     public Integer getId_usuario() {
         return id_usuario;

@@ -2,9 +2,12 @@ package com.example.kututistesis.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -12,6 +15,7 @@ import com.example.kututistesis.R;
 import com.example.kututistesis.activities.consonanticos.ConsonanticosMenuActivity;
 import com.example.kututistesis.activities.praxias.PraxiasMenuActivity;
 import com.example.kututistesis.activities.vocalicos.VocalicosMenuActivity;
+import com.example.kututistesis.util.Global;
 
 public class MenuPrincipalActivity extends AppCompatActivity {
 
@@ -19,12 +23,14 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     private ImageView imageViewConsonatesVocalicos;
     private ImageView imageViewConsonatesConsonanticos;
     private ImageView imageViewLogout;
+    private Global global;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_menu_principal);
+        global = (Global) getApplicationContext();
 
         // Cambia el color de la barra de notificaciones
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -70,6 +76,10 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     }
 
     private void logout() {
+        SharedPreferences.Editor editor = global.sharedPref.edit();
+        editor.putInt(getString(R.string.saved_user_id), -1);
+        editor.commit();
+
         Intent intent = new Intent(this, InicioSesionActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
