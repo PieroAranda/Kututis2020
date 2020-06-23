@@ -18,4 +18,5 @@
     <string name="ingrese_fecha">Ingrese Fecha</string>
     <string name="historial_videos">Historial Videos</string>
     <string name="titulo_vocabulario">Palabras que aprenderás</string>
+    <string name="string_videos_no_encontrados">No se encontraron videos</string>
 </resources>

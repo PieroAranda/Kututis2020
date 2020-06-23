@@ -15,6 +15,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,6 +49,7 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
     private Integer id_paciente;
     private Integer id_praxia;
     private ImageView imageViewAtras;
+    private ConstraintLayout layoutNotFound;
 
     private Global global;
 
@@ -85,6 +87,7 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerHistorialVideoPorFecha);
         imageViewAtras = findViewById(R.id.imageViewPraxiasHistorialAtras);
+        layoutNotFound = findViewById(R.id.layoutPraxiasHistorialNotFound);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -122,7 +125,13 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<SesionPraxia>> call, Response<List<SesionPraxia>> response) {
                 List<SesionPraxia> sesionPraxiaList = response.body();
-                //Log.d("Funciono praxias", sesionPraxiaList.get(0).getRuta());
+
+                if (sesionPraxiaList.size() == 0) {
+                    layoutNotFound.setVisibility(View.VISIBLE);
+                } else {
+                    layoutNotFound.setVisibility(View.GONE);
+                }
+
                 for (SesionPraxia sesionPraxia: sesionPraxiaList){
                     url = url + sesionPraxia.getRuta_servidor();
                     sesionPraxia.setRuta_servidor(url);
@@ -131,7 +140,6 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
 
                 videosFechasAdapter.setData(sesionPraxiaList, video, mediaController);
                 recyclerView.setAdapter(videosFechasAdapter);
-
             }
 
             @Override
