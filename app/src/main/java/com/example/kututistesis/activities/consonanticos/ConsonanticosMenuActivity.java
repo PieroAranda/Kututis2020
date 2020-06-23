@@ -100,6 +100,7 @@ public class ConsonanticosMenuActivity extends AppCompatActivity implements Cons
         Integer consonante_id = fonemas.get(position).getId();
         Intent intent = new Intent(this, ConsonanticosMenu2Activity.class);
         intent.putExtra("consonante_id", consonante_id);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 }

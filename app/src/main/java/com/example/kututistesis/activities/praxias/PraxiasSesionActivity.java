@@ -290,6 +290,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
     public void goToHistorialVideos(View view) {
         Intent intent = new Intent(this, PraxiasHistorialActivity.class);
         intent.putExtra("praxia_id", praxia.getId());
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
 
     }

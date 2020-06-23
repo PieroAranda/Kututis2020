@@ -117,6 +117,7 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
         intent.putExtra("imagen_palabra", imagen);
         intent.putExtra("texto_palabra", palabra);
         intent.putExtra("consonante_id", fonema_id);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 }

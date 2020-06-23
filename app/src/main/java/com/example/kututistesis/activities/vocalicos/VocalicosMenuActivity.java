@@ -114,6 +114,7 @@ public class VocalicosMenuActivity extends AppCompatActivity {
         Vocal v = vocalesList.get(position);
         Intent intent = new Intent(this, VocalicosSesionActivity.class);
         intent.putExtra("vocal", v);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 }

@@ -77,16 +77,19 @@ public class MenuPrincipalActivity extends AppCompatActivity {
 
     private void goToConsonatesConsonanticos() {
         Intent intent = new Intent(this, ConsonanticosMenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 
     private void goToConsonatesVocalicos() {
         Intent intent = new Intent(this, VocalicosMenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 
     private void goToPraxias() {
         Intent intent = new Intent(this, PraxiasMenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 }

@@ -264,6 +264,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
     public void goToHistorialAudios(View view) {
         Intent intent = new Intent(this, VocalicosHistorialActivity.class);
         intent.putExtra("vocal_id", vocal.getId());
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 
