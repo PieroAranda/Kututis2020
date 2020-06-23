@@ -43,6 +43,8 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
 
     private TextView texto_contador;
 
+    private int consonanteId;
+
     String url;
 
     String texto_palabra;
@@ -83,6 +85,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         url = intent.getStringExtra("imagen_palabra");
+        consonanteId = intent.getIntExtra("consonante_id", -1);
 
         Picasso.get().load(url).into(imageViewPalabraVocabulario);
 
@@ -190,7 +193,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
                     }
 
                     updateBarra(contadorBarraProgreso);
-                    if (contadorBarraProgreso == 10) {
+                    if (contadorBarraProgreso == 1) {
                         goToResultados();
                     }
                 }
@@ -201,6 +204,9 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
 
     private void goToResultados() {
         Intent intent = new Intent(this, ConsonanticosResultadosActivity.class);
+        intent.putExtra("imagen_palabra", url);
+        intent.putExtra("texto_palabra", texto_palabra);
+        intent.putExtra("consonante_id", consonanteId);
         intent.putExtra("puntaje", contador);
         startActivity(intent);
     }

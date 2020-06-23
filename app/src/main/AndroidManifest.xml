@@ -19,11 +19,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.consonanticos.ConsonanticosResultadosActivity"></activity>
+        <activity android:name=".activities.consonanticos.ConsonanticosResultadosActivity"
+            android:parentActivityName=".activities.consonanticos.ConsonanticosMenu2Activity"></activity>
         <activity android:name=".activities.consonanticos.ConsonanticosMenu2Activity" />
         <activity
             android:name=".activities.consonanticos.ConsonanticosSesionActivity"
-            android:parentActivityName=".activities.consonanticos.ConsonanticosMenuActivity" />
+            android:parentActivityName=".activities.consonanticos.ConsonanticosMenu2Activity" />
         <activity
             android:name=".activities.vocalicos.VocalicosHistorialActivity"
             android:parentActivityName=".activities.MenuPrincipalActivity" />
