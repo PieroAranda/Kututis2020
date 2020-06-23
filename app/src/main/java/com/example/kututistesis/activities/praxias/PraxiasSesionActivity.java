@@ -19,6 +19,7 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 
 import android.widget.ImageView;
@@ -248,6 +249,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
+                toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
                 buttonhitorialVideos.setEnabled(true);
                 //goToPaginaPrincipal();
@@ -274,10 +276,11 @@ public class PraxiasSesionActivity extends AppCompatActivity {
                 enviando = false;
                 progressBarVideo.setVisibility(View.GONE);
                 Log.e("Enviando video", t.getMessage());
-                Toast.makeText(getApplicationContext(),
+                Toast toast = Toast.makeText(getApplicationContext(),
                         "Ocurrío un problema, no se puede conectar al servicio",
-                        Toast.LENGTH_SHORT)
-                        .show();
+                        Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
             }
         });
 
