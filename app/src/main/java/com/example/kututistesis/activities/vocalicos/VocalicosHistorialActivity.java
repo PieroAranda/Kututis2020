@@ -2,6 +2,7 @@ package com.example.kututistesis.activities.vocalicos;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -148,6 +149,12 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
     }
 
     private void openDialogDatePicker() {
+        FragmentManager fm = this.getSupportFragmentManager();
+
+        if (fm.findFragmentByTag("datePicker") != null) {
+            return;
+        }
+
         BirthDatePickerFragment newFragment = BirthDatePickerFragment.newInstance(false,new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -163,6 +170,6 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
             }
         });
 
-        newFragment.show(VocalicosHistorialActivity.this.getSupportFragmentManager(), "datePicker");
+        newFragment.show(fm, "datePicker");
     }
 }

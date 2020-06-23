@@ -16,6 +16,7 @@ import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -163,6 +164,12 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
     }
 
     private void openDialogDatePicker() {
+        FragmentManager fm = this.getSupportFragmentManager();
+
+        if (fm.findFragmentByTag("datePicker") != null) {
+            return;
+        }
+
         BirthDatePickerFragment newFragment = BirthDatePickerFragment.newInstance(false,new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -177,7 +184,7 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
             }
         });
 
-        newFragment.show(PraxiasHistorialActivity.this.getSupportFragmentManager(), "datePicker");
+        newFragment.show(fm, "datePicker");
     }
 
 }

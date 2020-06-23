@@ -1,6 +1,7 @@
 package com.example.kututistesis.activities.registro;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -112,6 +113,12 @@ public class Registro1Activity extends AppCompatActivity {
     }
 
     private void openDialogDatePicker() {
+        FragmentManager fm = this.getSupportFragmentManager();
+
+        if (fm.findFragmentByTag("datePicker") != null) {
+            return;
+        }
+
         BirthDatePickerFragment newFragment = BirthDatePickerFragment.newInstance(true,new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -125,7 +132,7 @@ public class Registro1Activity extends AppCompatActivity {
             }
         });
 
-        newFragment.show(Registro1Activity.this.getSupportFragmentManager(), "datePicker");
+        newFragment.show(fm, "datePicker");
     }
 
     private void goToRegistro2() {
