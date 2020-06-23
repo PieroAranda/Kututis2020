@@ -19,6 +19,7 @@ import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Banderin;
 import com.example.kututistesis.model.Praxia;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,11 +109,9 @@ public class PraxiasMenuActivity extends AppCompatActivity {
     }
 
     public void onPraxiaClick(int position) {
-        Integer praxia_id = praxiasList.get(position).getId();
-        String video_por_praxia = praxiasList.get(position).getVideo();
+        Praxia p = praxiasList.get(position);
         Intent intent = new Intent(this, PraxiasSesionActivity.class);
-        intent.putExtra("praxia_id", praxia_id);
-        intent.putExtra("video_por_praxia", video_por_praxia);
+        intent.putExtra("praxia", (Serializable) p);
         startActivity(intent);
     }
 }

@@ -2,7 +2,9 @@ package com.example.kututistesis.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Praxia {
+import java.io.Serializable;
+
+public class Praxia implements Serializable {
     @SerializedName("id")
     private Integer id;
 

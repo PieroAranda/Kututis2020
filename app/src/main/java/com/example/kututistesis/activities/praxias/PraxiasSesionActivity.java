@@ -23,12 +23,14 @@ import android.view.View;
 
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.kututistesis.R;
 import com.example.kututistesis.activities.MenuPrincipalActivity;
 import com.example.kututistesis.api.ApiClient;
+import com.example.kututistesis.model.Praxia;
 import com.example.kututistesis.model.SesionPraxia;
 import com.example.kututistesis.util.Global;
 
@@ -52,42 +54,26 @@ public class PraxiasSesionActivity extends AppCompatActivity {
     private static final String DIRECTORIO_IMAGEN = CARPETA_PRINCIPAL + CARPETA_IMAGEN;
     private String path;
     File fileVideo;
-    Bitmap bitmap;
     private ApiClient apiClient;
-
     private Integer paciente_id;
-    private Integer praxias_id;
     private Integer Aprobado;
     private String Fecha;
     private String ruta;
-
     private VideoView videoEjemplo;
-
     private boolean enviando = false;
-
     private static final int COD_VIDEO = 20;
-    //private Button buttonEnviar;
     private ImageView buttonhitorialVideos;
-
-    private String url;
-
-    private String ruta_video_ejemplo;
-
     private ImageView play;
-
     private Global global;
-
     private ImageView imageViewAtras;
-
     private Boolean reproducido = false;
-
     private Integer position = 0;
-
     private ImageView imageViewRecordVideo;
+    private TextView textViewTitulo;
+    private Praxia praxia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_praxias_sesion);
@@ -102,11 +88,9 @@ public class PraxiasSesionActivity extends AppCompatActivity {
         global = (Global) getApplicationContext();
 
         Intent intent = getIntent();
-
+        praxia = (Praxia) intent.getSerializableExtra("praxia");
         Integer intent_praxia_id = intent.getIntExtra("praxia_id",0);
-
-        String intent_video_por_praxia = intent.getStringExtra("video_por_praxia");
-
+        String praxiaNombre = intent.getStringExtra("praxia_nombre");
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
@@ -116,35 +100,20 @@ public class PraxiasSesionActivity extends AppCompatActivity {
         }
 
         apiClient = ApiClient.getInstance();
-
         paciente_id = global.getId_usuario();
-        praxias_id = intent_praxia_id;
         Aprobado = 0;
         Fecha = "";
         ruta = "";
 
-        url = intent_video_por_praxia;
-
         buttonhitorialVideos = findViewById(R.id.buttonHistorailVideos);
         videoEjemplo = findViewById(R.id.videoEjemploPraxia);
         imageViewRecordVideo = findViewById(R.id.imageView2);
-
-        Uri uri = Uri.parse(url);
-        videoEjemplo.setVideoURI(uri);
-
-        MediaController mediaController = new MediaController(this);
-        videoEjemplo.setMediaController(mediaController);
-        mediaController.setAnchorView(videoEjemplo);
-
-        videoEjemplo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                play.setImageResource(R.drawable.ic_play_arrow_black_24dp);
-                position = 0;
-            }
-        });
-
         play = findViewById(R.id.playVideoEjemplo);
+        imageViewAtras = findViewById(R.id.imageViewPraxiasAtras);
+        textViewTitulo = findViewById(R.id.textViewPraxiasSesionTitulo);
+
+        loadTitle();
+        loadVideo();
 
         play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,18 +129,6 @@ public class PraxiasSesionActivity extends AppCompatActivity {
             }
         });
 
-        //buttonEnviar = (Button) findViewById(R.id.buttonEnvio);
-        //buttonEnviar.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        EnviarVideo();
-        //        // Deshabilita el botón de enviar mientras el servicio no responda, esto debería ser
-        //        // temporal hasta que se converse cómo debería ser la interacción
-        //        v.setEnabled(false);
-        //    }
-        //});
-
-        imageViewAtras = (ImageView) findViewById(R.id.imageViewPraxiasAtras);
         imageViewAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,42 +137,56 @@ public class PraxiasSesionActivity extends AppCompatActivity {
         });
     }
 
+    private void loadVideo() {
+        Uri uri = Uri.parse(praxia.getVideo());
+        videoEjemplo.setVideoURI(uri);
+
+        MediaController mediaController = new MediaController(this);
+        videoEjemplo.setMediaController(mediaController);
+        mediaController.setAnchorView(videoEjemplo);
+
+        videoEjemplo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                play.setImageResource(R.drawable.ic_play_arrow_black_24dp);
+                position = 0;
+            }
+        });
+    }
+
+    private void loadTitle() {
+        textViewTitulo.setText(praxia.getNombre());
+    }
+
     static final int REQUEST_VIDEO_CAPTURE = 1;
 
     public void TomarVideo() {
 
-        // Mientras está un video no abre la cámara
+        // Mientras está enviando un video no abre la cámara
         if(enviando) {
             return;
         }
-        //Para celular fisico
-        //StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        //StrictMode.setVmPolicy(builder.build());
 
-        File miFile = new File(Environment.getExternalStorageDirectory(),DIRECTORIO_IMAGEN);
-        boolean isCreada = miFile.exists();
+        File directorioVideos = new File(Environment.getExternalStorageDirectory(), DIRECTORIO_IMAGEN);
 
-        if(isCreada==false) {
-            isCreada=miFile.mkdirs();
-        }
-        if(isCreada==true){
-            Long consecutivo = System.currentTimeMillis()/1000;
-            String nombre = consecutivo.toString()+".mp4";
+        if(!directorioVideos.exists()) {
+            directorioVideos.mkdirs();
+        } else {
+            Long timestamp = System.currentTimeMillis() / 1000;
+            String fileName = timestamp.toString() + ".mp4";
 
-            path = Environment.getExternalStorageDirectory()+File.separator+DIRECTORIO_IMAGEN
-                    +File.separator+nombre;
+            path = Environment.getExternalStorageDirectory() + File.separator + DIRECTORIO_IMAGEN
+                    + File.separator + fileName;
 
             fileVideo = new File(path);
 
             Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-            takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(fileVideo));
+            takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileVideo));
+
             if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(takeVideoIntent, COD_VIDEO);
-
             }
-
         }
-
     }
 
     public void playVideo() {
@@ -241,7 +212,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
         videoEjemplo.requestFocus();
     }
 
-    public void EnviarVideo(){
+    public void EnviarVideo() {
 
         enviando = true;
 
@@ -258,7 +229,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
 
         ruta = "data:image/mp4;base64,"+ruta;
 
-        SesionPraxia sesionPraxia = new SesionPraxia(paciente_id, praxias_id, Aprobado, Fecha, ruta);
+        SesionPraxia sesionPraxia = new SesionPraxia(paciente_id, praxia.getId(), Aprobado, Fecha, ruta);
 
         apiClient.registroSesionPraxias(sesionPraxia).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -312,7 +283,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
 
     public void goToHistorialVideos(View view) {
         Intent intent = new Intent(this, PraxiasHistorialActivity.class);
-        intent.putExtra("praxia_id", praxias_id);
+        intent.putExtra("praxia_id", praxia.getId());
         startActivity(intent);
 
     }
@@ -339,10 +310,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
 
                 // Habilita el botón de enviar
                 //buttonEnviar.setEnabled(true);
-
                 EnviarVideo();
-
-
                 break;
         }
 
