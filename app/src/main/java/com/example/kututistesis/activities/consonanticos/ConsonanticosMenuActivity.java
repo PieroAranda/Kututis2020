@@ -59,16 +59,16 @@ public class ConsonanticosMenuActivity extends AppCompatActivity implements Cons
             }
         });
 
+        loadFonemas();
+    }
+
+    public void loadFonemas() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(
                 ConsonanticosMenuActivity.this, LinearLayoutManager.VERTICAL, false
         );
         recyclerViewFonemaConsonantico.setLayoutManager(layoutManager);
         recyclerViewFonemaConsonantico.setItemAnimator(new DefaultItemAnimator());
 
-        loadFonemas();
-    }
-
-    public void loadFonemas() {
         apiClient.getFonemas().enqueue(new Callback<List<Fonema>>() {
             @Override
             public void onResponse(Call<List<Fonema>> call, Response<List<Fonema>> response) {

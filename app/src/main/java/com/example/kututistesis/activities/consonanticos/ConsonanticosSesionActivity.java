@@ -193,7 +193,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
                     }
 
                     updateBarra(contadorBarraProgreso);
-                    if (contadorBarraProgreso == 1) {
+                    if (contadorBarraProgreso == 10) {
                         goToResultados();
                     }
                 }

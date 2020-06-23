@@ -1,6 +1,7 @@
 package com.example.kututistesis.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,22 +19,23 @@ import java.util.List;
 
 public class MenuBanderaAdapter extends RecyclerView.Adapter<MenuBanderaAdapter.MyViewHolder> {
 
+    private static final int LARGO_FILA = 5;
     private List<ConsonantesAdapter> banderasAdapters;
     private List<Banderin> fonemaList;
     private Context context;
     private ConsonantesAdapter.OnConsonantesListener mOnconsonanteslistener;
 
     public void setData(List<Banderin> fonemaList, ConsonantesAdapter.OnConsonantesListener onConsonantesListener) {
-        int rows = (int) Math.ceil(fonemaList.size() / 6.0);
+        int rows = (int) Math.ceil(fonemaList.size() / (LARGO_FILA * 1.0));
 
         banderasAdapters = new ArrayList<ConsonantesAdapter>();
 
         for (int i = 0; i < rows; i++) {
             ConsonantesAdapter adapter = new ConsonantesAdapter();
-            if (fonemaList.size() - 5 * i > 6) {
-                adapter.setData(fonemaList.subList(5 * i, 5 * i + 5), onConsonantesListener, i);
+            if (i + 1 != rows) {
+                adapter.setData(fonemaList.subList(i * LARGO_FILA, (i + 1) * LARGO_FILA), onConsonantesListener, i);
             } else {
-                adapter.setData(fonemaList.subList(5 * i, fonemaList.size()), onConsonantesListener, i);
+                adapter.setData(fonemaList.subList(i * LARGO_FILA, fonemaList.size()), onConsonantesListener, i);
             }
             banderasAdapters.add(adapter);
         }
@@ -62,7 +64,7 @@ public class MenuBanderaAdapter extends RecyclerView.Adapter<MenuBanderaAdapter.
 
     @Override
     public int getItemCount() {
-        return (int) Math.ceil(fonemaList.size() / 6.0);
+        return (int) Math.ceil(fonemaList.size() / (LARGO_FILA * 1.0));
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
