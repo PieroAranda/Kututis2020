@@ -128,6 +128,7 @@ public class InicioSesionActivity extends AppCompatActivity {
         int userId = global.sharedPref.getInt(getString(R.string.saved_user_id), defaultValue);
         Log.i("USER_ID", "value: " + userId);
         if (userId != defaultValue) {
+            global.setId(userId);
             goToMenuPrincipal();
         }
     }

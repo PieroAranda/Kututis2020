@@ -45,7 +45,6 @@ import retrofit2.Response;
 
 public class VocalicosSesionActivity extends AppCompatActivity {
     private MediaRecorder grabacion;
-    private Button btn_recorder;
 
     private static final String CARPETA_PRINCIPAL = "misAudiosApp/";
     private static final String CARPETA_AUDIO = "audios";
@@ -63,6 +62,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
     private static final int COD_VIDEO = 20;
     private Button buttonEnviar;
     private Button buttonReproducir;
+    private Button buttonGrabar;
     private Boolean grabado = false;
     private ImageView buttonHistorialAudios;
     private Global global;
@@ -102,7 +102,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(VocalicosSesionActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 1000); //escribe en pantalla las ventanas empergentes que piden permisos para acceder al microfno y que se guarden los audios en el celular
         }
 
-        btn_recorder = (Button) findViewById(R.id.btn_rec);
+        buttonGrabar = (Button) findViewById(R.id.btn_rec);
         buttonEnviar = (Button) findViewById(R.id.buttonEnvio2);
         buttonReproducir = (Button) findViewById(R.id.btn_play);
         imageViewAtras = findViewById(R.id.imageViewVocalicosSesionAtras);
@@ -133,13 +133,20 @@ public class VocalicosSesionActivity extends AppCompatActivity {
                 VocalicosSesionActivity.super.onBackPressed();
             }
         });
+
+        buttonGrabar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Recorder();
+            }
+        });
     }
 
     private void loadFonema() {
         textViewFonema.setText(vocal.getNombre());
     }
 
-    public void Recorder(View view){
+    public void Recorder() {
         buttonHistorialAudios.setEnabled(false);
         if(grabacion == null){
                 Long consecutivo = System.currentTimeMillis()/1000;
@@ -158,14 +165,18 @@ public class VocalicosSesionActivity extends AppCompatActivity {
                 } catch (IOException e){
                 }
 
-                btn_recorder.setBackgroundResource(R.drawable.boton_parar_grabacion);
+            buttonGrabar.setBackgroundResource(R.drawable.boton_parar_grabacion);
                 Toast.makeText(getApplicationContext(), "Grabando...", Toast.LENGTH_SHORT).show();
             } else if(grabacion!=null){
-            grabacion.stop();
+            try {
+                grabacion.stop();
+            } catch (Exception e) {
+
+            }
             grabacion.release();
             fileVideo = new File(path);
             grabacion = null;
-            btn_recorder.setBackgroundResource(R.drawable.boton_grabar);
+            buttonGrabar.setBackgroundResource(R.drawable.boton_grabar);
             buttonEnviar.setEnabled(true);
             grabado = true;
             Toast.makeText(getApplicationContext(), "Grabación finalizada", Toast.LENGTH_SHORT).show();
