@@ -133,6 +133,8 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
                 iniciarEntradaVoz();
             }
         });
+
+        updateBarra(0);
     }
 
     private void iniciarEntradaVoz() {
@@ -205,7 +207,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
 
     private void updateBarra(Integer contador) {
         Bitmap barraSprites = BitmapFactory.decodeResource(getResources(), R.drawable.sprite_barra);
-        Bitmap barra = Bitmap.createBitmap(barraSprites, 1046 * contador, 0, 1046, barraSprites.getHeight());
+        Bitmap barra = Bitmap.createBitmap(barraSprites, (barraSprites.getWidth() / 11) * contador, 0, barraSprites.getWidth() / 11, barraSprites.getHeight());
         imageViewBarra.setImageBitmap(getResizedBitmap(barra, 400, 100));
     }
 
