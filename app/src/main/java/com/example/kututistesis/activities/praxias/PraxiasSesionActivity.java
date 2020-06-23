@@ -218,6 +218,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
 
         try {
             byte[] arreglo_binarios = FileUtils.readFileToByteArray(fileVideo);//Convert any file, image or video into byte array
+            Log.i("VIDEO_SIZE", arreglo_binarios.length + "");
             ruta = Base64.encodeToString(arreglo_binarios, Base64.NO_WRAP);//Convert byte array into string
         } catch (IOException e) {
             e.printStackTrace();
@@ -291,6 +292,12 @@ public class PraxiasSesionActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        // Evita que continue el guardado si el usuario cerró la cámara sin grabar
+        if (resultCode == 0) {
+            return;
+        }
+
         switch (requestCode){
             case COD_VIDEO:
                 MediaScannerConnection.scanFile(getApplicationContext(), new String[]{path}, null,
