@@ -41,7 +41,6 @@
             android:id="@+id/btn_rec"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginLeft="32dp"
             android:background="@drawable/boton_grabar"
             android:onClick="Recorder" />
 

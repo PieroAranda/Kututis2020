@@ -1,6 +1,7 @@
 package com.example.kututistesis.activities.vocalicos;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +33,7 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
     private ApiClient apiClient;
     private EditText editText;
     private RecyclerView recyclerView;
+    private ConstraintLayout layoutNotFound;
 
     private HistorialAudiosFechasAdapter audiosFechasAdapter;
     private ImageView imageView;
@@ -71,6 +73,7 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerHistorialAudioPorFecha);
         imageViewAtras = findViewById(R.id.imageViewVocalicosHistorialAtras);
+        layoutNotFound = findViewById(R.id.layoutVocalicosHistorialNotFound);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -107,6 +110,13 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
             public void onResponse(Call<List<SesionVocal>> call, Response<List<SesionVocal>> response) {
                 List<SesionVocal> sesionVocalList = response.body();
                 Log.d("Funciono vocales", "tamanio:"+sesionVocalList.size());
+
+                if(sesionVocalList.size() == 0) {
+                    layoutNotFound.setVisibility(View.VISIBLE);
+                } else {
+                    layoutNotFound.setVisibility(View.GONE);
+                }
+
                 for (SesionVocal sesionVocal: sesionVocalList){
                     url = url + sesionVocal.getRuta_servidor();
                     sesionVocal.setRuta_servidor(url);
