@@ -19,6 +19,7 @@ import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Banderin;
 import com.example.kututistesis.model.Vocal;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,9 +104,9 @@ public class VocalicosMenuActivity extends AppCompatActivity {
     }
 
     public void OnVocalClick(int position) {
-        Integer vocal_id = vocalesList.get(position).getId();
+        Vocal v = vocalesList.get(position);
         Intent intent = new Intent(this, VocalicosSesionActivity.class);
-        intent.putExtra("vocal_id", vocal_id);
+        intent.putExtra("vocal", v);
         startActivity(intent);
     }
 }

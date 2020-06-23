@@ -2,7 +2,9 @@ package com.example.kututistesis.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Vocal {
+import java.io.Serializable;
+
+public class Vocal implements Serializable {
     @SerializedName("id")
     private Integer id;
 

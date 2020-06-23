@@ -28,6 +28,7 @@ import com.example.kututistesis.activities.MenuPrincipalActivity;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionVocal;
+import com.example.kututistesis.model.Vocal;
 import com.example.kututistesis.util.Global;
 
 import org.apache.commons.io.FileUtils;
@@ -46,9 +47,6 @@ public class VocalicosSesionActivity extends AppCompatActivity {
     private MediaRecorder grabacion;
     private Button btn_recorder;
 
-    private Button reproducir;
-    private TextView editText;
-
     private static final String CARPETA_PRINCIPAL = "misAudiosApp/";
     private static final String CARPETA_AUDIO = "audios";
     private static final String DIRECTORIO_AUDIO = CARPETA_PRINCIPAL + CARPETA_AUDIO;
@@ -57,10 +55,10 @@ public class VocalicosSesionActivity extends AppCompatActivity {
     private ApiClient apiClient;
 
     private Integer paciente_id;
-    private Integer vocales_id;
     private Integer Aprobado;
     private String Fecha;
     private String ruta;
+    private Vocal vocal;
 
     private static final int COD_VIDEO = 20;
     private Button buttonEnviar;
@@ -69,6 +67,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
     private ImageView buttonHistorialAudios;
     private Global global;
     private ImageView imageViewAtras;
+    private TextView textViewFonema;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +85,11 @@ public class VocalicosSesionActivity extends AppCompatActivity {
         global = (Global) getApplicationContext();
 
         Intent intent = getIntent();
-
-        Integer intent_vocal_id = intent.getIntExtra("vocal_id",0);
+        vocal = (Vocal) intent.getSerializableExtra("vocal");
 
         apiClient = ApiClient.getInstance();
 
         paciente_id = global.getId_usuario();
-        vocales_id = intent_vocal_id;
         Aprobado = 0;
         Fecha = "";
         ruta = "";
@@ -108,10 +105,11 @@ public class VocalicosSesionActivity extends AppCompatActivity {
         btn_recorder = (Button) findViewById(R.id.btn_rec);
         buttonEnviar = (Button) findViewById(R.id.buttonEnvio2);
         buttonReproducir = (Button) findViewById(R.id.btn_play);
-        reproducir = findViewById(R.id.btn_play);
         imageViewAtras = findViewById(R.id.imageViewVocalicosSesionAtras);
-
+        textViewFonema = findViewById(R.id.textViewVocalicosSesionFonema);
         buttonHistorialAudios = findViewById(R.id.buttonHistorialAudios);
+
+        loadFonema();
 
         buttonEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +134,11 @@ public class VocalicosSesionActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void loadFonema() {
+        textViewFonema.setText(vocal.getNombre());
+    }
+
     public void Recorder(View view){
         buttonHistorialAudios.setEnabled(false);
         if(grabacion == null){
@@ -206,7 +209,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
         ruta = "data:image/mp3;base64,"+ruta;
 
 
-        SesionVocal sesionVocal = new SesionVocal(paciente_id, vocales_id, Aprobado, Fecha, ruta);
+        SesionVocal sesionVocal = new SesionVocal(paciente_id, vocal.getId(), Aprobado, Fecha, ruta);
 
         apiClient.registroSesionVocales(sesionVocal).enqueue(new Callback<ResponseStatus>() {
             @Override
@@ -260,7 +263,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
 
     public void goToHistorialAudios(View view) {
         Intent intent = new Intent(this, VocalicosHistorialActivity.class);
-        intent.putExtra("vocal_id",vocales_id);
+        intent.putExtra("vocal_id", vocal.getId());
         startActivity(intent);
     }
 
