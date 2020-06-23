@@ -184,6 +184,8 @@ public class PraxiasSesionActivity extends AppCompatActivity {
             fileVideo = new File(path);
 
             Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+            // Establece que la grabación tenga baja calidad
+            takeVideoIntent.putExtra(android.provider.MediaStore.EXTRA_VIDEO_QUALITY, 0);
             takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileVideo));
 
             if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
@@ -306,13 +308,13 @@ public class PraxiasSesionActivity extends AppCompatActivity {
 
         switch (requestCode){
             case COD_VIDEO:
-                MediaScannerConnection.scanFile(getApplicationContext(), new String[]{path}, null,
+                /*MediaScannerConnection.scanFile(getApplicationContext(), new String[]{path}, null,
                         new MediaScannerConnection.OnScanCompletedListener() {
                             @Override
                             public void onScanCompleted(String path, Uri uri) {
                                 Log.i("Path",""+path);
                             }
-                        });
+                        });*/
 
                 Context context = getApplicationContext();
                 CharSequence text = "Enviando el video";
