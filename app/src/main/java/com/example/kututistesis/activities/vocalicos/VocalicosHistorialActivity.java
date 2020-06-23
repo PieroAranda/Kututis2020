@@ -25,6 +25,8 @@ import com.example.kututistesis.dialog.BirthDatePickerFragment;
 import com.example.kututistesis.model.SesionVocal;
 import com.example.kututistesis.util.Global;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -107,6 +109,16 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
                 VocalicosHistorialActivity.super.onBackPressed();
             }
         });
+
+        loadActualHistorial(id_vocal, id_paciente);
+    }
+
+    private void loadActualHistorial(int vocalId, int pacienteId) {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
+        String todayDateFormatted = f.format(c.getTime());
+        obtenerAudiosGrabados(vocalId, pacienteId, todayDateFormatted);
+        editText.setText(todayDateFormatted);
     }
 
     public void obtenerAudiosGrabados(Integer id_vocal, Integer id_paciente, String fecha) {

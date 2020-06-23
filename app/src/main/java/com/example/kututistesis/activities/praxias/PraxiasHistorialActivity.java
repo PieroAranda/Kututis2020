@@ -28,6 +28,8 @@ import com.example.kututistesis.model.SesionPraxia;
 import com.example.kututistesis.util.Global;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Collections;
 
@@ -122,6 +124,16 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
                 PraxiasHistorialActivity.super.onBackPressed();
             }
         });
+
+        loadActualHistorial(id_praxia, id_paciente);
+    }
+
+    private void loadActualHistorial(int praxiaId, int pacienteId) {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
+        String todayDateFormatted = f.format(c.getTime());
+        obtenerVideosGrabados(praxiaId, pacienteId, todayDateFormatted);
+        editText.setText(todayDateFormatted);
     }
 
     public void obtenerVideosGrabados(Integer id_praxia, Integer id_paciente,String fecha){
