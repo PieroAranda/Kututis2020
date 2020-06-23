@@ -23,6 +23,7 @@ import android.view.View;
 
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -71,6 +72,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
     private ImageView imageViewRecordVideo;
     private TextView textViewTitulo;
     private Praxia praxia;
+    private ProgressBar progressBarVideo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +113,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
         play = findViewById(R.id.playVideoEjemplo);
         imageViewAtras = findViewById(R.id.imageViewPraxiasAtras);
         textViewTitulo = findViewById(R.id.textViewPraxiasSesionTitulo);
+        progressBarVideo = findViewById(R.id.progressBarPraxiasSesionVideo);
 
         loadTitle();
         loadVideo();
@@ -236,6 +239,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 enviando = false;
+                progressBarVideo.setVisibility(View.GONE);
                 Log.i("VIDEO", response.toString());
                 Context context = getApplicationContext();
                 CharSequence text = "Video Enviado";
@@ -266,6 +270,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 enviando = false;
+                progressBarVideo.setVisibility(View.GONE);
                 Log.e("Enviando video", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrío un problema, no se puede conectar al servicio",
@@ -315,6 +320,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
 
+                progressBarVideo.setVisibility(View.VISIBLE);
                 // Habilita el botón de enviar
                 //buttonEnviar.setEnabled(true);
                 EnviarVideo();
