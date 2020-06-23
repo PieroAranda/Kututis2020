@@ -12,7 +12,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -68,6 +70,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
     private Global global;
     private ImageView imageViewAtras;
     private TextView textViewFonema;
+    private int screenHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +84,11 @@ public class VocalicosSesionActivity extends AppCompatActivity {
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground));
         }
+
+        // Obtiene el largo de la pantalla para mostrar correctamente los Toast
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        screenHeight = displayMetrics.heightPixels;
 
         global = (Global) getApplicationContext();
 
@@ -166,7 +174,9 @@ public class VocalicosSesionActivity extends AppCompatActivity {
                 }
 
             buttonGrabar.setBackgroundResource(R.drawable.boton_parar_grabacion);
-                Toast.makeText(getApplicationContext(), "Grabando...", Toast.LENGTH_SHORT).show();
+                Toast t = Toast.makeText(getApplicationContext(), "Grabando...", Toast.LENGTH_SHORT);
+                t.setGravity(Gravity.BOTTOM, 0, (screenHeight / 100) * 25);
+                t.show();
             } else if(grabacion!=null){
             try {
                 grabacion.stop();
@@ -179,7 +189,9 @@ public class VocalicosSesionActivity extends AppCompatActivity {
             buttonGrabar.setBackgroundResource(R.drawable.boton_grabar);
             buttonEnviar.setEnabled(true);
             grabado = true;
-            Toast.makeText(getApplicationContext(), "Grabación finalizada", Toast.LENGTH_SHORT).show();
+            Toast t = Toast.makeText(getApplicationContext(), "Grabación finalizada", Toast.LENGTH_SHORT);
+            t.setGravity(Gravity.BOTTOM, 0, (screenHeight / 100) * 25);
+            t.show();
         }
     }
 
@@ -192,7 +204,9 @@ public class VocalicosSesionActivity extends AppCompatActivity {
         }
 
         mediaPlayer.start();
-        Toast.makeText(getApplicationContext(), "Reproducir audio", Toast.LENGTH_SHORT).show();
+        Toast t = Toast.makeText(getApplicationContext(), "Reproducir audio", Toast.LENGTH_SHORT);
+        t.setGravity(Gravity.BOTTOM, 0, (screenHeight / 100) * 25);
+        t.show();
 
     }
 
@@ -204,6 +218,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
+        toast.setGravity(Gravity.BOTTOM, 0, (screenHeight / 100) * 25);
         toast.show();
 
         try {
@@ -236,6 +251,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
                         int duration = Toast.LENGTH_SHORT;
 
                         Toast toast = Toast.makeText(context, text, duration);
+                        toast.setGravity(Gravity.BOTTOM, 0, (screenHeight / 100) * 25);
                         toast.show();
                         buttonHistorialAudios.setEnabled(true);
                         buttonEnviar.setEnabled(false);
