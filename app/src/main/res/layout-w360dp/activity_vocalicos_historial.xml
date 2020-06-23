@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/dimbo_regular"
-            android:text="No se encontraron audios"
+            android:text="@string/string_audios_no_encontrados"
             android:textColor="@color/cardview_dark_background"
             android:textSize="24dp"
             app:layout_constraintBottom_toBottomOf="parent"

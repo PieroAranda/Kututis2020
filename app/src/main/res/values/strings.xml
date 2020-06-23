@@ -19,4 +19,5 @@
     <string name="historial_videos">Historial Videos</string>
     <string name="titulo_vocabulario">Palabras que aprenderás</string>
     <string name="string_videos_no_encontrados">No se encontraron videos</string>
+    <string name="string_audios_no_encontrados">No se encontraron audios</string>
 </resources>
