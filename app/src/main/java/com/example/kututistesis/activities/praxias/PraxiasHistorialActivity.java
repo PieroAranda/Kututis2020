@@ -29,6 +29,7 @@ import com.example.kututistesis.util.Global;
 
 import java.io.File;
 import java.util.List;
+import java.util.Collections;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -145,6 +146,8 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
                     sesionPraxia.setRuta_servidor(url);
                     url = "http://192.168.0.7:82/curso-laravel/kututis/";
                 }
+
+                Collections.reverse(sesionPraxiaList);
 
                 videosFechasAdapter.setData(sesionPraxiaList, video, mediaController);
                 recyclerView.setAdapter(videosFechasAdapter);

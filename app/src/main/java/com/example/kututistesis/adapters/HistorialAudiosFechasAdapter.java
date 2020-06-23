@@ -42,7 +42,7 @@ public class HistorialAudiosFechasAdapter extends RecyclerView.Adapter<Historial
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
         final SesionVocal sesionVocal = sesionVocalList.get(position);
-        Integer intento = position + 1;
+        Integer intento = sesionVocalList.size() - position;
         String numero_intento = "Intento #"+intento;
         holder.intentoAudio.setText(numero_intento);
         String aprobado;

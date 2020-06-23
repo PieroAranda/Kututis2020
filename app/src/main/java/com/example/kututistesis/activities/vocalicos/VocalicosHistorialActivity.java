@@ -25,6 +25,7 @@ import com.example.kututistesis.dialog.BirthDatePickerFragment;
 import com.example.kututistesis.model.SesionVocal;
 import com.example.kututistesis.util.Global;
 
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -130,6 +131,8 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
                     sesionVocal.setRuta_servidor(url);
                     url = "http://192.168.0.7:82/curso-laravel/kututis/";
                 }
+
+                Collections.reverse(sesionVocalList);
 
                 audiosFechasAdapter.setData(sesionVocalList);
                 recyclerView.setAdapter(audiosFechasAdapter);
