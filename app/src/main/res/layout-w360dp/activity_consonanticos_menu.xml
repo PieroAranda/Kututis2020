@@ -35,4 +35,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewConsonanticosTitulo"></androidx.recyclerview.widget.RecyclerView>
 
+    <ProgressBar
+        android:id="@+id/progressBarConsonanticosMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/colorPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewConsonanticosTitulo" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

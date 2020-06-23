@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.example.kututistesis.R;
 import com.example.kututistesis.adapters.ConsonantesAdapter;
@@ -32,6 +33,7 @@ public class ConsonanticosMenuActivity extends AppCompatActivity implements Cons
     private ApiClient apiClient;
     private List<Fonema> fonemas;
     private MenuBanderaAdapter consonantesAdapter;
+    private ProgressBar progressBarMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class ConsonanticosMenuActivity extends AppCompatActivity implements Cons
 
         imageViewAtras = findViewById(R.id.imageViewConsonanticosAtras);
         recyclerViewFonemaConsonantico = findViewById(R.id.recyclerFonemasConsonanticos);
+        progressBarMenu = findViewById(R.id.progressBarConsonanticosMenu);
 
         apiClient = ApiClient.getInstance();
         consonantesAdapter = new MenuBanderaAdapter();
@@ -63,6 +66,8 @@ public class ConsonanticosMenuActivity extends AppCompatActivity implements Cons
     }
 
     public void loadFonemas() {
+        progressBarMenu.setVisibility(View.VISIBLE);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(
                 ConsonanticosMenuActivity.this, LinearLayoutManager.VERTICAL, false
         );
@@ -72,6 +77,8 @@ public class ConsonanticosMenuActivity extends AppCompatActivity implements Cons
         apiClient.getFonemas().enqueue(new Callback<List<Fonema>>() {
             @Override
             public void onResponse(Call<List<Fonema>> call, Response<List<Fonema>> response) {
+                progressBarMenu.setVisibility(View.GONE);
+
                 fonemas = response.body();
                 List<Banderin> banderines = new ArrayList<>();
                 for (Fonema f : fonemas) {
@@ -83,7 +90,7 @@ public class ConsonanticosMenuActivity extends AppCompatActivity implements Cons
 
             @Override
             public void onFailure(Call<List<Fonema>> call, Throwable t) {
-
+                progressBarMenu.setVisibility(View.GONE);
             }
         });
     }

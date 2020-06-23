@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.kututistesis.R;
@@ -34,6 +35,7 @@ public class PraxiasMenuActivity extends AppCompatActivity {
     private MenuBanderaAdapter praxiasAdapter;
     private List<Praxia> praxiasList;
     private ImageView imageViewAtras;
+    private ProgressBar progressBarMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class PraxiasMenuActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewPraxias);
         imageViewAtras = findViewById(R.id.imageViewPraxiasAtras);
+        progressBarMenu = findViewById(R.id.progressBarPraxiasMenu);
 
         apiClient = ApiClient.getInstance();
 
@@ -67,9 +70,12 @@ public class PraxiasMenuActivity extends AppCompatActivity {
     }
 
     public void loadPraxias() {
+        progressBarMenu.setVisibility(View.VISIBLE);
+
         apiClient.listarpraxias().enqueue(new Callback<List<Praxia>>() {
             @Override
             public void onResponse(Call<List<Praxia>> call, Response<List<Praxia>> response) {
+                progressBarMenu.setVisibility(View.GONE);
                 if (response.isSuccessful()) {
                     praxiasList = response.body();
                     List<Banderin> banderines = new ArrayList<>();
@@ -99,6 +105,7 @@ public class PraxiasMenuActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Praxia>> call, Throwable t) {
+                progressBarMenu.setVisibility(View.GONE);
                 Log.e("Obteniendo praxias", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrió un problema, no se puede conectar al servicio",

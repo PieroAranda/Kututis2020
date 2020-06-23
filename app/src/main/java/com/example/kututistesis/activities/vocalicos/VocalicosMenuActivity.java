@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.kututistesis.R;
@@ -34,6 +35,7 @@ public class VocalicosMenuActivity extends AppCompatActivity {
     private MenuBanderaAdapter vocalAdapter;
     private List<Vocal> vocalesList;
     private ImageView imageViewAtras;
+    private ProgressBar progressBarMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class VocalicosMenuActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewVocalicos);
         imageViewAtras = findViewById(R.id.imageViewVocalicossAtras);
+        progressBarMenu = findViewById(R.id.progressBarVocalicosMenu);
 
         imageViewAtras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,9 +69,12 @@ public class VocalicosMenuActivity extends AppCompatActivity {
     }
 
     public void loadVocales() {
+        progressBarMenu.setVisibility(View.VISIBLE);
+
         apiClient.listarvocales().enqueue(new Callback<List<Vocal>>() {
             @Override
             public void onResponse(Call<List<Vocal>> call, Response<List<Vocal>> response) {
+                progressBarMenu.setVisibility(View.GONE);
                 if(response.isSuccessful()){
                     vocalesList = response.body();
                     List<Banderin> banderines = new ArrayList<>();
@@ -94,6 +100,7 @@ public class VocalicosMenuActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Vocal>> call, Throwable t) {
+                progressBarMenu.setVisibility(View.GONE);
                 Log.e("Obteniendo praxias", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrió un problema, no se puede conectar al servicio",

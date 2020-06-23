@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.kututistesis.R;
@@ -28,14 +29,15 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
     private ApiClient apiClient;
     private String url;
 
-    RecyclerView recyclerView;
-    VocabularioAdapter vocabularioAdapter;
+    private RecyclerView recyclerView;
+    private VocabularioAdapter vocabularioAdapter;
+    private ProgressBar progressBarMenu;
 
     private List<Vocabulario> vocabularioList;
 
-    ImageView imageViewAtras;
+    private ImageView imageViewAtras;
 
-    Integer fonema_id;
+    private Integer fonema_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,7 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         imageViewAtras = findViewById(R.id.imageViewVocabularioAtras);
+        progressBarMenu = findViewById(R.id.progressBarConsonanticosMenu2);
 
         imageViewAtras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,9 +78,13 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
     }
 
     public void obtenerVocabulario(Integer fonema_id){
+        progressBarMenu.setVisibility(View.VISIBLE);
+
         apiClient.buscarvocabularioxfonemaid(fonema_id).enqueue(new Callback<List<Vocabulario>>() {
             @Override
             public void onResponse(Call<List<Vocabulario>> call, Response<List<Vocabulario>> response) {
+                progressBarMenu.setVisibility(View.GONE);
+
                 vocabularioList = response.body();
                 for(Vocabulario vocabulario:vocabularioList)
                 {
@@ -91,6 +98,8 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
 
             @Override
             public void onFailure(Call<List<Vocabulario>> call, Throwable t) {
+                progressBarMenu.setVisibility(View.GONE);
+
                 Log.e("Obteniendo vocabulario", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrió un problema, no se puede conectar al servicio",
