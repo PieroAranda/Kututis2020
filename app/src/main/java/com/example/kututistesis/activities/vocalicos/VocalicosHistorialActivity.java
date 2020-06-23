@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.kututistesis.R;
@@ -40,6 +41,7 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
     private String url;
     private Global global;
     private ImageView imageViewAtras;
+    private ProgressBar progressBarBusqueda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,7 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerHistorialAudioPorFecha);
         imageViewAtras = findViewById(R.id.imageViewVocalicosHistorialAtras);
         layoutNotFound = findViewById(R.id.layoutVocalicosHistorialNotFound);
+        progressBarBusqueda = findViewById(R.id.progressBarVocalicosHistorial);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -105,9 +108,13 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
     }
 
     public void obtenerAudiosGrabados(Integer id_vocal, Integer id_paciente, String fecha) {
+        layoutNotFound.setVisibility(View.GONE);
+        progressBarBusqueda.setVisibility(View.VISIBLE);
+
         apiClient.buscarxvocalxusuarioxfecha(id_vocal, id_paciente, fecha).enqueue(new Callback<List<SesionVocal>>() {
             @Override
             public void onResponse(Call<List<SesionVocal>> call, Response<List<SesionVocal>> response) {
+                progressBarBusqueda.setVisibility(View.GONE);
                 List<SesionVocal> sesionVocalList = response.body();
                 Log.d("Funciono vocales", "tamanio:"+sesionVocalList.size());
 
@@ -129,6 +136,8 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<SesionVocal>> call, Throwable t) {
+                progressBarBusqueda.setVisibility(View.GONE);
+
                 Log.d("Fallo praxias", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrió un problema, no se puede conectar al servicio",

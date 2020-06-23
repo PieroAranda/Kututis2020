@@ -50,6 +50,7 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
     private Integer id_praxia;
     private ImageView imageViewAtras;
     private ConstraintLayout layoutNotFound;
+    private ProgressBar progressBarBusqueda;
 
     private Global global;
 
@@ -88,6 +89,7 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerHistorialVideoPorFecha);
         imageViewAtras = findViewById(R.id.imageViewPraxiasHistorialAtras);
         layoutNotFound = findViewById(R.id.layoutPraxiasHistorialNotFound);
+        progressBarBusqueda = findViewById(R.id.progressBarPraxiasHistorial);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -121,9 +123,14 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
     }
 
     public void obtenerVideosGrabados(Integer id_praxia, Integer id_paciente,String fecha){
+        layoutNotFound.setVisibility(View.GONE);
+        progressBarBusqueda.setVisibility(View.VISIBLE);
+
         apiClient.buscarxpraxiaxusuarioxfecha(id_praxia,id_paciente,fecha).enqueue(new Callback<List<SesionPraxia>>() {
             @Override
             public void onResponse(Call<List<SesionPraxia>> call, Response<List<SesionPraxia>> response) {
+                progressBarBusqueda.setVisibility(View.GONE);
+
                 List<SesionPraxia> sesionPraxiaList = response.body();
 
                 if (sesionPraxiaList.size() == 0) {
@@ -144,6 +151,8 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<SesionPraxia>> call, Throwable t) {
+                progressBarBusqueda.setVisibility(View.GONE);
+
                 Log.d("Fallo praxias", t.getMessage());
                 Toast.makeText(getApplicationContext(),
                         "Ocurrió un problema, no se puede conectar al servicio",
