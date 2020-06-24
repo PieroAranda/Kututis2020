@@ -222,6 +222,8 @@ public class PraxiasSesionActivity extends AppCompatActivity {
 
         enviando = true;
 
+        // La conversión de array de bytes a String base 64 no es eficiente o se debería hacer
+        // en un hilo aparte
         try {
             byte[] arreglo_binarios = FileUtils.readFileToByteArray(fileVideo);//Convert any file, image or video into byte array
             Log.i("VIDEO_SIZE", arreglo_binarios.length + "");
@@ -324,6 +326,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
+                toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
 
                 progressBarVideo.setVisibility(View.VISIBLE);

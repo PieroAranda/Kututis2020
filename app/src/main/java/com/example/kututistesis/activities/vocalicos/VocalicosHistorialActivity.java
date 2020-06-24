@@ -26,6 +26,7 @@ import com.example.kututistesis.model.SesionVocal;
 import com.example.kututistesis.util.Global;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
@@ -124,6 +125,12 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
     public void obtenerAudiosGrabados(Integer id_vocal, Integer id_paciente, String fecha) {
         layoutNotFound.setVisibility(View.GONE);
         progressBarBusqueda.setVisibility(View.VISIBLE);
+
+        // Elimina los resultados previos si los hubieron
+        HistorialAudiosFechasAdapter adapter = new HistorialAudiosFechasAdapter();
+        List<SesionVocal> listaVacia = new ArrayList<>();
+        adapter.setData(listaVacia);
+        recyclerView.setAdapter(adapter);
 
         apiClient.buscarxvocalxusuarioxfecha(id_vocal, id_paciente, fecha).enqueue(new Callback<List<SesionVocal>>() {
             @Override

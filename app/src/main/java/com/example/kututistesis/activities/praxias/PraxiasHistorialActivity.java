@@ -29,6 +29,7 @@ import com.example.kututistesis.util.Global;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Collections;
@@ -139,6 +140,12 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
     public void obtenerVideosGrabados(Integer id_praxia, Integer id_paciente,String fecha){
         layoutNotFound.setVisibility(View.GONE);
         progressBarBusqueda.setVisibility(View.VISIBLE);
+
+        // Elimina los resultados previos si los hubieron
+        HistorialVideosFechasAdapter adapter = new HistorialVideosFechasAdapter();
+        List<SesionPraxia> listaVacia = new ArrayList<>();
+        adapter.setData(listaVacia, video, mediaController);
+        recyclerView.setAdapter(adapter);
 
         apiClient.buscarxpraxiaxusuarioxfecha(id_praxia,id_paciente,fecha).enqueue(new Callback<List<SesionPraxia>>() {
             @Override
