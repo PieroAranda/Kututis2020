@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.consonanticos.ConsonanticosSesionActivity"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    tools:context=".activities.consonanticos.ConsonanticosSesionActivity">
 
     <ImageView
         android:id="@+id/imageViewConsonanticosAtras"
@@ -41,8 +41,8 @@
         android:id="@+id/imageViewPalabraVocabulario"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="24dp"
         android:layout_marginLeft="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginRight="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -52,11 +52,12 @@
 
     <ImageView
         android:id="@+id/imageViewBanderin"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:scaleType="fitXY"
+        app:layout_constraintLeft_toLeftOf="@+id/textPalabra"
+        app:layout_constraintRight_toRightOf="@+id/textPalabra"
         app:layout_constraintTop_toBottomOf="@+id/imageViewConsonanticosContador"
         app:srcCompat="@drawable/banderin_palabras_vocabulario" />
 
@@ -64,10 +65,12 @@
         android:id="@+id/textPalabra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="48dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="21dp"
         android:fontFamily="@font/dimbo_regular"
-        android:text="León"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="Palabra"
         android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/colorBackground"
@@ -80,9 +83,9 @@
         android:id="@+id/imageAltavoz"
         android:layout_width="48dp"
         android:layout_height="49dp"
-        android:background="@color/colorPrimaryDark"
         android:layout_marginTop="7dp"
         android:layout_marginRight="32dp"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewBanderin"
         app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />

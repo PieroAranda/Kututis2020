@@ -15,7 +15,6 @@
         android:src="@drawable/banderin_turquesa"
         app:layout_constraintBottom_toBottomOf="@+id/TextConsonante"
         app:layout_constraintEnd_toEndOf="@+id/TextConsonante"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/TextConsonante"></ImageView>
 
     <TextView
