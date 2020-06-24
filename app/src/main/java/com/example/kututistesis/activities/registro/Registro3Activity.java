@@ -3,6 +3,7 @@ package com.example.kututistesis.activities.registro;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import com.example.kututistesis.activities.BienvenidaActivity;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SignUpForm;
+import com.example.kututistesis.util.Global;
 import com.example.kututistesis.util.Validations;
 
 import retrofit2.Call;
@@ -34,12 +36,14 @@ public class Registro3Activity extends AppCompatActivity {
     private SignUpForm signUpForm;
     private ApiClient apiClient;
     private AwesomeValidation awesomeValidation;
+    private Global global;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_registro3);
+        global = (Global) getApplicationContext();
 
         getIntentData();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -87,7 +91,7 @@ public class Registro3Activity extends AppCompatActivity {
 
                     switch (responseCode) {
                         case "200":
-                            goToBienvenida();
+                            login(signUpForm.getCorreo(), signUpForm.getContrasenia());
                             break;
                         case "300":
                             Toast.makeText(getApplicationContext(),
@@ -130,5 +134,37 @@ public class Registro3Activity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void login(String email, String contrasenia) {
+        apiClient.loginPaciente(email, contrasenia).enqueue(new Callback<ResponseStatus>() {
+            @Override
+            public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
+                Log.i("SIGNIN", response.body().getStatus() + " " + response.body().getCode());
+                String responseCode = response.body().getCode();
+                String responseStatus = response.body().getStatus();
+                Integer responseId = response.body().getUser();
+
+                switch (responseCode) {
+                    case "200":
+                        SharedPreferences.Editor editor = global.sharedPref.edit();
+                        editor.putInt(getString(R.string.saved_user_id), responseId);
+                        editor.commit();
+                        global.setId(responseId);
+                        goToBienvenida();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseStatus> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),
+                        "Ocurrío un problema, no se puede conectar al servicio",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
     }
 }
