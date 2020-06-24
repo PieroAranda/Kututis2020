@@ -155,7 +155,6 @@ public class VocalicosSesionActivity extends AppCompatActivity {
     }
 
     public void Recorder() {
-        buttonHistorialAudios.setEnabled(false);
         if(grabacion == null){
                 Long consecutivo = System.currentTimeMillis()/1000;
                 String nombre = consecutivo.toString()+".mp3";
@@ -210,9 +209,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
 
     }
 
-
     public void EnviarAudio(){
-
         Context context = getApplicationContext();
         CharSequence text = "Enviando Audio";
         int duration = Toast.LENGTH_SHORT;
@@ -253,7 +250,6 @@ public class VocalicosSesionActivity extends AppCompatActivity {
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.setGravity(Gravity.BOTTOM, 0, (screenHeight / 100) * 25);
                         toast.show();
-                        buttonHistorialAudios.setEnabled(true);
                         buttonEnviar.setEnabled(false);
                         break;
                     case "400":
@@ -279,9 +275,6 @@ public class VocalicosSesionActivity extends AppCompatActivity {
 
     }
 
-
-
-
     private void goToPaginaPrincipal() {
         Intent intent = new Intent(this, MenuPrincipalActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -294,7 +287,6 @@ public class VocalicosSesionActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -318,6 +310,5 @@ public class VocalicosSesionActivity extends AppCompatActivity {
 
                 break;
         }
-
     }
 }
