@@ -191,6 +191,8 @@ public class VocalicosSesionActivity extends AppCompatActivity {
             Toast t = Toast.makeText(getApplicationContext(), "Grabación finalizada", Toast.LENGTH_SHORT);
             t.setGravity(Gravity.BOTTOM, 0, (screenHeight / 100) * 25);
             t.show();
+            buttonReproducir.setBackgroundResource(R.drawable.boton_reproducir);
+            buttonEnviar.setBackgroundResource(R.drawable.boton_enviar);
         }
     }
 
@@ -251,6 +253,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
                         toast.setGravity(Gravity.BOTTOM, 0, (screenHeight / 100) * 25);
                         toast.show();
                         buttonEnviar.setEnabled(false);
+                        buttonEnviar.setBackgroundResource(R.drawable.boton_enviar_deshabilitado);
                         break;
                     case "400":
                         Toast.makeText(getApplicationContext(),
