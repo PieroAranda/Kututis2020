@@ -87,7 +87,7 @@
             android:fontFamily="@font/dimbo_regular"
             android:text="@string/string_audios_no_encontrados"
             android:textColor="@color/cardview_dark_background"
-            android:textSize="24dp"
+            android:textSize="28dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
