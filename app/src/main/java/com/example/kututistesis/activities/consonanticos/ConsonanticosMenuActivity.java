@@ -103,4 +103,10 @@ public class ConsonanticosMenuActivity extends AppCompatActivity implements Cons
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadFonemas();
+    }
 }

@@ -122,4 +122,10 @@ public class PraxiasMenuActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadPraxias();
+    }
 }

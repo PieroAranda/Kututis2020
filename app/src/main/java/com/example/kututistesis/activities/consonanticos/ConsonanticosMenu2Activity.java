@@ -120,4 +120,10 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        obtenerVocabulario(fonema_id);
+    }
 }
