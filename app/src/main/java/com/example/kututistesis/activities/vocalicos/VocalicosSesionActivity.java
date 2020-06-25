@@ -1,6 +1,7 @@
 package com.example.kututistesis.activities.vocalicos;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -45,7 +46,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VocalicosSesionActivity extends AppCompatActivity {
+public class VocalicosSesionActivity extends Activity {
     private MediaRecorder grabacion;
 
     private static final String CARPETA_PRINCIPAL = "misAudiosApp/";
@@ -75,7 +76,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         setContentView(R.layout.activity_vocalicos_sesion);
 
         // Cambia el color de la barra de notificaciones
@@ -138,7 +139,7 @@ public class VocalicosSesionActivity extends AppCompatActivity {
         imageViewAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VocalicosSesionActivity.super.onBackPressed();
+                onBackPressed();
             }
         });
 
@@ -310,8 +311,20 @@ public class VocalicosSesionActivity extends AppCompatActivity {
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
-
                 break;
+        }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        stopRecording();
+        super.onBackPressed();  //if you want to do something new remove this line
+    }
+
+    public void stopRecording() {
+        if (grabacion != null) {
+            grabacion.stop();
         }
     }
 }
