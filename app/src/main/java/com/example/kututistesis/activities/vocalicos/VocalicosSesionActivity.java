@@ -149,6 +149,14 @@ public class VocalicosSesionActivity extends Activity {
                 Recorder();
             }
         });
+
+        buttonHistorialAudios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopRecording();
+                goToHistorialAudios();
+            }
+        });
     }
 
     private void loadFonema() {
@@ -279,13 +287,7 @@ public class VocalicosSesionActivity extends Activity {
 
     }
 
-    private void goToPaginaPrincipal() {
-        Intent intent = new Intent(this, MenuPrincipalActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-    }
-
-    public void goToHistorialAudios(View view) {
+    public void goToHistorialAudios() {
         Intent intent = new Intent(this, VocalicosHistorialActivity.class);
         intent.putExtra("vocal_id", vocal.getId());
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -323,8 +325,14 @@ public class VocalicosSesionActivity extends Activity {
     }
 
     public void stopRecording() {
+        grabado = true;
+        buttonGrabar.setBackgroundResource(R.drawable.boton_grabar);
+        buttonReproducir.setBackgroundResource(R.drawable.boton_reproducir_deshabilitado);
+        buttonEnviar.setBackgroundResource(R.drawable.boton_enviar_deshabilitado);
         if (grabacion != null) {
             grabacion.stop();
+            grabacion.release();
+            grabacion = null;
         }
     }
 }
