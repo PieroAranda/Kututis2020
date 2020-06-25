@@ -59,6 +59,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
     String [] texto_array;
 
     String palabra_en_pantalla;
+    private Toast vuelveAIntentarloToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +142,9 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
     }
 
     private void iniciarEntradaVoz() {
+        if (vuelveAIntentarloToast != null) {
+            vuelveAIntentarloToast.cancel();
+        }
 
         if (contadorBarraProgreso == 10) {
             return;
@@ -189,7 +193,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
                         texto_contador.setText(texto);
                     }
                     else {
-                        Toast vuelveAIntentarloToast = Toast.makeText(getApplicationContext(),
+                        vuelveAIntentarloToast = Toast.makeText(getApplicationContext(),
                                 "Intentalo nuevamente...no te rindas",
                                 Toast.LENGTH_SHORT);
                         vuelveAIntentarloToast.setGravity(Gravity.CENTER, 0, 0);
@@ -198,6 +202,9 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
 
                     updateBarra(contadorBarraProgreso);
                     if (contadorBarraProgreso == 10) {
+                        if (vuelveAIntentarloToast != null) {
+                            vuelveAIntentarloToast.cancel();
+                        }
                         goToResultados();
                     }
                 }
