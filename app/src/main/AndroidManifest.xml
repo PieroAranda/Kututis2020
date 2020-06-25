@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.kututistesis">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,57 +20,92 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.consonanticos.ConsonanticosResultadosActivity"
-            android:parentActivityName=".activities.consonanticos.ConsonanticosMenu2Activity"></activity>
-        <activity android:name=".activities.consonanticos.ConsonanticosMenu2Activity" />
+        <activity
+            android:name=".activities.consonanticos.ConsonanticosResultadosActivity"
+            android:parentActivityName=".activities.consonanticos.ConsonanticosMenu2Activity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"></activity>
+        <activity
+            android:name=".activities.consonanticos.ConsonanticosMenu2Activity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.consonanticos.ConsonanticosSesionActivity"
-            android:parentActivityName=".activities.consonanticos.ConsonanticosMenu2Activity" />
+            android:parentActivityName=".activities.consonanticos.ConsonanticosMenu2Activity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.vocalicos.VocalicosHistorialActivity"
-            android:parentActivityName=".activities.MenuPrincipalActivity" />
+            android:parentActivityName=".activities.MenuPrincipalActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.consonanticos.ConsonanticosMenuActivity"
             android:label="Fonemas Consonánticos"
-            android:parentActivityName=".activities.MenuPrincipalActivity" />
+            android:parentActivityName=".activities.MenuPrincipalActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.vocalicos.VocalicosMenuActivity"
             android:label="Fonemas Vocálicos"
-            android:parentActivityName=".activities.MenuPrincipalActivity" />
+            android:parentActivityName=".activities.MenuPrincipalActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.BienvenidaActivity"
-            android:label="Bienvenida" />
+            android:label="Bienvenida"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.praxias.PraxiasMenuActivity"
             android:label="Praxias"
-            android:parentActivityName=".activities.MenuPrincipalActivity" />
+            android:parentActivityName=".activities.MenuPrincipalActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.registro.Registro3Activity"
             android:label="Registro"
-            android:parentActivityName=".activities.registro.Registro2Activity" />
+            android:parentActivityName=".activities.registro.Registro2Activity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.registro.Registro2Activity"
             android:label="Registro"
-            android:parentActivityName=".activities.registro.Registro1Activity" />
+            android:parentActivityName=".activities.registro.Registro1Activity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.registro.Registro1Activity"
             android:label="Registro"
-            android:parentActivityName=".activities.InicioSesionActivity" />
+            android:parentActivityName=".activities.InicioSesionActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.MenuPrincipalActivity"
-            android:parentActivityName=".activities.InicioSesionActivity" />
+            android:parentActivityName=".activities.InicioSesionActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.praxias.PraxiasSesionActivity"
             android:label="Grabar Praxia"
-            android:parentActivityName=".activities.praxias.PraxiasMenuActivity" />
+            android:parentActivityName=".activities.praxias.PraxiasMenuActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.praxias.PraxiasHistorialActivity"
-            android:parentActivityName=".activities.MenuPrincipalActivity" />
+            android:parentActivityName=".activities.MenuPrincipalActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.vocalicos.VocalicosSesionActivity"
             android:label="Grabar Audios"
-            android:parentActivityName=".activities.vocalicos.VocalicosMenuActivity" />
-        <activity android:name=".activities.InicioSesionActivity">
+            android:parentActivityName=".activities.vocalicos.VocalicosMenuActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activities.InicioSesionActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
