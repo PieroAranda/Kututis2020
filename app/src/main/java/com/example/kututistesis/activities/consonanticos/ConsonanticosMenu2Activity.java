@@ -53,7 +53,7 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
         }
 
         apiClient = ApiClient.getInstance();
-        url = "http://192.168.0.7:82/curso-laravel/kututis/storage/app/images/";
+        url = ApiClient.BASE_STORAGE_IMAGE_URL;
         recyclerView = findViewById(R.id.recyclerVocabulario);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -90,7 +90,7 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
                 {
                     url = url + vocabulario.getImagen();
                     vocabulario.setImagen(url);
-                    url = "http://192.168.0.7:82/curso-laravel/kututis/storage/app/images/";
+                    url = ApiClient.BASE_STORAGE_IMAGE_URL;
                 }
                 vocabularioAdapter.setData(vocabularioList, ConsonanticosMenu2Activity.this);
                 recyclerView.setAdapter(vocabularioAdapter);

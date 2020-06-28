@@ -104,7 +104,7 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
 
         mediaController = new MediaController(this);
 
-        url = "http://192.168.0.7:82/curso-laravel/kututis/";
+        url = ApiClient.BASE_HOST_URL;
 
         id_paciente = global.getId_usuario();
         id_praxia = intent_praxia_id;
@@ -163,7 +163,7 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
                 for (SesionPraxia sesionPraxia: sesionPraxiaList){
                     url = url + sesionPraxia.getRuta_servidor();
                     sesionPraxia.setRuta_servidor(url);
-                    url = "http://192.168.0.7:82/curso-laravel/kututis/";
+                    url = ApiClient.BASE_HOST_URL;
                 }
 
                 Collections.reverse(sesionPraxiaList);

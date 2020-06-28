@@ -89,7 +89,7 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.Boton_Buscar_Audios);
 
-        url = "http://192.168.0.7:82/curso-laravel/kututis/";
+        url = ApiClient.BASE_HOST_URL;
 
         final Integer id_paciente = global.getId_usuario();
         final Integer id_vocal = intent_vocal_id;
@@ -148,7 +148,7 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
                 for (SesionVocal sesionVocal: sesionVocalList){
                     url = url + sesionVocal.getRuta_servidor();
                     sesionVocal.setRuta_servidor(url);
-                    url = "http://192.168.0.7:82/curso-laravel/kututis/";
+                    url = ApiClient.BASE_HOST_URL;
                 }
 
                 Collections.reverse(sesionVocalList);
