@@ -141,6 +141,7 @@ public class Registro1Activity extends AppCompatActivity {
             signUpData.setNombre(editTextNames.getText().toString().trim());
             signUpData.setApellido(editTextLastname.getText().toString().trim());
             signUpData.setCelular(editTextMobileNumber.getText().toString().trim());
+            signUpData.setFecha_nacimiento(editTextBirthDate.getText().toString().trim());
 
             Intent intent = new Intent(this, Registro2Activity.class);
             // Revisar si hacer un cast de Serializable es eficiente o mejor usar la

@@ -25,6 +25,12 @@ public class SignUpForm implements Serializable {
     @SerializedName("Contrasenia")
     @Expose
     private String contrasenia;
+    @SerializedName("Fecha_Inscripcion")
+    @Expose
+    private String fecha_inscripcion;
+    @SerializedName("Fecha_Nacimiento")
+    @Expose
+    private String fecha_nacimiento;
     @SerializedName("Habilitado")
     @Expose
     private int habilitado = 1;
@@ -73,6 +79,22 @@ public class SignUpForm implements Serializable {
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
+    }
+
+    public String getFecha_inscripcion() {
+        return fecha_inscripcion;
+    }
+
+    public void setFecha_inscripcion(String fecha_inscripcion) {
+        this.fecha_inscripcion = fecha_inscripcion;
+    }
+
+    public String getFecha_nacimiento() {
+        return fecha_nacimiento;
+    }
+
+    public void setFecha_nacimiento(String fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
     }
 
     public int getHabilitado() {

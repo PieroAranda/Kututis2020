@@ -5,32 +5,40 @@ import com.google.gson.annotations.SerializedName;
 import java.sql.Blob;
 
 public class SesionPraxia {
+    @SerializedName("id")
+    private Integer id;
+
     @SerializedName("paciente_id")
     private Integer paciente_id;
 
     @SerializedName("praxias_id")
     private Integer praxias_id;
 
-    @SerializedName("Aprobado")
-    private Integer Aprobado;
+    @SerializedName("Repeticiones")
+    private Integer repeticiones;
 
-    @SerializedName("Fecha")
-    private String Fecha;
+    @SerializedName("completado")
+    private Integer completado;
 
-    @SerializedName("ruta")
-    private String ruta;
+    @SerializedName("praxia")
+    private Praxia praxia;
 
-    @SerializedName("ruta_servidor")
-    private String ruta_servidor;
-
-    public SesionPraxia(Integer paciente_id, Integer praxias_id, Integer Aprobado, String Fecha, String ruta) {
+    public SesionPraxia(Integer id, Integer paciente_id, Integer praxias_id, Integer repeticiones, Integer completado, Praxia praxia) {
+        this.id = id;
         this.paciente_id = paciente_id;
         this.praxias_id = praxias_id;
-        this.Aprobado = Aprobado;
-        this.Fecha = Fecha;
-        this.ruta = ruta;
+        this.repeticiones = repeticiones;
+        this.completado = completado;
+        this.praxia = praxia;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getPaciente_id() {
         return paciente_id;
@@ -40,43 +48,35 @@ public class SesionPraxia {
         this.paciente_id = paciente_id;
     }
 
-    public Integer getPraxia_id() {
+    public Integer getPraxias_id() {
         return praxias_id;
     }
 
-    public void setPraxia_id(Integer praxia_id) {
-        this.praxias_id = praxia_id;
+    public void setPraxias_id(Integer praxias_id) {
+        this.praxias_id = praxias_id;
     }
 
-    public Integer getAprobado() {
-        return Aprobado;
+    public Integer getRepeticiones() {
+        return repeticiones;
     }
 
-    public void setAprobado(Integer aprobado) {
-        Aprobado = aprobado;
+    public void setRepeticiones(Integer repeticiones) {
+        this.repeticiones = repeticiones;
     }
 
-    public String getFecha() {
-        return Fecha;
+    public Integer getCompletado() {
+        return completado;
     }
 
-    public void setFecha(String fecha) {
-        Fecha = fecha;
+    public void setCompletado(Integer completado) {
+        this.completado = completado;
     }
 
-    public String getRuta() {
-        return ruta;
+    public Praxia getPraxia() {
+        return praxia;
     }
 
-    public void setRuta(String ruta) {
-        this.ruta = ruta;
-    }
-
-    public String getRuta_servidor() {
-        return ruta_servidor;
-    }
-
-    public void setRuta_servidor(String ruta_servidor) {
-        this.ruta_servidor = ruta_servidor;
+    public void setPraxia(Praxia praxia) {
+        this.praxia = praxia;
     }
 }

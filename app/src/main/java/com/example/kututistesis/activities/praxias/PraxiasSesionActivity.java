@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -32,14 +33,21 @@ import android.widget.VideoView;
 import com.example.kututistesis.R;
 import com.example.kututistesis.activities.MenuPrincipalActivity;
 import com.example.kututistesis.api.ApiClient;
+import com.example.kututistesis.model.ArchivoSesionPraxia;
 import com.example.kututistesis.model.Praxia;
 import com.example.kututistesis.model.SesionPraxia;
 import com.example.kututistesis.util.Global;
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteArrayDataOutput;
 
 import org.apache.commons.io.FileUtils;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -72,7 +80,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
     private Integer position = 0;
     private ImageView imageViewRecordVideo;
     private TextView textViewTitulo;
-    private Praxia praxia;
+    private SesionPraxia sesionPraxia;
     private ProgressBar progressBarVideo;
 
     @Override
@@ -91,7 +99,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
         global = (Global) getApplicationContext();
 
         Intent intent = getIntent();
-        praxia = (Praxia) intent.getSerializableExtra("praxia");
+        sesionPraxia = (SesionPraxia) intent.getSerializableExtra("sesion_praxia");
         Integer intent_praxia_id = intent.getIntExtra("praxia_id",0);
         String praxiaNombre = intent.getStringExtra("praxia_nombre");
 
@@ -141,9 +149,65 @@ public class PraxiasSesionActivity extends AppCompatActivity {
         });
     }
 
+    private File convertirByteArrayIntoFile(byte[] bytearray){
+         String FILEPATH = ApiClient.BASE_STORAGE_IMAGE_URL+ "VideoEjemplo"+ sesionPraxia.getPraxia().getNombre()+".mp4";
+         File file = new File(FILEPATH);
+            try {
+
+                // Initialize a pointer
+                // in file using OutputStream
+                OutputStream
+                        os
+                        = new FileOutputStream(file);
+
+                // Starts writing the bytes in it
+                os.write(bytearray);
+                System.out.println("Successfully"
+                        + " byte inserted");
+
+                // Close the file
+                os.close();
+            }
+
+            catch (Exception e) {
+                System.out.println("Exception: " + e);
+            }
+            return file;
+    }
+
+    private File generateTemporaryFile(String filename) throws IOException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        Date date = new Date();
+
+        String tempFileName = dateFormat.format(date);
+
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        File tempFile = File.createTempFile(
+                tempFileName,       /* prefix     "20130318_010530" */
+                filename,           /* filename   "video.3gp" */
+                storageDir          /* directory  "/data/sdcard/..." */
+        );
+
+        return tempFile;
+    }
+
     private void loadVideo() {
-        Uri uri = Uri.parse(praxia.getVideo());
-        videoEjemplo.setVideoURI(uri);
+        byte[] bytearray = Base64.decode(sesionPraxia.getPraxia().getVideo(), Base64.DEFAULT);
+        File file = convertirByteArrayIntoFile(bytearray);
+
+        try {
+            // Copy file to temporary file in order to view it.
+            File temporaryFile = generateTemporaryFile(file.getName());
+            FileUtils.copyFile(file, temporaryFile);
+            videoEjemplo.setVideoPath(temporaryFile.getAbsolutePath());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*Uri uri = Uri.parse(praxia.getVideo());
+        videoEjemplo.setVideoURI(uri);*/
 
         MediaController mediaController = new MediaController(this);
         videoEjemplo.setMediaController(mediaController);
@@ -159,7 +223,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
     }
 
     private void loadTitle() {
-        textViewTitulo.setText(praxia.getNombre());
+        textViewTitulo.setText(sesionPraxia.getPraxia().getNombre());
     }
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
@@ -238,9 +302,9 @@ public class PraxiasSesionActivity extends AppCompatActivity {
 
         ruta = "data:image/mp4;base64,"+ruta;
 
-        SesionPraxia sesionPraxia = new SesionPraxia(paciente_id, praxia.getId(), Aprobado, Fecha, ruta);
+        ArchivoSesionPraxia archivoSesionPraxia = new ArchivoSesionPraxia(sesionPraxia.getId(), Fecha, ruta);
 
-        apiClient.registroSesionPraxias(sesionPraxia).enqueue(new Callback<ResponseBody>() {
+        apiClient.registroArchivoSesionPraxias(archivoSesionPraxia).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 enviando = false;
@@ -296,7 +360,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
 
     public void goToHistorialVideos(View view) {
         Intent intent = new Intent(this, PraxiasHistorialActivity.class);
-        intent.putExtra("praxia_id", praxia.getId());
+        intent.putExtra("sesion_praxia_id", sesionPraxia.getId());
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
 

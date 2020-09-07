@@ -1,5 +1,6 @@
 package com.example.kututistesis.api;
 
+import com.example.kututistesis.model.ArchivoSesionPraxia;
 import com.example.kututistesis.model.Fonema;
 import com.example.kututistesis.model.Praxia;
 import com.example.kututistesis.model.ResponseStatus;
@@ -17,10 +18,13 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public class ApiClient {
     private static ApiClient instance = null;
-    public static final String BASE_HOST_URL = "http://192.168.0.7:82/curso-laravel/kututis/";
+    public static final String BASE_HOST_URL = "http://192.168.1.13:82/curso-laravel/kututis/";
     public static final String BASE_URL = BASE_HOST_URL + "public/api/";
     public static final String BASE_STORAGE_IMAGE_URL = BASE_HOST_URL + "storage/app/images/";
 
@@ -42,25 +46,28 @@ public class ApiClient {
     }
 
     public Call<ResponseStatus> registrarPaciente(SignUpForm signUpForm) {
-        Gson gson =  new Gson();
-        return apiService.registarPaciente(gson.toJson(signUpForm));
+        return apiService.registarPaciente(signUpForm.getNombre(), signUpForm.getApellido(), signUpForm.getCelular(),
+                signUpForm.getCorreo(), signUpForm.getContrasenia(), signUpForm.getFecha_inscripcion(), signUpForm.getFecha_nacimiento());
     }
 
     public Call<ResponseStatus> loginPaciente(String correo, String contrasenia) {
-        SignInForm signInForm = new SignInForm(correo, contrasenia);
-        Gson gson =  new Gson();
-        return apiService.loginPaciente(gson.toJson(signInForm));
+        return apiService.loginPaciente(correo, contrasenia);
     }
 
-    public Call<ResponseBody> registroSesionPraxias(SesionPraxia request){
+    /*public Call<ResponseBody> registroSesionPraxias(SesionPraxia request){
         Gson gson = new Gson();
         String json = gson.toJson(request);
         return apiService.registroSesionPraxias(json);
+    }*/
+
+    public Call<ResponseBody> registroArchivoSesionPraxias(ArchivoSesionPraxia archivoSesionPraxia){
+        return apiService.registroArchivoSesionPraxias(archivoSesionPraxia.getSesion_praxia_id(), archivoSesionPraxia.getFecha(),
+                archivoSesionPraxia.getArchivo());
     }
 
-    public Call<List<SesionPraxia>> listar_sesionpraxias(){
+    /*public Call<List<SesionPraxia>> listar_sesionpraxias(){
         return apiService.listar_sesionpraxias();
-    }
+    }*/
 
     public Call<ResponseStatus> registroSesionVocales(SesionVocal request){
         Gson gson = new Gson();
@@ -68,21 +75,31 @@ public class ApiClient {
         return apiService.registroSesionVocales(json);
     }
 
-    public Call<List<SesionVocal>> listar_sesionvocales(){
+    /*public Call<List<SesionVocal>> listar_sesionvocales(){
         return apiService.listar_sesionvocales();
+    }*/
+
+    /*public Call<List<Praxia>> listarpraxias(){
+        return apiService.listarpraxias();
+    }*/
+
+    public Call<List<SesionPraxia>> listar_sesionpraxiasxusuario(Integer id_usuario){
+        return apiService.listar_sesionpraxiasxusuario(id_usuario);
     }
 
-    public Call<List<Praxia>> listarpraxias(){
-        return apiService.listarpraxias();
-    }
 
     public Call<List<Vocal>> listarvocales(){
         return apiService.listarvocales();
     }
 
-    public Call<List<SesionPraxia>> buscarxpraxiaxusuarioxfecha(Integer id_praxia, Integer id_paciente, String fecha){
+    /*public Call<List<SesionPraxia>> buscarxpraxiaxusuarioxfecha(Integer id_praxia, Integer id_paciente, String fecha){
         return apiService.buscarxpraxiaxusuarioxfecha(id_praxia,id_paciente,fecha);
+    }*/
+
+    public Call<List<ArchivoSesionPraxia>> buscararchivosxsesionpraxiaidxfecha(Integer id_sesion_praxia, String fecha){
+        return apiService.buscararchivosxsesionpraxiaidxfecha(id_sesion_praxia, fecha);
     }
+
 
     public Call<List<SesionVocal>> buscarxvocalxusuarioxfecha(Integer id_vocal, Integer id_paciente, String fecha){
         return apiService.buscarxvocalxusuarioxfecha(id_vocal, id_paciente,fecha);

@@ -1,5 +1,6 @@
 package com.example.kututistesis.api;
 
+import com.example.kututistesis.model.ArchivoSesionPraxia;
 import com.example.kututistesis.model.Fonema;
 import com.example.kututistesis.model.Praxia;
 import com.example.kututistesis.model.ResponseStatus;
@@ -22,34 +23,46 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("registropaciente")
-    Call<ResponseStatus> registarPaciente(@Field("json") String json);
+    Call<ResponseStatus> registarPaciente(@Field("Nombre") String nombre, @Field("Apellido")
+            String apellido, @Field("Celular") String celular, @Field("Correo") String correo,
+                                          @Field("Contrasenia") String contrasenia, @Field("Fecha_Inscripcion") String fecha_inscripcion,
+                                          @Field("Fecha_Nacimiento") String fecha_nacimiento);
 
     @FormUrlEncoded
     @POST("loginpaciente")
-    Call<ResponseStatus> loginPaciente(@Field("json") String json);
+    Call<ResponseStatus> loginPaciente(@Field("Correo") String correo, @Field("Contrasenia") String contrasenia);
 
-    @FormUrlEncoded
+   /* @FormUrlEncoded
     @POST("registrosesion_praxias")
-    Call<ResponseBody> registroSesionPraxias(@Field("json") String json);
+    Call<ResponseBody> registroSesionPraxias(@Field("json") String json);*/
 
-    @GET("listar_sesionpraxias")
-    Call<List<SesionPraxia>> listar_sesionpraxias();
+    @POST("archivos_sesion_praxia/agregar")
+    Call<ResponseBody> registroArchivoSesionPraxias(@Field("sesion_praxia_id") Integer sesion_praxia_id,
+                                                    @Field("Fecha") String fecha,
+                                                    @Field("archivo") String archivo);
+
 
     @FormUrlEncoded
     @POST("registrosesion_vocales")
     Call<ResponseStatus> registroSesionVocales(@Field("json") String json);
 
-    @GET("listar_sesionvocales")
-    Call<List<SesionVocal>> listar_sesionvocales();
+    /*@GET("listarpraxias")
+    Call<List<Praxia>> listarpraxias();*/
 
-    @GET("listarpraxias")
-    Call<List<Praxia>> listarpraxias();
+    @GET("listar_sesionpraxiasxusuario/{id_usuario}")
+    Call<List<SesionPraxia>> listar_sesionpraxiasxusuario(@Path("id_usuario") Integer id_usuario);
 
     @GET("listarvocales")
     Call<List<Vocal>> listarvocales();
 
+    /*
     @GET("buscarxpraxiaxusuarioxfecha/{id_praxia}/{id_usuario}/{fecha}")
     Call<List<SesionPraxia>> buscarxpraxiaxusuarioxfecha(@Path("id_praxia") Integer id_praxia, @Path("id_usuario") Integer id_usuario, @Path("fecha") String fecha);
+*/
+
+    @GET("archivos_sesion_praxia/buscararchivosxsesionpraxiaidxfecha/{id_sesion_praxia}/{Fecha}")
+    Call<List<ArchivoSesionPraxia>> buscararchivosxsesionpraxiaidxfecha(@Path("id_sesion_praxia") Integer id_sesion_praxia, @Path("fecha") String fecha);
+
 
     @GET("buscarxvocalxusuarioxfecha/{id_vocal}/{id_usuario}/{fecha}")
     Call<List<SesionVocal>> buscarxvocalxusuarioxfecha(@Path("id_vocal") Integer id_vocal, @Path("id_usuario") Integer id_usuario, @Path("fecha") String fecha);

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -24,6 +25,7 @@ import com.example.kututistesis.R;
 import com.example.kututistesis.adapters.HistorialVideosFechasAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.dialog.BirthDatePickerFragment;
+import com.example.kututistesis.model.ArchivoSesionPraxia;
 import com.example.kututistesis.model.SesionPraxia;
 import com.example.kututistesis.util.Global;
 
@@ -56,8 +58,11 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
     private ImageView imageViewAtras;
     private ConstraintLayout layoutNotFound;
     private ProgressBar progressBarBusqueda;
+    private List<ArchivoSesionPraxia> archivoSesionPraxias;
 
     private Global global;
+    private File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +81,7 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        Integer intent_praxia_id = intent.getIntExtra("praxia_id",0);
+        Integer intent_praxia_id = intent.getIntExtra("sesion_praxia_id",0);
 
         apiClient = ApiClient.getInstance();
 
@@ -143,37 +148,38 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
 
         // Elimina los resultados previos si los hubieron
         HistorialVideosFechasAdapter adapter = new HistorialVideosFechasAdapter();
-        List<SesionPraxia> listaVacia = new ArrayList<>();
-        adapter.setData(listaVacia, video, mediaController);
+        List<ArchivoSesionPraxia> listaVacia = new ArrayList<>();
+        adapter.setData(listaVacia, video, mediaController, storageDir);
         recyclerView.setAdapter(adapter);
 
-        apiClient.buscarxpraxiaxusuarioxfecha(id_praxia,id_paciente,fecha).enqueue(new Callback<List<SesionPraxia>>() {
+        apiClient.buscararchivosxsesionpraxiaidxfecha(id_praxia,fecha).enqueue(new Callback<List<ArchivoSesionPraxia>>() {
             @Override
-            public void onResponse(Call<List<SesionPraxia>> call, Response<List<SesionPraxia>> response) {
+            public void onResponse(Call<List<ArchivoSesionPraxia>> call, Response<List<ArchivoSesionPraxia>> response) {
                 progressBarBusqueda.setVisibility(View.GONE);
 
-                List<SesionPraxia> sesionPraxiaList = response.body();
+                List<ArchivoSesionPraxia> archivoSesionPraxias = response.body();
 
-                if (sesionPraxiaList.size() == 0) {
+                if (archivoSesionPraxias.size() == 0) {
                     layoutNotFound.setVisibility(View.VISIBLE);
                 } else {
                     layoutNotFound.setVisibility(View.GONE);
                 }
 
+                /*
                 for (SesionPraxia sesionPraxia: sesionPraxiaList){
                     url = url + sesionPraxia.getRuta_servidor();
                     sesionPraxia.setRuta_servidor(url);
                     url = ApiClient.BASE_HOST_URL;
-                }
+                }*/
 
-                Collections.reverse(sesionPraxiaList);
+                Collections.reverse(archivoSesionPraxias);
 
-                videosFechasAdapter.setData(sesionPraxiaList, video, mediaController);
+                videosFechasAdapter.setData(archivoSesionPraxias, video, mediaController, storageDir);
                 recyclerView.setAdapter(videosFechasAdapter);
             }
 
             @Override
-            public void onFailure(Call<List<SesionPraxia>> call, Throwable t) {
+            public void onFailure(Call<List<ArchivoSesionPraxia>> call, Throwable t) {
                 progressBarBusqueda.setVisibility(View.GONE);
 
                 Log.d("Fallo praxias", t.getMessage());

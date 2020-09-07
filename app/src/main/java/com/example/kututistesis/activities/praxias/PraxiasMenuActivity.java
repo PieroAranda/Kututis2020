@@ -19,6 +19,8 @@ import com.example.kututistesis.adapters.MenuBanderaAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Banderin;
 import com.example.kututistesis.model.Praxia;
+import com.example.kututistesis.model.SesionPraxia;
+import com.example.kututistesis.util.Global;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,8 +36,11 @@ public class PraxiasMenuActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MenuBanderaAdapter praxiasAdapter;
     private List<Praxia> praxiasList;
+    private List<SesionPraxia> sesionPraxiaList;
     private ImageView imageViewAtras;
     private ProgressBar progressBarMenu;
+    private Global global;
+    private Integer paciente_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,10 @@ public class PraxiasMenuActivity extends AppCompatActivity {
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.colorBackground));
         }
+
+        global = (Global) getApplicationContext();
+
+        paciente_id = global.getId_usuario();
 
         recyclerView = findViewById(R.id.recyclerViewPraxias);
         imageViewAtras = findViewById(R.id.imageViewPraxiasAtras);
@@ -72,20 +81,20 @@ public class PraxiasMenuActivity extends AppCompatActivity {
     public void loadPraxias() {
         progressBarMenu.setVisibility(View.VISIBLE);
 
-        apiClient.listarpraxias().enqueue(new Callback<List<Praxia>>() {
+        apiClient.listar_sesionpraxiasxusuario(paciente_id).enqueue(new Callback<List<SesionPraxia>>() {
             @Override
-            public void onResponse(Call<List<Praxia>> call, Response<List<Praxia>> response) {
+            public void onResponse(Call<List<SesionPraxia>> call, Response<List<SesionPraxia>> response) {
                 progressBarMenu.setVisibility(View.GONE);
                 if (response.isSuccessful()) {
-                    praxiasList = response.body();
+                    sesionPraxiaList = response.body();
                     List<Banderin> banderines = new ArrayList<>();
 
-                    for (Praxia prax : praxiasList) {
-                        String urlVideo = ApiClient.BASE_STORAGE_IMAGE_URL + prax.getVideo();
-                        prax.setVideo(urlVideo);
-                        String urlImagen = ApiClient.BASE_STORAGE_IMAGE_URL + prax.getImagen();
-                        prax.setImagen(urlImagen);
-                        banderines.add(new Banderin(prax.getNombre()));
+                    for (SesionPraxia prax : sesionPraxiaList) {
+                        /*String urlVideo = ApiClient.BASE_STORAGE_IMAGE_URL + prax.getPraxia().getVideo();
+                        prax.getPraxia().setVideo(urlVideo);
+                        String urlImagen = ApiClient.BASE_STORAGE_IMAGE_URL + prax.getPraxia().getImagen();
+                        prax.getPraxia().setImagen(urlImagen);*/
+                        banderines.add(new Banderin(prax.getPraxia().getNombre()));
                     }
 
                     praxiasAdapter.setData(banderines, new ConsonantesAdapter.OnConsonantesListener() {
@@ -104,7 +113,7 @@ public class PraxiasMenuActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Praxia>> call, Throwable t) {
+            public void onFailure(Call<List<SesionPraxia>> call, Throwable t) {
                 progressBarMenu.setVisibility(View.GONE);
                 Log.e("Obteniendo praxias", t.getMessage());
                 Toast.makeText(getApplicationContext(),
@@ -116,9 +125,9 @@ public class PraxiasMenuActivity extends AppCompatActivity {
     }
 
     public void onPraxiaClick(int position) {
-        Praxia p = praxiasList.get(position);
+        SesionPraxia p = sesionPraxiaList.get(position);
         Intent intent = new Intent(this, PraxiasSesionActivity.class);
-        intent.putExtra("praxia", (Serializable) p);
+        intent.putExtra("sesion_praxia", (Serializable) p);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }

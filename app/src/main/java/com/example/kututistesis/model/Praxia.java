@@ -23,13 +23,18 @@ public class Praxia implements Serializable {
     @SerializedName("imagen")
     private String imagen;
 
-    public Praxia(Integer id, String Nombre, String Tipo, String Descripcion, String Video, String imagen) {
+    @SerializedName("eliminado")
+    private Integer eliminado;
+
+
+    public Praxia(Integer id, String Nombre, String Tipo, String Descripcion, String Video, String imagen, Integer eliminado) {
         this.id = id;
         this.Nombre = Nombre;
         this.Tipo = Tipo;
         this.Descripcion = Descripcion;
         this.Video = Video;
         this.imagen = imagen;
+        this.eliminado = eliminado;
     }
 
     public Integer getId() {
@@ -78,5 +83,13 @@ public class Praxia implements Serializable {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public Integer getEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(Integer eliminado) {
+        this.eliminado = eliminado;
     }
 }

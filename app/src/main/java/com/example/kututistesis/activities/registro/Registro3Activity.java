@@ -22,6 +22,10 @@ import com.example.kututistesis.model.SignUpForm;
 import com.example.kututistesis.util.Global;
 import com.example.kututistesis.util.Validations;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -77,6 +81,12 @@ public class Registro3Activity extends AppCompatActivity {
         if(getIntent() != null){
             signUpForm = (SignUpForm) getIntent().getSerializableExtra(INTENT_EXTRA_SIGN_UP_DATA);
         }
+    }
+
+    private void getFechaInscripcion(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        Date date = new Date();
+        signUpForm.setFecha_inscripcion(dateFormat.format(date));
     }
 
     private void registerUser() {
