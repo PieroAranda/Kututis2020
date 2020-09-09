@@ -29,7 +29,9 @@ import androidx.core.content.ContextCompat;
 import com.example.kututistesis.R;
 import com.example.kututistesis.activities.MenuPrincipalActivity;
 import com.example.kututistesis.api.ApiClient;
+import com.example.kututistesis.model.ArchivoSesionFonema;
 import com.example.kututistesis.model.ResponseStatus;
+import com.example.kututistesis.model.SesionFonema;
 import com.example.kututistesis.model.SesionVocal;
 import com.example.kututistesis.model.Vocal;
 import com.example.kututistesis.util.Global;
@@ -42,6 +44,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,7 +63,7 @@ public class VocalicosSesionActivity extends Activity {
     private Integer Aprobado;
     private String Fecha;
     private String ruta;
-    private Vocal vocal;
+    private SesionFonema sesionFonema;
 
     private static final int COD_VIDEO = 20;
     private Button buttonEnviar;
@@ -94,7 +97,7 @@ public class VocalicosSesionActivity extends Activity {
         global = (Global) getApplicationContext();
 
         Intent intent = getIntent();
-        vocal = (Vocal) intent.getSerializableExtra("vocal");
+        sesionFonema = (SesionFonema) intent.getSerializableExtra("sesion_fonema");
 
         apiClient = ApiClient.getInstance();
 
@@ -160,7 +163,7 @@ public class VocalicosSesionActivity extends Activity {
     }
 
     private void loadFonema() {
-        textViewFonema.setText(vocal.getNombre());
+        textViewFonema.setText(sesionFonema.getFonema().getNombre());
     }
 
     public void Recorder() {
@@ -243,9 +246,9 @@ public class VocalicosSesionActivity extends Activity {
         ruta = "data:image/mp3;base64,"+ruta;
 
 
-        SesionVocal sesionVocal = new SesionVocal(paciente_id, vocal.getId(), Aprobado, Fecha, ruta);
+        ArchivoSesionFonema archivoSesionFonema = new ArchivoSesionFonema(sesionFonema.getId(), Fecha, ruta);
 
-        apiClient.registroSesionVocales(sesionVocal).enqueue(new Callback<ResponseStatus>() {
+        apiClient.registroArchivoSesionFonemas(archivoSesionFonema).enqueue(new Callback<ResponseStatus>() {
             @Override
             public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
                 Log.i("Enviando audio", response.body().getStatus() + " " + response.body().getCode());
@@ -289,7 +292,7 @@ public class VocalicosSesionActivity extends Activity {
 
     public void goToHistorialAudios() {
         Intent intent = new Intent(this, VocalicosHistorialActivity.class);
-        intent.putExtra("vocal_id", vocal.getId());
+        intent.putExtra("sesion_fonema_id", sesionFonema.getId());
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }

@@ -1,9 +1,11 @@
 package com.example.kututistesis.api;
 
+import com.example.kututistesis.model.ArchivoSesionFonema;
 import com.example.kututistesis.model.ArchivoSesionPraxia;
 import com.example.kututistesis.model.Fonema;
 import com.example.kututistesis.model.Praxia;
 import com.example.kututistesis.model.ResponseStatus;
+import com.example.kututistesis.model.SesionFonema;
 import com.example.kututistesis.model.SesionPraxia;
 import com.example.kututistesis.model.SesionVocal;
 import com.example.kututistesis.model.SignInForm;
@@ -24,7 +26,7 @@ import retrofit2.http.Path;
 
 public class ApiClient {
     private static ApiClient instance = null;
-    public static final String BASE_HOST_URL = "http://192.168.1.13:82/curso-laravel/kututis/";
+    public static final String BASE_HOST_URL = "http://192.168.1.13:80/curso-laravel/kututis/";
     public static final String BASE_URL = BASE_HOST_URL + "public/api/";
     public static final String BASE_STORAGE_IMAGE_URL = BASE_HOST_URL + "storage/app/images/";
 
@@ -69,10 +71,15 @@ public class ApiClient {
         return apiService.listar_sesionpraxias();
     }*/
 
-    public Call<ResponseStatus> registroSesionVocales(SesionVocal request){
+    /*public Call<ResponseStatus> registroSesionVocales(SesionVocal request){
         Gson gson = new Gson();
         String json = gson.toJson(request);
         return apiService.registroSesionVocales(json);
+    }*/
+
+    public Call<ResponseStatus> registroArchivoSesionFonemas(ArchivoSesionFonema archivoSesionFonema){
+        return apiService.registroArchivoSesionFonemas(archivoSesionFonema.getSesion_fonema_id(), archivoSesionFonema.getFecha(),
+                archivoSesionFonema.getArchivo());
     }
 
     /*public Call<List<SesionVocal>> listar_sesionvocales(){
@@ -88,8 +95,12 @@ public class ApiClient {
     }
 
 
-    public Call<List<Vocal>> listarvocales(){
+    /*public Call<List<Vocal>> listarvocales(){
         return apiService.listarvocales();
+    }*/
+
+    public Call<List<SesionFonema>> listar_sesionfonemasxusuario(Integer id_usuario){
+        return apiService.listar_sesionfonemasxusuario(id_usuario);
     }
 
     /*public Call<List<SesionPraxia>> buscarxpraxiaxusuarioxfecha(Integer id_praxia, Integer id_paciente, String fecha){
@@ -100,10 +111,15 @@ public class ApiClient {
         return apiService.buscararchivosxsesionpraxiaidxfecha(id_sesion_praxia, fecha);
     }
 
-
+    /*
     public Call<List<SesionVocal>> buscarxvocalxusuarioxfecha(Integer id_vocal, Integer id_paciente, String fecha){
         return apiService.buscarxvocalxusuarioxfecha(id_vocal, id_paciente,fecha);
+    }*/
+
+    public Call<List<ArchivoSesionFonema>> buscararchivosxsesionfonemaidxfecha(Integer id_sesion_fonema, String fecha){
+        return apiService.buscararchivosxsesionfonemaidxfecha(id_sesion_fonema, fecha);
     }
+
 
     public Call<List<Fonema>> getFonemas(){
         return apiService.listarfonemas();

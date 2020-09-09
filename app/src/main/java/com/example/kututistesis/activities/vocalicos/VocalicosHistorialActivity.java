@@ -10,6 +10,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -22,9 +23,11 @@ import com.example.kututistesis.R;
 import com.example.kututistesis.adapters.HistorialAudiosFechasAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.dialog.BirthDatePickerFragment;
+import com.example.kututistesis.model.ArchivoSesionFonema;
 import com.example.kututistesis.model.SesionVocal;
 import com.example.kututistesis.util.Global;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,6 +51,8 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
     private ImageView imageViewAtras;
     private ProgressBar progressBarBusqueda;
 
+    private File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +70,7 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        Integer intent_vocal_id = intent.getIntExtra("vocal_id",0);
+        Integer intent_sesion_fonema_id = intent.getIntExtra("sesion_fonema_id",0);
 
         apiClient = ApiClient.getInstance();
 
@@ -92,14 +97,14 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
         url = ApiClient.BASE_HOST_URL;
 
         final Integer id_paciente = global.getId_usuario();
-        final Integer id_vocal = intent_vocal_id;
+        final Integer id_sesion_fonema = intent_sesion_fonema_id;
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String fecha = editText.getText().toString();
                 if (fecha.length() != 0) {
-                    obtenerAudiosGrabados(id_vocal, id_paciente, fecha);
+                    obtenerAudiosGrabados(id_sesion_fonema, fecha);
                 }
             }
         });
@@ -111,54 +116,55 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
             }
         });
 
-        loadActualHistorial(id_vocal, id_paciente);
+        loadActualHistorial(id_sesion_fonema);
     }
 
-    private void loadActualHistorial(int vocalId, int pacienteId) {
+    private void loadActualHistorial(int id_sesion_fonema) {
         Calendar c = Calendar.getInstance();
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
         String todayDateFormatted = f.format(c.getTime());
-        obtenerAudiosGrabados(vocalId, pacienteId, todayDateFormatted);
+        obtenerAudiosGrabados(id_sesion_fonema, todayDateFormatted);
         editText.setText(todayDateFormatted);
     }
 
-    public void obtenerAudiosGrabados(Integer id_vocal, Integer id_paciente, String fecha) {
+    public void obtenerAudiosGrabados(Integer id_sesion_fonema, String fecha) {
         layoutNotFound.setVisibility(View.GONE);
         progressBarBusqueda.setVisibility(View.VISIBLE);
 
         // Elimina los resultados previos si los hubieron
         HistorialAudiosFechasAdapter adapter = new HistorialAudiosFechasAdapter();
-        List<SesionVocal> listaVacia = new ArrayList<>();
-        adapter.setData(listaVacia);
+        List<ArchivoSesionFonema> listaVacia = new ArrayList<>();
+        adapter.setData(listaVacia, storageDir);
         recyclerView.setAdapter(adapter);
 
-        apiClient.buscarxvocalxusuarioxfecha(id_vocal, id_paciente, fecha).enqueue(new Callback<List<SesionVocal>>() {
+        apiClient.buscararchivosxsesionfonemaidxfecha(id_sesion_fonema, fecha).enqueue(new Callback<List<ArchivoSesionFonema>>() {
             @Override
-            public void onResponse(Call<List<SesionVocal>> call, Response<List<SesionVocal>> response) {
+            public void onResponse(Call<List<ArchivoSesionFonema>> call, Response<List<ArchivoSesionFonema>> response) {
                 progressBarBusqueda.setVisibility(View.GONE);
-                List<SesionVocal> sesionVocalList = response.body();
-                Log.d("Funciono vocales", "tamanio:"+sesionVocalList.size());
+                List<ArchivoSesionFonema> archivoSesionFonemas = response.body();
+                Log.d("Funciono vocales", "tamanio:"+archivoSesionFonemas.size());
 
-                if(sesionVocalList.size() == 0) {
+                if(archivoSesionFonemas.size() == 0) {
                     layoutNotFound.setVisibility(View.VISIBLE);
                 } else {
                     layoutNotFound.setVisibility(View.GONE);
                 }
 
+                /*
                 for (SesionVocal sesionVocal: sesionVocalList){
                     url = url + sesionVocal.getRuta_servidor();
                     sesionVocal.setRuta_servidor(url);
                     url = ApiClient.BASE_HOST_URL;
-                }
+                }*/
 
-                Collections.reverse(sesionVocalList);
+                Collections.reverse(archivoSesionFonemas);
 
-                audiosFechasAdapter.setData(sesionVocalList);
+                audiosFechasAdapter.setData(archivoSesionFonemas, storageDir);
                 recyclerView.setAdapter(audiosFechasAdapter);
             }
 
             @Override
-            public void onFailure(Call<List<SesionVocal>> call, Throwable t) {
+            public void onFailure(Call<List<ArchivoSesionFonema>> call, Throwable t) {
                 progressBarBusqueda.setVisibility(View.GONE);
 
                 Log.d("Fallo praxias", t.getMessage());

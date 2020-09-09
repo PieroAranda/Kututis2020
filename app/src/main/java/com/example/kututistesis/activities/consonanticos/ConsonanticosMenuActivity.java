@@ -82,7 +82,7 @@ public class ConsonanticosMenuActivity extends AppCompatActivity implements Cons
                 fonemas = response.body();
                 List<Banderin> banderines = new ArrayList<>();
                 for (Fonema f : fonemas) {
-                    banderines.add(new Banderin(f.getFonema().trim()));
+                    /*banderines.add(new Banderin(f.getFonema().trim()));*/
                 }
                 consonantesAdapter.setData(banderines, ConsonanticosMenuActivity.this);
                 recyclerViewFonemaConsonantico.setAdapter(consonantesAdapter);

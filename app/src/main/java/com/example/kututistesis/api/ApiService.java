@@ -1,9 +1,11 @@
 package com.example.kututistesis.api;
 
+import com.example.kututistesis.model.ArchivoSesionFonema;
 import com.example.kututistesis.model.ArchivoSesionPraxia;
 import com.example.kututistesis.model.Fonema;
 import com.example.kututistesis.model.Praxia;
 import com.example.kututistesis.model.ResponseStatus;
+import com.example.kututistesis.model.SesionFonema;
 import com.example.kututistesis.model.SesionPraxia;
 import com.example.kututistesis.model.SesionVocal;
 import com.example.kututistesis.model.Vocabulario;
@@ -42,9 +44,15 @@ public interface ApiService {
                                                     @Field("archivo") String archivo);
 
 
-    @FormUrlEncoded
+    /*@FormUrlEncoded
     @POST("registrosesion_vocales")
-    Call<ResponseStatus> registroSesionVocales(@Field("json") String json);
+    Call<ResponseStatus> registroSesionVocales(@Field("json") String json);*/
+
+    @POST("archivos_sesion_fonema/agregar")
+    Call<ResponseStatus> registroArchivoSesionFonemas(@Field("sesion_fonema_id") Integer sesion_praxia_id,
+                                                    @Field("Fecha") String fecha,
+                                                    @Field("archivo") String archivo);
+
 
     /*@GET("listarpraxias")
     Call<List<Praxia>> listarpraxias();*/
@@ -52,8 +60,11 @@ public interface ApiService {
     @GET("listar_sesionpraxiasxusuario/{id_usuario}")
     Call<List<SesionPraxia>> listar_sesionpraxiasxusuario(@Path("id_usuario") Integer id_usuario);
 
-    @GET("listarvocales")
-    Call<List<Vocal>> listarvocales();
+    /*@GET("listarvocales")
+    Call<List<Vocal>> listarvocales();*/
+
+    @GET("listar_sesionfonemasxusuario/{id_usuario}")
+    Call<List<SesionFonema>> listar_sesionfonemasxusuario(@Path("id_usuario") Integer id_usuario);
 
     /*
     @GET("buscarxpraxiaxusuarioxfecha/{id_praxia}/{id_usuario}/{fecha}")
@@ -61,11 +72,17 @@ public interface ApiService {
 */
 
     @GET("archivos_sesion_praxia/buscararchivosxsesionpraxiaidxfecha/{id_sesion_praxia}/{Fecha}")
-    Call<List<ArchivoSesionPraxia>> buscararchivosxsesionpraxiaidxfecha(@Path("id_sesion_praxia") Integer id_sesion_praxia, @Path("fecha") String fecha);
+    Call<List<ArchivoSesionPraxia>> buscararchivosxsesionpraxiaidxfecha(@Path("id_sesion_praxia") Integer id_sesion_praxia, @Path("Fecha") String fecha);
 
 
+    /*
     @GET("buscarxvocalxusuarioxfecha/{id_vocal}/{id_usuario}/{fecha}")
     Call<List<SesionVocal>> buscarxvocalxusuarioxfecha(@Path("id_vocal") Integer id_vocal, @Path("id_usuario") Integer id_usuario, @Path("fecha") String fecha);
+*/
+
+    @GET("archivos_sesion_fonema/buscararchivosxsesionfonemaidxfecha/{id_sesion_fonema}/{Fecha}")
+    Call<List<ArchivoSesionFonema>> buscararchivosxsesionfonemaidxfecha(@Path("id_sesion_fonema") Integer id_sesion_fonema, @Path("Fecha") String fecha);
+
 
     @GET("listarfonemas")
     Call<List<Fonema>> listarfonemas();

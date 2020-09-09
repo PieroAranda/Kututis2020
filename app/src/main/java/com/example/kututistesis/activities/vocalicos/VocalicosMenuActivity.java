@@ -18,7 +18,9 @@ import com.example.kututistesis.adapters.ConsonantesAdapter;
 import com.example.kututistesis.adapters.MenuBanderaAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Banderin;
+import com.example.kututistesis.model.SesionFonema;
 import com.example.kututistesis.model.Vocal;
+import com.example.kututistesis.util.Global;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,9 +35,12 @@ public class VocalicosMenuActivity extends AppCompatActivity {
     private ApiClient apiClient;
     private RecyclerView recyclerView;
     private MenuBanderaAdapter vocalAdapter;
-    private List<Vocal> vocalesList;
+    private List<SesionFonema> sesionFonemaList;
     private ImageView imageViewAtras;
     private ProgressBar progressBarMenu;
+
+    private Global global;
+    private Integer paciente_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,10 @@ public class VocalicosMenuActivity extends AppCompatActivity {
 
         apiClient = ApiClient.getInstance();
         vocalAdapter = new MenuBanderaAdapter();
+
+        global = (Global) getApplicationContext();
+
+        paciente_id = global.getId_usuario();
 
         recyclerView = findViewById(R.id.recyclerViewVocalicos);
         imageViewAtras = findViewById(R.id.imageViewVocalicossAtras);
@@ -71,16 +80,16 @@ public class VocalicosMenuActivity extends AppCompatActivity {
     public void loadVocales() {
         progressBarMenu.setVisibility(View.VISIBLE);
 
-        apiClient.listarvocales().enqueue(new Callback<List<Vocal>>() {
+        apiClient.listar_sesionfonemasxusuario(paciente_id).enqueue(new Callback<List<SesionFonema>>() {
             @Override
-            public void onResponse(Call<List<Vocal>> call, Response<List<Vocal>> response) {
+            public void onResponse(Call<List<SesionFonema>> call, Response<List<SesionFonema>> response) {
                 progressBarMenu.setVisibility(View.GONE);
                 if(response.isSuccessful()){
-                    vocalesList = response.body();
+                    sesionFonemaList = response.body();
                     List<Banderin> banderines = new ArrayList<>();
 
-                    for (Vocal v : vocalesList) {
-                        banderines.add(new Banderin(v.getNombre()));
+                    for (SesionFonema v : sesionFonemaList) {
+                        banderines.add(new Banderin(v.getFonema().getNombre()));
                     }
                     vocalAdapter.setData(banderines, new ConsonantesAdapter.OnConsonantesListener() {
                         @Override
@@ -99,7 +108,7 @@ public class VocalicosMenuActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Vocal>> call, Throwable t) {
+            public void onFailure(Call<List<SesionFonema>> call, Throwable t) {
                 progressBarMenu.setVisibility(View.GONE);
                 Log.e("Obteniendo praxias", t.getMessage());
                 Toast.makeText(getApplicationContext(),
@@ -111,9 +120,9 @@ public class VocalicosMenuActivity extends AppCompatActivity {
     }
 
     public void OnVocalClick(int position) {
-        Vocal v = vocalesList.get(position);
+        SesionFonema v = sesionFonemaList.get(position);
         Intent intent = new Intent(this, VocalicosSesionActivity.class);
-        intent.putExtra("vocal", v);
+        intent.putExtra("sesion_fonema", (Serializable) v);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }

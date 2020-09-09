@@ -9,17 +9,25 @@ public class Fonema {
     @SerializedName("Imagen")
     private String Imagen;
 
-    @SerializedName("Fonema")
-    private String Fonema;
+    @SerializedName("Nombre")
+    private String nombre;
 
-    @SerializedName("Tipo_Fonema")
-    private String Tipo_Fonema;
+    @SerializedName("Tipo")
+    private String tipo;
 
-    public Fonema(Integer id, String imagen, String fonema, String tipo_Fonema) {
+    @SerializedName("Descripcion")
+    private String descripcion;
+
+    @SerializedName("eliminado")
+    private String eliminado;
+
+    public Fonema(Integer id, String imagen, String nombre, String tipo, String descripcion, String eliminado) {
         this.id = id;
-        this.Imagen = imagen;
-        this.Fonema = fonema;
-        this.Tipo_Fonema = tipo_Fonema;
+        Imagen = imagen;
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.descripcion = descripcion;
+        this.eliminado = eliminado;
     }
 
     public Integer getId() {
@@ -38,19 +46,35 @@ public class Fonema {
         Imagen = imagen;
     }
 
-    public String getFonema() {
-        return Fonema;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setFonema(String fonema) {
-        Fonema = fonema;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getTipo_Fonema() {
-        return Tipo_Fonema;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setTipo_Fonema(String tipo_Fonema) {
-        Tipo_Fonema = tipo_Fonema;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(String eliminado) {
+        this.eliminado = eliminado;
     }
 }

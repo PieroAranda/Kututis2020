@@ -100,8 +100,10 @@ public class PraxiasSesionActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         sesionPraxia = (SesionPraxia) intent.getSerializableExtra("sesion_praxia");
-        Integer intent_praxia_id = intent.getIntExtra("praxia_id",0);
-        String praxiaNombre = intent.getStringExtra("praxia_nombre");
+
+
+        /*Integer intent_praxia_id = intent.getIntExtra("praxia_id",0);
+        String praxiaNombre = intent.getStringExtra("praxia_nombre");*/
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
