@@ -441,7 +441,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
 
     public void goToHistorialVideos(View view) {
         Intent intent = new Intent(this, PraxiasHistorialActivity.class);
-        intent.putExtra("sesion_praxia_id", sesionPraxia.getId());
+        intent.putExtra("sesion_praxia_id", id_sesion_praxia);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
 

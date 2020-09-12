@@ -54,14 +54,13 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
     private HistorialVideosFechasAdapter videosFechasAdapter;
     private MediaController mediaController;
     private Integer id_paciente;
-    private Integer id_praxia;
+    private Integer id_sesion_praxia;
     private ImageView imageViewAtras;
     private ConstraintLayout layoutNotFound;
     private ProgressBar progressBarBusqueda;
     private List<ArchivoSesionPraxia> archivoSesionPraxias;
 
     private Global global;
-    private File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
 
     @Override
@@ -81,7 +80,7 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        Integer intent_praxia_id = intent.getIntExtra("sesion_praxia_id",0);
+        Integer intent_sesion_praxia_id = intent.getIntExtra("sesion_praxia_id",0);
 
         apiClient = ApiClient.getInstance();
 
@@ -112,14 +111,14 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
         url = ApiClient.BASE_HOST_URL;
 
         id_paciente = global.getId_usuario();
-        id_praxia = intent_praxia_id;
+        id_sesion_praxia = intent_sesion_praxia_id;
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String fecha = editText.getText().toString();
                 if (fecha.length() != 0) {
-                    obtenerVideosGrabados(id_praxia, id_paciente, fecha);
+                    obtenerVideosGrabados(id_sesion_praxia, id_paciente, fecha);
                 }
             }
         });
@@ -131,28 +130,28 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
             }
         });
 
-        loadActualHistorial(id_praxia, id_paciente);
+        loadActualHistorial(id_sesion_praxia, id_paciente);
     }
 
-    private void loadActualHistorial(int praxiaId, int pacienteId) {
+    private void loadActualHistorial(int sesionpraxiaId, int pacienteId) {
         Calendar c = Calendar.getInstance();
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
         String todayDateFormatted = f.format(c.getTime());
-        obtenerVideosGrabados(praxiaId, pacienteId, todayDateFormatted);
+        obtenerVideosGrabados(sesionpraxiaId, pacienteId, todayDateFormatted);
         editText.setText(todayDateFormatted);
     }
 
-    public void obtenerVideosGrabados(Integer id_praxia, Integer id_paciente,String fecha){
+    public void obtenerVideosGrabados(Integer id_sesion_praxia, Integer id_paciente,String fecha){
         layoutNotFound.setVisibility(View.GONE);
         progressBarBusqueda.setVisibility(View.VISIBLE);
 
         // Elimina los resultados previos si los hubieron
         HistorialVideosFechasAdapter adapter = new HistorialVideosFechasAdapter();
         List<ArchivoSesionPraxia> listaVacia = new ArrayList<>();
-        adapter.setData(listaVacia, video, mediaController, storageDir);
+        adapter.setData(listaVacia, video, mediaController);
         recyclerView.setAdapter(adapter);
 
-        apiClient.buscararchivosxsesionpraxiaidxfecha(id_praxia,fecha).enqueue(new Callback<List<ArchivoSesionPraxia>>() {
+        apiClient.buscararchivosxsesionpraxiaidxfecha(id_sesion_praxia,fecha).enqueue(new Callback<List<ArchivoSesionPraxia>>() {
             @Override
             public void onResponse(Call<List<ArchivoSesionPraxia>> call, Response<List<ArchivoSesionPraxia>> response) {
                 progressBarBusqueda.setVisibility(View.GONE);
@@ -174,7 +173,7 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
 
                 Collections.reverse(archivoSesionPraxias);
 
-                videosFechasAdapter.setData(archivoSesionPraxias, video, mediaController, storageDir);
+                videosFechasAdapter.setData(archivoSesionPraxias, video, mediaController);
                 recyclerView.setAdapter(videosFechasAdapter);
             }
 

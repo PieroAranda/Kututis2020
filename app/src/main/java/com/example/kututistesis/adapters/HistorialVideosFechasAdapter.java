@@ -39,17 +39,22 @@ public class HistorialVideosFechasAdapter extends RecyclerView.Adapter<Historial
     private Context context;
     private VideoView video;
     private MediaController mediaController;
-    private File storageDir;
+
+    private static final String CARPETA_PRINCIPAL_VIDEO_HISTORIAL = "misVideosHistorialApp/";
+    private static final String CARPETA_HISTORIAL = "videosHistorial";
+    private static final String DIRECTORIO_VIDEOHISTORIAL = CARPETA_PRINCIPAL_VIDEO_HISTORIAL + CARPETA_HISTORIAL;
+
+    private String pathVideoHistorial;
+    File fileVideoHistorial;
 
     public HistorialVideosFechasAdapter() {
 
     }
 
-    public void setData(List<ArchivoSesionPraxia> sesionPraxiaList, VideoView video, MediaController mediaController, File storageDir) {
+    public void setData(List<ArchivoSesionPraxia> sesionPraxiaList, VideoView video, MediaController mediaController) {
         this.sesionPraxiaList= sesionPraxiaList;
         this.video = video;
         this.mediaController = mediaController;
-        this.storageDir = storageDir;
         notifyDataSetChanged();
     }
 
@@ -79,16 +84,14 @@ public class HistorialVideosFechasAdapter extends RecyclerView.Adapter<Historial
         holder.play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playVideo(sesionPraxia.getArchivo(), holder.play, position, numero_intento);
+                TomarVideoHistorial(sesionPraxia.getArchivo(), holder.play);
             }
         }
 
         );
     }
 
-    private File convertirByteArrayIntoFile(byte[] bytearray, Integer position, String numero_intento){
-        String FILEPATH = ApiClient.BASE_STORAGE_IMAGE_URL+ "VideoEjemplo"+ sesionPraxiaList.get(position).getId() + "-"+ sesionPraxiaList.get(position).getSesion_praxia_id()+"-"+sesionPraxiaList.get(position).getFecha()+"-"+numero_intento +".mp4";
-        File file = new File(FILEPATH);
+    private File convertirByteArrayIntoFile(byte[] bytearray, File file){
         try {
 
             // Initialize a pointer
@@ -112,36 +115,38 @@ public class HistorialVideosFechasAdapter extends RecyclerView.Adapter<Historial
         return file;
     }
 
-    private File generateTemporaryFile(String filename) throws IOException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        Date date = new Date();
 
-        String tempFileName = dateFormat.format(date);
+    public void TomarVideoHistorial(String archivo, @NonNull final ImageView play){
 
-        File tempFile = File.createTempFile(
-                tempFileName,       /* prefix     "20130318_010530" */
-                filename,           /* filename   "video.3gp" */
-                storageDir          /* directory  "/data/sdcard/..." */
-        );
+        File directorioVideos = new File(Environment.getExternalStorageDirectory(), DIRECTORIO_VIDEOHISTORIAL);
 
-        return tempFile;
+        if(!directorioVideos.exists()) {
+            directorioVideos.mkdirs();
+        } else {
+            Long timestamp = System.currentTimeMillis() / 1000;
+            String fileName = timestamp + ".mp4";
+
+            pathVideoHistorial = Environment.getExternalStorageDirectory() + File.separator + DIRECTORIO_VIDEOHISTORIAL
+                    + File.separator + fileName;
+
+            fileVideoHistorial = new File(pathVideoHistorial);
+            byte[] bytearray = Base64.decode(archivo, Base64.DEFAULT);
+            File file = convertirByteArrayIntoFile(bytearray, fileVideoHistorial);
+
+            playVideo(file, play);
+        }
     }
 
-    public void playVideo(String archivo, @NonNull final ImageView play, Integer position, String numero_intento) {
+
+    public void playVideo(File file, @NonNull final ImageView play) {
         try {
             if (!video.isPlaying()){
-                byte[] bytearray = Base64.decode(archivo, Base64.DEFAULT);
-                File file = convertirByteArrayIntoFile(bytearray, position, numero_intento);
 
-                try {
-                    // Copy file to temporary file in order to view it.
-                    File temporaryFile = generateTemporaryFile(file.getName());
-                    FileUtils.copyFile(file, temporaryFile);
-                    video.setVideoPath(temporaryFile.getAbsolutePath());
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
+                video.setVideoPath(file.getAbsolutePath());
+
+
                 video.setMediaController(mediaController);
                 mediaController.setAnchorView(video);
 
