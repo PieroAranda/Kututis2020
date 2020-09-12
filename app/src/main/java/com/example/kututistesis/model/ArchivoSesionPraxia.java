@@ -21,10 +21,13 @@ public class ArchivoSesionPraxia {
     @SerializedName("Pendiente_x_Revisar")
     private Integer pendiente_x_revisar;
 
-    public ArchivoSesionPraxia(Integer sesion_praxia_id, String fecha, String archivo) {
+    public ArchivoSesionPraxia(Integer id, Integer sesion_praxia_id, Integer aprobado, String fecha, String archivo, Integer pendiente_x_revisar) {
+        this.id = id;
         this.sesion_praxia_id = sesion_praxia_id;
+        Aprobado = aprobado;
         this.fecha = fecha;
         this.archivo = archivo;
+        this.pendiente_x_revisar = pendiente_x_revisar;
     }
 
     public Integer getId() {

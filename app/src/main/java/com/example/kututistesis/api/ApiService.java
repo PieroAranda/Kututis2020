@@ -38,6 +38,7 @@ public interface ApiService {
     @POST("registrosesion_praxias")
     Call<ResponseBody> registroSesionPraxias(@Field("json") String json);*/
 
+    @FormUrlEncoded
     @POST("archivos_sesion_praxia/agregar")
     Call<ResponseBody> registroArchivoSesionPraxias(@Field("sesion_praxia_id") Integer sesion_praxia_id,
                                                     @Field("Fecha") String fecha,
@@ -48,6 +49,7 @@ public interface ApiService {
     @POST("registrosesion_vocales")
     Call<ResponseStatus> registroSesionVocales(@Field("json") String json);*/
 
+    @FormUrlEncoded
     @POST("archivos_sesion_fonema/agregar")
     Call<ResponseStatus> registroArchivoSesionFonemas(@Field("sesion_fonema_id") Integer sesion_praxia_id,
                                                     @Field("Fecha") String fecha,

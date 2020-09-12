@@ -93,6 +93,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
     private ProgressBar progressBarVideo;
 
     private SesionPraxia sesionPraxiaAUX;
+    private Integer id_sesion_praxia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +116,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Integer id_praxia =  intent.getIntExtra("id_praxia",0);
+        id_sesion_praxia = intent.getIntExtra("id_sesion_praxia", 0);
         apiClient = ApiClient.getInstance();
 
 
@@ -379,11 +381,11 @@ public class PraxiasSesionActivity extends AppCompatActivity {
 
         Fecha = dateFormat.format(date);
 
-        ruta = "data:image/mp4;base64,"+ruta;
+        /*ruta = "data:image/mp4;base64,"+ruta;*/
 
-        ArchivoSesionPraxia archivoSesionPraxia = new ArchivoSesionPraxia(sesionPraxia.getId(), Fecha, ruta);
 
-        apiClient.registroArchivoSesionPraxias(archivoSesionPraxia).enqueue(new Callback<ResponseBody>() {
+
+        apiClient.registroArchivoSesionPraxias(id_sesion_praxia, Fecha, ruta).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 enviando = false;

@@ -62,9 +62,8 @@ public class ApiClient {
         return apiService.registroSesionPraxias(json);
     }*/
 
-    public Call<ResponseBody> registroArchivoSesionPraxias(ArchivoSesionPraxia archivoSesionPraxia){
-        return apiService.registroArchivoSesionPraxias(archivoSesionPraxia.getSesion_praxia_id(), archivoSesionPraxia.getFecha(),
-                archivoSesionPraxia.getArchivo());
+    public Call<ResponseBody> registroArchivoSesionPraxias(Integer sesion_praxia_id, String fecha, String archivo){
+        return apiService.registroArchivoSesionPraxias(sesion_praxia_id, fecha, archivo);
     }
 
     /*public Call<List<SesionPraxia>> listar_sesionpraxias(){
