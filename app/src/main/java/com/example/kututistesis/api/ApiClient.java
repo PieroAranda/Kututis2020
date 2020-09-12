@@ -128,4 +128,8 @@ public class ApiClient {
     public Call<List<Vocabulario>> buscarvocabularioxfonemaid(Integer fonema_id){
         return apiService.buscarvocabularioxfonemaid(fonema_id);
     }
+
+    public Call<List<SesionPraxia>> buscarxpraxiayusuario(Integer id_praxia, Integer id_paciente){
+        return apiService.buscarxpraxiayusuario(id_praxia, id_paciente);
+    }
 }

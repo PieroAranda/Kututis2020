@@ -127,7 +127,7 @@ public class PraxiasMenuActivity extends AppCompatActivity {
     public void onPraxiaClick(int position) {
         SesionPraxia p = sesionPraxiaList.get(position);
         Intent intent = new Intent(this, PraxiasSesionActivity.class);
-        intent.putExtra("sesion_praxia", (Serializable) p);
+        intent.putExtra("id_praxia", p.getPraxias_id());
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }

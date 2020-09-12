@@ -89,4 +89,9 @@ public interface ApiService {
 
     @GET("vocabulario/buscarxfonemaid/{fonema_id}")
     Call<List<Vocabulario>> buscarvocabularioxfonemaid(@Path("fonema_id") Integer fonema_id);
+
+
+    @GET("buscarxpraxiayusuario/{id_praxia}/{id_usuario}")
+    Call<List<SesionPraxia>> buscarxpraxiayusuario(@Path("id_praxia") Integer id_praxia, @Path("id_usuario") Integer id_usuario);
+
 }

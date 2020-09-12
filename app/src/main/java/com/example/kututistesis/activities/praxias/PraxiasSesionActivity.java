@@ -50,7 +50,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.io.FileWriter;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -62,8 +64,15 @@ public class PraxiasSesionActivity extends AppCompatActivity {
     private static final String CARPETA_PRINCIPAL = "misImagenesApp/";
     private static final String CARPETA_IMAGEN = "imagenes";
     private static final String DIRECTORIO_IMAGEN = CARPETA_PRINCIPAL + CARPETA_IMAGEN;
+
+    private static final String CARPETA_PRINCIPAL_VIDEO_EJEMPLO = "misVideosEjemplosApp/";
+    private static final String CARPETA_EJEMPLOS = "videos";
+    private static final String DIRECTORIO_VIDEOEJEMPLO = CARPETA_PRINCIPAL_VIDEO_EJEMPLO + CARPETA_EJEMPLOS;
+
     private String path;
+    private String pathVideoEjemplo;
     File fileVideo;
+    File fileVideoEjemplo;
     private ApiClient apiClient;
     private Integer paciente_id;
     private Integer Aprobado;
@@ -83,6 +92,8 @@ public class PraxiasSesionActivity extends AppCompatActivity {
     private SesionPraxia sesionPraxia;
     private ProgressBar progressBarVideo;
 
+    private SesionPraxia sesionPraxiaAUX;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,9 +108,15 @@ public class PraxiasSesionActivity extends AppCompatActivity {
         }
 
         global = (Global) getApplicationContext();
+        paciente_id = global.getId_usuario();
+
+        /*Intent intent = getIntent();
+        sesionPraxia = (SesionPraxia) intent.getSerializableExtra("sesion_praxia");*/
 
         Intent intent = getIntent();
-        sesionPraxia = (SesionPraxia) intent.getSerializableExtra("sesion_praxia");
+        Integer id_praxia =  intent.getIntExtra("id_praxia",0);
+        apiClient = ApiClient.getInstance();
+
 
 
         /*Integer intent_praxia_id = intent.getIntExtra("praxia_id",0);
@@ -112,8 +129,8 @@ public class PraxiasSesionActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(PraxiasSesionActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1000);
         }
 
-        apiClient = ApiClient.getInstance();
-        paciente_id = global.getId_usuario();
+
+
         Aprobado = 0;
         Fecha = "";
         ruta = "";
@@ -126,8 +143,9 @@ public class PraxiasSesionActivity extends AppCompatActivity {
         textViewTitulo = findViewById(R.id.textViewPraxiasSesionTitulo);
         progressBarVideo = findViewById(R.id.progressBarPraxiasSesionVideo);
 
-        loadTitle();
-        loadVideo();
+        loadSesionPraxia(id_praxia, paciente_id);
+        /*loadTitle();*/
+        /*loadVideo();*/
 
         play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,30 +169,63 @@ public class PraxiasSesionActivity extends AppCompatActivity {
         });
     }
 
-    private File convertirByteArrayIntoFile(byte[] bytearray){
-         String FILEPATH = ApiClient.BASE_STORAGE_IMAGE_URL+ "VideoEjemplo"+ sesionPraxia.getPraxia().getNombre()+".mp4";
-         File file = new File(FILEPATH);
-            try {
-
-                // Initialize a pointer
-                // in file using OutputStream
-                OutputStream
-                        os
-                        = new FileOutputStream(file);
-
-                // Starts writing the bytes in it
-                os.write(bytearray);
-                System.out.println("Successfully"
-                        + " byte inserted");
-
-                // Close the file
-                os.close();
+    public void loadSesionPraxia(int id_praxia, int paciente_id){
+        progressBarVideo.setVisibility(View.VISIBLE);
+        apiClient.buscarxpraxiayusuario(id_praxia, paciente_id).enqueue(new Callback<List<SesionPraxia>>() {
+            @Override
+            public void onResponse(Call<List<SesionPraxia>> call, Response<List<SesionPraxia>> response) {
+                progressBarVideo.setVisibility(View.GONE);
+                Log.d("ObteniendoSesionPraxia", "Status"+response.code());
+                if(response.isSuccessful()) {
+                    Log.d("FuncionoSesionPraxia", "Status"+response.body().get(0));
+                    sesionPraxiaAUX = response.body().get(0);
+                    Log.d("FuncionoSesionPraxia", "Status"+sesionPraxiaAUX);
+                    loadTitle(sesionPraxiaAUX);
+                    TomarVideoEjemplo(sesionPraxiaAUX);
+                    /*loadVideo(sesionPraxiaAUX);*/
+                }else {
+                    Log.d("FalloSesionPraxia", "Status"+response.body());
+                    Toast.makeText(getApplicationContext(),
+                            "Ocurrió un problema, no se pudo obtener el video",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
             }
 
-            catch (Exception e) {
-                System.out.println("Exception: " + e);
+            @Override
+            public void onFailure(Call<List<SesionPraxia>> call, Throwable t) {
+                Log.d("FalloSesionPraxia", "Trowable"+t);
+                Toast.makeText(getApplicationContext(),
+                        "Ocurrió un problema, no se pudo obtener el video",
+                        Toast.LENGTH_SHORT)
+                        .show();
             }
-            return file;
+        });
+    }
+
+
+    private File convertirByteArrayIntoFile(byte[] bytearray, File file){
+        try {
+
+            // Initialize a pointer
+            // in file using OutputStream
+            OutputStream
+                    os
+                    = new FileOutputStream(file);
+
+            // Starts writing the bytes in it
+            os.write(bytearray);
+            System.out.println("Successfully"
+                    + " byte inserted");
+
+            // Close the file
+            os.close();
+        }
+
+        catch (Exception e) {
+            System.out.println("Exception: " + e);
+        }
+        return file;
     }
 
     private File generateTemporaryFile(String filename) throws IOException {
@@ -194,15 +245,16 @@ public class PraxiasSesionActivity extends AppCompatActivity {
         return tempFile;
     }
 
-    private void loadVideo() {
-        byte[] bytearray = Base64.decode(sesionPraxia.getPraxia().getVideo(), Base64.DEFAULT);
-        File file = convertirByteArrayIntoFile(bytearray);
+    private void loadVideo(File file) {
+        /*byte[] bytearray = Base64.decode(sesionPraxia.getPraxia().getVideo(), Base64.DEFAULT);
+        File file = convertirByteArrayIntoFile(bytearray, fileVideoEjemplo);*/
 
         try {
             // Copy file to temporary file in order to view it.
             File temporaryFile = generateTemporaryFile(file.getName());
             FileUtils.copyFile(file, temporaryFile);
-            videoEjemplo.setVideoPath(temporaryFile.getAbsolutePath());
+            videoEjemplo.setVideoPath(file.getAbsolutePath());
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -224,11 +276,36 @@ public class PraxiasSesionActivity extends AppCompatActivity {
         });
     }
 
-    private void loadTitle() {
+    private void loadTitle(SesionPraxia sesionPraxia) {
         textViewTitulo.setText(sesionPraxia.getPraxia().getNombre());
     }
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
+
+    public void TomarVideoEjemplo(SesionPraxia sesionPraxia){
+        if(enviando) {
+            return;
+        }
+
+        File directorioVideos = new File(Environment.getExternalStorageDirectory(), DIRECTORIO_VIDEOEJEMPLO);
+
+        if(!directorioVideos.exists()) {
+            directorioVideos.mkdirs();
+        } else {
+            Long timestamp = System.currentTimeMillis() / 1000;
+            String fileName = timestamp + ".mp4";
+
+            pathVideoEjemplo = Environment.getExternalStorageDirectory() + File.separator + DIRECTORIO_VIDEOEJEMPLO
+                    + File.separator + fileName;
+
+            fileVideoEjemplo = new File(pathVideoEjemplo);
+            byte[] bytearray = Base64.decode(sesionPraxia.getPraxia().getVideo(), Base64.DEFAULT);
+            File file = convertirByteArrayIntoFile(bytearray, fileVideoEjemplo);
+
+            loadVideo(file);
+        }
+    }
+
 
     public void TomarVideo() {
 
