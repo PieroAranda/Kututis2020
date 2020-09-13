@@ -6,7 +6,7 @@ public class Fonema {
     @SerializedName("id")
     private Integer id;
 
-    @SerializedName("Imagen")
+    @SerializedName("imagen")
     private String Imagen;
 
     @SerializedName("Nombre")

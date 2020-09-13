@@ -122,7 +122,8 @@ public class VocalicosMenuActivity extends AppCompatActivity {
     public void OnVocalClick(int position) {
         SesionFonema v = sesionFonemaList.get(position);
         Intent intent = new Intent(this, VocalicosSesionActivity.class);
-        intent.putExtra("sesion_fonema", (Serializable) v);
+        intent.putExtra("id_fonema", v.getFonema_id());
+        intent.putExtra("id_sesion_fonema", v.getId());
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }

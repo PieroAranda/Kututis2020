@@ -30,6 +30,7 @@ import com.example.kututistesis.R;
 import com.example.kututistesis.activities.MenuPrincipalActivity;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.ArchivoSesionFonema;
+import com.example.kututistesis.model.Fonema;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionFonema;
 import com.example.kututistesis.model.SesionVocal;
@@ -42,6 +43,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import okhttp3.ResponseBody;
@@ -76,6 +78,9 @@ public class VocalicosSesionActivity extends Activity {
     private TextView textViewFonema;
     private int screenHeight;
 
+    private Integer id_sesion_fonema;
+    private Fonema fonema;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +102,9 @@ public class VocalicosSesionActivity extends Activity {
         global = (Global) getApplicationContext();
 
         Intent intent = getIntent();
-        sesionFonema = (SesionFonema) intent.getSerializableExtra("sesion_fonema");
+        /*sesionFonema = (SesionFonema) intent.getSerializableExtra("sesion_fonema");*/
+        Integer id_fonema =  intent.getIntExtra("id_fonema",0);
+        id_sesion_fonema = intent.getIntExtra("id_sesion_fonema", 0);
 
         apiClient = ApiClient.getInstance();
 
@@ -121,7 +128,7 @@ public class VocalicosSesionActivity extends Activity {
         textViewFonema = findViewById(R.id.textViewVocalicosSesionFonema);
         buttonHistorialAudios = findViewById(R.id.buttonHistorialAudios);
 
-        loadFonema();
+        loadFonema(id_fonema);
 
         buttonEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,8 +169,23 @@ public class VocalicosSesionActivity extends Activity {
         });
     }
 
-    private void loadFonema() {
-        textViewFonema.setText(sesionFonema.getFonema().getNombre());
+    private void loadFonema(Integer id_fonema) {
+        apiClient.buscarfonemaxid(id_fonema).enqueue(new Callback<List<Fonema>>() {
+            @Override
+            public void onResponse(Call<List<Fonema>> call, Response<List<Fonema>> response) {
+                fonema = response.body().get(0);
+                textViewFonema.setText(fonema.getNombre());
+            }
+
+            @Override
+            public void onFailure(Call<List<Fonema>> call, Throwable t) {
+                Log.d("FalloSesionPraxia", "Trowable"+t);
+                Toast.makeText(getApplicationContext(),
+                        "Ocurrió un problema, no se pudo obtener el fonema",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
     }
 
     public void Recorder() {
@@ -243,12 +265,8 @@ public class VocalicosSesionActivity extends Activity {
 
         Fecha = dateFormat.format(date);
 
-        ruta = "data:image/mp3;base64,"+ruta;
 
-
-        ArchivoSesionFonema archivoSesionFonema = new ArchivoSesionFonema(sesionFonema.getId(), Fecha, ruta);
-
-        apiClient.registroArchivoSesionFonemas(archivoSesionFonema).enqueue(new Callback<ResponseStatus>() {
+        apiClient.registroArchivoSesionFonemas(id_sesion_fonema, Fecha, ruta).enqueue(new Callback<ResponseStatus>() {
             @Override
             public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
                 Log.i("Enviando audio", response.body().getStatus() + " " + response.body().getCode());
@@ -292,7 +310,7 @@ public class VocalicosSesionActivity extends Activity {
 
     public void goToHistorialAudios() {
         Intent intent = new Intent(this, VocalicosHistorialActivity.class);
-        intent.putExtra("sesion_fonema_id", sesionFonema.getId());
+        intent.putExtra("sesion_fonema_id", id_sesion_fonema);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }

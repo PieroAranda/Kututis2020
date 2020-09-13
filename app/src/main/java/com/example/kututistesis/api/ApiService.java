@@ -51,7 +51,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("archivos_sesion_fonema/agregar")
-    Call<ResponseStatus> registroArchivoSesionFonemas(@Field("sesion_fonema_id") Integer sesion_praxia_id,
+    Call<ResponseStatus> registroArchivoSesionFonemas(@Field("sesion_fonema_id") Integer sesion_fonema_id,
                                                     @Field("Fecha") String fecha,
                                                     @Field("archivo") String archivo);
 
@@ -95,5 +95,8 @@ public interface ApiService {
 
     @GET("buscarxpraxiayusuario/{id_praxia}/{id_usuario}")
     Call<List<SesionPraxia>> buscarxpraxiayusuario(@Path("id_praxia") Integer id_praxia, @Path("id_usuario") Integer id_usuario);
+
+    @GET("fonema/buscarxid/{id}")
+    Call<List<Fonema>> buscarfonemaxid(@Path("id") Integer id_fonema);
 
 }

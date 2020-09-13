@@ -76,9 +76,8 @@ public class ApiClient {
         return apiService.registroSesionVocales(json);
     }*/
 
-    public Call<ResponseStatus> registroArchivoSesionFonemas(ArchivoSesionFonema archivoSesionFonema){
-        return apiService.registroArchivoSesionFonemas(archivoSesionFonema.getSesion_fonema_id(), archivoSesionFonema.getFecha(),
-                archivoSesionFonema.getArchivo());
+    public Call<ResponseStatus> registroArchivoSesionFonemas(Integer sesion_fonema_id, String fecha, String archivo){
+        return apiService.registroArchivoSesionFonemas(sesion_fonema_id, fecha, archivo);
     }
 
     /*public Call<List<SesionVocal>> listar_sesionvocales(){
@@ -130,5 +129,9 @@ public class ApiClient {
 
     public Call<List<SesionPraxia>> buscarxpraxiayusuario(Integer id_praxia, Integer id_paciente){
         return apiService.buscarxpraxiayusuario(id_praxia, id_paciente);
+    }
+
+    public Call<List<Fonema>> buscarfonemaxid(Integer id_fonema){
+        return apiService.buscarfonemaxid(id_fonema);
     }
 }

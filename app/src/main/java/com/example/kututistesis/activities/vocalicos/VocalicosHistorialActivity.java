@@ -51,7 +51,6 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
     private ImageView imageViewAtras;
     private ProgressBar progressBarBusqueda;
 
-    private File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +133,7 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
         // Elimina los resultados previos si los hubieron
         HistorialAudiosFechasAdapter adapter = new HistorialAudiosFechasAdapter();
         List<ArchivoSesionFonema> listaVacia = new ArrayList<>();
-        adapter.setData(listaVacia, storageDir);
+        adapter.setData(listaVacia);
         recyclerView.setAdapter(adapter);
 
         apiClient.buscararchivosxsesionfonemaidxfecha(id_sesion_fonema, fecha).enqueue(new Callback<List<ArchivoSesionFonema>>() {
@@ -159,7 +158,7 @@ public class VocalicosHistorialActivity extends AppCompatActivity {
 
                 Collections.reverse(archivoSesionFonemas);
 
-                audiosFechasAdapter.setData(archivoSesionFonemas, storageDir);
+                audiosFechasAdapter.setData(archivoSesionFonemas);
                 recyclerView.setAdapter(audiosFechasAdapter);
             }
 

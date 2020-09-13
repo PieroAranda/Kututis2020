@@ -34,16 +34,21 @@ public class HistorialAudiosFechasAdapter extends RecyclerView.Adapter<Historial
 
     private List<ArchivoSesionFonema> archivoSesionFonemasList;
     private Context context;
-    private File storageDir;
+
+    private static final String CARPETA_PRINCIPAL_AUDIO_HISTORIAL = "misAudiosHistorialApp/";
+    private static final String CARPETA_HISTORIAL_AUDIO = "audiosHistorial";
+    private static final String DIRECTORIO_AUDIOHISTORIAL = CARPETA_PRINCIPAL_AUDIO_HISTORIAL + CARPETA_HISTORIAL_AUDIO;
+
+    private String pathAudioHistorial;
+    File fileAudioHistorial;
 
 
     public HistorialAudiosFechasAdapter(){
 
     }
 
-    public void setData(List<ArchivoSesionFonema> archivoSesionFonemasList, File storageDir){
+    public void setData(List<ArchivoSesionFonema> archivoSesionFonemasList){
         this.archivoSesionFonemasList = archivoSesionFonemasList;
-        this.storageDir = storageDir;
         notifyDataSetChanged();
     }
 
@@ -72,15 +77,13 @@ public class HistorialAudiosFechasAdapter extends RecyclerView.Adapter<Historial
         holder.playAudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playAudio(arSesionFonema.getArchivo(), holder.playAudio, position, numero_intento);
+                TomarAudioHistorial(arSesionFonema.getArchivo(), holder.playAudio);
             }
         }
         );
     }
 
-    private File convertirByteArrayIntoFile(byte[] bytearray, Integer position, String numero_intento){
-        String FILEPATH = ApiClient.BASE_STORAGE_IMAGE_URL+ "VideoEjemplo"+ archivoSesionFonemasList.get(position).getId() + "-"+ archivoSesionFonemasList.get(position).getSesion_fonema_id()+"-"+archivoSesionFonemasList.get(position).getFecha()+"-"+numero_intento +".mp4";
-        File file = new File(FILEPATH);
+    private File convertirByteArrayIntoFile(byte[] bytearray, File file){
         try {
 
             // Initialize a pointer
@@ -104,34 +107,35 @@ public class HistorialAudiosFechasAdapter extends RecyclerView.Adapter<Historial
         return file;
     }
 
-    private File generateTemporaryFile(String filename) throws IOException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        Date date = new Date();
 
-        String tempFileName = dateFormat.format(date);
+    public void TomarAudioHistorial(String archivo, @NonNull final ImageView play){
 
-        File tempFile = File.createTempFile(
-                tempFileName,       /* prefix     "20130318_010530" */
-                filename,           /* filename   "video.3gp" */
-                storageDir          /* directory  "/data/sdcard/..." */
-        );
+        File directorioVideos = new File(Environment.getExternalStorageDirectory(), DIRECTORIO_AUDIOHISTORIAL);
 
-        return tempFile;
+        if(!directorioVideos.exists()) {
+            directorioVideos.mkdirs();
+        } else {
+            Long timestamp = System.currentTimeMillis() / 1000;
+            String fileName = timestamp + ".mp4";
+
+            pathAudioHistorial = Environment.getExternalStorageDirectory() + File.separator + DIRECTORIO_AUDIOHISTORIAL
+                    + File.separator + fileName;
+
+            fileAudioHistorial = new File(pathAudioHistorial);
+            byte[] bytearray = Base64.decode(archivo, Base64.DEFAULT);
+            File file = convertirByteArrayIntoFile(bytearray, fileAudioHistorial);
+
+            playAudio(file, play);
+        }
     }
 
-    public void playAudio(String archivo, @NonNull final ImageView play, Integer position, String numero_intento){
+    public void playAudio(File file, @NonNull final ImageView play){
         MediaPlayer mediaPlayer = new MediaPlayer();
 
-        byte[] bytearray = Base64.decode(archivo, Base64.DEFAULT);
-        File file = convertirByteArrayIntoFile(bytearray, position, numero_intento);
-
         try {
-            File temporaryFile = generateTemporaryFile(file.getName());
-            FileUtils.copyFile(file, temporaryFile);
-
-            mediaPlayer.setDataSource(temporaryFile.getAbsolutePath());
+            mediaPlayer.setDataSource(file.getAbsolutePath());
             mediaPlayer.prepare();
-            Toast.makeText(context, "Reproducir audio "+temporaryFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Reproducir audio "+file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
         }catch (IOException e){
         }
 

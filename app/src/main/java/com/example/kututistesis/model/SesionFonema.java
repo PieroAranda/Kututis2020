@@ -10,7 +10,7 @@ public class SesionFonema {
     private Integer paciente_id;
 
     @SerializedName("fonema_id")
-    private Integer praxias_id;
+    private Integer fonema_id;
 
     @SerializedName("Repeticiones")
     private Integer repeticiones;
@@ -21,10 +21,10 @@ public class SesionFonema {
     @SerializedName("fonema")
     private Fonema fonema;
 
-    public SesionFonema(Integer id, Integer paciente_id, Integer praxias_id, Integer repeticiones, Integer completado, Fonema fonema) {
+    public SesionFonema(Integer id, Integer paciente_id, Integer fonema_id, Integer repeticiones, Integer completado, Fonema fonema) {
         this.id = id;
         this.paciente_id = paciente_id;
-        this.praxias_id = praxias_id;
+        this.fonema_id = fonema_id;
         this.repeticiones = repeticiones;
         this.completado = completado;
         this.fonema = fonema;
@@ -46,12 +46,12 @@ public class SesionFonema {
         this.paciente_id = paciente_id;
     }
 
-    public Integer getPraxias_id() {
-        return praxias_id;
+    public Integer getFonema_id() {
+        return fonema_id;
     }
 
-    public void setPraxias_id(Integer praxias_id) {
-        this.praxias_id = praxias_id;
+    public void setFonema_id(Integer praxias_id) {
+        this.fonema_id = praxias_id;
     }
 
     public Integer getRepeticiones() {
