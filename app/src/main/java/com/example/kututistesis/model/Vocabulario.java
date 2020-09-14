@@ -10,17 +10,21 @@ public class Vocabulario {
     @SerializedName("Palabra")
     private String Palabra;
 
-    @SerializedName("Imagen")
+    @SerializedName("imagen")
     private String Imagen;
 
     @SerializedName("fonema_id")
     private Integer fonema_id;
 
-    public Vocabulario(Integer id, String palabra, String imagen, Integer fonema_id) {
+    @SerializedName("eliminado")
+    private Integer eliminado;
+
+    public Vocabulario(Integer id, String palabra, String imagen, Integer fonema_id, Integer eliminado) {
         this.id = id;
-        Palabra = palabra;
-        Imagen = imagen;
+        this.Palabra = palabra;
+        this.Imagen = imagen;
         this.fonema_id = fonema_id;
+        this.eliminado = eliminado;
     }
 
     public Integer getId() {

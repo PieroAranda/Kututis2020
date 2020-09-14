@@ -16,7 +16,9 @@ import android.widget.Toast;
 import com.example.kututistesis.R;
 import com.example.kututistesis.adapters.VocabularioAdapter;
 import com.example.kututistesis.api.ApiClient;
+import com.example.kututistesis.model.SesionVocabulario;
 import com.example.kututistesis.model.Vocabulario;
+import com.example.kututistesis.util.Global;
 
 import java.util.List;
 
@@ -33,11 +35,14 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
     private VocabularioAdapter vocabularioAdapter;
     private ProgressBar progressBarMenu;
 
-    private List<Vocabulario> vocabularioList;
 
     private ImageView imageViewAtras;
 
-    private Integer fonema_id;
+    private List<SesionVocabulario> sesionVocabulario;
+
+
+    private Global global;
+    private Integer paciente_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,17 +75,41 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
 
         vocabularioAdapter = new VocabularioAdapter();
 
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
 
-        fonema_id = intent.getIntExtra("consonante_id",0);
+        fonema_id = intent.getIntExtra("consonante_id",0);*/
+        global = (Global) getApplicationContext();
 
-        obtenerVocabulario(fonema_id);
+        paciente_id = global.getId_usuario();
+
+        obtenerVocabulario(paciente_id);
     }
 
-    public void obtenerVocabulario(Integer fonema_id){
+    public void obtenerVocabulario(Integer paciente_id){
         progressBarMenu.setVisibility(View.VISIBLE);
 
-        apiClient.buscarvocabularioxfonemaid(fonema_id).enqueue(new Callback<List<Vocabulario>>() {
+        apiClient.listar_sesionvocabularioxusuario(paciente_id).enqueue(new Callback<List<SesionVocabulario>>() {
+            @Override
+            public void onResponse(Call<List<SesionVocabulario>> call, Response<List<SesionVocabulario>> response) {
+                progressBarMenu.setVisibility(View.GONE);
+                sesionVocabulario = response.body();
+
+                vocabularioAdapter.setData(sesionVocabulario, ConsonanticosMenu2Activity.this);
+                recyclerView.setAdapter(vocabularioAdapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<SesionVocabulario>> call, Throwable t) {
+                Log.d("FalloSesionPraxia", "Trowable"+t);
+                Toast.makeText(getApplicationContext(),
+                        "Ocurrió un problema, no se pudo obtener el vocabulario",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+
+        /*apiClient.buscarvocabularioxfonemaid(fonema_id).enqueue(new Callback<List<Vocabulario>>() {
             @Override
             public void onResponse(Call<List<Vocabulario>> call, Response<List<Vocabulario>> response) {
                 progressBarMenu.setVisibility(View.GONE);
@@ -106,17 +135,18 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
                         Toast.LENGTH_SHORT)
                         .show();
             }
-        });
+        });*/
     }
 
     @Override
     public void onVocabularioClick(int position) {
-        String imagen = vocabularioList.get(position).getImagen();
-        String palabra = vocabularioList.get(position).getPalabra();
+        String imagen = sesionVocabulario.get(position).getVocabulario().getImagen();
+        String palabra = sesionVocabulario.get(position).getVocabulario().getPalabra();
+        Integer id_fonema = sesionVocabulario.get(position).getVocabulario().getFonema_id();
         Intent intent = new Intent(this, ConsonanticosSesionActivity.class);
         intent.putExtra("imagen_palabra", imagen);
         intent.putExtra("texto_palabra", palabra);
-        intent.putExtra("consonante_id", fonema_id);
+        intent.putExtra("consonante_id", id_fonema);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
@@ -124,6 +154,6 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
     @Override
     protected void onResume() {
         super.onResume();
-        obtenerVocabulario(fonema_id);
+        obtenerVocabulario(paciente_id);
     }
 }

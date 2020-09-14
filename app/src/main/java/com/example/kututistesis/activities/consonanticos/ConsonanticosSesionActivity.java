@@ -11,6 +11,7 @@ import android.graphics.Matrix;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import com.example.kututistesis.R;
 import com.example.kututistesis.util.TTSManager;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -88,7 +90,14 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
         url = intent.getStringExtra("imagen_palabra");
         consonanteId = intent.getIntExtra("consonante_id", -1);
 
-        Picasso.get().load(url).into(imageViewPalabraVocabulario);
+        byte[] bytearray = Base64.decode(url, Base64.DEFAULT);
+
+        ByteArrayInputStream imageStream = new ByteArrayInputStream(bytearray);
+        Bitmap imagen = BitmapFactory.decodeStream(imageStream);
+
+        imageViewPalabraVocabulario.setImageBitmap(imagen);
+
+        /*Picasso.get().load(url).into(imageViewPalabraVocabulario);*/
 
         mBotonHablar = findViewById(R.id.buttonMicrofono);
         lista_palabras = "";

@@ -7,6 +7,7 @@ import com.example.kututistesis.model.Praxia;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionFonema;
 import com.example.kututistesis.model.SesionPraxia;
+import com.example.kututistesis.model.SesionVocabulario;
 import com.example.kututistesis.model.SesionVocal;
 import com.example.kututistesis.model.Vocabulario;
 import com.example.kututistesis.model.Vocal;
@@ -98,5 +99,8 @@ public interface ApiService {
 
     @GET("fonema/buscarxid/{id}")
     Call<List<Fonema>> buscarfonemaxid(@Path("id") Integer id_fonema);
+
+    @GET("sesion_vocabulario/listar_sesionvocabularioxusuario/{id}")
+    Call<List<SesionVocabulario>> listar_sesionvocabularioxusuario(@Path("id") Integer id);
 
 }

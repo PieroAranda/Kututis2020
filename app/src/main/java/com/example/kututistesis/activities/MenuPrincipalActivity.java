@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.activities.consonanticos.ConsonanticosMenu2Activity;
 import com.example.kututistesis.activities.consonanticos.ConsonanticosMenuActivity;
 import com.example.kututistesis.activities.praxias.PraxiasMenuActivity;
 import com.example.kututistesis.activities.vocalicos.VocalicosMenuActivity;
@@ -86,7 +87,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     }
 
     private void goToConsonatesConsonanticos() {
-        Intent intent = new Intent(this, ConsonanticosMenuActivity.class);
+        Intent intent = new Intent(this, ConsonanticosMenu2Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }

@@ -1,6 +1,9 @@
 package com.example.kututistesis.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +14,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.model.SesionVocabulario;
 import com.example.kututistesis.model.Vocabulario;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 public class VocabularioAdapter extends RecyclerView.Adapter<VocabularioAdapter.MyViewHolder> {
 
-    private List<Vocabulario> vocabularioList;
+    private List<SesionVocabulario> vocabularioList;
     private Context context;
     private OnVocabularioListener mOnvocabulariolistener;
 
@@ -26,7 +31,7 @@ public class VocabularioAdapter extends RecyclerView.Adapter<VocabularioAdapter.
 
     }
 
-    public void setData(List<Vocabulario> vocabularioList, OnVocabularioListener onVocabularioListener){
+    public void setData(List<SesionVocabulario> vocabularioList, OnVocabularioListener onVocabularioListener){
         this.vocabularioList = vocabularioList;
         this.mOnvocabulariolistener = onVocabularioListener;
         notifyDataSetChanged();
@@ -41,9 +46,17 @@ public class VocabularioAdapter extends RecyclerView.Adapter<VocabularioAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Vocabulario vocabulario = vocabularioList.get(position);
-        holder.textoPalabra.setText(vocabulario.getPalabra());
-        Picasso.get().load(vocabulario.getImagen()).into(holder.imagenPalabra);
+        SesionVocabulario vocabulario = vocabularioList.get(position);
+        holder.textoPalabra.setText(vocabulario.getVocabulario().getPalabra());
+
+        byte[] bytearray = Base64.decode(vocabulario.getVocabulario().getImagen(), Base64.DEFAULT);
+
+        ByteArrayInputStream imageStream = new ByteArrayInputStream(bytearray);
+        Bitmap imagen = BitmapFactory.decodeStream(imageStream);
+
+        holder.imagenPalabra.setImageBitmap(imagen);
+
+        /*Picasso.get().load(vocabulario.getImagen()).into(holder.imagenPalabra);*/
     }
 
     @Override
