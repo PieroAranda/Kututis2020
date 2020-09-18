@@ -1,6 +1,7 @@
 package com.example.kututistesis.api;
 
 import com.example.kututistesis.model.Fonema;
+import com.example.kututistesis.model.Mascota;
 import com.example.kututistesis.model.Praxia;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionPraxia;
@@ -20,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static ApiClient instance = null;
-    public static final String BASE_HOST_URL = "http://192.168.0.7:82/curso-laravel/kututis/";
+    public static final String BASE_HOST_URL = "http://192.168.1.104/curso-laravel/kututis/";
     public static final String BASE_URL = BASE_HOST_URL + "public/api/";
     public static final String BASE_STORAGE_IMAGE_URL = BASE_HOST_URL + "storage/app/images/";
 
@@ -43,13 +44,12 @@ public class ApiClient {
 
     public Call<ResponseStatus> registrarPaciente(SignUpForm signUpForm) {
         Gson gson =  new Gson();
-        return apiService.registarPaciente(gson.toJson(signUpForm));
+        return apiService.registarPaciente(signUpForm.getNombre(), signUpForm.getApellido(), signUpForm.getCelular(),
+                signUpForm.getCorreo(), signUpForm.getContrasenia(), "123","123");
     }
 
     public Call<ResponseStatus> loginPaciente(String correo, String contrasenia) {
-        SignInForm signInForm = new SignInForm(correo, contrasenia);
-        Gson gson =  new Gson();
-        return apiService.loginPaciente(gson.toJson(signInForm));
+        return apiService.loginPaciente(correo, contrasenia);
     }
 
     public Call<ResponseBody> registroSesionPraxias(SesionPraxia request){
@@ -94,5 +94,9 @@ public class ApiClient {
 
     public Call<List<Vocabulario>> buscarvocabularioxfonemaid(Integer fonema_id){
         return apiService.buscarvocabularioxfonemaid(fonema_id);
+    }
+
+    public Call<Mascota> getMascota(Integer mascota_id){
+        return apiService.getMascota(mascota_id);
     }
 }

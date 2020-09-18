@@ -1,6 +1,7 @@
 package com.example.kututistesis.activities.vocalicos;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,10 +15,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.activities.consonanticos.ConsonanticosMenuActivity;
 import com.example.kututistesis.adapters.ConsonantesAdapter;
 import com.example.kututistesis.adapters.MenuBanderaAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Banderin;
+import com.example.kututistesis.model.Fonema;
 import com.example.kututistesis.model.Vocal;
 
 import java.io.Serializable;
@@ -109,6 +112,7 @@ public class VocalicosMenuActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void OnVocalClick(int position) {
         Vocal v = vocalesList.get(position);

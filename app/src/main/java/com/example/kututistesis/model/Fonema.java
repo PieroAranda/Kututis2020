@@ -12,6 +12,9 @@ public class Fonema {
     @SerializedName("Fonema")
     private String Fonema;
 
+    @SerializedName("Nombre")
+    private String Nombre;
+
     @SerializedName("Tipo_Fonema")
     private String Tipo_Fonema;
 
@@ -44,6 +47,14 @@ public class Fonema {
 
     public void setFonema(String fonema) {
         Fonema = fonema;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String nombre) {
+        Nombre = nombre;
     }
 
     public String getTipo_Fonema() {

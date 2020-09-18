@@ -104,6 +104,8 @@ public class Registro3Activity extends AppCompatActivity {
                     }
                 }
 
+
+
                 @Override
                 public void onFailure(Call<ResponseStatus> call, Throwable t) {
                     Log.e("SIGNUP", t.getMessage());

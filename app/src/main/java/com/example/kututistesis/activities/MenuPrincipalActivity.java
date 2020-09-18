@@ -70,7 +70,8 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         imageViewLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logout();
+                //logout();
+                onBackPressed();
             }
         });
     }

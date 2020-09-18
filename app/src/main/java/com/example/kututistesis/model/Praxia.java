@@ -29,7 +29,7 @@ public class Praxia implements Serializable {
         this.Tipo = Tipo;
         this.Descripcion = Descripcion;
         this.Video = Video;
-        this.imagen = imagen;
+        //this.imagen = imagen;
     }
 
     public Integer getId() {
