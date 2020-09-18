@@ -139,4 +139,10 @@ public class ApiClient {
     public Call<List<SesionVocabulario>> listar_sesionvocabularioxusuario(@Path("id") Integer id){
         return apiService.listar_sesionvocabularioxusuario(id);
     }
+
+    public Call<ResponseStatus> actualizarsesion_vocabulario(@Path("id") Integer id, @Field("Intentos_Buenos") Integer Intentos_Buenos,
+                                                              @Field("Intentos_Malos") Integer Intentos_Malos, @Field("Intentos_x_Revisar") Integer Intentos_x_Revisar,
+                                                              @Field("Fecha") String Fecha){
+        return apiService.actualizarsesion_vocabulario(id, Intentos_Buenos, Intentos_Malos, Intentos_x_Revisar, Fecha);
+    }
 }

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.api.ApiClient;
 
 public class ConsonanticosResultadosActivity extends AppCompatActivity {
 
@@ -21,6 +22,8 @@ public class ConsonanticosResultadosActivity extends AppCompatActivity {
     private int consonanteId;
     String url;
     String textoPalabra;
+
+    private ApiClient apiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,8 @@ public class ConsonanticosResultadosActivity extends AppCompatActivity {
         textoPalabra = intent.getStringExtra("texto_palabra");
         url = intent.getStringExtra("imagen_palabra");
 
+        apiClient = ApiClient.getInstance();
+
         showPuntaje();
     }
 
@@ -76,4 +81,5 @@ public class ConsonanticosResultadosActivity extends AppCompatActivity {
         intent.putExtra("consonante_id", consonanteId);
         NavUtils.navigateUpTo(this, intent);
     }
+
 }
