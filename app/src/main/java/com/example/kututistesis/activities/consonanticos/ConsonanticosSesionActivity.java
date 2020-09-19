@@ -11,6 +11,7 @@ import android.graphics.Matrix;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
@@ -56,12 +57,18 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
     Integer contador;
     Integer contadorBarraProgreso;
 
+    Integer id_sesion_vocabulario;
+
     String texto;
 
     String [] texto_array;
 
     String palabra_en_pantalla;
     private Toast vuelveAIntentarloToast;
+    private Integer repeticiones;
+
+    private Integer sumarBarra;
+    private Integer contadorAuxBarra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +96,11 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
 
         url = intent.getStringExtra("imagen_palabra");
         consonanteId = intent.getIntExtra("consonante_id", -1);
+        id_sesion_vocabulario = intent.getIntExtra("id_sesion_vocabulario",-1);
+        repeticiones = intent.getIntExtra("repeticiones",-1);
+
+        sumarBarra = 10 / repeticiones; // porque el sprite es de 10
+
 
         byte[] bytearray = Base64.decode(url, Base64.DEFAULT);
 
@@ -120,11 +132,18 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
         texto = texto_contador.getText().toString();
         texto_array = texto.split(" ");
 
+        texto_array[2] = repeticiones.toString();
+
+
         contador = Integer.parseInt(texto_array[0]);
         contadorBarraProgreso = 0;
+        contadorAuxBarra = 0; //esto es un auxiliar para poder sumar de uno en uno las repeticiones y hacer la validacion con el numero de repeticiones
 
         hablarAhoraBoton = findViewById(R.id.imageAltavoz);
         imageViewConsonanticosAtras = (ImageView) findViewById(R.id.imageViewConsonanticosAtras);
+
+        texto = TextUtils.join(" ",texto_array);
+        texto_contador.setText(texto);
 
 
         imageViewConsonanticosAtras.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +174,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
             vuelveAIntentarloToast.cancel();
         }
 
-        if (contadorBarraProgreso == 10) {
+        if (contadorAuxBarra == repeticiones) {
             return;
         }
 
@@ -179,7 +198,8 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
         switch (requestCode){
             case REQ_CODE_SPEECH_INPUT:{
                 if (resultCode==RESULT_OK && null!=data){
-                    contadorBarraProgreso++;
+                    contadorBarraProgreso = contadorBarraProgreso + sumarBarra;
+                    contadorAuxBarra++;
                     ArrayList<String> result=data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     float[]confidence = data.getFloatArrayExtra(RecognizerIntent.EXTRA_CONFIDENCE_SCORES);
 
@@ -210,7 +230,7 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
                     }
 
                     updateBarra(contadorBarraProgreso);
-                    if (contadorBarraProgreso == 10) {
+                    if (contadorAuxBarra == repeticiones) {
                         if (vuelveAIntentarloToast != null) {
                             vuelveAIntentarloToast.cancel();
                         }
@@ -228,6 +248,8 @@ public class ConsonanticosSesionActivity extends AppCompatActivity {
         intent.putExtra("texto_palabra", texto_palabra);
         intent.putExtra("consonante_id", consonanteId);
         intent.putExtra("puntaje", contador);
+        intent.putExtra("id_sesion_vocabulario", id_sesion_vocabulario);
+        intent.putExtra("repeticiones", repeticiones);
         startActivity(intent);
     }
 

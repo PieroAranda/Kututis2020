@@ -143,10 +143,14 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
         String imagen = sesionVocabulario.get(position).getVocabulario().getImagen();
         String palabra = sesionVocabulario.get(position).getVocabulario().getPalabra();
         Integer id_fonema = sesionVocabulario.get(position).getVocabulario().getFonema_id();
+        Integer id_sesion_vocabulario = sesionVocabulario.get(position).getId();
+        Integer repeticiones = sesionVocabulario.get(position).getRepeticiones();
         Intent intent = new Intent(this, ConsonanticosSesionActivity.class);
         intent.putExtra("imagen_palabra", imagen);
         intent.putExtra("texto_palabra", palabra);
         intent.putExtra("consonante_id", id_fonema);
+        intent.putExtra("id_sesion_vocabulario", id_sesion_vocabulario);
+        intent.putExtra("repeticiones", repeticiones);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }

@@ -104,9 +104,13 @@ public interface ApiService {
     @GET("sesion_vocabulario/listar_sesionvocabularioxusuario/{id}")
     Call<List<SesionVocabulario>> listar_sesionvocabularioxusuario(@Path("id") Integer id);
 
+    @FormUrlEncoded
     @PUT("sesion_fonemas/actualizarsesion_vocabulario/{id}")
     Call<ResponseStatus> actualizarsesion_vocabulario(@Path("id") Integer id, @Field("Intentos_Buenos") Integer Intentos_Buenos,
                                                       @Field("Intentos_Malos") Integer Intentos_Malos, @Field("Intentos_x_Revisar") Integer Intentos_x_Revisar,
-                                                      @Field("Fecha") String Fecha);
+                                                      @Field("Fecha") String Fecha, @Field("paciente_id") Integer paciente_id);
+
+    @GET("buscarxvocabularioyusuario/{id_vocabulario}/{id_usuario}")
+    Call<SesionVocabulario> buscarxvocabularioyusuario(@Path("id_vocabulario") Integer id_vocabulario, @Path("id_usuario") Integer id_usuario);
 
 }
