@@ -83,5 +83,8 @@ public interface ApiService {
     @GET("get_mascota/{paciente_id}")
     Call<Mascota> getMascota(@Path("paciente_id") Integer mascota_id);
 
+    @GET("alimentar_mascota/{paciente_id}")
+    Call<Mascota> alimentarMascota(@Path("paciente_id") Integer mascota_id);
+
 }
 

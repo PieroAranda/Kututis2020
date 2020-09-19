@@ -14,9 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.activities.vocalicos.VocalicosHistorialActivity;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Mascota;
 import com.example.kututistesis.util.Global;
+import com.example.kututistesis.util.Prefs;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,12 +28,14 @@ public class MenuActivity extends AppCompatActivity {
 
     private ImageButton botonPracticar;
     private ImageButton botonSincronizar;
-    private ImageButton botonAtras;
+    private ImageButton botonAtras; //boton_monstruo
+    private ImageButton botonMonstruo;
     private TextView golosinas;
     private ProgressBar progressBar;
     private ApiClient apiClient;
     private Global global;
     private Integer id_paciente;
+    private Prefs preference;
 
 
     @Override
@@ -39,6 +43,8 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_menu);
+        preference = new Prefs(getApplicationContext());
+
 
         int defaultValue = -1;
         global = (Global) getApplicationContext();
@@ -47,6 +53,8 @@ public class MenuActivity extends AppCompatActivity {
 
         botonPracticar = findViewById(R.id.boton_practicar);
         botonAtras = findViewById(R.id.boton_atras);
+        botonMonstruo = findViewById(R.id.boton_monstruo);
+
         apiClient = ApiClient.getInstance();
         golosinas = findViewById(R.id.golosinas);
         progressBar = findViewById(R.id.progress_menu);
@@ -62,6 +70,12 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadMascota(id_paciente);
+            }
+        });
+        botonMonstruo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMonstruo();
             }
         });
         botonAtras.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +109,9 @@ public class MenuActivity extends AppCompatActivity {
             public void onResponse(Call<Mascota> call, Response<Mascota> response) {
                 if (response.isSuccessful()) {
                     golosinas.setText(response.body().getCantidad_Dinero().toString());
+                   // if( response.body() != null)
+                   //     preference.saveMascota("mascota", response.body());
+
 
                 } else {
                     Toast.makeText(getApplicationContext(),
@@ -124,6 +141,11 @@ public class MenuActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, InicioSesionActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private void goToMonstruo() {
+        Intent intent = new Intent(this, MonstruoActivity.class);
         startActivity(intent);
     }
 }

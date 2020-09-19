@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+
 public class Mascota implements Serializable {
     @SerializedName("id")
     private Integer id;
@@ -23,17 +24,53 @@ public class Mascota implements Serializable {
     @SerializedName("Vida")
     private Integer Vida;
 
-    public Mascota(Integer id, String Nombre, String Color, String Imagen, Integer Cantidad_Dinero, Integer Vida) {
+    @SerializedName("Hambre")
+    private Integer Hambre;
+
+    @SerializedName("Estado")
+    private Integer Estado;
+
+    @SerializedName("code")
+    private String Error;
+
+    public Mascota(Integer id, String Nombre, String Color, String Imagen, Integer Cantidad_Dinero, Integer Vida, Integer Hambre, Integer Estado, String Error) {
         this.id = id;
         this.Nombre = Nombre;
         this.Color = Color;
         this.Imagen = Imagen;
         this.Cantidad_Dinero = Cantidad_Dinero;
         this.Vida = Vida;
+        this.Hambre = Hambre;
+        this.Estado = Estado;
+        this.Error = Error;
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public Integer getHambre() {
+        return Hambre;
+    }
+
+    public void setHambre(Integer hambre) {
+        Hambre = hambre;
+    }
+
+    public Integer getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(Integer estado) {
+        Estado = estado;
+    }
+
+    public String getError() {
+        return Error;
+    }
+
+    public void setError(String error) {
+        Error = error;
     }
 
     public void setId(Integer id) {
