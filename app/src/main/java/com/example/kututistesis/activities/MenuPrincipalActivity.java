@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.kututistesis.R;
@@ -25,6 +26,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     private ImageView imageViewConsonatesConsonanticos;
     private ImageView imageViewLogout;
     private Global global;
+    private Button botonLogros;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         imageViewConsonatesVocalicos = findViewById(R.id.button_fonemas_vocalicos);
         imageViewConsonatesConsonanticos = findViewById(R.id.button_fonemas_consonanticos);
         imageViewLogout = findViewById(R.id.image_logout);
+        botonLogros = findViewById(R.id.buttonLogros);
 
         // Eventos de la vista
         imageViewPraxias.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +77,13 @@ public class MenuPrincipalActivity extends AppCompatActivity {
                 logout();
             }
         });
+
+        botonLogros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToLogros();
+            }
+        });
     }
 
     private void logout() {
@@ -100,6 +110,12 @@ public class MenuPrincipalActivity extends AppCompatActivity {
 
     private void goToPraxias() {
         Intent intent = new Intent(this, PraxiasMenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
+
+    private void goToLogros() {
+        Intent intent = new Intent(this, MenuLogros.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }

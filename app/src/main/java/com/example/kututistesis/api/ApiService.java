@@ -3,6 +3,7 @@ package com.example.kututistesis.api;
 import com.example.kututistesis.model.ArchivoSesionFonema;
 import com.example.kututistesis.model.ArchivoSesionPraxia;
 import com.example.kututistesis.model.Fonema;
+import com.example.kututistesis.model.PacienteLogro;
 import com.example.kututistesis.model.Praxia;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionFonema;
@@ -113,4 +114,10 @@ public interface ApiService {
     @GET("buscarxvocabularioyusuario/{id_vocabulario}/{id_usuario}")
     Call<SesionVocabulario> buscarxvocabularioyusuario(@Path("id_vocabulario") Integer id_vocabulario, @Path("id_usuario") Integer id_usuario);
 
+    @GET("paciente_logro/listarxusuarioid/{paciente_id}")
+    Call<List<PacienteLogro>> listarlogroxusuarioid(@Path("paciente_id") Integer paciente_id);
+
+    @FormUrlEncoded
+    @POST("paciente_logro/agregar")
+    Call<ResponseStatus> agregar_logro(@Field("paciente_id") Integer paciente_id, @Field("logro_id") Integer logro_id);
 }

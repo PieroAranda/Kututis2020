@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.example.kututistesis.R;
 import com.example.kututistesis.adapters.VocabularioAdapter;
 import com.example.kututistesis.api.ApiClient;
+import com.example.kututistesis.model.PacienteLogro;
+import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionVocabulario;
 import com.example.kututistesis.model.Vocabulario;
 import com.example.kututistesis.util.Global;
@@ -43,6 +45,9 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
 
     private Global global;
     private Integer paciente_id;
+
+    private List<PacienteLogro> pacienteLogroList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +90,68 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
         obtenerVocabulario(paciente_id);
     }
 
+    public void visualizarLogroPrimeraLeccion(Integer logro_id){
+
+        apiClient.agregar_logro(paciente_id, logro_id).enqueue(new Callback<ResponseStatus>() {
+            @Override
+            public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
+                if (response.body().getCode().equals("200")){
+                    Log.e("Logro PrimeraLeccion", "Logro Primera Leccion");
+                    Toast.makeText(getApplicationContext(),
+                            "Logro conseguido: Primera Lección",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }else {
+                    Log.e("No Logro PrimeraLeccion", "No Logro Primera Leccion");
+                    Toast.makeText(getApplicationContext(),
+                            "No se pudo agregar logro",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseStatus> call, Throwable t) {
+                Log.e("ObteniendoPacienteLogro", t.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Ocurrió un problema, no se puede conectar al servicio",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+    }
+
+    public void checkifobtuvoLogroPrimeraLeccion(){
+        apiClient.listarlogroxusuarioid(paciente_id).enqueue(new Callback<List<PacienteLogro>>() {
+            @Override
+            public void onResponse(Call<List<PacienteLogro>> call, Response<List<PacienteLogro>> response) {
+                pacienteLogroList = response.body();
+
+                if(!pacienteLogroList.isEmpty()){
+                    for(PacienteLogro pl:pacienteLogroList){
+                        if(pl.getLogro_id() == 1){
+                            return;
+                        }
+                    }
+                    visualizarLogroPrimeraLeccion(1);
+                    return;
+                }else {
+                    visualizarLogroPrimeraLeccion(1);
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PacienteLogro>> call, Throwable t) {
+                Log.e("ObteniendoPacienteLogro", t.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Ocurrió un problema, no se puede conectar al servicio",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+    }
+
     public void obtenerVocabulario(Integer paciente_id){
         progressBarMenu.setVisibility(View.VISIBLE);
 
@@ -93,6 +160,13 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
             public void onResponse(Call<List<SesionVocabulario>> call, Response<List<SesionVocabulario>> response) {
                 progressBarMenu.setVisibility(View.GONE);
                 sesionVocabulario = response.body();
+
+                for(SesionVocabulario sv:sesionVocabulario){
+                    if(sv.getCompletado()==1){
+                        checkifobtuvoLogroPrimeraLeccion();
+                        break;
+                    }
+                }
 
                 vocabularioAdapter.setData(sesionVocabulario, ConsonanticosMenu2Activity.this);
                 recyclerView.setAdapter(vocabularioAdapter);
@@ -158,6 +232,6 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
     @Override
     protected void onResume() {
         super.onResume();
-        obtenerVocabulario(paciente_id);
+        /*obtenerVocabulario(paciente_id);*/
     }
 }

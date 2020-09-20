@@ -3,6 +3,7 @@ package com.example.kututistesis.api;
 import com.example.kututistesis.model.ArchivoSesionFonema;
 import com.example.kututistesis.model.ArchivoSesionPraxia;
 import com.example.kututistesis.model.Fonema;
+import com.example.kututistesis.model.PacienteLogro;
 import com.example.kututistesis.model.Praxia;
 import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionFonema;
@@ -150,4 +151,11 @@ public class ApiClient {
         return apiService.buscarxvocabularioyusuario(id_vocabulario, id_usuario);
     }
 
+    public Call<List<PacienteLogro>> listarlogroxusuarioid(Integer paciente_id){
+        return apiService.listarlogroxusuarioid(paciente_id);
+    }
+
+    public Call<ResponseStatus> agregar_logro(Integer paciente_id,Integer logro_id){
+        return apiService.agregar_logro(paciente_id, logro_id);
+    }
 }

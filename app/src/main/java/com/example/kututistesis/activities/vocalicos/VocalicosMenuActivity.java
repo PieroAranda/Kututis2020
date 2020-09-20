@@ -18,6 +18,8 @@ import com.example.kututistesis.adapters.ConsonantesAdapter;
 import com.example.kututistesis.adapters.MenuBanderaAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Banderin;
+import com.example.kututistesis.model.PacienteLogro;
+import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionFonema;
 import com.example.kututistesis.model.Vocal;
 import com.example.kututistesis.util.Global;
@@ -41,6 +43,8 @@ public class VocalicosMenuActivity extends AppCompatActivity {
 
     private Global global;
     private Integer paciente_id;
+
+    private List<PacienteLogro> pacienteLogroList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,68 @@ public class VocalicosMenuActivity extends AppCompatActivity {
         loadVocales();
     }
 
+    public void visualizarLogroPrimerFonema(Integer logro_id){
+
+        apiClient.agregar_logro(paciente_id, logro_id).enqueue(new Callback<ResponseStatus>() {
+            @Override
+            public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
+                if (response.body().getCode().equals("200")){
+                    Log.e("Logro PrimerFonema", "Logro Primer Fonema");
+                    Toast.makeText(getApplicationContext(),
+                            "Logro conseguido: Primer Fonema",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }else {
+                    Log.e("No Logro PrimerFonema", "No Logro Primer Fonema");
+                    Toast.makeText(getApplicationContext(),
+                            "No se pudo agregar logro",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseStatus> call, Throwable t) {
+                Log.e("ObteniendoPacienteLogro", t.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Ocurrió un problema, no se puede conectar al servicio",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+    }
+
+    public void checkifobtuvoLogroPrimerFonema(){
+        apiClient.listarlogroxusuarioid(paciente_id).enqueue(new Callback<List<PacienteLogro>>() {
+            @Override
+            public void onResponse(Call<List<PacienteLogro>> call, Response<List<PacienteLogro>> response) {
+                pacienteLogroList = response.body();
+
+                if(!pacienteLogroList.isEmpty()){
+                    for(PacienteLogro pl:pacienteLogroList){
+                        if(pl.getLogro_id() == 3){
+                            return;
+                        }
+                    }
+                    visualizarLogroPrimerFonema(3);
+                    return;
+                }else {
+                    visualizarLogroPrimerFonema(3);
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PacienteLogro>> call, Throwable t) {
+                Log.e("ObteniendoPacienteLogro", t.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Ocurrió un problema, no se puede conectar al servicio",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+    }
+
     public void loadVocales() {
         progressBarMenu.setVisibility(View.VISIBLE);
 
@@ -90,6 +156,10 @@ public class VocalicosMenuActivity extends AppCompatActivity {
 
                     for (SesionFonema v : sesionFonemaList) {
                         banderines.add(new Banderin(v.getFonema().getNombre()));
+                        if(v.getCompletado()==1){
+                            checkifobtuvoLogroPrimerFonema();
+                            break;
+                        }
                     }
                     vocalAdapter.setData(banderines, new ConsonantesAdapter.OnConsonantesListener() {
                         @Override
@@ -131,6 +201,6 @@ public class VocalicosMenuActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadVocales();
+        /*loadVocales();*/
     }
 }

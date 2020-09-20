@@ -18,8 +18,11 @@ import com.example.kututistesis.adapters.ConsonantesAdapter;
 import com.example.kututistesis.adapters.MenuBanderaAdapter;
 import com.example.kututistesis.api.ApiClient;
 import com.example.kututistesis.model.Banderin;
+import com.example.kututistesis.model.PacienteLogro;
 import com.example.kututistesis.model.Praxia;
+import com.example.kututistesis.model.ResponseStatus;
 import com.example.kututistesis.model.SesionPraxia;
+import com.example.kututistesis.model.SesionVocabulario;
 import com.example.kututistesis.util.Global;
 
 import java.io.Serializable;
@@ -41,6 +44,7 @@ public class PraxiasMenuActivity extends AppCompatActivity {
     private ProgressBar progressBarMenu;
     private Global global;
     private Integer paciente_id;
+    private List<PacienteLogro> pacienteLogroList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,68 @@ public class PraxiasMenuActivity extends AppCompatActivity {
         loadPraxias();
     }
 
+    public void visualizarLogroPrimeraMueca(Integer logro_id){
+
+        apiClient.agregar_logro(paciente_id, logro_id).enqueue(new Callback<ResponseStatus>() {
+            @Override
+            public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
+                if (response.body().getCode().equals("200")){
+                    Log.e("Logro PrimeraMueca", "Logro Primera Mueca");
+                    Toast.makeText(getApplicationContext(),
+                            "Logro conseguido: Primera Mueca",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }else {
+                    Log.e("No Logro PrimeraMueca", "No Logro Primera Mueca");
+                    Toast.makeText(getApplicationContext(),
+                            "No se pudo agregar logro",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseStatus> call, Throwable t) {
+                Log.e("ObteniendoPacienteLogro", t.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Ocurrió un problema, no se puede conectar al servicio",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+    }
+
+    public void checkifobtuvoLogroPrimeraMueca(){
+        apiClient.listarlogroxusuarioid(paciente_id).enqueue(new Callback<List<PacienteLogro>>() {
+            @Override
+            public void onResponse(Call<List<PacienteLogro>> call, Response<List<PacienteLogro>> response) {
+                pacienteLogroList = response.body();
+
+                if(!pacienteLogroList.isEmpty()){
+                    for(PacienteLogro pl:pacienteLogroList){
+                        if(pl.getLogro_id() == 2){
+                            return;
+                        }
+                    }
+                    visualizarLogroPrimeraMueca(2);
+                    return;
+                }else {
+                    visualizarLogroPrimeraMueca(2);
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PacienteLogro>> call, Throwable t) {
+                Log.e("ObteniendoPacienteLogro", t.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        "Ocurrió un problema, no se puede conectar al servicio",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+    }
+
     public void loadPraxias() {
         progressBarMenu.setVisibility(View.VISIBLE);
 
@@ -95,6 +161,10 @@ public class PraxiasMenuActivity extends AppCompatActivity {
                         String urlImagen = ApiClient.BASE_STORAGE_IMAGE_URL + prax.getPraxia().getImagen();
                         prax.getPraxia().setImagen(urlImagen);*/
                         banderines.add(new Banderin(prax.getPraxia().getNombre()));
+                        if(prax.getCompletado()==1){
+                            checkifobtuvoLogroPrimeraMueca();
+                            break;
+                        }
                     }
 
                     praxiasAdapter.setData(banderines, new ConsonantesAdapter.OnConsonantesListener() {
@@ -136,6 +206,6 @@ public class PraxiasMenuActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadPraxias();
+        /*loadPraxias();*/
     }
 }

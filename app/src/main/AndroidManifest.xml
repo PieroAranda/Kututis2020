@@ -39,6 +39,14 @@
             android:parentActivityName=".activities.MenuPrincipalActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            android:name=".activities.MenuLogros"
+            android:label="Menu Logros"
+            android:parentActivityName=".activities.MenuPrincipalActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+
         <activity
             android:name=".activities.consonanticos.ConsonanticosMenuActivity"
             android:label="Fonemas Consonánticos"
