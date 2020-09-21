@@ -3,6 +3,7 @@ package com.example.kututistesis.api;
 import com.example.kututistesis.model.ArchivoSesionFonema;
 import com.example.kututistesis.model.ArchivoSesionPraxia;
 import com.example.kututistesis.model.Fonema;
+import com.example.kututistesis.model.Medico;
 import com.example.kututistesis.model.PacienteLogro;
 import com.example.kututistesis.model.Praxia;
 import com.example.kututistesis.model.ResponseStatus;
@@ -167,5 +168,9 @@ public class ApiClient {
         return apiService.actualizar_paciente(paciente_id, signUpForm.getNombre(), signUpForm.getApellido(), signUpForm.getCelular(),
                 signUpForm.getCorreo(), signUpForm.getContrasenia(), signUpForm.getFecha_inscripcion(), signUpForm.getFecha_nacimiento(),
                 signUpForm.getHabilitado(), signUpForm.getMedicoId(), signUpForm.getMascotaId());
+    }
+
+    public Call<List<Medico>> buscar_medicoxid(Integer medico_id){
+        return apiService.buscar_medicoxid(medico_id);
     }
 }

@@ -3,6 +3,7 @@ package com.example.kututistesis.api;
 import com.example.kututistesis.model.ArchivoSesionFonema;
 import com.example.kututistesis.model.ArchivoSesionPraxia;
 import com.example.kututistesis.model.Fonema;
+import com.example.kututistesis.model.Medico;
 import com.example.kututistesis.model.PacienteLogro;
 import com.example.kututistesis.model.Praxia;
 import com.example.kututistesis.model.ResponseStatus;
@@ -132,5 +133,9 @@ public interface ApiService {
                                              @Field("Contrasenia") String contrasenia, @Field("Fecha_Inscripcion") String fecha_inscripcion,
                                              @Field("Fecha_Nacimiento") String fecha_nacimiento, @Field("Habilitado") Integer Habilitado,
                                             @Field("medico_id") Integer medico_id, @Field("mascota_id") Integer mascota_id);
+
+
+    @GET("medico/buscarxid/{id}")
+    Call<List<Medico>> buscar_medicoxid(@Path("id") Integer medico_id);
 
 }

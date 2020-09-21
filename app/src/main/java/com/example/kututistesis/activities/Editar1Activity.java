@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -52,6 +53,9 @@ public class Editar1Activity extends AppCompatActivity {
     private Integer paciente_id;
     private ApiClient apiClient;
     private SignUpForm datospaciente;
+    private Integer medico_id;
+
+    private Button botonMedico;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,7 @@ public class Editar1Activity extends AppCompatActivity {
         editTextMobileNumber = (EditText) findViewById(R.id.edit_Celular);
         buttonNext = (ImageView) findViewById(R.id.button_siguiente_editar);
         imageViewAtras = (ImageView) findViewById(R.id.imageViewEditarPerfil1Atras);
+        botonMedico = (Button) findViewById(R.id.buttonMédico);
 
         global = (Global) getApplicationContext();
 
@@ -73,6 +78,13 @@ public class Editar1Activity extends AppCompatActivity {
         apiClient = ApiClient.getInstance();
 
         obtenerDatosPaciente(paciente_id);
+
+        botonMedico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToPerfilMedico();
+            }
+        });
 
         // Eventos de la vista
         buttonNext.setOnClickListener(new View.OnClickListener() {
@@ -140,6 +152,7 @@ public class Editar1Activity extends AppCompatActivity {
         editTextLastname.setText(datospaciente.getApellido());
         editTextBirthDate.setText(datospaciente.getFecha_nacimiento());
         editTextMobileNumber.setText(datospaciente.getCelular());
+        medico_id = datospaciente.getMedicoId();
     }
 
     public void obtenerDatosPaciente(Integer paciente_id){
@@ -182,6 +195,14 @@ public class Editar1Activity extends AppCompatActivity {
         });
 
         newFragment.show(fm, "datePicker");
+    }
+
+    public void goToPerfilMedico(){
+        Intent intent = new Intent(this, MedicoActivity.class);
+        // Revisar si hacer un cast de Serializable es eficiente o mejor usar la
+        // interface Parcelable
+        intent.putExtra("medico_id", medico_id);
+        startActivity(intent);
     }
 
     private void goToEditar2() {

@@ -91,15 +91,22 @@
 
         <activity
             android:name=".activities.Editar2Activity"
-            android:label="Registro"
+            android:label="Editar2"
             android:parentActivityName=".activities.Editar1Activity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
         <activity
             android:name=".activities.Editar1Activity"
-            android:label="Registro"
+            android:label="Editar1"
             android:parentActivityName=".activities.MenuPrincipalActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            android:name=".activities.MedicoActivity"
+            android:label="Medico"
+            android:parentActivityName=".activities.Editar1Activity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
