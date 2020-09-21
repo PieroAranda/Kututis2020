@@ -87,7 +87,7 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
 
         paciente_id = global.getId_usuario();
 
-        obtenerVocabulario(paciente_id);
+        /*obtenerVocabulario(paciente_id);*/
     }
 
     public void visualizarLogroPrimeraLeccion(Integer logro_id){
@@ -232,6 +232,6 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
     @Override
     protected void onResume() {
         super.onResume();
-        /*obtenerVocabulario(paciente_id);*/
+        obtenerVocabulario(paciente_id);
     }
 }

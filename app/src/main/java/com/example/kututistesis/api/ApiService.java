@@ -10,6 +10,7 @@ import com.example.kututistesis.model.SesionFonema;
 import com.example.kututistesis.model.SesionPraxia;
 import com.example.kututistesis.model.SesionVocabulario;
 import com.example.kututistesis.model.SesionVocal;
+import com.example.kututistesis.model.SignUpForm;
 import com.example.kututistesis.model.Vocabulario;
 import com.example.kututistesis.model.Vocal;
 
@@ -120,4 +121,16 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("paciente_logro/agregar")
     Call<ResponseStatus> agregar_logro(@Field("paciente_id") Integer paciente_id, @Field("logro_id") Integer logro_id);
+
+    @GET("paciente/buscarxid/{id}")
+    Call<List<SignUpForm>> buscar_pacientexid(@Path("id") Integer paciente_id);
+
+    @FormUrlEncoded
+    @POST("paciente/actualizar_paciente/{id}")
+    Call<ResponseStatus> actualizar_paciente(@Path("id") Integer paciente_id, @Field("Nombre") String nombre, @Field("Apellido")
+            String apellido, @Field("Celular") String celular, @Field("Correo") String correo,
+                                             @Field("Contrasenia") String contrasenia, @Field("Fecha_Inscripcion") String fecha_inscripcion,
+                                             @Field("Fecha_Nacimiento") String fecha_nacimiento, @Field("Habilitado") Integer Habilitado,
+                                            @Field("medico_id") Integer medico_id, @Field("mascota_id") Integer mascota_id);
+
 }

@@ -78,7 +78,7 @@ public class VocalicosMenuActivity extends AppCompatActivity {
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        loadVocales();
+        /*loadVocales();*/
     }
 
     public void visualizarLogroPrimerFonema(Integer logro_id){
@@ -201,6 +201,6 @@ public class VocalicosMenuActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        /*loadVocales();*/
+        loadVocales();
     }
 }

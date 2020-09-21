@@ -52,6 +52,8 @@ public class Registro3Activity extends AppCompatActivity {
         getIntentData();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        getFechaInscripcion();
+
         editTextPetName = (EditText) findViewById(R.id.edit_text_pet_name);
         buttonRegister = (ImageView) findViewById(R.id.button_register);
         imageViewAtras = (ImageView) findViewById(R.id.imageViewRegistro3Atras);

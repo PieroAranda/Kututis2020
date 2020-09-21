@@ -27,6 +27,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     private ImageView imageViewLogout;
     private Global global;
     private Button botonLogros;
+    private Button botonPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         imageViewConsonatesConsonanticos = findViewById(R.id.button_fonemas_consonanticos);
         imageViewLogout = findViewById(R.id.image_logout);
         botonLogros = findViewById(R.id.buttonLogros);
+        botonPerfil = findViewById(R.id.buttonPerfil);
 
         // Eventos de la vista
         imageViewPraxias.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +86,13 @@ public class MenuPrincipalActivity extends AppCompatActivity {
                 goToLogros();
             }
         });
+
+        botonPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToEditarPerfil();
+            }
+        });
     }
 
     private void logout() {
@@ -116,6 +125,12 @@ public class MenuPrincipalActivity extends AppCompatActivity {
 
     private void goToLogros() {
         Intent intent = new Intent(this, MenuLogros.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
+
+    private void goToEditarPerfil() {
+        Intent intent = new Intent(this, Editar1Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }

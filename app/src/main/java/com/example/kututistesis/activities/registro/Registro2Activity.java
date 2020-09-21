@@ -128,7 +128,9 @@ public class Registro2Activity extends AppCompatActivity {
             String correo = editTextEmail.getText().toString().trim();
             String contrasenia = editTextPassword1.getText().toString().trim();
 
-            apiClient.loginPaciente(correo, "WRONG_PASSWORD").enqueue(new Callback<ResponseStatus>() {
+            goToRegistro3();
+
+            /*apiClient.loginPaciente(correo, "WRONG_PASSWORD").enqueue(new Callback<ResponseStatus>() {
                 @Override
                 public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
                     Log.i("SIGNUP", response.body().getStatus() + " " + response.body().getCode());
@@ -151,7 +153,7 @@ public class Registro2Activity extends AppCompatActivity {
                             Toast.LENGTH_SHORT)
                             .show();
                 }
-            });
+            });*/
 
         }
     }

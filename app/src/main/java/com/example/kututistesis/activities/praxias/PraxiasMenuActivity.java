@@ -79,7 +79,7 @@ public class PraxiasMenuActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         praxiasAdapter = new MenuBanderaAdapter();
 
-        loadPraxias();
+        /*loadPraxias();*/
     }
 
     public void visualizarLogroPrimeraMueca(Integer logro_id){
@@ -206,6 +206,6 @@ public class PraxiasMenuActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        /*loadPraxias();*/
+        loadPraxias();
     }
 }

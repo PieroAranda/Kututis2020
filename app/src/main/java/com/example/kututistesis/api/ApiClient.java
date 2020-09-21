@@ -158,4 +158,14 @@ public class ApiClient {
     public Call<ResponseStatus> agregar_logro(Integer paciente_id,Integer logro_id){
         return apiService.agregar_logro(paciente_id, logro_id);
     }
+
+    public Call<List<SignUpForm>> buscar_pacientexid(Integer paciente_id){
+        return apiService.buscar_pacientexid(paciente_id);
+    }
+
+    public Call<ResponseStatus> actualizar_paciente(Integer paciente_id, SignUpForm signUpForm){
+        return apiService.actualizar_paciente(paciente_id, signUpForm.getNombre(), signUpForm.getApellido(), signUpForm.getCelular(),
+                signUpForm.getCorreo(), signUpForm.getContrasenia(), signUpForm.getFecha_inscripcion(), signUpForm.getFecha_nacimiento(),
+                signUpForm.getHabilitado(), signUpForm.getMedicoId(), signUpForm.getMascotaId());
+    }
 }
