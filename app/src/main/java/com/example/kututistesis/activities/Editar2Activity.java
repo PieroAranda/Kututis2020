@@ -182,8 +182,8 @@ public class Editar2Activity extends AppCompatActivity {
             if(correo.equals(correo_antiguo)){
                 EdiarDatos();
             }else {
-                EdiarDatos();
-                /*apiClient = ApiClient.getInstance();
+                /*EdiarDatos();*/
+                apiClient = ApiClient.getInstance();
                 apiClient.loginPaciente(correo, "WRONG_PASSWORD").enqueue(new Callback<ResponseStatus>() {
                     @Override
                     public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
@@ -200,7 +200,7 @@ public class Editar2Activity extends AppCompatActivity {
                     public void onFailure(Call<ResponseStatus> call, Throwable t) {
 
                     }
-                });*/
+                });
             }
 
         }

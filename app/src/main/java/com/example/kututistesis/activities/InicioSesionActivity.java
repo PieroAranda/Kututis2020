@@ -150,16 +150,14 @@ public class InicioSesionActivity extends AppCompatActivity {
                 String responseStatus = response.body().getStatus();
                 Integer responseId = response.body().getUser();
 
-                switch (responseCode) {
-                    case "200":
+                if(responseStatus.equals("succes")){
                         finish();
                         SharedPreferences.Editor editor = global.sharedPref.edit();
                         editor.putInt(getString(R.string.saved_user_id), responseId);
                         editor.commit();
                         global.setId(responseId);
                         goToMenuPrincipal();
-                        break;
-                    case "400":
+                }else {
                         progressBarSignIn.setVisibility(View.GONE);
                         if (responseStatus.matches("error_correo")) {
                             awesomeValidation.clear();
@@ -174,9 +172,6 @@ public class InicioSesionActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT)
                                     .show();
                         }
-                        break;
-                    default:
-                        break;
                 }
             }
 
