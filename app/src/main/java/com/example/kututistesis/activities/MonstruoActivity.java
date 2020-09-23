@@ -143,10 +143,18 @@ public class MonstruoActivity extends AppCompatActivity {
                         else
                             imageViewMonstruo.setBackgroundResource(R.drawable.img_monstruo_triste);
                     }else{
-                        Toast.makeText(getApplicationContext(),
-                                "No cuenta con los caramelos suficientes para alimentar :(",
-                                Toast.LENGTH_SHORT)
-                                .show();
+                        if(response.body().getError().equals("100")){
+                            Toast.makeText(getApplicationContext(),
+                                    "No cuenta con los caramelos suficientes para alimentar :(",
+                                    Toast.LENGTH_SHORT)
+                                    .show();
+                        }else if(response.body().getError().equals("200")){
+                            Toast.makeText(getApplicationContext(),
+                                    "Ya alcanzó el måximo de vida",
+                                    Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+
                     }
 
 

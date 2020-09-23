@@ -11,14 +11,15 @@
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:background="@drawable/boton_back_monstruo"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:layout_marginStart="15dp"/>
 
     <LinearLayout
         android:id="@+id/llLife"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/llCaramelos">
+        android:layout_toLeftOf="@id/llCaramelos"
+        android:layout_marginTop="10dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,10 +30,10 @@
             android:id="@+id/textViewMonstruoVida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10/100"
+            android:text="/100"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
-            android:textSize="20dp"
+            android:textSize="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"/>
     </LinearLayout>
@@ -43,7 +44,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_alignParentRight="true">
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,10 +58,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
-            android:text="4"
+            android:text=""
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
-            android:textSize="20dp"/>
+            android:textSize="30dp"/>
     </LinearLayout>
 
 
@@ -72,7 +74,7 @@
         android:background="@drawable/bg_my_monster"
         android:layout_below="@id/buttonBackMonstruo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="30dp"/>
 
     <RelativeLayout
         android:id="@+id/llMonstruo"
@@ -87,14 +89,6 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <ImageButton
-                android:id="@+id/buttonPreviousMonstruo"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/bg_previous"
-                android:layout_marginStart="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="80dp"/>
 
             <ImageView
                 android:id="@+id/imageViewMonstruo"
@@ -105,15 +99,6 @@
                 android:layout_marginRight="45dp"
                 android:layout_centerHorizontal="true"/>
 
-            <ImageButton
-                android:id="@+id/buttonNextMonstruo"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/bg_next"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="80dp"/>
         </RelativeLayout>
 
         <TextView
