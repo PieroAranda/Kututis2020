@@ -20,6 +20,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activities.MonstruoActivity"></activity>
+        <activity
+            android:name=".activities.MenuActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.consonanticos.ConsonanticosResultadosActivity"
             android:parentActivityName=".activities.consonanticos.ConsonanticosMenu2Activity"

@@ -3,6 +3,7 @@ package com.example.kututistesis.api;
 import com.example.kututistesis.model.ArchivoSesionFonema;
 import com.example.kututistesis.model.ArchivoSesionPraxia;
 import com.example.kututistesis.model.Fonema;
+import com.example.kututistesis.model.Mascota;
 import com.example.kututistesis.model.Medico;
 import com.example.kututistesis.model.PacienteLogro;
 import com.example.kututistesis.model.Praxia;
@@ -137,5 +138,11 @@ public interface ApiService {
 
     @GET("medico/buscarxid/{id}")
     Call<List<Medico>> buscar_medicoxid(@Path("id") Integer medico_id);
+
+    @GET("get_mascota/{paciente_id}")
+    Call<Mascota> getMascota(@Path("paciente_id") Integer mascota_id);
+
+    @GET("alimentar_mascota/{paciente_id}")
+    Call<Mascota> alimentarMascota(@Path("paciente_id") Integer mascota_id);
 
 }

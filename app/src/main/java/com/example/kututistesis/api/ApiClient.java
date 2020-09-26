@@ -3,6 +3,7 @@ package com.example.kututistesis.api;
 import com.example.kututistesis.model.ArchivoSesionFonema;
 import com.example.kututistesis.model.ArchivoSesionPraxia;
 import com.example.kututistesis.model.Fonema;
+import com.example.kututistesis.model.Mascota;
 import com.example.kututistesis.model.Medico;
 import com.example.kututistesis.model.PacienteLogro;
 import com.example.kututistesis.model.Praxia;
@@ -29,7 +30,7 @@ import retrofit2.http.Path;
 
 public class ApiClient {
     private static ApiClient instance = null;
-    public static final String BASE_HOST_URL = "http://192.168.1.13:80/curso-laravel/kututis/";
+    public static final String BASE_HOST_URL = "http://192.168.1.107/curso-laravel/kututis/";
     public static final String BASE_URL = BASE_HOST_URL + "public/api/";
     public static final String BASE_STORAGE_IMAGE_URL = BASE_HOST_URL + "storage/app/images/";
 
@@ -172,5 +173,13 @@ public class ApiClient {
 
     public Call<List<Medico>> buscar_medicoxid(Integer medico_id){
         return apiService.buscar_medicoxid(medico_id);
+    }
+
+    public Call<Mascota> getMascota(Integer mascota_id){
+        return apiService.getMascota(mascota_id);
+    }
+
+    public Call<Mascota> alimentarMascota(Integer mascota_id){
+        return apiService.alimentarMascota(mascota_id);
     }
 }

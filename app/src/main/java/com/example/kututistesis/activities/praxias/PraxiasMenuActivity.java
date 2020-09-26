@@ -1,9 +1,15 @@
 package com.example.kututistesis.activities.praxias;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.kututistesis.R;
+import com.example.kututistesis.activities.MenuLogros;
 import com.example.kututistesis.adapters.ConsonantesAdapter;
 import com.example.kututistesis.adapters.MenuBanderaAdapter;
 import com.example.kututistesis.api.ApiClient;
@@ -89,10 +96,11 @@ public class PraxiasMenuActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
                 if (response.body().getCode().equals("200")){
                     Log.e("Logro PrimeraMueca", "Logro Primera Mueca");
-                    Toast.makeText(getApplicationContext(),
+                    /*Toast.makeText(getApplicationContext(),
                             "Logro conseguido: Primera Mueca",
                             Toast.LENGTH_SHORT)
-                            .show();
+                            .show();*/
+                    showNotification("Primera Mueca");
                 }else {
                     Log.e("No Logro PrimeraMueca", "No Logro Primera Mueca");
                     Toast.makeText(getApplicationContext(),
@@ -207,5 +215,38 @@ public class PraxiasMenuActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         loadPraxias();
+    }
+
+    public void showNotification(String message){
+        int NOTIFICATION_ID = 234;
+        String CHANNEL_ID = "hola";
+        NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            CHANNEL_ID = "my_channel_01";
+            CharSequence name = "my_channel";
+            String Description = "This is my channel";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+            mChannel.setDescription(Description);
+            mChannel.enableLights(true);
+            mChannel.enableVibration(true);
+            mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            mChannel.setShowBadge(false);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("Logro conseguido")
+                .setContentText(message);
+
+        Intent resultIntent = new Intent(this, MenuLogros.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(MenuLogros.class);
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(resultPendingIntent);
+        notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 }

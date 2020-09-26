@@ -18,107 +18,187 @@
         android:src="@drawable/atras_azul"
         />
 
-    <EditText
-        android:id="@+id/edit_Nombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/ivMiPerfil"
+        android:layout_width="200dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/miperfil"
         app:layout_constraintTop_toBottomOf="@id/imageViewEditarPerfil1Atras"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="48dp"
-        android:text=""
-        android:singleLine="true"
-        android:maxLength="25"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ áéíóúÁÉÍÓÚ"
-        android:background="@drawable/edittext_round"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:fontFamily="@font/dimbo_regular"
-        android:textSize="24dp"
-        android:hint="Nombres"
-        android:textColorHint="#fbcfa5"
-        android:letterSpacing="0.05"/>
+        app:layout_constraintRight_toRightOf="parent"/>
 
-    <EditText
-        android:id="@+id/edit_Apellido"
+    <LinearLayout
+        android:id="@+id/ll_edit_Nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edit_Nombre"
+        app:layout_constraintTop_toBottomOf="@id/ivMiPerfil"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:fontFamily="@font/dimbo_regular"
+            android:textSize="25dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="35dp"/>
+
+        <EditText
+            android:id="@+id/edit_Nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/imageViewEditarPerfil1Atras"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:text=""
+            android:singleLine="true"
+            android:maxLength="25"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ áéíóúÁÉÍÓÚ"
+            android:background="@drawable/edittext_round"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:fontFamily="@font/dimbo_regular"
+            android:textSize="24dp"
+            android:textColorHint="#fbcfa5"
+            android:letterSpacing="0.05"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_edit_Apellido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ll_edit_Nombre"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="16dp"
-        android:text=""
-        android:maxLength="25"
-        android:singleLine="true"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ áéíóúÁÉÍÓÚ"
-        android:background="@drawable/edittext_round"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:fontFamily="@font/dimbo_regular"
-        android:textSize="24dp"
-        android:hint="Apellidos"
-        android:textColorHint="#fbcfa5"
-        android:letterSpacing="0.05"/>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edit_Nacimiento"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apellido"
+            android:fontFamily="@font/dimbo_regular"
+            android:textSize="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"/>
+
+        <EditText
+            android:id="@+id/edit_Apellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/ll_edit_Nombre"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text=""
+            android:maxLength="25"
+            android:singleLine="true"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ áéíóúÁÉÍÓÚ"
+            android:background="@drawable/edittext_round"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:fontFamily="@font/dimbo_regular"
+            android:textSize="24dp"
+            android:textColorHint="#fbcfa5"
+            android:letterSpacing="0.05"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_edit_Nacimiento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edit_Apellido"
+        app:layout_constraintTop_toBottomOf="@id/ll_edit_Apellido"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="16dp"
-        android:text=""
-        android:maxLines="1"
-        android:clickable="true"
-        android:focusable="false"
-        android:inputType="date"
-        android:background="@drawable/edittext_round"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:fontFamily="@font/dimbo_regular"
-        android:textSize="24dp"
-        android:hint="Fecha de nacimiento"
-        android:textColorHint="#fbcfa5"
-        android:letterSpacing="0.05"/>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edit_Celular"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha de naciminto"
+            android:fontFamily="@font/dimbo_regular"
+            android:textSize="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"/>
+
+        <EditText
+            android:id="@+id/edit_Nacimiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/ll_edit_Apellido"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text=""
+            android:maxLines="1"
+            android:clickable="true"
+            android:focusable="false"
+            android:inputType="date"
+            android:background="@drawable/edittext_round"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:fontFamily="@font/dimbo_regular"
+            android:textSize="24dp"
+            android:textColorHint="#fbcfa5"
+            android:letterSpacing="0.05"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_edit_Celular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edit_Nacimiento"
+        app:layout_constraintTop_toBottomOf="@id/ll_edit_Nacimiento"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="16dp"
-        android:text=""
-        android:digits="0123456789"
-        android:inputType="phone"
-        android:maxLength="9"
-        android:imeOptions="actionNext"
-        android:background="@drawable/edittext_round"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:fontFamily="@font/dimbo_regular"
-        android:textSize="24dp"
-        android:hint="Celular"
-        android:textColorHint="#fbcfa5"
-        android:letterSpacing="0.05"/>
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Celular"
+            android:fontFamily="@font/dimbo_regular"
+            android:textSize="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"/>
+        <EditText
+            android:id="@+id/edit_Celular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/ll_edit_Nacimiento"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text=""
+            android:digits="0123456789"
+            android:inputType="phone"
+            android:maxLength="9"
+            android:imeOptions="actionNext"
+            android:background="@drawable/edittext_round"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:fontFamily="@font/dimbo_regular"
+            android:textSize="24dp"
+            android:textColorHint="#fbcfa5"
+            android:letterSpacing="0.05"/>
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/button_siguiente_editar"
@@ -135,13 +215,13 @@
 
     <Button
         android:id="@+id/buttonMédico"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="115dp"
+        android:layout_height="45dp"
         android:layout_marginTop="24dp"
-        android:text="Mi Médico"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.835"
         app:layout_constraintStart_toEndOf="@+id/imageViewEditarPerfil1Atras"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/boton_medico"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
