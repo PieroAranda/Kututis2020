@@ -1,5 +1,6 @@
 package com.example.kututistesis.activities.praxias;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,8 +16,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kututistesis.R;
@@ -101,6 +104,7 @@ public class PraxiasMenuActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT)
                             .show();*/
                     showNotification("Primera Mueca");
+                    showAlertDialog("Logro conseguido", "Primera Mueca");
                 }else {
                     Log.e("No Logro PrimeraMueca", "No Logro Primera Mueca");
                     Toast.makeText(getApplicationContext(),
@@ -237,7 +241,7 @@ public class PraxiasMenuActivity extends AppCompatActivity {
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.trophy)
                 .setContentTitle("Logro conseguido")
                 .setContentText(message);
 
@@ -248,5 +252,27 @@ public class PraxiasMenuActivity extends AppCompatActivity {
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(resultPendingIntent);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
+    }
+
+    public void showAlertDialog(String title, String subtitle) {
+        // create an alert builder
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.row_alert, null);
+        builder.setView(customLayout);
+        ImageButton button = customLayout.findViewById(R.id.alertButton);
+        TextView mTitle = customLayout.findViewById(R.id.alertTitle);
+        TextView mSubtitle = customLayout.findViewById(R.id.alertSubtitle);
+        mTitle.setText(title);
+        mSubtitle.setText(subtitle);
+        // create and show the alert dialog
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 }

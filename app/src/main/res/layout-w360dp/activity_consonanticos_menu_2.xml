@@ -17,6 +17,16 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageViewConsonanticosTitulo"
+        android:layout_width="250dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/vocabulario_leccion"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewVocabularioAtras" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -27,7 +37,7 @@
         android:textSize="26dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewVocabularioAtras" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewConsonanticosTitulo" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerVocabulario"

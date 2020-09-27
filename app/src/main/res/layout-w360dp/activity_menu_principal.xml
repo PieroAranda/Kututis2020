@@ -15,13 +15,40 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:padding="25dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:background="@drawable/icono_golosina"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center" />
+        <TextView
+            android:id="@+id/menu_golosinas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:textColor="@color/colorBackground"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/button_praxias"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginLeft="90dp"
-        android:layout_marginTop="270dp"
+        android:layout_marginTop="340dp"
         android:layout_marginRight="90dp"
         android:layout_marginBottom="8dp"
         android:src="@drawable/boton_muecas"
@@ -38,7 +65,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="90dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/boton_menu_vocales"
+        android:src="@drawable/boton_fonemas"
         android:text="Fonemas Vocálicos"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -68,7 +95,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonPerfil"
         app:layout_constraintHorizontal_bias="0.093"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/buttonPerfil"
@@ -78,6 +106,7 @@
         android:layout_marginBottom="24dp"
         android:text="Perfil"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

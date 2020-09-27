@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/itemVocabulario"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="185dp"
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true"
-    android:background="@drawable/adapter_logro"
+    android:background="@drawable/adapterlogro"
     android:orientation="vertical">
 
     <TextView
@@ -20,7 +20,8 @@
         tools:text="Nombre Logro"
         android:fontFamily="@font/dimbo_regular"
         android:textSize="28dp"
-        android:padding="20dp"
+        android:padding="25dp"
+        android:layout_marginTop="3dp"
         android:layout_gravity="center"
         android:layout_marginLeft="25dp"
         android:textColor="#FFF"/>
@@ -37,7 +38,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Descripcion Logro sasdas asdasdsa asdasd"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:layout_gravity="center"
         android:layout_marginLeft="25dp"
         android:textColor="#FFF"/>

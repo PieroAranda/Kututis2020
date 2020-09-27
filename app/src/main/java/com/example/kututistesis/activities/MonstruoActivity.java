@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.kututistesis.R;
@@ -96,6 +98,10 @@ public class MonstruoActivity extends AppCompatActivity {
                             imageViewMonstruo.setBackgroundResource(R.drawable.img_monstruo_feliz);
                         else
                             imageViewMonstruo.setBackgroundResource(R.drawable.img_monstruo_triste);
+
+                        if(response.body().getVida()==0){
+                            showAlertDialog("La salud de tu mascota esta en 0", "Utiliza los caramelos para alimentarlo");
+                        }
                     }else{
                         Toast.makeText(getApplicationContext(),
                                 "No cuenta con los caramelos suficientes para alimetar :(",
@@ -174,6 +180,28 @@ public class MonstruoActivity extends AppCompatActivity {
                         "Ocurrió un problema, no se puede conectar al servicio",
                         Toast.LENGTH_SHORT)
                         .show();
+            }
+        });
+    }
+
+    public void showAlertDialog(String title, String subtitle) {
+        // create an alert builder
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.row_alert_monster, null);
+        builder.setView(customLayout);
+        ImageButton button = customLayout.findViewById(R.id.alertButton);
+        TextView mTitle = customLayout.findViewById(R.id.alertTitle);
+        TextView mSubtitle = customLayout.findViewById(R.id.alertSubtitle);
+        mTitle.setText(title);
+        mSubtitle.setText(subtitle);
+        // create and show the alert dialog
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
     }

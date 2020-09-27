@@ -16,16 +16,25 @@
         android:src="@drawable/atras_azul"
         />
 
+    <ImageView
+        android:id="@+id/ivMiPerfil"
+        android:layout_width="300dp"
+        android:layout_height="120dp"
+        android:background="@drawable/miperfil"
+        app:layout_constraintTop_toBottomOf="@id/imageViewEditarPerfil2Atras"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
     <LinearLayout
         android:id="@+id/ll_edit_Email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/imageViewEditarPerfil2Atras"
+        app:layout_constraintTop_toBottomOf="@id/ivMiPerfil"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="15dp"
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"

@@ -1,15 +1,19 @@
 package com.example.kututistesis.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.kututistesis.R;
@@ -30,6 +34,7 @@ public class MenuActivity extends AppCompatActivity {
     private ImageButton botonMonstruo;
     private ImageButton botonLogros;
     private ImageButton botonPerfil;
+    private ImageButton botonAcerca;
     private TextView golosinas;
     private ProgressBar progressBar;
     private ApiClient apiClient;
@@ -56,6 +61,7 @@ public class MenuActivity extends AppCompatActivity {
         botonMonstruo = findViewById(R.id.boton_monstruo);
         botonLogros = findViewById(R.id.boton_logros);
         botonPerfil = findViewById(R.id.boton_perfil);
+        botonAcerca = findViewById(R.id.boton_acerca);
 
         apiClient = ApiClient.getInstance();
         golosinas = findViewById(R.id.golosinas);
@@ -96,6 +102,12 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goToEditarPerfil();
+            }
+        });
+        botonAcerca.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToAcerca();
             }
         });
         loadMascota(id_paciente);
@@ -173,5 +185,38 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Editar1Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
+    }
+
+    private void goToAcerca() {
+        Intent intent = new Intent(this, AcercaActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+        //showAlertDialog();
+    }
+
+    public void showAlertDialog(String title, String subtitle) {
+        // create an alert builder
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.row_alert, null);
+        builder.setView(customLayout);
+        ImageButton button = customLayout.findViewById(R.id.alertButton);
+        TextView mTitle = customLayout.findViewById(R.id.alertTitle);
+        TextView mSubtitle = customLayout.findViewById(R.id.alertSubtitle);
+        mTitle.setText(title);
+        mSubtitle.setText(subtitle);
+        // create and show the alert dialog
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+    // do something with the data coming from the AlertDialog
+    private void sendDialogDataToActivity(String data) {
+        Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
     }
 }

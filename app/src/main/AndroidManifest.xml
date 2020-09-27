@@ -138,6 +138,11 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
+            android:name=".activities.AcercaActivity"
+            android:label="Acerca de"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".activities.InicioSesionActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
