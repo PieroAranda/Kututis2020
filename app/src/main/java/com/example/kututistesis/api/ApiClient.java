@@ -30,7 +30,7 @@ import retrofit2.http.Path;
 
 public class ApiClient {
     private static ApiClient instance = null;
-    public static final String BASE_HOST_URL = "http://192.168.1.107/curso-laravel/kututis/";
+    public static final String BASE_HOST_URL = "http://192.168.1.13/curso-laravel/kututis/";
     public static final String BASE_URL = BASE_HOST_URL + "public/api/";
     public static final String BASE_STORAGE_IMAGE_URL = BASE_HOST_URL + "storage/app/images/";
 
