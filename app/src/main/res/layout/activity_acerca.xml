@@ -12,26 +12,16 @@
         android:background="@drawable/boton_atras"
         android:layout_margin="25dp"/>
 
-    <ImageView
-        android:id="@+id/ivAcerca"
-        android:layout_width="170dp"
-        android:layout_height="60dp"
-        android:background="@drawable/acercade"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="320dp"/>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="230dp"
-        android:layout_height="230dp"
-        android:layout_below="@id/ivAcerca"
-        android:layout_centerHorizontal="true">
+        android:layout_height="270dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="260dp">
         <TextView
             android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:text="Kututis es una aplicación que contribuirá con el reforzamiento de tu pronunciación por medio de sesiones de terapia del habla que te asignará tu médico.
-Además de esto, contarás con una mascota virtual, la cual tendrás que alimentar por medio de caramelos que obtendrás por cada actividad aprobada.
-Recuerda que tu mascota comenzará con una salud total de 100, pero esta irá disminuyendo cada día en 7.
-Por lo que, es importante que refuerces tu pronunciación todos los días!!!"
+            android:text="Kututis es una aplicación que contribuirá con el reforzamiento de tu pronunciación por medio de sesiones de terapia del habla que te asignará tu médico. \nAdemás de esto, contarás con una mascota virtual, la cual tendrás que alimentar por medio de caramelos que obtendrás por cada actividad aprobada.\nRecuerda que tu mascota comenzará con una salud total de 100, pero esta irá disminuyendo cada día en 7.\nPor lo que, es importante que refuerces tu pronunciación todos los días!!!"
             android:textSize="20dp"
             android:justificationMode="inter_word"
             android:fontFamily="@font/dimbo_regular"/>

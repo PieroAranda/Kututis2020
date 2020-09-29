@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:text="Nombre"
             android:fontFamily="@font/dimbo_regular"
-            android:textSize="25dp"
+            android:textSize="22dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:layout_marginBottom="10dp"
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:text="Apellido"
             android:fontFamily="@font/dimbo_regular"
-            android:textSize="25dp"
+            android:textSize="22dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="15dp"/>
 
@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:text="Fecha de naciminto"
             android:fontFamily="@font/dimbo_regular"
-            android:textSize="25dp"
+            android:textSize="22dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="15dp"/>
 
@@ -173,7 +173,7 @@
             android:layout_height="wrap_content"
             android:text="Celular"
             android:fontFamily="@font/dimbo_regular"
-            android:textSize="25dp"
+            android:textSize="22dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="15dp"/>
         <EditText
@@ -201,8 +201,8 @@
 
     <ImageView
         android:id="@+id/button_siguiente_editar"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
+        android:layout_width="150dp"
+        android:layout_height="44dp"
         android:text="Siguiente"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -210,7 +210,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="32dp"
-        android:src="@drawable/boton_siguiente"/>
+        android:background="@drawable/boton_siguiente"/>
 
     <Button
         android:id="@+id/buttonMédico"
