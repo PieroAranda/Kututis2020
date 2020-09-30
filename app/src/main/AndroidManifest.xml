@@ -141,7 +141,9 @@
             android:name=".activities.AcercaActivity"
             android:label="Acerca de"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity" >
+
+        </activity>
         <activity
             android:name=".activities.InicioSesionActivity"
             android:screenOrientation="portrait"
