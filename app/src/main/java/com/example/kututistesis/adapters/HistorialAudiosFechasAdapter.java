@@ -135,7 +135,8 @@ public class HistorialAudiosFechasAdapter extends RecyclerView.Adapter<Historial
         try {
             mediaPlayer.setDataSource(file.getAbsolutePath());
             mediaPlayer.prepare();
-            Toast.makeText(context, "Reproducir audio "+file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Reproducir audio "+file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Reproducir audio", Toast.LENGTH_SHORT).show();
         }catch (IOException e){
         }
 

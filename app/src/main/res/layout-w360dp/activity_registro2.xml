@@ -16,78 +16,143 @@
         android:src="@drawable/atras_azul"
         />
 
-    <EditText
-        android:id="@+id/edit_text_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/ivRegisterName2"
+        android:layout_width="200dp"
+        android:layout_height="75dp"
+        android:background="@drawable/registrolabel"
         app:layout_constraintTop_toBottomOf="@id/imageViewRegistro2Atras"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="48dp"
-        android:text=""
-        android:singleLine="true"
-        android:inputType="textEmailAddress"
-        android:background="@drawable/edittext_round"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:fontFamily="@font/dimbo_regular"
-        android:textSize="24dp"
-        android:hint="Correo"
-        android:textColorHint="#fbcfa5"
-        android:letterSpacing="0.05"/>
+        app:layout_constraintRight_toRightOf="parent"/>
 
-    <EditText
-        android:id="@+id/edit_text_password_1"
+    <LinearLayout
+        android:id="@+id/ll_register_Email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_email"
+        app:layout_constraintTop_toBottomOf="@id/ivRegisterName2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="16dp"
-        android:text=""
-        android:inputType="textPassword"
-        android:maxLength="16"
-        android:background="@drawable/edittext_round"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:fontFamily="@font/dimbo_regular"
-        android:textSize="24dp"
-        android:hint="Contraseña"
-        android:textColorHint="#fbcfa5"
-        android:letterSpacing="0.05"/>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edit_text_password_2"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Correo"
+            android:fontFamily="@font/dimbo_regular"
+            android:textSize="22dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"/>
+
+        <EditText
+            android:id="@+id/edit_text_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/imageViewRegistro2Atras"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text=""
+            android:singleLine="true"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/edittext_round"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:fontFamily="@font/dimbo_regular"
+            android:textSize="24dp"
+            android:textColorHint="#fbcfa5"
+            android:letterSpacing="0.05"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_register_Pass1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_password_1"
+        app:layout_constraintTop_toBottomOf="@id/ll_register_Email"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="16dp"
-        android:text=""
-        android:inputType="textPassword"
-        android:maxLength="16"
-        android:imeOptions="actionNext"
-        android:background="@drawable/edittext_round"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:fontFamily="@font/dimbo_regular"
-        android:textSize="24dp"
-        android:hint="Repita contraseña"
-        android:textColorHint="#fbcfa5"
-        android:letterSpacing="0.05"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contraseña"
+            android:fontFamily="@font/dimbo_regular"
+            android:textSize="22dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"/>
+
+        <EditText
+            android:id="@+id/edit_text_password_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_email"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text=""
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:background="@drawable/edittext_round"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:fontFamily="@font/dimbo_regular"
+            android:textSize="24dp"
+            android:textColorHint="#fbcfa5"
+            android:letterSpacing="0.05"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_register_Pass2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ll_register_Pass1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Repita contraseña"
+            android:fontFamily="@font/dimbo_regular"
+            android:textSize="22dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"/>
+
+        <EditText
+            android:id="@+id/edit_text_password_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_password_1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text=""
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:imeOptions="actionNext"
+            android:background="@drawable/edittext_round"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:fontFamily="@font/dimbo_regular"
+            android:textSize="24dp"
+            android:textColorHint="#fbcfa5"
+            android:letterSpacing="0.05"/>
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/button_next"

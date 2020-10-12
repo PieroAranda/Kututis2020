@@ -103,10 +103,8 @@ public class MonstruoActivity extends AppCompatActivity {
                             showAlertDialog("La salud de tu mascota esta en 0", "Utiliza los caramelos para alimentarlo");
                         }
                     }else{
-                        Toast.makeText(getApplicationContext(),
-                                "No cuenta con los caramelos suficientes para alimetar :(",
-                                Toast.LENGTH_SHORT)
-                                .show();
+                        showAlertDialog("No se pudo alimentar", "No cuenta con los caramelos suficientes para alimetar");
+
                     }
 
 
@@ -150,10 +148,8 @@ public class MonstruoActivity extends AppCompatActivity {
                             imageViewMonstruo.setBackgroundResource(R.drawable.img_monstruo_triste);
                     }else{
                         if(response.body().getError().equals("100")){
-                            Toast.makeText(getApplicationContext(),
-                                    "No cuenta con los caramelos suficientes para alimentar :(",
-                                    Toast.LENGTH_SHORT)
-                                    .show();
+                            showAlertDialog("No se pudo alimentar", "No cuenta con los caramelos suficientes para alimentar");
+
                         }else if(response.body().getError().equals("200")){
                             Toast.makeText(getApplicationContext(),
                                     "Ya alcanzó el måximo de vida",
@@ -166,10 +162,7 @@ public class MonstruoActivity extends AppCompatActivity {
 
 
                 } else {
-                    Toast.makeText(getApplicationContext(),
-                            "No cuenta con las golosinas suficientes :(",
-                            Toast.LENGTH_SHORT)
-                            .show();
+                    showAlertDialog("No se pudo alimentar", "No cuenta con las golosinas suficientes");
                 }
             }
 

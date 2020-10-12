@@ -11,10 +11,12 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -104,20 +106,48 @@ public class MedicoActivity extends AppCompatActivity {
     }
 
     public void obtenerDatosMedico(Integer medico_id){
-        apiClient.buscar_medicoxid(medico_id).enqueue(new Callback<List<Medico>>() {
-            @Override
-            public void onResponse(Call<List<Medico>> call, Response<List<Medico>> response) {
-                datosMedico = response.body().get(0);
-                ponerDatosEnEditTexts(datosMedico);
-            }
+        Log.e("medico", medico_id.toString());
+        if(medico_id == 1){
+            showAlertDialog("No tiene médico", "Aún no se ha asigando a un médico");
+        }else{
+            apiClient.buscar_medicoxid(medico_id).enqueue(new Callback<List<Medico>>() {
+                @Override
+                public void onResponse(Call<List<Medico>> call, Response<List<Medico>> response) {
+                    datosMedico = response.body().get(0);
+                    ponerDatosEnEditTexts(datosMedico);
+                }
 
+                @Override
+                public void onFailure(Call<List<Medico>> call, Throwable t) {
+                    Log.d("FalloMedico", "Trowable"+t);
+                    Toast.makeText(getApplicationContext(),
+                            "Ocurrió un problema, no se pudo obtener los datos del medico",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
+            });
+        }
+
+    }
+
+    public void showAlertDialog(String title, String subtitle) {
+        // create an alert builder
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.row_alert_monster, null);
+        builder.setView(customLayout);
+        ImageButton button = customLayout.findViewById(R.id.alertButton);
+        TextView mTitle = customLayout.findViewById(R.id.alertTitle);
+        TextView mSubtitle = customLayout.findViewById(R.id.alertSubtitle);
+        mTitle.setText(title);
+        mSubtitle.setText(subtitle);
+        // create and show the alert dialog
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFailure(Call<List<Medico>> call, Throwable t) {
-                Log.d("FalloMedico", "Trowable"+t);
-                Toast.makeText(getApplicationContext(),
-                        "Ocurrió un problema, no se pudo obtener los datos del medico",
-                        Toast.LENGTH_SHORT)
-                        .show();
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
     }

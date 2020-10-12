@@ -50,6 +50,7 @@ public class VocalicosMenuActivity extends AppCompatActivity {
     private List<SesionFonema> sesionFonemaList;
     private ImageView imageViewAtras;
     private ProgressBar progressBarMenu;
+    private TextView vocalicosText;
 
     private Global global;
     private Integer paciente_id;
@@ -79,6 +80,7 @@ public class VocalicosMenuActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewVocalicos);
         imageViewAtras = findViewById(R.id.imageViewVocalicossAtras);
         progressBarMenu = findViewById(R.id.progressBarVocalicosMenu);
+        vocalicosText = findViewById(R.id.vocalicosText);
 
         imageViewAtras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,6 +182,11 @@ public class VocalicosMenuActivity extends AppCompatActivity {
                         }
                     });
                     recyclerView.setAdapter(vocalAdapter);
+
+                    if(sesionFonemaList.toString() == "[]"){
+                        recyclerView.setVisibility(View.GONE);
+                        vocalicosText.setVisibility(View.VISIBLE);
+                    }
                 }
                 else{
                     Toast.makeText(getApplicationContext(),

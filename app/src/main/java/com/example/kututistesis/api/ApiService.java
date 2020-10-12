@@ -34,7 +34,8 @@ public interface ApiService {
     Call<ResponseStatus> registarPaciente(@Field("Nombre") String nombre, @Field("Apellido")
             String apellido, @Field("Celular") String celular, @Field("Correo") String correo,
                                           @Field("Contrasenia") String contrasenia, @Field("Fecha_Inscripcion") String fecha_inscripcion,
-                                          @Field("Fecha_Nacimiento") String fecha_nacimiento);
+                                          @Field("Fecha_Nacimiento") String fecha_nacimiento,
+                                          @Field("Nombre_Mascota") String nombre_mascota);
 
     @FormUrlEncoded
     @POST("loginpaciente")

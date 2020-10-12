@@ -160,7 +160,8 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
-    private void logout() {
+    private void logoutDoing() {
+
         SharedPreferences.Editor editor = global.sharedPref.edit();
         editor.putInt(getString(R.string.saved_user_id), -1);
         editor.commit();
@@ -168,6 +169,11 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, InicioSesionActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    private void logout() {
+
+        showAlertDialogLogout("Te vamos a echar de menos", "Seguro te quieres ir?");
     }
 
     private void goToMonstruo() {
@@ -218,5 +224,28 @@ public class MenuActivity extends AppCompatActivity {
     // do something with the data coming from the AlertDialog
     private void sendDialogDataToActivity(String data) {
         Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
+    }
+
+    public void showAlertDialogLogout(String title, String subtitle) {
+        // create an alert builder
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.row_alert_logout, null);
+        builder.setView(customLayout);
+        ImageButton button = customLayout.findViewById(R.id.alertButton);
+        TextView mTitle = customLayout.findViewById(R.id.alertTitle);
+        TextView mSubtitle = customLayout.findViewById(R.id.alertSubtitle);
+        mTitle.setText(title);
+        mSubtitle.setText(subtitle);
+        // create and show the alert dialog
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                logoutDoing();
+            }
+        });
     }
 }

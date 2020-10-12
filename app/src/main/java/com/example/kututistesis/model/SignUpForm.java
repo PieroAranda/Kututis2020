@@ -40,6 +40,10 @@ public class SignUpForm implements Serializable {
     @SerializedName("mascota_id")
     @Expose
     private int mascotaId = 1;
+    @SerializedName("Nombre_Mascota")
+    @Expose
+    private String nombre_mascota;
+    @SerializedName("Nombre_Mascota")
 
     public String getNombre() {
         return nombre;
@@ -88,6 +92,13 @@ public class SignUpForm implements Serializable {
     public void setFecha_inscripcion(String fecha_inscripcion) {
         this.fecha_inscripcion = fecha_inscripcion;
     }
+    public String getNombre_mascota() {
+        return nombre_mascota;
+    }
+
+    public void setNombre_mascota(String nombre_mascota) {
+        this.nombre_mascota = nombre_mascota;
+    }
 
     public String getFecha_nacimiento() {
         return fecha_nacimiento;
@@ -124,6 +135,6 @@ public class SignUpForm implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        return nombre + " " + apellido + " " + celular + " " + correo + " " + habilitado + " " + contrasenia + " " + medicoId + " " + mascotaId;
+        return nombre + " " + apellido + " " + celular + " " + correo + " " + habilitado + " " + contrasenia + " " + medicoId + " " + mascotaId + " " + nombre_mascota;
     }
 }

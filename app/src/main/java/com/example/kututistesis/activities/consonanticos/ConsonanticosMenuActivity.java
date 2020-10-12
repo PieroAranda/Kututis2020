@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -80,6 +81,7 @@ public class ConsonanticosMenuActivity extends AppCompatActivity implements Cons
                 progressBarMenu.setVisibility(View.GONE);
 
                 fonemas = response.body();
+                Log.e("fonemas",fonemas.toString());
                 List<Banderin> banderines = new ArrayList<>();
                 for (Fonema f : fonemas) {
                     /*banderines.add(new Banderin(f.getFonema().trim()));*/
@@ -91,6 +93,7 @@ public class ConsonanticosMenuActivity extends AppCompatActivity implements Cons
             @Override
             public void onFailure(Call<List<Fonema>> call, Throwable t) {
                 progressBarMenu.setVisibility(View.GONE);
+                Log.e("fonemas fail",fonemas.toString());
             }
         });
     }

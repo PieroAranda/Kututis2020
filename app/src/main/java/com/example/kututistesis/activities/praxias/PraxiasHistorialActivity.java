@@ -157,12 +157,12 @@ public class PraxiasHistorialActivity extends AppCompatActivity {
                 progressBarBusqueda.setVisibility(View.GONE);
 
                 List<ArchivoSesionPraxia> archivoSesionPraxias = response.body();
-
                 if (archivoSesionPraxias.size() == 0) {
                     layoutNotFound.setVisibility(View.VISIBLE);
                 } else {
                     layoutNotFound.setVisibility(View.GONE);
                 }
+
 
                 /*
                 for (SesionPraxia sesionPraxia: sesionPraxiaList){

@@ -47,6 +47,8 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
     private RecyclerView recyclerView;
     private VocabularioAdapter vocabularioAdapter;
     private ProgressBar progressBarMenu;
+    private TextView vocabularioText;
+    private TextView vocabularioTextWords;
 
 
     private ImageView imageViewAtras;
@@ -81,6 +83,8 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
 
         imageViewAtras = findViewById(R.id.imageViewVocabularioAtras);
         progressBarMenu = findViewById(R.id.progressBarConsonanticosMenu2);
+        vocabularioText = findViewById(R.id.vocabularioText);
+        vocabularioTextWords = findViewById(R.id.textView2);
 
         imageViewAtras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,12 +177,19 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
             public void onResponse(Call<List<SesionVocabulario>> call, Response<List<SesionVocabulario>> response) {
                 progressBarMenu.setVisibility(View.GONE);
                 sesionVocabulario = response.body();
+                Log.e("sesionVocabulario ",sesionVocabulario.toString());
 
                 for(SesionVocabulario sv:sesionVocabulario){
                     if(sv.getCompletado()==1){
                         checkifobtuvoLogroPrimeraLeccion();
                         break;
                     }
+                }
+                //si no tiene sesiones
+                if(sesionVocabulario.toString() == "[]"){
+                   vocabularioTextWords.setVisibility(View.GONE);
+                   recyclerView.setVisibility(View.GONE);
+                   vocabularioText.setVisibility(View.VISIBLE);
                 }
 
                 vocabularioAdapter.setData(sesionVocabulario, ConsonanticosMenu2Activity.this);

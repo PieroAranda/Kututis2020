@@ -55,6 +55,7 @@ public class PraxiasMenuActivity extends AppCompatActivity {
     private Global global;
     private Integer paciente_id;
     private List<PacienteLogro> pacienteLogroList;
+    private TextView praxiasText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class PraxiasMenuActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewPraxias);
         imageViewAtras = findViewById(R.id.imageViewPraxiasAtras);
         progressBarMenu = findViewById(R.id.progressBarPraxiasMenu);
+        praxiasText = findViewById(R.id.praxiasText);
 
         apiClient = ApiClient.getInstance();
 
@@ -177,6 +179,11 @@ public class PraxiasMenuActivity extends AppCompatActivity {
                             checkifobtuvoLogroPrimeraMueca();
                             break;
                         }
+                    }
+
+                    if(sesionPraxiaList.toString() == "[]"){
+                        recyclerView.setVisibility(View.GONE);
+                        praxiasText.setVisibility(View.VISIBLE);
                     }
 
                     praxiasAdapter.setData(banderines, new ConsonantesAdapter.OnConsonantesListener() {

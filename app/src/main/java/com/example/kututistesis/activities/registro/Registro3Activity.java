@@ -94,6 +94,7 @@ public class Registro3Activity extends AppCompatActivity {
     private void registerUser() {
         if(awesomeValidation.validate()) {
             // Se valida y se registra al usuario
+            signUpForm.setNombre_mascota(editTextPetName.getText().toString());
             Log.i("SIGNUP", signUpForm.toString());
             apiClient.registrarPaciente(signUpForm).enqueue(new Callback<ResponseStatus>() {
                 @Override
