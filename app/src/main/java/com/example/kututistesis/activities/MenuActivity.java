@@ -173,7 +173,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private void logout() {
 
-        showAlertDialogLogout("Te vamos a echar de menos", "Seguro te quieres ir?");
+        showAlertDialogLogout("Te vamos a echar de menos", "¿Estás seguro de cerrar sesión?");
     }
 
     private void goToMonstruo() {
