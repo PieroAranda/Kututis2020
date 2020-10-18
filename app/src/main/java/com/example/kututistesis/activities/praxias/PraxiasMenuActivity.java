@@ -177,7 +177,6 @@ public class PraxiasMenuActivity extends AppCompatActivity {
                         banderines.add(new Banderin(prax.getPraxia().getNombre()));
                         if(prax.getCompletado()==1){
                             checkifobtuvoLogroPrimeraMueca();
-                            break;
                         }
                     }
 

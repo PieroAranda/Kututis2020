@@ -182,7 +182,6 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
                 for(SesionVocabulario sv:sesionVocabulario){
                     if(sv.getCompletado()==1){
                         checkifobtuvoLogroPrimeraLeccion();
-                        break;
                     }
                 }
                 //si no tiene sesiones

@@ -172,7 +172,6 @@ public class VocalicosMenuActivity extends AppCompatActivity {
                         banderines.add(new Banderin(v.getFonema().getNombre()));
                         if(v.getCompletado()==1){
                             checkifobtuvoLogroPrimerFonema();
-                            break;
                         }
                     }
                     vocalAdapter.setData(banderines, new ConsonantesAdapter.OnConsonantesListener() {

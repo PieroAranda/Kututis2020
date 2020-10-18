@@ -33,7 +33,7 @@
             android:id="@+id/menu_golosinas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5"
+            android:text="0"
             android:textStyle="bold"
             android:textSize="25dp"
             android:textColor="@color/colorBackground"
