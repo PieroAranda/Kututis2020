@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="270dp">
+        android:layout_marginTop="300dp">
         <ImageButton
             android:id="@+id/boton_practicar"
             android:layout_width="150dp"

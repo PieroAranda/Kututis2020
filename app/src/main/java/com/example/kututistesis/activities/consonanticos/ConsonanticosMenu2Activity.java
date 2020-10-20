@@ -186,9 +186,11 @@ public class ConsonanticosMenu2Activity extends AppCompatActivity implements Voc
                 }
                 //si no tiene sesiones
                 if(sesionVocabulario.toString() == "[]"){
-                   vocabularioTextWords.setVisibility(View.GONE);
+
                    recyclerView.setVisibility(View.GONE);
                    vocabularioText.setVisibility(View.VISIBLE);
+                }else{
+                    vocabularioTextWords.setVisibility(View.VISIBLE);
                 }
 
                 vocabularioAdapter.setData(sesionVocabulario, ConsonanticosMenu2Activity.this);
