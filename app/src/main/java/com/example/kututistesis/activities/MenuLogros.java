@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +46,8 @@ public class MenuLogros extends AppCompatActivity implements LogrosAdapter.OnLog
 
     private List<PacienteLogro> pacienteLogroList;
 
+    private TextView logrosText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,8 @@ public class MenuLogros extends AppCompatActivity implements LogrosAdapter.OnLog
         recyclerView = findViewById(R.id.recyclerLogros);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        logrosText = findViewById(R.id.logrosText);
 
         imageViewAtras = findViewById(R.id.imageViewLogrosAtras);
         progressBarMenu = findViewById(R.id.progressBarLogrosMenu);
@@ -94,6 +99,11 @@ public class MenuLogros extends AppCompatActivity implements LogrosAdapter.OnLog
             public void onResponse(Call<List<PacienteLogro>> call, Response<List<PacienteLogro>> response) {
                 progressBarMenu.setVisibility(View.GONE);
                 pacienteLogroList = response.body();
+
+                if(pacienteLogroList.toString() == "[]"){
+                    recyclerView.setVisibility(View.GONE);
+                    logrosText.setVisibility(View.VISIBLE);
+                }
 
                 logrosAdapter.setData(pacienteLogroList, MenuLogros.this);
                 recyclerView.setAdapter(logrosAdapter);
