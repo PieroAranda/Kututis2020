@@ -126,7 +126,7 @@ public class MenuActivity extends AppCompatActivity {
 
     public void loadMascota(int pacienteId) {
 
-        progressBar.setVisibility(View.VISIBLE);
+       // progressBar.setVisibility(View.VISIBLE);
 
         Log.e("user id", String.valueOf(pacienteId));
 
@@ -145,7 +145,7 @@ public class MenuActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT)
                             .show();
                 }
-                progressBar.setVisibility(View.GONE);
+               // progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -155,7 +155,7 @@ public class MenuActivity extends AppCompatActivity {
                         "Ocurrió un problema, no se puede conectar al servicio",
                         Toast.LENGTH_SHORT)
                         .show();
-                progressBar.setVisibility(View.GONE);
+               // progressBar.setVisibility(View.GONE);
             }
         });
     }

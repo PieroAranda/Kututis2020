@@ -1,39 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_menu">
+    android:background="@drawable/fondo_menu"
+    android:orientation="vertical"
+    android:weightSum="10">
 
-    <ImageButton
-        android:id="@+id/acerca_boton_atras"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:background="@drawable/boton_atras"
-        android:layout_margin="25dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+        <ImageButton
+            android:id="@+id/acerca_boton_atras"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:background="@drawable/boton_atras"
+            android:layout_margin="25dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:gravity="center">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="220dp"
+            android:layout_height="270dp">
+            <TextView
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="Kututis es una aplicación que contribuirá con el reforzamiento de tu pronunciación por medio de sesiones de terapia del habla que te asignará tu médico. \nAdemás de esto, contarás con una mascota virtual, la cual tendrás que alimentar por medio de caramelos que obtendrás por cada actividad aprobada.\nRecuerda que tu mascota comenzará con una salud total de 100, pero esta irá disminuyendo cada día en 7.\nPor lo que, es importante que refuerces tu pronunciación todos los días!!!"
+                android:textSize="20dp"
+                android:justificationMode="inter_word"
+                android:fontFamily="@font/dimbo_regular"/>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:background="@drawable/acercade"/>
+    </LinearLayout>
 
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="230dp"
-        android:layout_height="270dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="260dp">
-        <TextView
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:text="Kututis es una aplicación que contribuirá con el reforzamiento de tu pronunciación por medio de sesiones de terapia del habla que te asignará tu médico. \nAdemás de esto, contarás con una mascota virtual, la cual tendrás que alimentar por medio de caramelos que obtendrás por cada actividad aprobada.\nRecuerda que tu mascota comenzará con una salud total de 100, pero esta irá disminuyendo cada día en 7.\nPor lo que, es importante que refuerces tu pronunciación todos los días!!!"
-            android:textSize="20dp"
-            android:justificationMode="inter_word"
-            android:fontFamily="@font/dimbo_regular"/>
-    </androidx.core.widget.NestedScrollView>
-
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:background="@drawable/acercade"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="25dp"/>
-
-
-</RelativeLayout>
+</LinearLayout>

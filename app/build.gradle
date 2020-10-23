@@ -10,9 +10,11 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+
 
     buildTypes {
         release {
@@ -34,9 +36,14 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // Necesarios para conectarse hacer requests al API
+    //implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    //implementation 'com.google.code.gson:gson:2.8.2'
+    //implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     // Validaciones
     implementation 'com.basgeekball:awesome-validation:4.2'
