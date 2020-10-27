@@ -23,7 +23,6 @@ import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
@@ -46,9 +45,8 @@ public class ApiClient {
 
     private ApiClient() {
         Retrofit retrofit = new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
         apiService =  retrofit.create(ApiService.class);
     }
@@ -147,8 +145,8 @@ public class ApiClient {
     }
 
     public Call<ResponseStatus> actualizarsesion_vocabulario(Integer id, Integer Intentos_Buenos,
-                                                              Integer Intentos_Malos, Integer Intentos_x_Revisar,
-                                                              String Fecha, Integer paciente_id){
+                                                             Integer Intentos_Malos, Integer Intentos_x_Revisar,
+                                                             String Fecha, Integer paciente_id){
         return apiService.actualizarsesion_vocabulario(id, Intentos_Buenos, Intentos_Malos, Intentos_x_Revisar, Fecha, paciente_id);
     }
 

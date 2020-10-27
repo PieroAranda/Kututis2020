@@ -48,37 +48,48 @@
 
         </LinearLayout>
     </RelativeLayout>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:gravity="center">
-        <ImageButton
-            android:id="@+id/boton_practicar"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:background="@drawable/boton_practicar"
-            android:layout_marginBottom="20dp"/>
-        <ImageButton
-            android:id="@+id/boton_logros"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:background="@drawable/boton_logros"
-            android:layout_marginBottom="20dp"/>
-        <ImageButton
-            android:id="@+id/boton_monstruo"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:background="@drawable/boton_monstruo"
-            android:layout_marginBottom="20dp"/>
-        <ImageButton
-            android:id="@+id/boton_perfil"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:background="@drawable/boton_perfil"/>
-    </LinearLayout>
+        android:layout_weight="6">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true">
+            <ImageButton
+                android:id="@+id/boton_practicar"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:background="@drawable/boton_practicar"
+                android:layout_marginBottom="20dp"/>
+            <ImageButton
+                android:id="@+id/boton_logros"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:background="@drawable/boton_logros"
+                android:layout_marginBottom="20dp"/>
+            <ImageButton
+                android:id="@+id/boton_monstruo"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:background="@drawable/boton_monstruo"
+                android:layout_marginBottom="20dp"/>
+            <ImageButton
+                android:id="@+id/boton_perfil"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:background="@drawable/boton_perfil"/>
+        </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progress_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -97,11 +108,7 @@
             android:layout_width="120dp"
             android:layout_height="40dp"
             android:background="@drawable/boton_acerca"/>
-        <ProgressBar
-            android:id="@+id/progress_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
+
     </LinearLayout>
 
 
