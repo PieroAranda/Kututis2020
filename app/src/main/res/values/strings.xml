@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KututisTesis</string>
+    <string name="app_name">Kututis</string>
     <string name="err_email">Ingrese un correo válido</string>
     <string name="err_password">Ingrese una constraseña válida</string>
     <string name="err_names_blank">Ingrese sus nombres</string>

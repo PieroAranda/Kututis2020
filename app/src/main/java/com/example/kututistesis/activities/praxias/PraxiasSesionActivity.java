@@ -330,6 +330,7 @@ public class PraxiasSesionActivity extends AppCompatActivity {
             fileVideo = new File(path);
 
             Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+            takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 60);
             // Establece que la grabación tenga baja calidad
             takeVideoIntent.putExtra(android.provider.MediaStore.EXTRA_VIDEO_QUALITY, 0);
             takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(fileVideo));

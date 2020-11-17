@@ -199,9 +199,34 @@ public class VocalicosSesionActivity extends Activity {
                 grabacion.setAudioSource(MediaRecorder.AudioSource.MIC);
                 grabacion.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
                 grabacion.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
+
                 grabacion.setOutputFile(path);
                 try{
+                    grabacion.setMaxDuration(60000);
                     grabacion.prepare();
+                    grabacion.setOnInfoListener(new MediaRecorder.OnInfoListener() {
+                        @Override
+                        public void onInfo(MediaRecorder mr, int what, int extra) {
+                            if(what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED){
+                                try {
+                                    grabacion.stop();
+                                } catch (Exception e) {
+
+                                }
+                                grabacion.release();
+                                fileVideo = new File(path);
+                                grabacion = null;
+                                buttonGrabar.setBackgroundResource(R.drawable.boton_grabar);
+                                buttonEnviar.setEnabled(true);
+                                grabado = true;
+                                Toast t = Toast.makeText(getApplicationContext(), "Grabación finalizada", Toast.LENGTH_SHORT);
+                                t.setGravity(Gravity.BOTTOM, 0, (screenHeight / 100) * 25);
+                                t.show();
+                                buttonReproducir.setBackgroundResource(R.drawable.boton_reproducir);
+                                buttonEnviar.setBackgroundResource(R.drawable.boton_enviar);
+                            }
+                        }
+                    });
                     grabacion.start();
                 } catch (IOException e){
                 }
